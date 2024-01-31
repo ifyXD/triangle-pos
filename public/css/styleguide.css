@@ -408,7 +408,8 @@
     --gray-palette100: rgba(255, 255, 255, 1);
     --primarylight-400: rgba(51, 151, 139, 1);
     --primarylight-500: rgba(0, 125, 110, 1);
-    --button-link-button-link-l-bold-18-24-font-family: "Montserrat-Bold", Helvetica;
+    --button-link-button-link-l-bold-18-24-font-family:
+    "Montserrat-Bold", Helvetica;
     --button-link-button-link-l-bold-18-24-font-weight: 700;
     --button-link-button-link-l-bold-18-24-font-size: 18px;
     --button-link-button-link-l-bold-18-24-letter-spacing: 0px;

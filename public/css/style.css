@@ -1,5 +1,5 @@
 .main {
-    background-color: #00210b;
+    background-color: #3C4B64;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -27,7 +27,7 @@
     position: absolute;
     top: 785px;
     left: 158px;
-    background-color: var(--material-theme-schemes-primary-container);
+    background-color: #321FDB;
     border-radius: 8px;
 }
 
@@ -39,7 +39,7 @@
     margin-top: -1px;
     font-family: "Outfit-Bold", Helvetica;
     font-weight: 700;
-    color: var(--material-themesyslight-high-contrastprimary);
+    color: var(--material-themesyslighton-primary);;
     font-size: 18px;
     text-align: center;
     letter-spacing: 0;
@@ -59,7 +59,7 @@
     position: absolute;
     top: 31px;
     left: 1643px;
-    background-color: var(--material-theme-schemes-primary-container);
+    background-color: #321FDB;
     border-radius: 98px;
 }
 
@@ -71,7 +71,7 @@
     margin-top: -1px;
     font-family: "Montserrat-Bold", Helvetica;
     font-weight: 700;
-    color: var(--material-themesyslight-high-contrastprimary);
+    color: var(--material-themesyslighton-primary);;
     font-size: 16px;
     text-align: center;
     letter-spacing: 0;
@@ -81,11 +81,12 @@
 
 .desktop-headline {
     position: absolute;
-    width: 930px;
+    width: 900px;
     top: 180px;
+    font-style: normal;
     left: 158px;
-    font-family: "Outfit-Bold", Helvetica;
-    font-weight: 700;
+    font-family: "Outfit", Helvetica;
+    font-weight: 400;
     color: var(--material-themesyslighton-primary);
     font-size: 128px;
     letter-spacing: 0;

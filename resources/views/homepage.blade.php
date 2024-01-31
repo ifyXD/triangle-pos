@@ -28,23 +28,15 @@
         <img class="img-box thomas-le-2" alt="karne" src={{ asset('images/homepage/karne.jpg')}}>
         <img class="img-box thomas-le-3" alt="mais" src={{ asset('images/homepage/mais.jpg')}}>
 
-
-
-
-
         <button class="button">
             <a href="#" class="text-wrapper">Get Started</a>
         </button>
         <button class="button-wrapper">
             <a href="{{route('login')}}" class="button-2">Log in</a>
         </button>
-
-
-
-
     </div>
-{{--    <div class="rectangle"></div>--}}
-
 </div>
 </body>
 </html>
+
+
