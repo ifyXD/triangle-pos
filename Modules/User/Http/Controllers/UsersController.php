@@ -10,8 +10,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Modules\Upload\Entities\Upload;
-
+use Modules\Upload\Entities\Upload; 
+use Illuminate\Support\Facades\File;
 class UsersController extends Controller
 {
     public function index(UsersDataTable $dataTable) {
@@ -75,31 +75,45 @@ class UsersController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email,'.$user->id,
-        ]);
-
-        $user->update([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'is_active' => $request->is_active
-        ]);
+        ]); 
 
         $user->syncRoles($request->role);
 
-        if ($request->has('image')) {
-            $tempFile = Upload::where('folder', $request->image)->first();
-
-            if ($user->getFirstMedia('avatars')) {
-                $user->getFirstMedia('avatars')->delete();
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($user->image) {
+                $oldImagePath = public_path($user->image);
+                if (File::exists($oldImagePath)) {
+                    // File::delete($oldImagePath);
+                }
             }
 
-            if ($tempFile) {
-                $user->addMedia(Storage::path('public/temp/' . $request->image . '/' . $tempFile->filename))->toMediaCollection('avatars');
+            $image = $request->file('image');
 
-                Storage::deleteDirectory('public/temp/' . $request->image);
-                $tempFile->delete();
-            }
+            // Generate a unique filename
+            $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+
+            // Resize the image if needed
+            // $resizedImage = Image::make($image)->resize(300, 200)->encode();
+
+            // Store the image to the public directory with a unique filename
+            $image->move(public_path('images/users'), $imageName);
+
+            // Save the image path to the database or associate it with the user
+            $user->update([
+                'name'  => $request->name,
+                'email' => $request->email,
+                'is_active' => $request->is_active,
+                'image' => 'images/users/' . $imageName,
+            ]);
+        } else {
+            // No image uploaded
+            $user->update([
+                'name'  => $request->name,
+                'email' => $request->email,
+                'is_active' => $request->is_active
+            ]);
         }
-
         toast("User Updated & Assigned '$request->role' Role!", 'info');
 
         return redirect()->route('users.index');

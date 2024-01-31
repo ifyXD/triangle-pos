@@ -70,7 +70,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="image">Profile Image <span class="text-danger">*</span></label>
-                                <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ $user->getFirstMediaUrl('avatars') }}" alt="Profile Image">
+                                <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ $user->image == 'avatar.png' ? 
+                                auth()->user()->getFirstMediaUrl('avatars') : 
+                                asset($user->image) }}" alt="Profile Image">
                                 <input id="image" type="file" name="image" data-max-file-size="500KB">
                             </div>
                         </div>
@@ -92,23 +94,23 @@
 
 @push('page_scripts')
     <script>
-        FilePond.registerPlugin(
-            FilePondPluginImagePreview,
-            FilePondPluginFileValidateSize,
-            FilePondPluginFileValidateType
-        );
-        const fileElement = document.querySelector('input[id="image"]');
-        const pond = FilePond.create(fileElement, {
-            acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-        });
-        FilePond.setOptions({
-            server: {
-                url: "{{ route('filepond.upload') }}",
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                }
-            }
-        });
+        // FilePond.registerPlugin(
+        //     FilePondPluginImagePreview,
+        //     FilePondPluginFileValidateSize,
+        //     FilePondPluginFileValidateType
+        // );
+        // const fileElement = document.querySelector('input[id="image"]');
+        // const pond = FilePond.create(fileElement, {
+        //     acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+        // });
+        // FilePond.setOptions({
+        //     server: {
+        //         url: "{{ route('filepond.upload') }}",
+        //         headers: {
+        //             "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        //         }
+        //     }
+        // });
     </script>
 @endpush
 
