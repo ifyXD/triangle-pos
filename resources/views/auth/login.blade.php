@@ -84,7 +84,7 @@
 
             <p class="text-center mt-5 lead">
                 Developed By
-                <a href="https://fahimanzam.netlify.app" class="font-weight-bold text-primary">Joseph Tanquilan</a>
+                <a href="https://www.facebook.com/JosephM.Tanquilan" class="font-weight-bold text-primary">Joseph</a>
             </p>
         </div>
     </div>
