@@ -21,10 +21,18 @@ class CustomersDataTable extends DataTable
             });
     }
 
-    public function query(Customer $model) {
-        return $model->newQuery();
+    public function query(Customer $model)
+    {
+        $user = auth()->user();
+    
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery();
+        }
+    
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id',1);
     }
-
     public function html() {
         return $this->builder()
             ->setTableId('customers-table')

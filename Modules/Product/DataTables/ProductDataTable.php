@@ -42,10 +42,10 @@ class ProductDataTable extends DataTable
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             return $model->newQuery()->with('category');
-        }
+        }   
     
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->where('user_id', $user->id)->with('category');
+        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id', 1)->with('category');
     }
 
     public function html()

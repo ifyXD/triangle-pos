@@ -57,6 +57,7 @@ class PosController extends Controller
                 'note' => $request->note,
                 'tax_amount' => Cart::instance('sale')->tax() * 100,
                 'discount_amount' => Cart::instance('sale')->discount() * 100,
+                'user_id' => auth()->user()->id,
             ]);
 
             foreach (Cart::instance('sale')->content() as $cart_item) {
@@ -72,6 +73,7 @@ class PosController extends Controller
                     'product_discount_amount' => $cart_item->options->product_discount * 100,
                     'product_discount_type' => $cart_item->options->product_discount_type,
                     'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'user_id' => auth()->user()->id,
                 ]);
 
                 $product = Product::findOrFail($cart_item->id);
@@ -88,6 +90,7 @@ class PosController extends Controller
                     'reference' => 'INV/'.$sale->reference,
                     'amount' => $sale->paid_amount,
                     'sale_id' => $sale->id,
+                    'user_id' => auth()->user()->id,
                     'payment_method' => $request->payment_method
                 ]);
             }

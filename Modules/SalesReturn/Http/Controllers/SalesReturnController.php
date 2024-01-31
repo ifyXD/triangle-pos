@@ -62,6 +62,7 @@ class SalesReturnController extends Controller
                 'note' => $request->note,
                 'tax_amount' => Cart::instance('sale_return')->tax() * 100,
                 'discount_amount' => Cart::instance('sale_return')->discount() * 100,
+                'user_id' => auth()->user()->id,
             ]);
 
             foreach (Cart::instance('sale_return')->content() as $cart_item) {
@@ -77,6 +78,7 @@ class SalesReturnController extends Controller
                     'product_discount_amount' => $cart_item->options->product_discount * 100,
                     'product_discount_type' => $cart_item->options->product_discount_type,
                     'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'user_id' => auth()->user()->id,
                 ]);
 
                 if ($request->status == 'Completed') {
@@ -95,7 +97,8 @@ class SalesReturnController extends Controller
                     'reference' => 'INV/'.$sale_return->reference,
                     'amount' => $sale_return->paid_amount,
                     'sale_return_id' => $sale_return->id,
-                    'payment_method' => $request->payment_method
+                    'payment_method' => $request->payment_method,
+                    'user_id' => auth()->user()->id,
                 ]);
             }
         });

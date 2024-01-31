@@ -20,8 +20,16 @@ class ExpenseCategoriesDataTable extends DataTable
             });
     }
 
-    public function query(ExpenseCategory $model) {
-        return $model->newQuery()->withCount('expenses');
+    public function query(ExpenseCategory $model) { 
+        $user = auth()->user();
+    
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery()->withCount('expenses');
+        }
+    
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()->withCount('expenses')->where('user_id', $user->id)->orWhere('user_id',1);
     }
 
     public function html() {

@@ -4,6 +4,7 @@ namespace App\Livewire\Pos;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
+use Modules\People\Entities\Customer;
 
 class Checkout extends Component
 {
@@ -41,6 +42,12 @@ class Checkout extends Component
     }
 
     public function render() {
+        $user = auth()->user();
+        $this->customers = Customer::when(!$user->hasRole('Super Admin'), function ($query) use ($user) {
+            return $query->where('user_id', $user->id)
+                         ->orWhere('user_id', '=', 1);
+        })->get();
+
         $cart_items = Cart::instance($this->cart_instance)->content();
 
         return view('livewire.pos.checkout', [

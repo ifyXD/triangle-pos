@@ -44,7 +44,8 @@ class SuppliersController extends Controller
             'supplier_email' => $request->supplier_email,
             'city'           => $request->city,
             'country'        => $request->country,
-            'address'        => $request->address
+            'address'        => $request->address,
+            'user_id'        => auth()->user()->id,
         ]);
 
         toast('Supplier Created!', 'success');

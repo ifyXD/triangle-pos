@@ -30,6 +30,8 @@ class CreateSaleReturnDetailsTable extends Migration
                 ->on('sale_returns')->cascadeOnDelete();
             $table->foreign('product_id')->references('id')
                 ->on('products')->nullOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
