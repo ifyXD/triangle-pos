@@ -19,14 +19,40 @@ class SuperUserSeeder extends Seeder
         $user = User::create([
             'name' => 'Administrator',
             'email' => 'super.admin@test.com',
-            'password' => Hash::make(12345678),
-            'is_active' => 1
+            'password' => bcrypt('12345678'),
+            'is_active' => 1,
         ]);
 
-        $superAdmin = Role::create([
-            'name' => 'Super Admin'
+        $superAdminRole = Role::where('name', 'Super Admin')->where('guard_name', 'web')->first();
+
+        if (!$superAdminRole) {
+            // Role does not exist, create it
+            $superAdminRole = Role::create([
+                'name' => 'Super Admin',
+                'guard_name' => 'web',
+            ]);
+        }
+
+        $user->assignRole($superAdminRole);
+
+        $user = User::create([
+            'name' => 'Rico Ni',
+            'email' => 'ricobregildo@gmail.com',
+            'password' => bcrypt('rico1234'),
+            'is_active' => 1,
         ]);
 
-        $user->assignRole($superAdmin);
+        $adminRole = Role::where('name', 'Admin')->where('guard_name', 'web')->first();
+
+        if (!$adminRole) {
+            // Role does not exist, create it
+            $adminRole = Role::create([
+                'name' => 'Admin',
+                'guard_name' => 'web',
+            ]);
+        }
+
+        $user->assignRole($adminRole);
+        
     }
 }

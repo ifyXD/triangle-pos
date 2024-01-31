@@ -12,19 +12,38 @@ use Yajra\DataTables\Services\DataTable;
 class ProductCategoriesDataTable extends DataTable
 {
 
-    public function dataTable($query) {
+    public function dataTable($query)
+    {
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($data) {
                 return view('product::categories.partials.actions', compact('data'));
             });
+         
     }
 
-    public function query(Category $model) {
-        return $model->newQuery()->withCount('products');
-    }
 
-    public function html() {
+    public function query(Category $model)
+    {
+        $user = auth()->user();
+
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery()->withCount('products')->orderBy('category_name');
+        }
+
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()
+            ->withCount('products')
+            ->where(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->orWhere('user_id', 1);
+            })
+            ->orderBy('category_name');
+    } 
+
+    public function html()
+    {
         return $this->builder()
             ->setTableId('product_categories-table')
             ->columns($this->getColumns())
@@ -45,28 +64,36 @@ class ProductCategoriesDataTable extends DataTable
             );
     }
 
-    protected function getColumns() {
+    protected function getColumns()
+    {
         return [
             Column::make('category_code')
-                ->addClass('text-center'),
-
+                ->addClass('text-center')
+                ->searchable(true),
+    
             Column::make('category_name')
-                ->addClass('text-center'),
-
+                ->addClass('text-center')
+                ->searchable(true),
+    
             Column::make('products_count')
-                ->addClass('text-center'),
-
+                ->addClass('text-center')
+                ->searchable(false), // Assuming you don't want to search on products_count
+    
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('text-center'),
-
+                ->addClass('text-center')
+                ->searchable(false), // Assuming you don't want to search on actions
+    
             Column::make('created_at')
                 ->visible(false)
+                ->searchable(false), // Assuming you don't want to search on created_at
         ];
     }
+    
 
-    protected function filename(): string {
+    protected function filename(): string
+    {
         return 'ProductCategories_' . date('YmdHis');
     }
 }

@@ -44,8 +44,7 @@ class UsersController extends Controller
             'is_active' => $request->is_active
         ]);
 
-        $user->assignRole($request->role);
-
+    $user->assignRole($request->role);
         if ($request->has('image')) {
             $tempFile = Upload::where('folder', $request->image)->first();
 

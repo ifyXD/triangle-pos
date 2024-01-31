@@ -20,7 +20,8 @@ class ProductDatabaseSeeder extends Seeder
 
         Category::create([
             'category_code' => 'CA_01',
-            'category_name' => 'Random'
+            'category_name' => 'Random',
+            'user_id' => 1
         ]);
 
         Unit::create([
