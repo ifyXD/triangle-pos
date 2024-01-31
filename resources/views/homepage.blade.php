@@ -17,54 +17,59 @@
 
 <body class="c-app flex-row align-items-center">
 <div class="container">
-    <div class="row mb-3">
-        <div class="col-12 d-flex justify-content-center">
-            <img width="200" src="{{ asset('images/logo-dark.png') }}" alt="Logo">
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-5"> 
-            <div class="card p-4 border-0 shadow-sm">
-                <div class="card-body">
-                     <h1 class="text-center">This is fucking homepage well played bro</h1>
-                </div>
-            </div>
+{{--    <div class="row mb-3">--}}
+{{--        <div class="col-12 d-flex justify-content-center">--}}
+{{--            <img width="200" src="{{ asset('images/logo-dark.png') }}" alt="Logo">--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row justify-content-center">--}}
+{{--        <div class="col-md-5">--}}
+{{--            <div class="card p-4 border-0 shadow-sm">--}}
+{{--                <div class="card-body">--}}
+{{--                     <h1 class="text-center">This is fucking homepage well played bro</h1>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <p class="text-center mt-5 lead">
-                Developed By
-                <a href="https://www.facebook.com/JosephM.Tanquilan" class="font-weight-bold text-primary">Joseph</a>
-            </p>
-        </div>
-    </div>
+{{--            <p class="text-center mt-5 lead">--}}
+{{--                Developed By--}}
+{{--                <a href="https://www.facebook.com/JosephM.Tanquilan" class="font-weight-bold text-primary">Joseph</a>--}}
+{{--            </p>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+
+
+
+
 </div>
 
 <!-- CoreUI -->
 <script src="{{ mix('js/app.js') }}" defer></script>
-<script>
-    let login = document.getElementById('login');
-    let submit = document.getElementById('submit');
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let spinner = document.getElementById('spinner')
+{{--<script>--}}
+{{--    let login = document.getElementById('login');--}}
+{{--    let submit = document.getElementById('submit');--}}
+{{--    let email = document.getElementById('email');--}}
+{{--    let password = document.getElementById('password');--}}
+{{--    let spinner = document.getElementById('spinner')--}}
 
-    login.addEventListener('submit', (e) => {
-        submit.disabled = true;
-        email.readonly = true;
-        password.readonly = true;
+{{--    login.addEventListener('submit', (e) => {--}}
+{{--        submit.disabled = true;--}}
+{{--        email.readonly = true;--}}
+{{--        password.readonly = true;--}}
 
-        spinner.style.display = 'block';
+{{--        spinner.style.display = 'block';--}}
 
-        login.submit();
-    });
+{{--        login.submit();--}}
+{{--    });--}}
 
-    setTimeout(() => {
-        submit.disabled = false;
-        email.readonly = false;
-        password.readonly = false;
+{{--    setTimeout(() => {--}}
+{{--        submit.disabled = false;--}}
+{{--        email.readonly = false;--}}
+{{--        password.readonly = false;--}}
 
-        spinner.style.display = 'none';
-    }, 3000);
-</script>
+{{--        spinner.style.display = 'none';--}}
+{{--    }, 3000);--}}
+{{--</script>--}}
 
 </body>
 </html>
