@@ -1,75 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-    <title>Login | {{ config('app.name') }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('images/favicon.png') }}">
-    <!-- CoreUI CSS -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href={{ asset('css/globals.css') }} />
+    <link rel="stylesheet" href={{ asset('css/styleguide.css') }} />
+    <link rel="stylesheet" href={{ asset('css/style.css') }} />
 </head>
 
-<body class="c-app flex-row align-items-center">
-<div class="container">
-{{--    <div class="row mb-3">--}}
-{{--        <div class="col-12 d-flex justify-content-center">--}}
-{{--            <img width="200" src="{{ asset('images/logo-dark.png') }}" alt="Logo">--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <div class="row justify-content-center">--}}
-{{--        <div class="col-md-5">--}}
-{{--            <div class="card p-4 border-0 shadow-sm">--}}
-{{--                <div class="card-body">--}}
-{{--                     <h1 class="text-center">This is fucking homepage well played bro</h1>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+<body>
+<div class="main">
+    <div class="div">
 
-{{--            <p class="text-center mt-5 lead">--}}
-{{--                Developed By--}}
-{{--                <a href="https://www.facebook.com/JosephM.Tanquilan" class="font-weight-bold text-primary">Joseph</a>--}}
-{{--            </p>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
+        <nav class="nav">
+            <a href="#" class="desktop-headline-logo"><h1>PUBLIC MARKET</h1></a>
+            <a href="#" class="desktop-headline-2">Home</a>
+            <a href="#" class="desktop-headline-4">About</a>
+            <a href="#" class="desktop-headline-5">Contact</a>
+        </nav>
+
+
+        <p class="desktop-headline">Streamline Your Business Operations Today!</p>
+        <p class="p">Discover the Power of Our POS and Inventory System.</p>
+
+        <img class="img-box thomas-le" alt="gulay" src={{ asset('images/homepage/gulay.jpg')}}>
+        <img class="img-box thomas-le-1" alt="isda" src={{ asset('images/homepage/isda.jpg')}}>
+        <img class="img-box thomas-le-2" alt="karne" src={{ asset('images/homepage/karne.jpg')}}>
+        <img class="img-box thomas-le-3" alt="mais" src={{ asset('images/homepage/mais.jpg')}}>
 
 
 
 
+
+        <button class="button">
+            <a href="#" class="text-wrapper">Get Started</a>
+        </button>
+        <button class="button-wrapper">
+            <a href="#" class="button-2">Log in</a>
+        </button>
+
+
+
+
+    </div>
+    <div class="rectangle"></div>
 </div>
-
-<!-- CoreUI -->
-<script src="{{ mix('js/app.js') }}" defer></script>
-{{--<script>--}}
-{{--    let login = document.getElementById('login');--}}
-{{--    let submit = document.getElementById('submit');--}}
-{{--    let email = document.getElementById('email');--}}
-{{--    let password = document.getElementById('password');--}}
-{{--    let spinner = document.getElementById('spinner')--}}
-
-{{--    login.addEventListener('submit', (e) => {--}}
-{{--        submit.disabled = true;--}}
-{{--        email.readonly = true;--}}
-{{--        password.readonly = true;--}}
-
-{{--        spinner.style.display = 'block';--}}
-
-{{--        login.submit();--}}
-{{--    });--}}
-
-{{--    setTimeout(() => {--}}
-{{--        submit.disabled = false;--}}
-{{--        email.readonly = false;--}}
-{{--        password.readonly = false;--}}
-
-{{--        spinner.style.display = 'none';--}}
-{{--    }, 3000);--}}
-{{--</script>--}}
-
 </body>
 </html>

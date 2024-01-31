@@ -1,0 +1,219 @@
+.main {
+    background-color: #00210b;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.div {
+    background: transparent;
+    /*background-color: var(--material-theme-schemes-on-primary-fixed);*/
+    width: 1920px;
+    /*height: 1080px;*/
+    position: relative;
+}
+
+.button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 255px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 32px;
+    position: absolute;
+    top: 785px;
+    left: 158px;
+    background-color: var(--material-theme-schemes-primary-container);
+    border-radius: 8px;
+}
+
+.text-wrapper {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Outfit-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-themesyslight-high-contrastprimary);
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+.button-wrapper {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 32px;
+    position: absolute;
+    top: 31px;
+    left: 1643px;
+    background-color: var(--material-theme-schemes-primary-container);
+    border-radius: 98px;
+}
+
+.button-2 {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Montserrat-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-themesyslight-high-contrastprimary);
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+.desktop-headline {
+    position: absolute;
+    width: 930px;
+    top: 180px;
+    left: 158px;
+    font-family: "Outfit-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-themesyslighton-primary);
+    font-size: 128px;
+    letter-spacing: 0;
+    line-height: 120px;
+}
+
+.p {
+    position: absolute;
+    top: 683px;
+    left: 158px;
+    font-family: "Outfit-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 64px;
+    white-space: nowrap;
+}
+
+.img-box {
+    border-radius: 30px;
+}
+
+.thomas-le {
+    width: 390px;
+    height: 441px;
+    top: 180px;
+    left: 1103px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.thomas-le-1 {
+    width: 255px;
+    height: 213px;
+    top: 408px;
+    left: 1508px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.thomas-le-2 {
+    width: 660px;
+    height: 213px;
+    top: 636px;
+    left: 1103px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.thomas-le-3 {
+    width: 255px;
+    height: 213px;
+    top: 180px;
+    left: 1508px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.desktop-headline-2 {
+    position: absolute;
+    top: 48px;
+    left: 158px;
+    font-family: "Outfit-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-theme-schemes-on-primary);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.desktop-headline-logo {
+    position: absolute;
+    /*width: 310px;*/
+    /*height: 29px;*/
+    top: 40px;
+    left: 837px;
+    width: 316px;
+    height: 37px;
+    flex-shrink: 0;
+
+}
+
+.desktop-headline-logo h1 {
+    color: var(--Schemes-On-Primary, #FFF);
+    font-family: Outfit;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 70% */
+    text-transform: uppercase;
+}
+
+.desktop-headline-4 {
+    position: absolute;
+    top: 48px;
+    left: 292px;
+    font-family: "Outfit-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-theme-schemes-on-primary);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.desktop-headline-5 {
+    position: absolute;
+    top: 48px;
+    left: 428px;
+    font-family: "Outfit-Bold", Helvetica;
+    font-weight: 700;
+    color: var(--material-theme-schemes-on-primary);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 28px;
+    white-space: nowrap;
+}
+
+.rectangle {
+    position: absolute;
+
+    width: 100vw;
+    height: 10px;
+    /*top: 1073px;*/
+    bottom: 0;
+    /*left: 0;*/
+    background-color: var(--material-theme-schemes-surface-tint);
+}
