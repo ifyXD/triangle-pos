@@ -95,7 +95,7 @@ class SalesReturnController extends Controller
                 SaleReturnPayment::create([
                     'date' => $request->date,
                     'reference' => 'INV/'.$sale_return->reference,
-                    'amount' => $sale_return->paid_amount,
+                  'amount' => $sale_return->paid_amount,
                     'sale_return_id' => $sale_return->id,
                     'payment_method' => $request->payment_method,
                     'user_id' => auth()->user()->id,

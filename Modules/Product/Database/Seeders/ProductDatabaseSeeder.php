@@ -28,7 +28,8 @@ class ProductDatabaseSeeder extends Seeder
             'name' => 'Piece',
             'short_name' => 'PC',
             'operator' => '*',
-            'operation_value' => 1
+            'operation_value' => 1,
+            'user_id' => 1
         ]);
     }
 }
