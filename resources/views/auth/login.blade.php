@@ -97,7 +97,7 @@
     let submit = document.getElementById('submit');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    let spinner = document.getElementById('spinner')
+        let spinner = document.getElementById('spinner')
 
     login.addEventListener('submit', (e) => {
         submit.disabled = true;
