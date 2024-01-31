@@ -27,22 +27,26 @@ class ProductController extends Controller
         abort_if(Gate::denies('create_products'), 403);
 
         return view('product::products.create');
-    }
-
-
-    public function store(StoreProductRequest $request) {
+    } 
+ 
+    public function store(StoreProductRequest $request)
+    {
+        // Set user_id from the authenticated user
+        $request->merge(['user_id' => auth()->user()->id]);
+    
         $product = Product::create($request->except('document'));
-
+    
         if ($request->has('document')) {
             foreach ($request->input('document', []) as $file) {
                 $product->addMedia(Storage::path('temp/dropzone/' . $file))->toMediaCollection('images');
             }
         }
-
+    
         toast('Product Created!', 'success');
-
+    
         return redirect()->route('products.index');
     }
+    
 
 
     public function show(Product $product) {

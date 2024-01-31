@@ -61,6 +61,7 @@ class PurchaseController extends Controller
                 'note' => $request->note,
                 'tax_amount' => Cart::instance('purchase')->tax() * 100,
                 'discount_amount' => Cart::instance('purchase')->discount() * 100,
+                'user_id' => auth()->user()->id,
             ]);
 
             foreach (Cart::instance('purchase')->content() as $cart_item) {

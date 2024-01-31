@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('homepage');
+})->middleware('guest');
+Route::get('/login', function () {
     return view('auth.login');
 })->middleware('guest');
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')

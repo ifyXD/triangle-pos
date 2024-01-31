@@ -23,10 +23,26 @@ class SearchProduct extends Component
         return view('livewire.search-product');
     }
 
-    public function updatedQuery() {
-        $this->search_results = Product::where('product_name', 'like', '%' . $this->query . '%')
-            ->orWhere('product_code', 'like', '%' . $this->query . '%')
-            ->take($this->how_many)->get();
+    public function updatedQuery()
+    {
+        $user = auth()->user();
+    
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            $this->search_results = Product::where('product_name', 'like', '%' . $this->query . '%')
+                ->orWhere('product_code', 'like', '%' . $this->query . '%')
+                ->take($this->how_many)
+                ->get();
+        } else {
+            // If not "Super Admin," apply the original condition
+            $this->search_results = Product::where('user_id', $user->id)
+                ->where(function ($query) {
+                    $query->where('product_name', 'like', '%' . $this->query . '%')
+                        ->orWhere('product_code', 'like', '%' . $this->query . '%');
+                })
+                ->take($this->how_many)
+                ->get();
+        }
     }
 
     public function loadMore() {
