@@ -12,7 +12,8 @@ use Yajra\DataTables\Services\DataTable;
 class PurchaseReturnPaymentsDataTable extends DataTable
 {
 
-    public function dataTable($query) {
+    public function dataTable($query)
+    {
         return datatables()
             ->eloquent($query)
             ->addColumn('amount', function ($data) {
@@ -23,11 +24,22 @@ class PurchaseReturnPaymentsDataTable extends DataTable
             });
     }
 
-    public function query(PurchaseReturnPayment $model) {
-        return $model->newQuery()->byPurchaseReturn()->with('purchaseReturn');
+    public function query(PurchaseReturnPayment $model)
+    {
+
+        $user = auth()->user();
+
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery()->byPurchaseReturn()->with('purchaseReturn');
+        }
+
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()->byPurchaseReturn()->with('purchaseReturn')->where('user_id', $user->id)->orWhere('user_id', 1);
     }
 
-    public function html() {
+    public function html()
+    {
         return $this->builder()
             ->setTableId('purchase-payments-table')
             ->columns($this->getColumns())
@@ -48,7 +60,8 @@ class PurchaseReturnPaymentsDataTable extends DataTable
             );
     }
 
-    protected function getColumns() {
+    protected function getColumns()
+    {
         return [
             Column::make('date')
                 ->className('align-middle text-center'),
@@ -72,7 +85,8 @@ class PurchaseReturnPaymentsDataTable extends DataTable
         ];
     }
 
-    protected function filename(): string {
+    protected function filename(): string
+    {
         return 'PurchaseReturnPayments_' . date('YmdHis');
     }
 }

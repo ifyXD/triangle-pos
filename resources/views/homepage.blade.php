@@ -36,7 +36,7 @@
             <a href="#" class="text-wrapper">Get Started</a>
         </button>
         <button class="button-wrapper">
-            <a href="#" class="button-2">Log in</a>
+            <a href="{{route('login')}}" class="button-2">Log in</a>
         </button>
 
 

@@ -50,7 +50,8 @@ class PurchaseReturnPaymentsController extends Controller
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'purchase_return_id' => $request->purchase_return_id,
-                'payment_method' => $request->payment_method
+                'payment_method' => $request->payment_method,
+                'user_id' => auth()->user()->id,
             ]);
 
             $purchase_return = PurchaseReturn::findOrFail($request->purchase_return_id);

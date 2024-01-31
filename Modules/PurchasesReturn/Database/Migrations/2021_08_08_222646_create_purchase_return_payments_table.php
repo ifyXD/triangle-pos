@@ -22,6 +22,8 @@ class CreatePurchaseReturnPaymentsTable extends Migration
             $table->string('payment_method');
             $table->text('note')->nullable();
             $table->foreign('purchase_return_id')->references('id')->on('purchase_returns')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
