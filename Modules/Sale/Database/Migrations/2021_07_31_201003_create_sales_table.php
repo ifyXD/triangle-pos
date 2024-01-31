@@ -32,6 +32,8 @@ class CreateSalesTable extends Migration
             $table->string('payment_method');
             $table->text('note')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -44,7 +44,8 @@ class CustomersController extends Controller
             'customer_email' => $request->customer_email,
             'city'           => $request->city,
             'country'        => $request->country,
-            'address'        => $request->address
+            'address'        => $request->address,
+            'user_id'        => auth()->user()->id
         ]);
 
         toast('Customer Created!', 'success');

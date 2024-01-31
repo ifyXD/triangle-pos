@@ -28,7 +28,8 @@ class ExpenseCategoriesController extends Controller
 
         ExpenseCategory::create([
             'category_name' => $request->category_name,
-            'category_description' => $request->category_description
+            'category_description' => $request->category_description,
+            'user_id' => auth()->user()->id,
         ]);
 
         toast('Expense Category Created!', 'success');

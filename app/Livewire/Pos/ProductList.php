@@ -48,16 +48,14 @@ class ProductList extends Component
 
     public function showCountChanged($value) {
         // Apply hasRole check for 'Super Admin'
-        if (auth()->user()->hasRole('Super Admin')) {
+        
             $this->limit = $value;
-            $this->resetPage();
-        }
+            $this->resetPage(); 
     }
 
     public function selectProduct($product) {
         // Apply hasRole check for 'Super Admin'
-        if (!auth()->user()->hasRole('Super Admin')) {
-            $this->dispatch('productSelected', $product);
-        }
+         
+            $this->dispatch('productSelected', $product); 
     }
 }
