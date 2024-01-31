@@ -12,7 +12,7 @@
     <div class="div">
 
 
-        <nav class="nav">
+        <nav class="nav-headline">
             <a href="#" class="desktop-headline-logo"><h1>PUBLIC MARKET</h1></a>
             <a href="#" class="desktop-headline-2">Home</a>
             <a href="#" class="desktop-headline-4">About</a>
@@ -43,7 +43,8 @@
 
 
     </div>
-    <div class="rectangle"></div>
+{{--    <div class="rectangle"></div>--}}
+
 </div>
 </body>
 </html>
