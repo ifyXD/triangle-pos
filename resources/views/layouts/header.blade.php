@@ -53,7 +53,7 @@
                 <img class="c-avatar rounded-circle" 
                 src="{{ auth()->user()->image == 'avatar.png' ? 
                            auth()->user()->getFirstMediaUrl('avatars') : 
-                           asset(auth()->user()->image) }}" 
+                           asset(auth()->user()->image) }}"
                 alt="Profile Image">
            
             </div>

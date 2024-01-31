@@ -43,7 +43,7 @@ class ProfileController extends Controller
             if ($user->image) {
                 $oldImagePath = public_path($user->image);
                 if (File::exists($oldImagePath)) {
-                    File::delete($oldImagePath);
+                    // File::delete($oldImagePath);
                 }
             }
 
