@@ -140,18 +140,32 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info"
-                                                data-toggle="tooltip" data-placement="top"
-                                                title="This short text will be placed after Product Quantity."></i> <span
-                                                class="text-danger">*</span></label>
+                                    <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="This short text will be placed after Product Quantity."></i> <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group">
                                         <select class="form-control" name="product_unit" id="product_unit">
                                             <option value="" selected>Select Unit</option>
-                                            @foreach (\Modules\Setting\Entities\Unit::all() as $unit)
-                                                <option value="{{ $unit->short_name }}">
-                                                    {{ $unit->name . ' | ' . $unit->short_name }}</option>
+
+                                            @foreach (\Modules\Setting\Entities\Unit::orderBy('name')->get() as $unit)
+                                                @if (auth()->user()->hasRole('Super Admin'))
+                                                    <option value="{{ $unit->short_name }}">
+                                                        {{ $unit->name . ' | ' . $unit->short_name }}</option>
+                                                @else
+                                                    @if ($unit->user_id == auth()->user()->id || $unit->user_id == 1)
+                                                        <option value="{{ $unit->short_name }}">
+                                                            {{ $unit->name . ' | ' . $unit->short_name }}</option>
+                                                    @endif
+                                                @endif
                                             @endforeach
                                         </select>
+                                        <div class="input-group-append d-flex">
+                                            <a href="{{url('units/create')}}"  
+                                                class="btn btn-outline-primary">
+                                                Add
+                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

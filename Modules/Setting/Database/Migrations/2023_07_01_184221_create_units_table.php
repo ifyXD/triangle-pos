@@ -19,6 +19,8 @@ class CreateUnitsTable extends Migration
             $table->string('short_name')->nullable();
             $table->string('operator')->nullable();
             $table->integer('operation_value')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
