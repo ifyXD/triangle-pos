@@ -37,7 +37,15 @@ class ProductDataTable extends DataTable
 
     public function query(Product $model)
     {
-        return $model->newQuery()->with('category');
+        $user = auth()->user();
+    
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery()->with('category');
+        }
+    
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()->where('user_id', $user->id)->with('category');
     }
 
     public function html()

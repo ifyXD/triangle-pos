@@ -28,6 +28,8 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('product_tax_type')->nullable();
             $table->text('product_note')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
