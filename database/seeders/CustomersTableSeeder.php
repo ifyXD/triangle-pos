@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Modules\People\Database\factories\CustomerFactory;
 
 class CustomersTableSeeder extends Seeder
 {
@@ -27,9 +26,5 @@ class CustomersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        // gamtion ang factory sht to create 4 more customers sht with the same user_id
-        CustomerFactory::new()
-            ->count(19)
-            ->create(['user_id' => 1]);
     }
 }
