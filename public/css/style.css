@@ -206,7 +206,7 @@
     font-family: Outfit;
     font-size: 40px;
     font-style: normal;
-    font-weight: 700;
+    /* font-weight: 700; */
     line-height: 28px; /* 70% */
     text-transform: uppercase;
 }
