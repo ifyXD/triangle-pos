@@ -21,16 +21,26 @@
                     <div class="card-body">
                         <form action="{{ route('system-settings.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-row"> 
+                            <div class="form-row">
                                 <div class="col-lg-12">
                                     <label for="image">Profile Image <span class="text-danger">*</span></label>
-                                    <div class="form-group text-center"> 
-                                        <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ auth()->user()->setting->image == 'avatar.png' ?
-                                        asset('images/logo.png') :
-                                        asset('storage/'.auth()->user()->setting->image) }}" alt="Profile Image">
+                                    <div class="form-group text-center">
+                                        @if (auth()->user()->setting && auth()->user()->setting->image)
+                                            <img style="width: 100px; height: 100px;"
+                                                class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
+                                                src="{{ auth()->user()->setting->image == 'avatar.png'
+                                                    ? asset('images/logo.png')
+                                                    : asset('storage/' . auth()->user()->setting->image) }}"
+                                                alt="Profile Image">
+                                        @else
+                                            <img style="width: 100px; height: 100px;"
+                                                class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
+                                                src="{{ asset('images/logo.png') }}" alt="Default Image">
+                                        @endif
                                         <input id="image" type="file" name="image" data-max-file-size="500KB">
                                     </div>
                                 </div>
+
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
@@ -110,7 +120,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="form-group mb-0">
                                 <button type="submit" id="submitNi" class="btn btn-primary"><i class="bi bi-check"></i>
                                     Save Changes</button>
@@ -137,7 +147,8 @@
 
                                         <div class="container">
                                             <div class="container-color">
-                                                <input value="{{ auth()->user()->themecustom->sidebar_color?? NULL }}" type="color" id="color-picker" />
+                                                <input value="{{ auth()->user()->themecustom->sidebar_color ?? null }}"
+                                                    type="color" id="color-picker" />
                                                 <span id="value"></span>
                                             </div>
                                         </div>
@@ -205,7 +216,7 @@
 
                             </div>
                             --}}
-                            <input type="hidden" id="sidebar_color_id" class="form-control" name="sidebar_color">
+                                <input type="hidden" id="sidebar_color_id" class="form-control" name="sidebar_color">
 
                                 <div class="form-group mb-0">
                                     <button type="submit" class="btn btn-primary"><i class="bi bi-check"></i>
