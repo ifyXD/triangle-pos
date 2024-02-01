@@ -25,6 +25,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
+                                        <input type="hidden" class="form-control" name="user_id" value="{{ $settings->user_id }}" required>
                                         <label for="company_name">Company Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_name" value="{{ $settings->company_name }}" required>
                                     </div>

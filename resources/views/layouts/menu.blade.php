@@ -232,7 +232,8 @@
     </li>
 @endcan
 
-@if (auth()->user()->can('access_suppliers') || auth()->user()->can('access_customers'))
+@if (auth()->user()->can('access_suppliers') ||
+        auth()->user()->can('access_customers'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers.*') || request()->routeIs('suppliers.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -336,13 +337,15 @@
 @endcan
 
 
-@if (auth()->user()->can('access_currencies') || auth()->user()->can('access_settings')) 
+@if (auth()->user()->can('access_currencies') ||
+        auth()->user()->can('access_settings'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('currencies*') || request()->routeIs('units*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
         </a>
-        @if(auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Super Admin'))
+        @if (auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasRole('Super Admin'))
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('units*') ? 'c-active' : '' }}"
@@ -352,7 +355,7 @@
                 </li>
             </ul>
         @endif
-        @if(auth()->user()->hasRole('Super Admin'))
+        @if (auth()->user()->hasRole('Super Admin'))
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('currencies*') ? 'c-active' : '' }}"
@@ -361,7 +364,7 @@
                     </a>
                 </li>
             </ul>
-        @endif
+        @endif 
         @can('access_settings')
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
@@ -372,5 +375,16 @@
                 </li>
             </ul>
         @endcan
+        {{-- user settings --}}
+        @if (!auth()->user()->hasRole('Super Admin'))
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('system-settings*') ? 'c-active' : '' }}"
+                        href="{{ route('system-settings.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i>General System Settings
+                    </a>
+                </li>
+            </ul>
+        @endif
     </li>
 @endif

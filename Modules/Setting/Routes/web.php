@@ -20,4 +20,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/settings', 'SettingController@update')->name('settings.update');
     // Units
     Route::resource('units', 'UnitsController')->except('show');
+    
+    
+    // for user settings
+    Route::get('system-settings', 'UserSettingController@index')->name('system-settings.index');
+    Route::post('system-settings/update', 'UserSettingController@update')->name('system-settings.update');
+
+
+
 });
