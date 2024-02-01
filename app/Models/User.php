@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Product\Entities\Category;
+use Modules\Setting\Entities\Setting;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\File;
@@ -63,5 +64,13 @@ class User extends Authenticatable implements HasMedia
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'user_id', 'id');
+    }
+    public function setting()
+    {
+        return $this->hasOne(Setting::class);
+    }
+    public function themecustom()
+    {
+        return $this->hasOne(ThemeSetting::class);
     }
 }

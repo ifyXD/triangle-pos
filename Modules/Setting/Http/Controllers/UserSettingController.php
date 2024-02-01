@@ -2,6 +2,7 @@
 
 namespace Modules\Setting\Http\Controllers;
 
+use App\Models\ThemeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Setting;
@@ -51,6 +52,26 @@ class UserSettingController extends Controller
                 'default_currency_id' => $request->default_currency_id,
                 'user_id' => auth()->user()->id,
                 'default_currency_position' => $request->default_currency_position,
+            ]);
+        }
+        toast('Settings Updated!', 'info');
+
+        return redirect()->route('system-settings.index');
+    }
+    public function themeupdate(Request $request)
+    {
+        $setting = ThemeSetting::where('user_id', $request->user_id)->first();
+
+
+        if ($setting == null) {
+            ThemeSetting::create([
+                'sidebar_color' => $request->sidebar_color, 
+                'user_id' => auth()->user()->id, 
+            ]);
+        } else {
+            $setting->update([
+                'sidebar_color' => $request->sidebar_color, 
+                'user_id' => auth()->user()->id, 
             ]);
         }
         toast('Settings Updated!', 'info');

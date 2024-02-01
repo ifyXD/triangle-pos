@@ -23,7 +23,7 @@ class CreateSettingsTable extends Migration
             $table->string('default_currency_position')->nullable();
             $table->string('notification_email')->nullable();
             $table->text('footer_text')->nullable();
-            $table->text('company_address')->nullable();
+            $table->text('company_address')->nullable();  
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
