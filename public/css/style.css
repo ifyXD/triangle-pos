@@ -47,6 +47,22 @@
     white-space: nowrap;
 }
 
+/*.button-wrapper {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 32px;
+    position: absolute;
+    top: 31px;
+    left: 1643px;
+    background-color: #321FDB;
+    border-radius: 98px;
+}*/
+
 .button-wrapper {
     all: unset;
     box-sizing: border-box;
@@ -61,7 +77,14 @@
     left: 1643px;
     background-color: #321FDB;
     border-radius: 98px;
+    cursor: pointer; /* Add this to make the button clickable */
 }
+
+.button:hover,
+.button-wrapper:hover {
+    cursor: pointer; /* Change cursor on hover */
+}
+
 
 .button-2 {
     all: unset;
@@ -108,7 +131,7 @@
 }
 
 .img-box {
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .thomas-le {

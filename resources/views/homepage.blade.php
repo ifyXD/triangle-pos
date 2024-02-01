@@ -34,6 +34,7 @@
         <button class="button-wrapper">
             <a href="{{route('login')}}" class="button-2">Log in</a>
         </button>
+
     </div>
 </div>
 </body>
