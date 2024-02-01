@@ -128,7 +128,7 @@
 
                                         <div class="container">
                                             <div class="container-color">
-                                                <input type="color" id="color-picker" />
+                                                <input value="{{ auth()->user()->themecustom->sidebar_color?? NULL }}" type="color" id="color-picker" />
                                                 <span id="value"></span>
                                             </div>
                                         </div>
