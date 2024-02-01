@@ -24,12 +24,12 @@ class CustomersDataTable extends DataTable
     public function query(Customer $model)
     {
         $user = auth()->user();
-    
+
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             return $model->newQuery();
         }
-    
+
         // If not "Super Admin," apply the original condition
         return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id',1);
     }
@@ -43,8 +43,8 @@ class CustomersDataTable extends DataTable
                                  <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
             ->orderBy(4)
             ->buttons(
-                Button::make('excel')
-                    ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
+                /*Button::make('excel')
+                    ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),*/
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
                 Button::make('reset')

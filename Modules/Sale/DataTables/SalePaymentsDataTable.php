@@ -26,14 +26,14 @@ class SalePaymentsDataTable extends DataTable
     public function query(SalePayment $model) {
 
         $user = auth()->user();
-    
+
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             return $model->newQuery()->bySale()->with('sale');
         }
-    
+
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->bySale()->with('sale')->where('user_id', $user->id)->orWhere('user_id',1);   
+        return $model->newQuery()->bySale()->with('sale')->where('user_id', $user->id)->orWhere('user_id',1);
     }
 
     public function html() {

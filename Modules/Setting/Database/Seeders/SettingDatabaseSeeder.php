@@ -24,7 +24,7 @@ class SettingDatabaseSeeder extends Seeder
             'default_currency_position' => 'prefix',
             'user_id' => 1,
             'footer_text' => 'Pub Market © 2024 || Developed by <strong><a target="_blank" href="https://www.facebook.com/JosephM.Tanquilan">Joseph</a></strong>',
-            'company_address' => 'Tangail, Bangladesh'
+            'company_address' => 'Mindanao, Philippines'
         ]);
     }
 }
