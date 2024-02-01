@@ -3,13 +3,18 @@
     id="sidebar">
     <div class="c-sidebar-brand d-md-down-none">
         <a href="{{ route('home') }}">
-            <img class="c-sidebar-brand-full"
-                src="{{ auth()->user()->hasRole('Super Admin')? asset('images/logo.png'): auth()->user()->setting->company_name ?? null }}"
+            @php
+                $userSetting = auth()->user()->setting;
+                $logoPath = $userSetting ? asset('storage/' . $userSetting->image) : asset('images/logo.png');
+            @endphp
+
+            <img class="c-sidebar-brand-full" src="{{ auth()->user()->hasRole('Super Admin') ?  asset('images/logo.png') :$logoPath }}"
                 alt="Site Logo" width="200">
             <img class="c-sidebar-brand-minimized" src="{{ asset('images/logo-minimize.png') }}" alt="Site Logo"
                 width="40">
         </a>
     </div>
+
     <ul class="c-sidebar-nav">
         @include('layouts.menu')
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

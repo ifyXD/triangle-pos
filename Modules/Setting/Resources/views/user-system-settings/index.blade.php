@@ -19,9 +19,18 @@
                         <h5 class="mb-0">General Settings</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('system-settings.update') }}" method="POST">
+                        <form action="{{ route('system-settings.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-row">
+                            <div class="form-row"> 
+                                <div class="col-lg-12">
+                                    <label for="image">Profile Image <span class="text-danger">*</span></label>
+                                    <div class="form-group text-center"> 
+                                        <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ auth()->user()->setting->image == 'avatar.png' ?
+                                        asset('images/logo.png') :
+                                        asset('storage/'.auth()->user()->setting->image) }}" alt="Profile Image">
+                                        <input id="image" type="file" name="image" data-max-file-size="500KB">
+                                    </div>
+                                </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
@@ -101,7 +110,7 @@
                                 </div>
                             </div>
 
-
+                            
                             <div class="form-group mb-0">
                                 <button type="submit" id="submitNi" class="btn btn-primary"><i class="bi bi-check"></i>
                                     Save Changes</button>

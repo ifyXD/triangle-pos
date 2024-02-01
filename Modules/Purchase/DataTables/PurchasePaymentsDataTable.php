@@ -23,7 +23,16 @@ class PurchasePaymentsDataTable extends DataTable
     }
 
     public function query(PurchasePayment $model) {
-        return $model->newQuery()->byPurchase()->with('purchase');
+
+        $user = auth()->user();
+    
+        // Check if the user has the role "Super Admin"
+        if ($user->hasRole('Super Admin')) {
+            return $model->newQuery()->byPurchase()->with('purchase');
+        }   
+    
+        // If not "Super Admin," apply the original condition
+        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id', 1)->byPurchase()->with('purchase'); 
     }
 
     public function html() {

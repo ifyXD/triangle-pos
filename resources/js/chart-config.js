@@ -41,6 +41,7 @@ $(document).ready(function () {
 
     let overviewChart = document.getElementById('currentMonthChart');
     $.get('/current-month/chart-data', function (response) {
+        console.log(response);
         let currentMonthChart = new Chart(overviewChart, {
             type: 'doughnut',
             data: {
@@ -61,7 +62,6 @@ $(document).ready(function () {
             },
         });
     });
-
     let paymentChart = document.getElementById('paymentChart');
     $.get('/payment-flow/chart-data', function (response) {
         let cashflowChart = new Chart(paymentChart, {
@@ -87,4 +87,5 @@ $(document).ready(function () {
             },
         });
     });
+    
 });

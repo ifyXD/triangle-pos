@@ -22,6 +22,7 @@ class CreateSettingsTable extends Migration
             $table->integer('default_currency_id')->nullable();
             $table->string('default_currency_position')->nullable();
             $table->string('notification_email')->nullable();
+            $table->string('image')->nullable()->default('avatar.png');
             $table->text('footer_text')->nullable();
             $table->text('company_address')->nullable();  
             $table->unsignedBigInteger('user_id');
