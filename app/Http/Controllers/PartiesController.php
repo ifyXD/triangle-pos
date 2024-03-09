@@ -12,7 +12,7 @@ class PartiesController extends Controller
      */
     public function index()
     {
-        //
+        return view('web/figures/parties/index');
     }
 
     /**

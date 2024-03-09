@@ -12,7 +12,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return view('web/figures/expense/index.blade.php');
+        return view('web/figures/expense/index');
     }
 
     /**

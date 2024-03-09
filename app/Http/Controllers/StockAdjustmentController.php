@@ -12,7 +12,7 @@ class StockAdjustmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('web/figures/stock-adjustment/index');
     }
 
     /**

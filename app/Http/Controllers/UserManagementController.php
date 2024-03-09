@@ -12,7 +12,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        //
+        return view('web/figures/user-management/index');
     }
 
     /**
