@@ -1,3 +1,15 @@
+/* Static values */
+/*width: clamp(200px, 40%, 400px);*/
+/*width: clamp(20rem, 30vw, 70rem);*/
+/*width: clamp(10vw, 20em, 100vw);*/
+
+/* Calculated values */
+/*width: clamp(min(10vw, 20rem), 300px, max(90vw, 55rem));*/
+/*width: clamp(100px, calc(30% / 2rem + 10px), 900px);*/
+
+
+
+
 /* Typography */
 a, h1, p, figcaption, span {
     font-family: Outfit, sans-serif;
