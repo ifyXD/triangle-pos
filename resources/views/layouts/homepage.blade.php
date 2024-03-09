@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-... (hash value)" crossorigin="anonymous">
 </head>
 <body>
 
@@ -52,15 +54,19 @@
     <section>
         <div class="container">
             <div class="logo"><h1>RM</h1></div>
-            <div class="footer-links"></div>
-
-
+            <p>Each app simplifies a process and empowers more people.
+                Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </section>
 
     <div class="copyright">
         <div class="copyright-container">
-            <p>Website made with love</p>
+            <p>Copyright &copy; 2024 Joseph Tanquilan</p>
         </div>
     </div>
 </footer>
