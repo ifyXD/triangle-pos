@@ -72,7 +72,7 @@
 
             <div class="feature-content">
                 <div class="content">
-                    <a href="">
+                    <a href="{{ url('product') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
@@ -80,49 +80,49 @@
                         </figure>
                     </a>
 
-                    <a href="">
+                    <a href="{{ url('stock') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Stock Adjustments</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('purchase') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Purchases</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('sale') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Sale</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('expense') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Expenses</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('parties') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Parties</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('reports') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Reports</figcaption>
                         </figure>
                     </a>
-                    <a href="">
+                    <a href="{{ url('user') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">

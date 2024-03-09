@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
+    /* height: 100%; */
 }
 
 
@@ -20,6 +21,7 @@ main {
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 auto;
     flex: 1 0 auto;
+    /* z-index: -1; */
 }
 
 
@@ -33,6 +35,7 @@ header {
     justify-content: center;
     align-items: center;
     align-self: stretch;
+    z-index: 1;
 }
 
 nav {
@@ -157,7 +160,7 @@ section {
     align-items: flex-start;
     /* align-self: stretch; */
     position: relative;
-    z-index: -1;
+    /* z-index: -1; */
 }
 
 .hero-section {
