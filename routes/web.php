@@ -25,20 +25,18 @@ Route::get('/trial', function () {
 })->middleware('guest');
 Route::get('/login', function () {
     return view('auth.login');
-})->middleware('guest');
-
-
-
-
+})->middleware('guest'); 
+Route::get('/trial', function () {
+    return view('auth.login');
+})->middleware('guest'); 
 Auth::routes(['register' => true]);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/sales-purchases/chart-data', 'HomeController@salesPurchasesChart')->name('sales-purchases.chart');
     Route::get('/current-month/chart-data', 'HomeController@currentMonthChart')->name('current-month.chart');
     Route::get('/payment-flow/chart-data', 'HomeController@paymentChart')->name('payment-flow.chart');
 });
-
-
 
 Route::resources([
     'expense' => ExpenseController::class,
