@@ -1,7 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Outfit:700,600|Montserrat:700");
 
-
+/* Reset and global styles */
 *,
 *::before,
 *::after {
@@ -9,8 +9,7 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;

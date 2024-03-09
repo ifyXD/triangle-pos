@@ -10,18 +10,17 @@
     <link rel="stylesheet" href="{{ asset('css/globals.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Bakbak+One&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 
-<header class="bg-200">
+<header>
     <nav>
         <div class="logo">
-            <h1><a href="/">PUBMARK</a></h1>
+            <h1><a href="/">PM</a></h1>
         </div>
 
         <div class="menu">
@@ -65,7 +64,5 @@
         </div>
     </div>
 </footer>
-
-
 </body>
 </html>
