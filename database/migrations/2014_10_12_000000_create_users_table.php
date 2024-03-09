@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->default('avatar.png');
             $table->boolean('is_active');
+            $table->string('reg_requirements')->default('trial')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
