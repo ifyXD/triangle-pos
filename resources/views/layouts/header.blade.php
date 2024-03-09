@@ -50,17 +50,14 @@
         <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button"
            aria-haspopup="true" aria-expanded="false">
             <div class="c-avatar mr-2">
-                <img class="c-avatar rounded-circle" 
-                src="{{ auth()->user()->image == 'avatar.png' ? 
-                           auth()->user()->getFirstMediaUrl('avatars') : 
+                <img class="c-avatar rounded-circle"
+                src="{{ auth()->user()->image == 'avatar.png' ?
+                           auth()->user()->getFirstMediaUrl('avatars') :
                            asset(auth()->user()->image) }}"
                 alt="Profile Image">
-           
+
             </div>
-            <div class="d-flex flex-column">
-                <span class="font-weight-bold">{{ auth()->user()->name }}</span>
-                <span class="font-italic">Online <i class="bi bi-circle-fill text-success" style="font-size: 11px;"></i></span>
-            </div>
+
         </a>
         <div class="dropdown-menu dropdown-menu-right pt-0">
             <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
