@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PartiesController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StockAdjustmentController;
+use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-
-Route::resource('expense', 'ExpenseController');
-
+Route::resources([
+    'expense' => ExpenseController::class,
+    'parties' => PartiesController::class,
+    'product' => ProductController::class,
+    'purchase' => PurchaseController::class,
+    'report' => ReportController::class,
+    'sale' => SaleController::class,
+    'stock' => StockAdjustmentController::class,
+    'user' => UserManagementController::class,
+]);

@@ -72,7 +72,7 @@
 
             <div class="feature-content">
                 <div class="content">
-                    <a href="">
+                    <a href="{{ url('expense/index') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
@@ -80,13 +80,13 @@
                         </figure>
                     </a>
 
-                    <a href="">
+{{--                    <a href="">--}}
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
                                  alt="Product Picture">
                             <figcaption>Stock Adjustments</figcaption>
                         </figure>
-                    </a>
+{{--                    </a>--}}
                     <a href="">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
