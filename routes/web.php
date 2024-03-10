@@ -29,6 +29,7 @@ Route::get('/login', function () {
 Route::get('/trial', function () {
     return view('auth.login');
 })->middleware('guest'); 
+Route::post('/register-user', [ExpenseController::class, 'register']); 
 Auth::routes(['register' => true]);
 
 Route::group(['middleware' => 'auth'], function () {
