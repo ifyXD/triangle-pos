@@ -14,6 +14,12 @@ class ExpenseController extends Controller
     {
         return view('web/figures/expense/index');
     }
+    public function register(Request $request)
+    {
+        return response()->json([
+            'message' => $request->name
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
