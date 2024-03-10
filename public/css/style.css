@@ -98,7 +98,11 @@ nav .logo a,
     background: #D5A076;
 }
 
-.login a, .start-free a {
+.login a {
+    color: #000;
+}
+
+.start-free a {
     color: #FFF;
 }
 
@@ -136,7 +140,7 @@ nav .logo a {
     color: #000;
     font-size: 32px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
 }
@@ -215,9 +219,9 @@ nav .logo a {
 
 footer section .container .logo h1 {
     color: #FFF;
-    font-size: 32px;
+    font-size: var(--fs-logo);
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
 }
@@ -263,13 +267,12 @@ section {
 .container {
     display: flex;
     max-width: 1280px;
-    padding: 0 15px;
+    /* padding: 0 15px; */
     flex-direction: column;
     align-items: center;
     gap: 10px;
     flex: 1 0 0;
     align-self: stretch;
-
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -299,7 +302,7 @@ section {
     font-family: var(--ff-display-1);
     font-size: var(--fs-700);
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 96px;
 }
 
@@ -309,7 +312,7 @@ section {
     font-family: var(--ff-display-3);
     font-size: 48px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 64px;
 }
 
@@ -358,20 +361,20 @@ section {
     color: #13282B;
     text-align: center;
     font-style: normal;
-    font-weight: 700;
-    line-height: 1.5;
+    font-weight: 600;
+    /*line-height: 1.5rem;*/
 }
 
 .hero-content .display-1 {
      font-family: var(--ff-display-1);
      font-size: var(--fs-700);
-    line-height: normal;
+     line-height: normal;
 }
 
 .hero-content .display-3 {
     font-family: var(--ff-display-3);
     font-size: var(--fs-display-3);
-    line-height: 64px;
+    line-height: normal;
 }
 
 .hero-content .cta-container {
@@ -397,7 +400,7 @@ section {
 
 .hero-content .cta-container .start-now a {
     color: #FFF;
-    font-size: 16px;
+    font-size: var(--fs-600);
     font-weight: 500;
     line-height: 28px;
 }
@@ -553,9 +556,9 @@ figure {
 .feature-text-content p {
     color: #000;
     text-align: center;
-    font-size: 24px;
+    font-size: var(--fs-300);
     font-weight: 300;
-    line-height: 36px;
+    line-height: var(--lh-300);
 }
 
 .feature-text-content strong {
@@ -582,7 +585,7 @@ figure {
 /*    font-family: var(--ff-display-1);*/
 /*    font-size: var(--fs-700);*/
 /*    font-style: normal;*/
-/*    font-weight: 700;*/
+/*    font-weight: 600;*/
 /*    line-height: 96px;*/
 /*}*/
 
@@ -726,14 +729,16 @@ figure {
     color: #000;
     text-align: center;
     font: var(--fs-700) var(--ff-display-1);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 96px;
 }*/
 
 .near-footer h1 {
     color: #000;
+    /* width: 75%; */
     text-align: center;
-    font: 700 var(--fs-700) / 96px var(--ff-display-1);
+    font: 700 var(--fs-700) var(--ff-display-1);
+    line-height: normal;
 }
 
 
@@ -833,8 +838,8 @@ footer .copyright .copyright-container p {
 footer section .container p {
     color: #D9D9D9;
     text-align: center;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: var(--fs-300);
+    line-height: var(--lh-300);
     font-weight: 300;
     font-style: normal;
     width: 75%;
