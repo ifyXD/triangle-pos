@@ -57,7 +57,7 @@ nav .logo a {
 nav .logo a,
 .menu ul li a {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--fs-600);
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -82,7 +82,7 @@ nav .logo a,
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1rem;
+    font-size: var(--fs-500);
     font-style: normal;
     font-weight: 500;
     line-height: 28px;
@@ -463,9 +463,8 @@ footer section .container .social-links a {
     :root {
         --fs-700: 5rem;
         --fs-display-3: 2.5rem;
-        --fs-600: 0.9rem;
-        --fs-500: 0.9rem;
-        --fs-400: 0.8rem;
+        /*--fs-600: 0.9rem;*/
+        /*--fs-500: 0.9rem;*/
         --fs-300: 1.125rem;
 
         --lh-300: 1.75rem;
@@ -479,9 +478,8 @@ footer section .container .social-links a {
     :root {
         --fs-700: 4rem;
         --fs-display-3: 2rem;
-        --fs-600: 0.8rem;
-        --fs-500: 0.8rem;
-        --fs-400: 0.75rem;
+        /*--fs-600: 0.8rem;*/
+        /*--fs-500: 0.8rem;*/
         --fs-300: 1.125rem;
 
         --lh-300: 1.75rem;
@@ -493,13 +491,33 @@ footer section .container .social-links a {
     :root {
         --fs-700: 3rem;
         --fs-display-3: 1.5rem;
-        --fs-600: 0.7rem;
-        --fs-500: 0.7rem;
-        --fs-400: 0.65rem;
+        /*--fs-600: 0.7rem;*/
+        /*--fs-500: 0.7rem;*/
         --fs-300: 1.125rem;
 
         --lh-300: 1.5rem;
     }
+
+
+    footer section .container p {
+        width: 100%;
+    }
+
+    .near-footer {
+        gap: 12px;
+        padding: 59px 0;
+    }
+
+
+    footer section .container .social-links {
+        padding: 30px 0;
+    }
+
+    .feature-content .content figure {
+        width: 30vw;
+    }
+
+
 }
 
 /* Mobile S */
@@ -507,9 +525,8 @@ footer section .container .social-links a {
     :root {
         --fs-700: 2.5rem;
         --fs-display-3: 1.2rem;
-        --fs-600: 0.6rem;
-        --fs-500: 0.6rem;
-        --fs-400: 0.55rem;
+        /*--fs-600: 0.6rem;*/
+        /*--fs-500: 0.6rem;*/
         --fs-300: 1.125rem;
         --lh-300: 1.25rem;
     }
@@ -521,10 +538,6 @@ footer section .container .social-links a {
 
     footer section .container p {
         width: 100%;
-    }
-
-    .feature-content .content figure {
-        width: 30vw;
     }
 
     .feature-content .content {
@@ -551,5 +564,9 @@ footer section .container .social-links a {
 
     footer section .container .social-links {
         padding: 30px 0;
+    }
+
+    .feature-content .content figure {
+        width: 45vw;
     }
 }

@@ -31,14 +31,16 @@ a {
     --ff-display-3: "Outfit", sans-serif;
 
 
-    --fs-logo: 2rem; /* 32px */
-    --fs-700: 6rem;
-    --fs-display-3: 3rem;
-    --fs-600: 1rem; /* 16px */
-    --fs-500: 1rem;
-    --fs-400: 0.875rem;
-    --fs-300: 1.5rem;
+    /* Font Sizes */
+    --fs-logo: 2rem; /* Equivalent to 32px */
+    --fs-700: 6rem; /* Equivalent to 96px */
+    --fs-display-3: 3rem; /* Equivalent to 48px */
+    --fs-600: 1rem; /* Equivalent to 16px */
+    --fs-500: 1rem; /* Equivalent to 16px */
+    --fs-400: 0.875rem; /* Equivalent to 14px */
+    --fs-300: 1.5rem; /* Equivalent to 24px */
 
+    /* Line Height */
+    --lh-300: 2.25rem; /* Equivalent to 36px */
 
-    --lh-300: 2.25rem; /* 36px */
 }
