@@ -27,10 +27,10 @@ Route::get('/trial', function () {
 })->middleware('guest');
 Route::get('/login', function () {
     return view('auth.login');
-})->middleware('guest'); 
+})->middleware('guest');
 Route::get('/trial', function () {
     return view('auth.login');
-})->middleware('guest');  
+})->middleware('guest');
 Auth::routes(['register' => true]);
 
 Route::group(['middleware' => 'auth'], function () {
