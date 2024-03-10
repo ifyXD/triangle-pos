@@ -21,6 +21,7 @@ class SuperUserSeeder extends Seeder
             'email' => 'super.admin@test.com',
             'password' => bcrypt('12345678'),
             'is_active' => 1,
+            'reg_requirements' => 'completed',
         ]);
 
         $superAdminRole = Role::where('name', 'Super Admin')->where('guard_name', 'web')->first();
@@ -40,6 +41,7 @@ class SuperUserSeeder extends Seeder
             'email' => 'ricobregildo@gmail.com',
             'password' => bcrypt('rico1234'),
             'is_active' => 1,
+            'reg_requirements' => 'completed',
         ]);
 
         $adminRole = Role::where('name', 'Admin')->where('guard_name', 'web')->first();

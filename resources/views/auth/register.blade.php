@@ -147,7 +147,7 @@
                 // Perform AJAX POST request with CSRF token included in headers
                 $.ajax({
                     method: 'post',
-                    url: '/register-user',
+                    url: '/register',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
                     },
