@@ -4,7 +4,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="display-1">Streamline Your Business Operations Today!</h1>
-                <h1 class="display-3">Discover the Power of Our POS</h1>
+                <h1 class="display-3">Sales Management Solution</h1>
                 <div class="cta-container">
                     <div class="start-now">
                         <a href="{{route('register')}}">Start now - It’s free</a>
@@ -30,49 +30,49 @@
                     </a>
                     <a href="{{ url('stock') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/stock.png') }}"
                                  alt="Product Picture">
                             <figcaption>Stock Adjustments</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('purchase') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/purchases.png') }}"
                                  alt="Product Picture">
                             <figcaption>Purchases</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('sale') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/sale.png') }}"
                                  alt="Product Picture">
                             <figcaption>Sale</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('expense') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/expense.png') }}"
                                  alt="Product Picture">
                             <figcaption>Expenses</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('parties') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/party.png') }}"
                                  alt="Product Picture">
                             <figcaption>Parties</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('reports') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/report.png') }}"
                                  alt="Product Picture">
                             <figcaption>Reports</figcaption>
                         </figure>
                     </a>
                     <a href="{{ url('user') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/user.png') }}"
                                  alt="Product Picture">
                             <figcaption>User Management</figcaption>
                         </figure>

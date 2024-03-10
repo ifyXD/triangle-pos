@@ -3,8 +3,8 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="display-1"> This is {{ ucfirst(request()->segment(1)) }}</h1>
-                <h1 class="display-3">Discover the Power of Our POS</h1>
+                <h1 class="display-1">Effortless Stock Adjustment</h1>
+                <h1 class="display-3">Manage Inventory with Ease!</h1>
                 <div class="cta-container">
                     <div class="start-now">
                         <a href="{{route('register')}}">Start now - It’s free</a>
