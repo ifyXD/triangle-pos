@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PartiesController;
 use App\Http\Controllers\ProductController;
@@ -29,7 +30,7 @@ Route::get('/login', function () {
 Route::get('/trial', function () {
     return view('auth.login');
 })->middleware('guest'); 
-Route::post('/register-user', [ExpenseController::class, 'register']); 
+Route::post('/register-user', [RegisterController::class, 'register_user']); 
 Auth::routes(['register' => true]);
 
 Route::group(['middleware' => 'auth'], function () {
