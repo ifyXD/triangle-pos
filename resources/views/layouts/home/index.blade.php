@@ -98,16 +98,17 @@
     </section>
 
     <section>
-        <div class="container-near">
+        <div class="container">
             <div class="near-footer">
                 <h1>Unleash your growth potential</h1>
-            </div>
-
-            <div class="near-button-container">
-                <div class="near-footer-button">
-                    <a href="{{route('login')}}">Start now - It’s free</a>
+                <div class="near-button-container">
+                    <div class="near-footer-button">
+                        <a href="{{route('login')}}">Start now - It’s free</a>
+                    </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 @endsection

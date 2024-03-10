@@ -107,7 +107,7 @@
 
 
     <section>
-        <div class="container-near">
+        <div class="container">
             <div class="near-footer">
                 <h1>Unleash your growth potential</h1>
             </div>

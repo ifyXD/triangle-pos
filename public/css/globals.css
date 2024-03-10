@@ -30,22 +30,69 @@ a {
     --ff-display-2: "Outfit", sans-serif;
     --ff-display-3: "Outfit", sans-serif;
 
-    --fs-700: 6rem;
 
+
+    --fs-logo: 2rem;
+    --fs-700: 6rem;
+    --fs-display-3: 3rem;
     --fs-600: 1rem;
     --fs-500: 1rem;
-
-    --fs-400: 1rem;
+    --fs-400: 0.875rem;
     --fs-300: 1rem;
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+    :root {
+        /* Adjust font sizes for desktop */
+        --fs-700: 5rem;
+        --fs-display-3: 2.5rem;
+        --fs-600: 0.9rem;
+        --fs-500: 0.9rem;
+        --fs-400: 0.8rem;
+        --fs-300: 0.9rem;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+    :root {
+        /* Adjust font sizes for tablet */
+        --fs-700: 4rem;
+        --fs-display-3: 2rem;
+        --fs-600: 0.8rem;
+        --fs-500: 0.8rem;
+        --fs-400: 0.75rem;
+        --fs-300: 0.8rem;
+    }
+}
+
+/* Mobile L */
+@media (max-width: 767px) and (min-width: 480px) {
+    :root {
+        /* Adjust font sizes for larger mobile devices */
+        --fs-700: 3rem;
+        --fs-display-3: 1.5rem;
+        --fs-600: 0.7rem;
+        --fs-500: 0.7rem;
+        --fs-400: 0.65rem;
+        --fs-300: 0.7rem;
+    }
+}
+
+/* Mobile S */
+@media (max-width: 479px) {
+    :root {
+        /* Adjust font sizes for smaller mobile devices */
+        --fs-700: 2.5rem;
+        --fs-display-3: 1.2rem;
+        --fs-600: 0.6rem;
+        --fs-500: 0.6rem;
+        --fs-400: 0.55rem;
+        --fs-300: 0.6rem;
+    }
 }
 
 
 
-/* Static values */
-/*width: clamp(200px, 40%, 400px);*/
-/*width: clamp(20rem, 30vw, 70rem);*/
-/*width: clamp(10vw, 20em, 100vw);*/
 
-/* Calculated values */
-/*width: clamp(min(10vw, 20rem), 300px, max(90vw, 55rem));*/
-/*width: clamp(100px, calc(30% / 2rem + 10px), 900px);*/
