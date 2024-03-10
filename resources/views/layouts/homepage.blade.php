@@ -39,7 +39,7 @@
                 <a href="{{route('login')}}">Login</a>
             </div>
             <div class="start-free">
-                <a href="{{route('register')}}">Try if free</a>
+                <a href="{{route('register')}}">Sign up</a>
             </div>
         </div>
     </nav>
