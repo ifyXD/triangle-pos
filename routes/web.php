@@ -36,6 +36,7 @@ Auth::routes(['register' => true]);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->middleware('isRequirement')->name('home');
     Route::get('/registration-requirements', [HomeController::class, 'requirements'])->name('registration.requirements');
+    Route::post('/update/registration-requirements', [HomeController::class, 'update_requirements']);
 
     Route::get('/sales-purchases/chart-data', 'HomeController@salesPurchasesChart')->name('sales-purchases.chart');
     Route::get('/current-month/chart-data', 'HomeController@currentMonthChart')->name('current-month.chart');
