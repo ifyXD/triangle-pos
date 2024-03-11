@@ -160,7 +160,8 @@
                     },
                     success: function(data) {
 
-                        console.log(data);
+                        window.location.href = "{{ route('home') }}";
+
                     },
                     error: function(xhr) {
 
@@ -171,10 +172,7 @@
                             $('#' + key + 'input').addClass('is-invalid');
                             $('.' + key + '-error').text(value[0]);
                         });
-                    }
-
-
-
+                    } 
                 });
 
             });

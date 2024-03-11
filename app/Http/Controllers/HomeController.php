@@ -337,6 +337,6 @@ class HomeController extends Controller
         return response()->json(['data' => $data, 'days' => $days]);
     }
     public function requirements(){
-       return view('auth.requirements-registration');
+       return view('auth.color-palette');
     }
 }
