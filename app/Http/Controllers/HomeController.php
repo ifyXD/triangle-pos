@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB; 
 use Modules\Expense\Entities\Expense;
 use Modules\Purchase\Entities\Purchase;
 use Modules\Purchase\Entities\PurchasePayment;
@@ -18,7 +19,7 @@ class HomeController extends Controller
 {
 
     public function index()
-    { 
+    {
 
         $user = auth()->user();
 
@@ -336,7 +337,15 @@ class HomeController extends Controller
 
         return response()->json(['data' => $data, 'days' => $days]);
     }
-    public function requirements(){
-       return view('auth.color-palette');
+    public function requirements()
+    {
+        return view('auth.color-palette');
     }
+    public function update_requirements(Request $request)
+    {
+        return response()->json([
+            'message' => $request->first
+        ]);
+    }
+    
 }
