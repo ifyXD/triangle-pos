@@ -1,0 +1,145 @@
+/* Reset and global styles */
+*,
+*::before,
+*::after {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+:root {
+    /* Typography */
+    --ff-display-1: "Outfit", sans-serif;
+
+    /* Color Palette */
+
+    --color-0: #F0F5F4;
+
+    --color-1: #38383B;
+    --color-2: #A1A1A1;
+    --color-3: #79DFC1;
+    --color-4: #B04A68;
+    --color-5: #0A58CA;
+    --color-6: #E0CCAF;
+    --color-7: #E36FF7;
+    --color-8: #233D4D;
+    --color-9: #E17726;
+    --color-10: #51344D;
+    --color-11: #0F5132;
+    --color-12: #A38F99;
+    --color-13: #3DD5F3;
+    --color-14: #B73B23;
+    --color-15: #6610F2;
+    --color-16: #C97064;
+    --color-17: #E56B6B;
+    --color-18: #4C5B5C;
+    --color-19: #DFA400;
+    --color-20: #203878;
+    --color-21: #6CB14F;
+    --color-22: #114B5F;
+    --color-23: #6EA8FE;
+    --color-24: #474973;
+    --color-25: #6F42C1;
+    --color-26: #114B5F;
+    --color-27: #8B1E3F;
+    --color-28: #23395B;
+    --color-29: #FAB803;
+    --color-30: #1A1423;
+    --color-31: #20C997;
+    --color-32: #426A5A;
+    --color-33: #0AA2C0;
+    --color-34: #DBB4AC;
+    --color-35: #A370F7;
+    --color-36: #504746;
+    --color-37: #DE6528;
+    --color-38: #C9E2EF;
+    --color-39: #B99253;
+    --color-40: #495867;
+
+
+
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    max-width: 1280px;
+    padding: 0 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* styling start here */
+
+
+.display-1 {
+    color: #000;
+    font-family: var(--ff-display-1);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 250;
+    line-height: normal;
+}
+
+
+
+.palette-container {
+    display: flex;
+    max-width: 854px;
+    padding: 10px;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.palette {
+    display: flex;
+    align-items: flex-start;
+}
+
+.palette div {
+    cursor: pointer;
+}
+
+.left-color,
+.right-color,
+.middle-color {
+    width: 67px;
+    height: 64px;
+}
+
+.left-color {
+    border-radius: 32px 0 0 32px;
+    background: #38383B;
+}
+
+.right-color {
+    border-radius: 0 32px 32px 0;
+    background: #A1A1A1;
+}
+
+.middle-color {
+    background: #F0F5F4;
+}
+
+
