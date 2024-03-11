@@ -62,17 +62,11 @@
                 </div>
             </div>
         @endforeach
-
-
-
-
         <div style="position: absolute; right:-20%;">
-
             <div class="card" style="width: 15rem;">
                 <div class="card-body">
                     <h5 class="card-title text-end">Legend</h5>
                     <hr>
-
                     <div style="position: relative; margin-bottom: -15px">
                         <div class="first-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
                         </div>
@@ -93,20 +87,20 @@
                     </div>
                 </div>
             </div>
-        </div> 
-       
+        </div>
+
 
     </div>
     <div class="d-flex justify-content-end">
-        <button id="paletteBtnSubmit" disabled class="btn btn-success rounded-pill w-100 fs-5">Proceed</button> 
+        <button id="paletteBtnSubmit" disabled class="btn btn-success rounded-pill w-100 fs-5">Proceed</button>
     </div>
 @endsection
 
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('.parent').click(function() {
-                $('.parent').removeClass('border-parent');
+            $('.palette').click(function() {
+                $('.palette').removeClass('border-parent');
                 $(this).addClass('border-parent');
 
                 var first = $(this).find('.left-color').data('color');

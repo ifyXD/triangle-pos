@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container mt-5" style="position: relative">
+    <div class="container">
         @yield('content')
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"

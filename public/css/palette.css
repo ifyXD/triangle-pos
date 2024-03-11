@@ -69,22 +69,16 @@ a {
 
 }
 
-.body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
-}
-
 .container {
+    position: relative;
     display: flex;
     max-width: 1280px;
-    padding: 0 15px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     width: 100%;
     margin-right: auto;
+    padding: 50px 15px 0;
     margin-left: auto;
 }
 
@@ -102,20 +96,21 @@ a {
 
 
 
-.palette-container {
-    display: flex;
-    max-width: 854px;
-    padding: 10px;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
-}
+/*.palette-container {*/
+/*    display: flex;*/
+/*    max-width: 854px;*/
+/*    padding: 10px;*/
+/*    align-items: flex-start;*/
+/*    align-content: flex-start;*/
+/*    gap: 10px;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: center;*/
+/*}*/
 
 .palette {
     display: flex;
-    align-items: flex-start; 
-} 
+    justify-content: center;
+}
 
 .palette div {
     cursor: pointer;
@@ -142,9 +137,52 @@ a {
     background: #F0F5F4;
 }
 
-.border-parent{
-    border: 0.5px solid #dd0000
-    /* position: absolute; */
+
+
+
+.palette-container {
+    display: flex;
+    max-width: 1000px;
+    padding: 10px;
+    /*align-items: flex-start;*/
+    /*align-content: flex-start;*/
+    gap: 20px;
+    flex-wrap: wrap;
+    /* display: grid; */
+    /* grid-template-columns: repeat(4, 1fr); */
+    /* grid-gap: 10px; */
+    justify-content: center;
 }
 
 
+
+
+
+.parent {
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+}
+
+
+
+
+.border-parent,
+.parent .palette {
+    border-radius: 32px;
+}
+
+.border-parent {
+    /*border: 1px solid #dd0000;*/
+}
+
+.palette {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.palette:hover {
+    transform: translateY(-3px);
+}
+
+.palette {
+    transition: .1s ease;
+}
