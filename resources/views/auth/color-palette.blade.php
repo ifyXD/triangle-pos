@@ -54,14 +54,11 @@
         @foreach ($colors as $key => $palette)
             <div class="parent">
                 <div class="palette">
-                    <div class="left-color" data-color="{{ $val[$key][0] }}"
-                         style="background: var({{ $palette[0] }});">
+                    <div class="left-color" data-color="{{ $val[$key][0] }}" style="background: var({{ $palette[0] }});">
                     </div>
-                    <div class="middle-color" data-color="{{ $val[$key][1] }}"
-                         style="background: var({{ $palette[1] }});">
+                    <div class="middle-color" data-color="{{ $val[$key][1] }}" style="background: var({{ $palette[1] }});">
                     </div>
-                    <div class="right-color" data-color="{{ $val[$key][2] }}"
-                         style="background: var({{ $palette[2] }});">
+                    <div class="right-color" data-color="{{ $val[$key][2] }}" style="background: var({{ $palette[2] }});">
                     </div>
                 </div>
             </div>
@@ -79,19 +76,19 @@
                         <div class="first-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
                         </div>
                         <span class="first-color text-dark h5"
-                              style="position: absolute; top:0; right: 0;">#000000</span><br>
+                            style="position: absolute; top:0; right: 0;">#000000</span><br>
                     </div>
                     <div style="position: relative; margin-bottom: -15px">
                         <div class="second-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
                         </div>
                         <span class="second-color text-dark h5"
-                              style="position: absolute; top:0; right: 0;">#000000</span><br>
+                            style="position: absolute; top:0; right: 0;">#000000</span><br>
                     </div>
                     <div style="position: relative; margin-bottom: -15px">
                         <div class="third-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
                         </div>
                         <span class="third-color text-dark h5"
-                              style="position: absolute; top:0; right: 0;">#000000</span><br>
+                            style="position: absolute; top:0; right: 0;">#000000</span><br>
                     </div>
                 </div>
             </div>
@@ -104,7 +101,7 @@
     </div>
 
 
-    <div class="counter">0</div>
+    <div class="counter"></div>
     <div class="progressbar">
         <span class="progress"></span>
     </div>
@@ -142,18 +139,18 @@
 
             // Define counterInit function
             function counterInit(fValue, lValue) {
-                var counter_value = parseInt($('.counter').text());
+                var counter_value = parseInt($('.counter').text()) || 0;
                 counter_value++;
 
-                if (counter_value >= fValue && counter_value <= lValue) {
+                if (counter_value <= 100) {
                     $('.counter').text(counter_value + '%');
-                    progress.css({
+                    $('.progress').css({
                         'width': counter_value + '%'
                     });
 
                     setTimeout(function() {
                         counterInit(fValue, lValue);
-                    }, 150);
+                    }, 120);
 
                     if (counter_value === 100) {
                         $.ajax({
@@ -165,7 +162,6 @@
                                 'third': third,
                             },
                             success: function(data) {
-                                console.log(data);
                                 window.location.href = "{{ route('home') }}";
                             },
                             error: function(xhr, status, error) {
@@ -175,6 +171,7 @@
                     }
                 }
             }
+
 
             // Bind click event to start counting
             $('#paletteBtnSubmit').click(function() {

@@ -95,7 +95,8 @@ class PurchaseController extends Controller
                     'reference' => 'INV/'.$purchase->reference,
                     'amount' => $purchase->paid_amount,
                     'purchase_id' => $purchase->id,
-                    'payment_method' => $request->payment_method
+                    'payment_method' => $request->payment_method,
+                    'user_id' => auth()->user()->id,
                 ]);
             }
         });
