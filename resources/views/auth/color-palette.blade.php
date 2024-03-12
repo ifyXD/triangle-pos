@@ -1,4 +1,5 @@
 @extends('auth.requirements-registration')
+@section('title', 'Color Palette')
 @section('content')
     <h1 class="display-1"><strong>Choose</strong> a Pre-made Palette</h1>
     <div class="palette-container">
@@ -165,7 +166,7 @@
                             },
                             success: function(data) {
                                 console.log(data);
-                                // window.location.href = "{{ route('home') }}";
+                                window.location.href = "{{ route('home') }}";
                             },
                             error: function(xhr, status, error) {
                                 console.log(xhr);

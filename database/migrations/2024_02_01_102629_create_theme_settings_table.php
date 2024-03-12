@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('theme_settings', function (Blueprint $table) {
             $table->id();
             $table->string('sidebar_color')->nullable()->default("#3c4b64");
+            $table->string('color_palette')->nullable()->default("#38383B,#F0F5F4,#A1A1A1");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

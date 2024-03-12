@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ThemeSetting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 use Modules\Expense\Entities\Expense;
 use Modules\Purchase\Entities\Purchase;
 use Modules\Purchase\Entities\PurchasePayment;
@@ -343,9 +345,20 @@ class HomeController extends Controller
     }
     public function update_requirements(Request $request)
     {
+
+        $user_id = auth()->user()->id;
+        User::where('id', $user_id)->update(['reg_requirements' => 'completed']);
+
+
+        $color_palette = $request->first . ',' . $request->second . ',' . $request->third;
+
+        $themeSetting = ThemeSetting::updateOrCreate(
+            ['user_id' => $user_id],
+            ['color_palette' => $color_palette]
+        );
+
         return response()->json([
             'message' => $request->first
         ]);
     }
-    
 }

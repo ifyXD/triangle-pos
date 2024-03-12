@@ -10,6 +10,7 @@ class ThemeSetting extends Model
     use HasFactory;
     protected $fillable = [
         'sidebar_color',
+        'color_palette',
         'user_id',
     ];
 
