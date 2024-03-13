@@ -33,6 +33,8 @@ Route::get('/trial', function () {
 })->middleware('guest');
 Auth::routes(['register' => true]);
 
+Route::get('/userlist', [HomeController::class, 'userlist']);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->middleware('isRequirement')->name('home');
     Route::get('/registration-requirements', [HomeController::class, 'requirements'])->name('registration.requirements');
