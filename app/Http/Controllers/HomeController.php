@@ -22,6 +22,7 @@ class HomeController extends Controller
 
     public function index()
     {
+ 
 
         $user = auth()->user();
 
@@ -57,7 +58,7 @@ class HomeController extends Controller
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
             'purchase_returns' => $purchaseReturns / 100,
-            'profit' => $profit,
+            'profit' => $profit, 
         ]);
     }
 
@@ -103,9 +104,7 @@ class HomeController extends Controller
 
     public function salesPurchasesChart()
     {
-        abort_if(!request()->ajax(), 404);
-
-
+        abort_if(!request()->ajax(), 404); 
 
         $sales = $this->salesChartData();
         $purchases = $this->purchasesChartData();
@@ -251,6 +250,7 @@ class HomeController extends Controller
 
         $date_range = Carbon::today()->subDays(6);
 
+       
 
         $user = auth()->user();
 

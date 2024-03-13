@@ -53,10 +53,9 @@
                                         <i class="bi bi-shop"></i>
                                     </span>
                                 </div>
-                                <input type="text" id="storenameinput"
-                                    class="form-control" name="storename"
+                                <input type="text" id="storenameinput" class="form-control" name="storename"
                                     value="{{ old('storename') }}" placeholder="Store Name">
-                                
+
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -64,10 +63,9 @@
                                         <i class="bi bi-lock"></i>
                                     </span>
                                 </div>
-                                <input type="password" id="passwordinput"
-                                    class="form-control" name="password"
+                                <input type="password" id="passwordinput" class="form-control" name="password"
                                     placeholder="Password">
-                                    <div class="invalid-feedback password-error"> </div>
+                                <div class="invalid-feedback password-error"> </div>
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -116,7 +114,7 @@
                 $('.permissionForm').addClass('d-none');
                 $('.registrationForm').removeClass('d-none');
 
-                
+
             });
             $('.backtoPermission').click(function() {
                 $('.permissionForm').removeClass('d-none');
@@ -125,6 +123,10 @@
 
 
             $('#registerBtn').click(function() {
+                var btn = $(this);
+                btn.prop('disabled', true); // Disable the button
+                btn.text('Register...'); // Change the text
+
                 // Get input values
                 var name = $('#nameinput').val();
                 var email = $('#emailinput').val();
@@ -135,6 +137,8 @@
                 // Check if password and password_confirmation password match
                 if (password !== password_confirmation) {
                     alert("Passwords do not match!");
+                    btn.prop('disabled', false); // Enable the button
+                    btn.text('Register'); // Change the text back
                     return; // Prevent further execution
                 }
 
@@ -159,12 +163,9 @@
                         // 'storename': storename,
                     },
                     success: function(data) {
-
                         window.location.href = "{{ route('home') }}";
-
                     },
                     error: function(xhr) {
-
                         console.log(xhr.responseJSON.message);
                         var errors = xhr.responseJSON.errors;
                         // Display errors next to corresponding input fields
@@ -172,14 +173,21 @@
                             $('#' + key + 'input').addClass('is-invalid');
                             $('.' + key + '-error').text(value[0]);
                         });
-                    } 
+                    },
+                    complete: function() {
+                        btn.prop('disabled', false); // Enable the button
+                        btn.text('Register'); // Change the text back
+                    }
                 });
 
             });
 
+            $('#select-all').click(function() {
+                $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+            });
+
         });
     </script>
-
     <!-- CoreUI -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
