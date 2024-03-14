@@ -29,7 +29,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_total_stats" name="permissions[]"
-                                            value="show_total_stats">
+                                            value="3">
                                         <label class="custom-control-label" for="show_total_stats">Total
                                             Stats</label>
                                     </div>
@@ -38,7 +38,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_notifications" name="permissions[]"
-                                            value="show_notifications">
+                                            value="7">
                                         <label class="custom-control-label"
                                             for="show_notifications">Notifications</label>
                                     </div>
@@ -47,7 +47,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_month_overview" name="permissions[]"
-                                            value="show_month_overview">
+                                            value="4">
                                         <label class="custom-control-label"
                                             for="show_month_overview">Month Overview</label>
                                     </div>
@@ -56,7 +56,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_weekly_sales_purchases" name="permissions[]"
-                                            value="show_weekly_sales_purchases">
+                                            value="5">
                                         <label class="custom-control-label"
                                             for="show_weekly_sales_purchases">Weekly Sales &
                                             Purchases</label>
@@ -66,7 +66,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_monthly_cashflow" name="permissions[]"
-                                            value="show_monthly_cashflow">
+                                            value="6">
                                         <label class="custom-control-label"
                                             for="show_monthly_cashflow">Monthly Cashflow</label>
                                     </div>
@@ -74,38 +74,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- User Management Permission -->
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-header">
-                            User Mangement
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="access_user_management" name="permissions[]"
-                                            value="access_user_management">
-                                        <label class="custom-control-label"
-                                            for="access_user_management">Access</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="edit_own_profile" name="permissions[]"
-                                            value="edit_own_profile">
-                                        <label class="custom-control-label" for="edit_own_profile">Own
-                                            Profile</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
 
                 <!-- Products Permission -->
                 <div class="col-lg-4 col-md-6 mb-3">
@@ -119,7 +88,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_products" name="permissions[]"
-                                            value="access_products">
+                                            value="8">
                                         <label class="custom-control-label"
                                             for="access_products">Access</label>
                                     </div>
@@ -128,7 +97,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_products" name="permissions[]"
-                                            value="show_products">
+                                            value="10">
                                         <label class="custom-control-label"
                                             for="show_products">View</label>
                                     </div>
@@ -137,7 +106,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_products" name="permissions[]"
-                                            value="create_products">
+                                            value="9">
                                         <label class="custom-control-label"
                                             for="create_products">Create</label>
                                     </div>
@@ -146,7 +115,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="edit_products" name="permissions[]"
-                                            value="edit_products">
+                                            value="11">
                                         <label class="custom-control-label"
                                             for="edit_products">Edit</label>
                                     </div>
@@ -155,7 +124,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="delete_products" name="permissions[]"
-                                            value="delete_products">
+                                            value="12">
                                         <label class="custom-control-label"
                                             for="delete_products">Delete</label>
                                     </div>
@@ -164,25 +133,15 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_product_categories" name="permissions[]"
-                                            value="access_product_categories">
+                                            value="13">
                                         <label class="custom-control-label"
                                             for="access_product_categories">Category</label>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="print_barcodes" name="permissions[]"
-                                            value="print_barcodes">
-                                        <label class="custom-control-label" for="print_barcodes">Print
-                                            Barcodes</label>
-                                    </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div> 
                 <!-- Adjustments Permission -->
                 <div class="col-lg-4 col-md-6 mb-3">
                     <div class="card h-100 border-0 shadow">
@@ -195,7 +154,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_adjustments" name="permissions[]"
-                                            value="access_adjustments">
+                                            value="15">
                                         <label class="custom-control-label"
                                             for="access_adjustments">Access</label>
                                     </div>
@@ -204,7 +163,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_adjustments" name="permissions[]"
-                                            value="create_adjustments">
+                                            value="16">
                                         <label class="custom-control-label"
                                             for="create_adjustments">Create</label>
                                     </div>
@@ -213,7 +172,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_adjustments" name="permissions[]"
-                                            value="show_adjustments">
+                                            value="17">
                                         <label class="custom-control-label"
                                             for="show_adjustments">View</label>
                                     </div>
@@ -222,7 +181,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="edit_adjustments" name="permissions[]"
-                                            value="edit_adjustments">
+                                            value="18">
                                         <label class="custom-control-label"
                                             for="edit_adjustments">Edit</label>
                                     </div>
@@ -231,7 +190,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="delete_adjustments" name="permissions[]"
-                                            value="delete_adjustments">
+                                            value="19">
                                         <label class="custom-control-label"
                                             for="delete_adjustments">Delete</label>
                                     </div>
@@ -239,84 +198,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Quotations Permission -->
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-header">
-                            Quotaions
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="access_quotations" name="permissions[]"
-                                            value="access_quotations">
-                                        <label class="custom-control-label"
-                                            for="access_quotations">Access</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="create_quotations" name="permissions[]"
-                                            value="create_quotations">
-                                        <label class="custom-control-label"
-                                            for="create_quotations">Create</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="show_quotations" name="permissions[]"
-                                            value="show_quotations">
-                                        <label class="custom-control-label"
-                                            for="show_quotations">View</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="edit_quotations" name="permissions[]"
-                                            value="edit_quotations">
-                                        <label class="custom-control-label"
-                                            for="edit_quotations">Edit</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="delete_quotations" name="permissions[]"
-                                            value="delete_quotations">
-                                        <label class="custom-control-label"
-                                            for="delete_quotations">Delete</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="send_quotation_mails" name="permissions[]"
-                                            value="send_quotation_mails">
-                                        <label class="custom-control-label"
-                                            for="send_quotation_mails">Send Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="create_quotation_sales" name="permissions[]"
-                                            value="create_quotation_sales">
-                                        <label class="custom-control-label"
-                                            for="create_quotation_sales">Sale From Quotation</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                </div> 
                 <!-- Expenses Permission -->
                 <div class="col-lg-4 col-md-6 mb-3">
                     <div class="card h-100 border-0 shadow">
@@ -329,7 +211,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_expenses" name="permissions[]"
-                                            value="access_expenses">
+                                            value="27">
                                         <label class="custom-control-label"
                                             for="access_expenses">Access</label>
                                     </div>
@@ -338,7 +220,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_expenses" name="permissions[]"
-                                            value="create_expenses">
+                                            value="28">
                                         <label class="custom-control-label"
                                             for="create_expenses">Create</label>
                                     </div>
@@ -347,7 +229,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="edit_expenses" name="permissions[]"
-                                            value="edit_expenses">
+                                            value="29">
                                         <label class="custom-control-label"
                                             for="edit_expenses">Edit</label>
                                     </div>
@@ -356,7 +238,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="delete_expenses" name="permissions[]"
-                                            value="delete_expenses">
+                                            value="30">
                                         <label class="custom-control-label"
                                             for="delete_expenses">Delete</label>
                                     </div>
@@ -365,7 +247,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_expense_categories" name="permissions[]"
-                                            value="access_expense_categories">
+                                            value="31">
                                         <label class="custom-control-label"
                                             for="access_expense_categories">Category</label>
                                     </div>
@@ -387,7 +269,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_customers" name="permissions[]"
-                                            value="access_customers">
+                                            value="32">
                                         <label class="custom-control-label"
                                             for="access_customers">Access</label>
                                     </div>
@@ -396,7 +278,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_customers" name="permissions[]"
-                                            value="create_customers">
+                                            value="33">
                                         <label class="custom-control-label"
                                             for="create_customers">Create</label>
                                     </div>
@@ -405,7 +287,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_customers" name="permissions[]"
-                                            value="show_customers">
+                                            value="34">
                                         <label class="custom-control-label"
                                             for="show_customers">View</label>
                                     </div>
@@ -414,7 +296,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="edit_customers" name="permissions[]"
-                                            value="edit_customers">
+                                            value="35">
                                         <label class="custom-control-label"
                                             for="edit_customers">Edit</label>
                                     </div>
@@ -423,7 +305,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="delete_customers" name="permissions[]"
-                                            value="delete_customers">
+                                            value="36">
                                         <label class="custom-control-label"
                                             for="delete_customers">Delete</label>
                                     </div>
@@ -434,7 +316,7 @@
                 </div>
 
                 <!-- Suppliers Permission -->
-                <div class="col-lg-4 col-md-6 mb-3">
+                {{-- <div class="col-lg-4 col-md-6 mb-3">
                     <div class="card h-100 border-0 shadow">
                         <div class="card-header">
                             Suppliers
@@ -489,7 +371,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Sales Permission -->
                 <div class="col-lg-4 col-md-6 mb-3">
@@ -503,7 +385,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_sales" name="permissions[]"
-                                            value="access_sales">
+                                            value="42">
                                         <label class="custom-control-label"
                                             for="access_sales">Access</label>
                                     </div>
@@ -512,12 +394,12 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_sales" name="permissions[]"
-                                            value="create_sales">
+                                            value="43">
                                         <label class="custom-control-label"
                                             for="create_sales">Create</label>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="show_sales" name="permissions[]"
@@ -525,11 +407,11 @@
                                         <label class="custom-control-label"
                                             for="show_sales">View</label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-6">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
-                                            id="edit_sales" name="permissions[]" value="edit_sales">
+                                            id="edit_sales" name="permissions[]" value="45">
                                         <label class="custom-control-label"
                                             for="edit_sales">Edit</label>
                                     </div>
@@ -538,7 +420,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="delete_sales" name="permissions[]"
-                                            value="delete_sales">
+                                            value="46">
                                         <label class="custom-control-label"
                                             for="delete_sales">Delete</label>
                                     </div>
@@ -547,7 +429,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="create_pos_sales" name="permissions[]"
-                                            value="create_pos_sales">
+                                            value="47">
                                         <label class="custom-control-label" for="create_pos_sales">POS
                                             System</label>
                                     </div>
@@ -556,7 +438,7 @@
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input"
                                             id="access_sale_payments" name="permissions[]"
-                                            value="access_sale_payments">
+                                            value="48">
                                         <label class="custom-control-label"
                                             for="access_sale_payments">Payments</label>
                                     </div>
@@ -836,29 +718,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Settings -->
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-header">
-                            Settings
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="access_settings" name="permissions[]"
-                                            value="access_settings">
-                                        <label class="custom-control-label"
-                                            for="access_settings">Access</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>

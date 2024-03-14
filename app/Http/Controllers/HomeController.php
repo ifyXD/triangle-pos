@@ -361,8 +361,7 @@ class HomeController extends Controller
             'message' => $request->first
         ]);
     }
-    public function userlist(){
-
+    public function userlist(){ 
         $uselist = DB::select("CALL getUsers()");
         return response()->json($uselist);
     }
