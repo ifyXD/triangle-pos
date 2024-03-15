@@ -22,12 +22,11 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryCreateModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#categoryCreateModal">
                             Add Category <i class="bi bi-plus"></i>
-                        </button>
-
-                        <hr>
-
+                        </button> 
+                        <hr> 
                         <div class="table-responsive">
                             {!! $dataTable->table() !!}
                         </div>

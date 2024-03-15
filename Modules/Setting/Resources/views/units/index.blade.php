@@ -83,7 +83,7 @@
         var table = $('#data-table').DataTable({
             dom: "<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4 justify-content-end'f>>tr<'row'<'col-md-5'i><'col-md-7 mt-2'p>>",
             "buttons": [
-                {extend: 'excel',text: '<i class="bi bi-file-earmark-excel-fill"></i> Excel'},
+                // {extend: 'excel',text: '<i class="bi bi-file-earmark-excel-fill"></i> Excel'},
                 {extend: 'csv',text: '<i class="bi bi-file-earmark-excel-fill"></i> CSV'},
                 {extend: 'print',
                     text: '<i class="bi bi-printer-fill"></i> Print',

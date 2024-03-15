@@ -24,9 +24,7 @@ class HomeController extends Controller
 {
 
     public function index()
-    {
-
-
+    { 
         $user = auth()->user();
 
         $salesQuery = Sale::completed();
@@ -50,6 +48,7 @@ class HomeController extends Controller
             foreach ($sale->saleDetails as $saleDetail) {
                 if (!is_null($saleDetail->product)) {
                     $product_costs += $saleDetail->product->product_cost * $saleDetail->quantity;
+                     
                 }
             }
         }

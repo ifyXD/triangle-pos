@@ -33,14 +33,20 @@
                     <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Products
                 </a>
             </li>
-            @can('print_barcodes')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('units.index') ? 'c-active' : '' }}"
+                    href="{{ route('units.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
+                </a>
+            </li> 
+            {{-- @can('print_barcodes')
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('barcode.print') ? 'c-active' : '' }}"
                         href="{{ route('barcode.print') }}">
                         <i class="c-sidebar-nav-icon bi bi-printer" style="line-height: 1;"></i> Print Barcode
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
         </ul>
     </li>
 @endcan
@@ -232,8 +238,7 @@
     </li>
 @endcan
 
-@if (auth()->user()->can('access_suppliers') ||
-        auth()->user()->can('access_customers'))
+@if (auth()->user()->can('access_suppliers') || auth()->user()->can('access_customers'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers.*') || request()->routeIs('suppliers.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -273,12 +278,12 @@
                     <i class="c-sidebar-nav-icon bi bi-clipboard-data" style="line-height: 1;"></i> Profit / Loss Report
                 </a>
             </li>
-            <li class="c-sidebar-nav-item">
+            {{-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('payments-report.index') ? 'c-active' : '' }}"
                     href="{{ route('payments-report.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-clipboard-data" style="line-height: 1;"></i> Payments Report
                 </a>
-            </li>
+            </li> --}}
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('sales-report.index') ? 'c-active' : '' }}"
                     href="{{ route('sales-report.index') }}">
@@ -291,7 +296,7 @@
                     <i class="c-sidebar-nav-icon bi bi-clipboard-data" style="line-height: 1;"></i> Purchases Report
                 </a>
             </li>
-            <li class="c-sidebar-nav-item">
+            {{-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('sales-return-report.index') ? 'c-active' : '' }}"
                     href="{{ route('sales-return-report.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-clipboard-data" style="line-height: 1;"></i> Sales Return Report
@@ -303,7 +308,7 @@
                     <i class="c-sidebar-nav-icon bi bi-clipboard-data" style="line-height: 1;"></i> Purchases Return
                     Report
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
 @endcan
@@ -337,24 +342,12 @@
 @endcan
 
 
-@if (auth()->user()->can('access_currencies') ||
-        auth()->user()->can('access_settings'))
+@if (auth()->user()->can('access_currencies') || auth()->user()->can('access_settings'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('currencies*') || request()->routeIs('units*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
         </a>
-        @if (auth()->user()->hasRole('Admin') ||
-                auth()->user()->hasRole('Super Admin'))
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link {{ request()->routeIs('units*') ? 'c-active' : '' }}"
-                        href="{{ route('units.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
-                    </a>
-                </li>
-            </ul>
-        @endif
         @if (auth()->user()->hasRole('Super Admin'))
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
@@ -364,8 +357,8 @@
                     </a>
                 </li>
             </ul>
-        @endif 
-        @can('access_settings')
+        @endif
+        {{-- @can('access_settings')
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('settings*') ? 'c-active' : '' }}"
@@ -374,14 +367,14 @@
                     </a>
                 </li>
             </ul>
-        @endcan
+        @endcan --}}
         {{-- user settings --}}
         @if (!auth()->user()->hasRole('Super Admin'))
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('system-settings*') ? 'c-active' : '' }}"
                         href="{{ route('system-settings.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i>General System Settings
+                        <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i>System Settings
                     </a>
                 </li>
             </ul>
