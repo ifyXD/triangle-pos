@@ -6,6 +6,7 @@ use App\Models\ThemeSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Expense\Entities\Expense;
 use Modules\Purchase\Entities\Purchase;
@@ -16,13 +17,14 @@ use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SalePayment;
 use Modules\SalesReturn\Entities\SaleReturn;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
+use Modules\Setting\Entities\Setting;
 
 class HomeController extends Controller
 {
 
     public function index()
     {
- 
+
 
         $user = auth()->user();
 
@@ -58,7 +60,7 @@ class HomeController extends Controller
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
             'purchase_returns' => $purchaseReturns / 100,
-            'profit' => $profit, 
+            'profit' => $profit,
         ]);
     }
 
@@ -104,7 +106,7 @@ class HomeController extends Controller
 
     public function salesPurchasesChart()
     {
-        abort_if(!request()->ajax(), 404); 
+        abort_if(!request()->ajax(), 404);
 
         $sales = $this->salesChartData();
         $purchases = $this->purchasesChartData();
@@ -250,7 +252,7 @@ class HomeController extends Controller
 
         $date_range = Carbon::today()->subDays(6);
 
-       
+
 
         $user = auth()->user();
 
@@ -343,6 +345,48 @@ class HomeController extends Controller
     {
         return view('auth.color-palette');
     }
+    public function updateSession(Request $request)
+    {
+        if (auth()->user()->id != $request->id) {
+            Auth::logout();
+            return redirect()->route('register');
+        } else {
+            $userId = auth()->id(); // Get the authenticated user's ID
+
+            // Construct session keys with a prefix using the user's unique identifier
+            $selectedElementKey = 'selectedElement_' . $userId;
+            $storenameKey = 'storename_' . $userId;
+
+            $selectedElement = $request->input('selectedElement');
+            $storename = $request->input('storename');
+
+            // Check if session variables are not set and initialize them
+            if (!session()->has($selectedElementKey)) {
+                session([$selectedElementKey => 'first']);
+            }
+
+            if (!session()->has($storenameKey)) {
+                session([$storenameKey => '']);
+            }
+
+            if ($storename !== null) {
+                // Save in settings table using updateOrCreate
+                Setting::updateOrCreate(
+                    ['user_id' => $userId], // Use the user's ID
+                    ['company_name' => $storename]
+                );
+            }
+
+            // Update session variables with the user-specific keys
+            session([$selectedElementKey => $selectedElement]);
+            session([$storenameKey => $storename]);
+        }
+
+        // You can return a response if necessary
+        return response()->json(['success' => true]);
+    }
+
+
     public function update_requirements(Request $request)
     {
 
@@ -361,7 +405,8 @@ class HomeController extends Controller
             'message' => $request->first
         ]);
     }
-    public function userlist(){ 
+    public function userlist()
+    {
         $uselist = DB::select("CALL getUsers()");
         return response()->json($uselist);
     }

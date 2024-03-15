@@ -38,6 +38,8 @@ Route::get('/userlist', [HomeController::class, 'userlist']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->middleware('isRequirement')->name('home');
     Route::get('/registration-requirements', [HomeController::class, 'requirements'])->name('registration.requirements');
+    Route::post('/update-session/registration-requirements', [HomeController::class, 'updateSession']);
+
     Route::post('/update/registration-requirements', [HomeController::class, 'update_requirements']);
 
     Route::get('/sales-purchases/chart-data', 'HomeController@salesPurchasesChart')->name('sales-purchases.chart');
