@@ -45,7 +45,7 @@ class ProductCategoriesDataTable extends DataTable
     public function html()
     {
         $auth = auth()->user()->id;
-        $route = route('hehe.id', $auth);
+        $route = route('category.printToExcel.id', $auth);
         return $this->builder()
             ->setTableId('product_categories-table')
             ->columns($this->getColumns())

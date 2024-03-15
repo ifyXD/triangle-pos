@@ -28,7 +28,7 @@ class ProductController extends Controller
 
         return view('product::products.create');
     } 
-    public function hehe($id)
+    public function toExcel($id)
     {
         echo $id;
     }
