@@ -44,16 +44,18 @@ class ProductCategoriesDataTable extends DataTable
 
     public function html()
     {
+        $auth = auth()->user()->id;
+        $route = route('hehe.id', $auth);
         return $this->builder()
             ->setTableId('product_categories-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
-                                'tr' .
-                                <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
+            ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>>" .
+                    "'tr'" .
+                    "<'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
             ->orderBy(4)
             ->buttons(
-                '<a href="hehe" class="btn btn-primary"><i class="bi bi-file-earmark-excel-fill"></i> Excel</a>',
+                "<a href='{$route}' class='btn btn-primary'><i class='bi bi-file-earmark-excel-fill'></i> Excel</a>",
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill border"></i> Print'),
                 Button::make('reset')
@@ -61,6 +63,7 @@ class ProductCategoriesDataTable extends DataTable
                 Button::make('reload')
                     ->text('<i class="bi bi-arrow-repeat"></i> Reload')
             );
+        
     }
 
     protected function getColumns()

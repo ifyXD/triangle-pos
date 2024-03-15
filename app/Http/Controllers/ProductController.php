@@ -14,6 +14,7 @@ class ProductController extends Controller
     {
         return view('web/figures/product/index');
     }
+    
 
     /**
      * Show the form for creating a new resource.

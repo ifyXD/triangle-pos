@@ -28,6 +28,10 @@ class ProductController extends Controller
 
         return view('product::products.create');
     } 
+    public function hehe($id)
+    {
+        echo $id;
+    }
  
     public function store(StoreProductRequest $request)
     {
