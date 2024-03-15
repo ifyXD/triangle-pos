@@ -1,5 +1,5 @@
 @extends('auth.requirements-registration')
-@section('title', 'Color Palette')
+@section('title', 'Pub Market Registration')
 @section('content')
     @php
         $userId = auth()->id(); // Get the authenticated user's ID
