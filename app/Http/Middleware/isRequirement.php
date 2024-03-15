@@ -18,6 +18,7 @@ class isRequirement
     {
         // Check if the authenticated user's role is equal to 1 (admin)
         if (auth()->user() && auth()->user()->reg_requirements === 'completed') {
+            // return $next($request);
             return $next($request);
         } 
         // If the user's role is not equal to 1, redirect them to the admin route
