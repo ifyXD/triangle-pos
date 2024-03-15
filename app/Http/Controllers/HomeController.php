@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ThemeSetting;
 use App\Models\User;
+use App\Models\UserPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -386,6 +387,54 @@ class HomeController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function withPermission(Request $request)
+    {
+
+        $user = auth()->user();
+
+        // Sync permissions
+        $permissions = $request->input('permissions', []);
+
+
+        // Save permissions in user_permissions table
+        foreach ($permissions as  $permission) {
+            // Create or update the record in the user_permissions table
+            UserPermission::updateOrCreate(
+                ['user_id' => $user->id, 'permission_id' => $permission['permission_id']],
+                ['status' => $permission['status']] // Set status to true since the permission is enabled
+            );
+        }
+
+        if (auth()->user()->id != $request->id) {
+            Auth::logout();
+            return redirect()->route('register');
+        } else {
+            $userId = auth()->id(); // Get the authenticated user's ID
+
+            // Construct session keys with a prefix using the user's unique identifier
+            $selectedElementKey = 'selectedElement_' . $userId;
+            $storenameKey = 'storename_' . $userId;
+
+            $selectedElement = $request->input('selectedElement');
+            $storename = $request->input('storename');
+
+            // Check if session variables are not set and initialize them
+            if (!session()->has($selectedElementKey)) {
+                session([$selectedElementKey => 'first']);
+            }
+
+            if (!session()->has($storenameKey)) {
+                session([$storenameKey => '']);
+            } 
+
+            // Update session variables with the user-specific keys
+            session([$selectedElementKey => $selectedElement]);
+            session([$storenameKey => $storename]);
+        }
+
+        // Set status to false for permissions not present in the submitted data 
+        return response()->json(['message' => 'Permissions saved successfully'], 200);
+    }
 
     public function update_requirements(Request $request)
     {

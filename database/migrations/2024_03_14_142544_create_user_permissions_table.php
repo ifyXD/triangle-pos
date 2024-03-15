@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('permission_id');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-            $table->boolean('status')->default(false); // Whether the permission is enabled or not
+            $table->string('status')->default(false); // Whether the permission is enabled or not
             $table->timestamps();
         });
     }
