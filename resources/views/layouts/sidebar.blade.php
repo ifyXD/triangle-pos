@@ -5,7 +5,7 @@
         <a href="{{ route('home') }}">
             @php
                 $userSetting = auth()->user()->setting;
-                $logoPath = $userSetting ? asset('storage/' . $userSetting->image) : asset('images/logo.png');
+                $logoPath = $userSetting ? ($userSetting->image != 'avatar.png'? asset('storage/' . $userSetting->image) : asset('images/logo.png')) : asset('images/logo.png');
             @endphp
 
             <img class="c-sidebar-brand-full" src="{{ auth()->user()->hasRole('Super Admin') ?  asset('images/logo.png') :$logoPath }}"
