@@ -53,10 +53,9 @@ class ProductCategoriesDataTable extends DataTable
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
             ->orderBy(4)
             ->buttons(
-                Button::make('excel')
-                    ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
+                '<a href="hehe" class="btn btn-primary"><i class="bi bi-file-earmark-excel-fill"></i> Excel</a>',
                 Button::make('print')
-                    ->text('<i class="bi bi-printer-fill"></i> Print'),
+                    ->text('<i class="bi bi-printer-fill border"></i> Print'),
                 Button::make('reset')
                     ->text('<i class="bi bi-x-circle"></i> Reset'),
                 Button::make('reload')
