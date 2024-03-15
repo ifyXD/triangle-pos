@@ -16,9 +16,7 @@
         if (!session()->has($storenameKey)) {
             session([$storenameKey => '']); // or any default value you prefer
         }
-    @endphp
-
-    <h1>{{ session($selectedElementKey) }}</h1> 
+    @endphp 
     <div class="container-fluid {{ session($selectedElementKey) != 'first' ? 'd-none' : '' }} firstPage">
         <h1>Let's give your store a name
             <input value="{{ session($storenameKey) }}" class="storename"type="text" placeholder="store name" required
