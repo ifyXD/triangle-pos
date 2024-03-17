@@ -26,21 +26,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_name">Product Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="product_name" required value="{{ $product->product_name }}">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="product_code">Code <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_code" required value="{{ $product->product_code }}">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category_id">Category <span class="text-danger">*</span></label>
@@ -51,7 +42,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="product_code">Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="product_code" required value="{{ $product->product_code }}">
+                                    </div>
+                                </div> --}}
+                            </div>
+
+                            <div class="form-row">
+                                
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="barcode_symbology">Barcode Symbology <span class="text-danger">*</span></label>
                                         <select class="form-control" name="product_barcode_symbology" id="barcode_symbology" required>
@@ -63,7 +64,7 @@
                                             <option {{ $product->product_barcode_symbology == 'EAN8' ? 'selected' : '' }} value="EAN8">EAN-8</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="form-row">
