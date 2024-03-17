@@ -1,5 +1,9 @@
 /* Typography */
-a, h1, p, figcaption, span {
+a,
+h1,
+p,
+figcaption,
+span {
     font-family: var(--ff-body);
 }
 
@@ -25,7 +29,8 @@ main {
 
 
 /* Header styles */
-header, nav {
+header,
+nav {
     display: flex;
     width: 100%;
     align-items: center;
@@ -78,7 +83,9 @@ nav .logo a,
     margin-right: 0;
 }
 
-.header-buttons, .login, .start-free {
+.header-buttons,
+.login,
+.start-free {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -88,7 +95,8 @@ nav .logo a,
     line-height: 28px;
 }
 
-.login, .start-free {
+.login,
+.start-free {
     height: 36px;
     padding: 10px;
 }
@@ -173,7 +181,8 @@ section {
     align-self: stretch;
 }
 
-.display-1, .display-3 {
+.display-1,
+.display-3 {
     color: #13282B;
     text-align: center;
     font-style: normal;
@@ -182,9 +191,9 @@ section {
 }
 
 .display-1 {
-     font-family: var(--ff-display-1);
-     font-size: var(--fs-700);
-     line-height: normal;
+    font-family: var(--ff-display-1);
+    font-size: var(--fs-700);
+    line-height: normal;
 }
 
 .display-3 {

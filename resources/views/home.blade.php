@@ -5,7 +5,12 @@
         <li class="breadcrumb-item active">Home</li>
     </ol>
 @endsection
-
+@php
+    $colorPalette = auth()->user()->themecustom->color_palette?? 'darkblue';
+    $paletteArray = explode(',', $colorPalette);
+    $firstValue = trim($paletteArray[0]?? NULL);
+@endphp
+ 
 @section('content')
     <div class="container-fluid">
         @can('show_total_stats')
@@ -13,7 +18,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                            <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
+                            <div class=" p-4 mfe-3 rounded-left " style="background-color: {{$firstValue}}; color: white">
                                 <i class="bi bi-bar-chart font-2xl"></i>
                             </div>
                             <div>
@@ -27,7 +32,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                            <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
+                            <div class=" p-4 mfe-3 rounded-left " style="background-color: {{$firstValue}}; color: white">
                                 <i class="bi bi-arrow-return-left font-2xl"></i>
                             </div>
                             <div>
@@ -41,7 +46,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                            <div class="bg-gradient-success p-4 mfe-3 rounded-left">
+                            <div class=" p-4 mfe-3 rounded-left " style="background-color: {{$firstValue}}; color: white">
                                 <i class="bi bi-arrow-return-right font-2xl"></i>
                             </div>
                             <div>
@@ -55,7 +60,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
-                            <div class="bg-gradient-info p-4 mfe-3 rounded-left">
+                            <div class=" p-4 mfe-3 rounded-left " style="background-color: {{$firstValue}}; color: white">
                                 <i class="bi bi-trophy font-2xl"></i>
                             </div>
                             <div>
