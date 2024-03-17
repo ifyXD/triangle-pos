@@ -1,8 +1,3 @@
-@php
-    $colorPalette = auth()->user()->themecustom->color_palette?? NULL;
-    $paletteArray = explode(',', $colorPalette);
-    $firstValue = trim($paletteArray[2]?? NULL);
-@endphp
 <div style="background-color: {{ $firstValue ?? '#3c4b64' }} "
     class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show {{ request()->routeIs('app.pos.*') ? 'c-sidebar-minimized' : '' }}"
     id="sidebar">

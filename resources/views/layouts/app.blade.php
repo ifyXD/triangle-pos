@@ -1,3 +1,8 @@
+@php
+    $colorPalette = auth()->user()->themecustom->color_palette?? 'darkblue';
+    $paletteArray = explode(',', $colorPalette);
+    $firstValue = trim($paletteArray[2]?? NULL);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +15,11 @@
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
 
     @include('includes.main-css')
+    <style>
+        .btn-primary{
+            background-color: {{$firstValue}} !important;
+        }
+    </style>
 </head>
 
 <body class="c-app">
