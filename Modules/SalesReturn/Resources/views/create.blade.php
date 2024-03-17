@@ -88,9 +88,9 @@
                                         <div class="input-group">
                                             <input id="paid_amount" type="text" class="form-control" name="paid_amount" required>
                                             <div class="input-group-append">
-                                                <button id="getTotalAmount" class="btn btn-primary" type="button">
+                                                {{-- <button id="getTotalAmount" class="btn btn-primary" type="button">
                                                     <i class="bi bi-check-square"></i>
-                                                </button>
+                                                </button> --}}
                                             </div>
                                         </div>
                                     </div>
