@@ -26,5 +26,16 @@ class CustomersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('suppliers')->insert([
+            'supplier_name' => 'Anonymous',
+            'supplier_email' => 'anonymous@example.com',
+            'supplier_phone' => '123456789',
+            'city' => 'Blank City',
+            'country' => 'Blank Country',
+            'address' => 'Blank Address',
+            'user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

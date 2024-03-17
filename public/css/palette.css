@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -29,7 +30,7 @@ a {
     --color-3: #79DFC1;
     --color-4: #B04A68;
     --color-5: #0A58CA;
-    --color-6: #E0CCAF;
+    --color-6: #ff00bb;
     --color-7: #E36FF7;
     --color-8: #233D4D;
     --color-9: #E17726;
@@ -61,7 +62,7 @@ a {
     --color-35: #A370F7;
     --color-36: #504746;
     --color-37: #DE6528;
-    --color-38: #C9E2EF;
+    --color-38: #1100ff;
     --color-39: #B99253;
     --color-40: #495867;
 

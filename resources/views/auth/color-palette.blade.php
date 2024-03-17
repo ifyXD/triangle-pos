@@ -3,21 +3,21 @@
 @section('content')
     @php
         $userId = auth()->id(); // Get the authenticated user's ID
-        $userEmail = auth()->user()->email; // Get the authenticated user's email (or any unique identifier)
+$userEmail = auth()->user()->email; // Get the authenticated user's email (or any unique identifier)
 
-                // Construct session keys with a prefix using the user's unique identifier
-        $selectedElementKey = 'selectedElement_' . $userId;
-        $storenameKey = 'storename_' . $userId; 
-        // session()->forget($selectedElementKey);
-        // session()->forget($storenameKey);
-        // If the session variable is not set, set it to a default value
-        if (!session()->has($selectedElementKey)) {
-            session([$selectedElementKey => 'first']); // or any default value you prefer
+        // Construct session keys with a prefix using the user's unique identifier
+$selectedElementKey = 'selectedElement_' . $userId;
+$storenameKey = 'storename_' . $userId;
+// session()->forget($selectedElementKey);
+// session()->forget($storenameKey);
+// If the session variable is not set, set it to a default value
+if (!session()->has($selectedElementKey)) {
+    session([$selectedElementKey => 'first']); // or any default value you prefer
+}
+if (!session()->has($storenameKey)) {
+    session([$storenameKey => '']); // or any default value you prefer
         }
-        if (!session()->has($storenameKey)) {
-            session([$storenameKey => '']); // or any default value you prefer
-        }
-    @endphp 
+    @endphp
     <div class="container-fluid {{ session($selectedElementKey) != 'first' ? 'd-none' : '' }} firstPage">
         <h1>Let's give your store a name
             <input value="{{ session($storenameKey) }}" class="storename"type="text" required
@@ -64,7 +64,7 @@
                     $val = [
                         ['#38383B', '#F0F5F4', '#A1A1A1'],
                         ['#79DFC1', '#F0F5F4', '#B04A68'],
-                        ['#0A58CA', '#F0F5F4', '#E0CCAF'],
+                        ['#0A58CA', '#F0F5F4', '#ff00bb'],
                         ['#E36FF7', '#F0F5F4', '#233D4D'],
                         ['#E17726', '#F0F5F4', '#51344D'],
                         ['#0F5132', '#F0F5F4', '#A38F99'],
@@ -80,7 +80,7 @@
                         ['#20C997', '#F0F5F4', '#426A5A'],
                         ['#0AA2C0', '#F0F5F4', '#DBB4AC'],
                         ['#A370F7', '#F0F5F4', '#504746'],
-                        ['#DE6528', '#F0F5F4', '#C9E2EF'],
+                        ['#DE6528', '#F0F5F4', '#1100FF'],
                         ['#B99253', '#F0F5F4', '#495867'],
                     ];
                 @endphp
@@ -150,5 +150,5 @@
 @endsection
 
 @push('scripts')
-  @include('auth.registration-script')
+    @include('auth.registration-script')
 @endpush
