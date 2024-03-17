@@ -23,8 +23,6 @@
                 <div class="content">
                     <h1 class="display-1"> {{ ucfirst(request()->segment(1)) }}</h1>
                 </div>
-
-
             </div>
         </div>
     </section>

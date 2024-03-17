@@ -7,7 +7,7 @@
                 <h1 class="display-3">Sales Management Solution</h1>
                 <div class="cta-container">
                     <div class="start-now">
-                        <a href="{{route('register')}}">Start now - It’s free</a>
+                        <a href="{{ route('register')}}">Start now - It’s free</a>
                     </div>
                 </div>
             </div>
