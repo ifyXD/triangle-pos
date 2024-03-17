@@ -100,9 +100,10 @@
     flex-direction: column;
 }
 
-.login .login-form .form-label:not(:first-child) {
+.login .login-form .form-label:not(:first-child):not(:nth-child(2)) {
     margin-top: 16px;
 }
+
 
 .login .login-form .form-label label,
 .login .login-form .form-label label{
@@ -188,4 +189,15 @@
 
     transition: color 0.3s ease;
     cursor: pointer;
+}
+
+
+
+.login .invalid-feedback {
+    color: #E83030;
+    font-family: Outfit, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
