@@ -1468,8 +1468,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-    background-color: #321fdb;
-    border-color: #321fdb;
+    background-color: #D5A076;
+    border-color: #D5A076;
     color: #fff
 }
 
@@ -3796,7 +3796,7 @@ html:not([dir=rtl]) .c-callout-dark {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem
+    padding: 1.25rem;
 }
 
 .card-title {
@@ -4427,8 +4427,8 @@ html:not([dir=rtl]) .custom-control-input {
 }
 
 .custom-control-input:checked~.custom-control-label:before {
-    background-color: #321fdb;
-    border-color: #321fdb;
+    background-color: #D5A076;
+    border-color: #D5A076;
     color: #fff
 }
 
@@ -6007,7 +6007,7 @@ html:not([dir=rtl]) .was-validated .custom-select:invalid {
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
-    width: 100%
+    width: 100%;
 }
 
 @media (min-width:576px) {
@@ -14878,7 +14878,7 @@ button.bg-gray-900:hover {
 }
 
 .d-flex {
-    display: flex !important
+    display: flex !important;
 }
 
 .d-inline-flex {
@@ -15244,7 +15244,7 @@ button.bg-gray-900:hover {
 }
 
 .justify-content-end {
-    justify-content: flex-end !important
+    justify-content: flex-end !important;
 }
 
 .justify-content-center {

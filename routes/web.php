@@ -49,5 +49,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resources([
-    'expense' => ExpenseController::class, 'parties' => PartiesController::class, 'product' => ProductController::class, 'purchase' => PurchaseController::class, 'report' => ReportController::class, 'sale' => SaleController::class, 'stock' => StockAdjustmentController::class, 'user' => UserManagementController::class,
+    'expense' => ExpenseController::class,
+    'parties' => PartiesController::class,
+    'product' => ProductController::class,
+    'purchase' => PurchaseController::class,
+    'reports' => ReportController::class,
+    'sale' => SaleController::class,
+    'stock' => StockAdjustmentController::class,
+    'user' => UserManagementController::class,
 ]);

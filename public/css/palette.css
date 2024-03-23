@@ -78,7 +78,7 @@ a {
     gap: 10px;
     width: 100%;
     margin-right: auto;
-    padding: 50px 15px 0;
+    padding: 0px 15px 0;
     margin-left: auto;
 }
 
@@ -92,6 +92,7 @@ a {
     font-style: normal;
     font-weight: 250;
     line-height: normal;
+    text-align: center;
 }
 
 /*.palette-container {*/
@@ -141,8 +142,8 @@ a {
 
 .palette-container {
     display: flex;
-    max-width: 1000px;
-    padding: 10px;
+    /* max-width: 1000px; */
+    padding: 10px 10px 50px;
     /*align-items: flex-start;*/
     /*align-content: flex-start;*/
     gap: 20px;

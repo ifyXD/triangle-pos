@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-... (hash value)" crossorigin="anonymous">
 </head>
 <body>
@@ -34,6 +37,12 @@
             </ul>
         </div>
 
+        <div id="nav-icon3">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
         <div class="header-buttons">
             <div class="login">
@@ -54,7 +63,9 @@
 <footer>
     <section>
         <div class="container">
-            <div class="logo"><h1>RM</h1></div>
+            <div class="logo">
+                <h1>PM</h1>
+            </div>
             <p>Each app simplifies a process and empowers more people.
                 Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
             <div class="social-links">
@@ -71,5 +82,15 @@
         </div>
     </div>
 </footer>
+
+
+<script>
+    $(document).ready(function(){
+        $('#nav-icon3').click(function(){
+            $(this).toggleClass('open');
+        });
+    });
+
+</script>
 </body>
 </html>
