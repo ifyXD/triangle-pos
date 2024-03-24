@@ -511,11 +511,10 @@ footer section .container .social-links a {
 
 
     .header-buttons,
-    .login,
-    .start-free,
-    .menu ul li a {
+    .menu {
         display: none;
     }
+
 
 
 
@@ -573,9 +572,9 @@ footer section .container .social-links a {
 @media only screen and (max-width: 767px) {
     /* Show the header buttons on larger screens */
 
-    #nav-icon3 {
+    #nav-magic {
         width: 50px;
-        height: 32px;
+        height: 34px;
         /* margin-top: 8px; */
         position: relative;
         -webkit-transform: rotate(0deg);
@@ -589,7 +588,7 @@ footer section .container .social-links a {
         cursor: pointer;
     }
 
-    #nav-icon3 span {
+    #nav-magic span {
         display: block;
         position: absolute;
         height: 7px;
@@ -612,43 +611,116 @@ footer section .container .social-links a {
 
     /* Icon 3 */
 
-    #nav-icon3 span:nth-child(1) {
+    #nav-magic span:nth-child(1) {
         top: 0;
     }
 
-    #nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
+    #nav-magic span:nth-child(2),#nav-magic span:nth-child(3) {
         top: 14px;
     }
 
-    #nav-icon3 span:nth-child(4) {
+    #nav-magic span:nth-child(4) {
         top: 28px;
     }
 
-    #nav-icon3.open span:nth-child(1) {
+    #nav-magic.open span:nth-child(1) {
         top: 18px;
         width: 0;
         left: 50%;
     }
 
-    #nav-icon3.open span:nth-child(2) {
+    #nav-magic.open span:nth-child(2) {
         -webkit-transform: rotate(45deg);
         -moz-transform: rotate(45deg);
         -o-transform: rotate(45deg);
         transform: rotate(45deg);
     }
 
-    #nav-icon3.open span:nth-child(3) {
+    #nav-magic.open span:nth-child(3) {
         -webkit-transform: rotate(-45deg);
         -moz-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
         transform: rotate(-45deg);
     }
 
-    #nav-icon3.open span:nth-child(4) {
+    #nav-magic.open span:nth-child(4) {
         top: 18px;
         width: 0;
         left: 50%;
     }
+
+
+
+
+
+
+
+
+    header {
+        position: absolute;
+        height: 60px;
+        z-index: 1;
+    }
+
+    nav {
+        max-width: 1280px;
+        padding: 0 15px;
+        background: green;
+        margin: 0 auto;
+    }
+
+    nav .logo {
+        justify-content: flex-start;
+    }
+
+    nav .logo a {
+        font-size: var(--fs-logo) !important;
+        font-weight: 700 !important;
+    }
+
+
+    #nav-magic1.other-class,
+    #nav-magic2.other-class {
+        display: block;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
@@ -664,9 +736,7 @@ footer section .container .social-links a {
 
 
     .header-buttons,
-    .login,
-    .start-free,
-    .menu ul li a {
+    .menu {
         display: none;
     }
 
@@ -707,4 +777,13 @@ footer section .container .social-links a {
     .feature-content .content figure {
         width: 45vw;
     }
+
+
+
+
+    #nav-magic1.other-class,
+    #nav-magic2.other-class {
+        display: block;
+    }
+
 }

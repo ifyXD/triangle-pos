@@ -29,7 +29,7 @@
             <h1><a href="/">PM</a></h1>
         </div>
 
-        <div class="menu">
+        <div class="menu" id="nav-magic1">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="#">About</a></li>
@@ -37,14 +37,14 @@
             </ul>
         </div>
 
-        <div id="nav-icon3">
+        <div id="nav-magic">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
         </div>
 
-        <div class="header-buttons">
+        <div class="header-buttons" id="nav-magic2">
             <div class="login">
                 <a href="{{route('login')}}">Login</a>
             </div>
@@ -85,9 +85,18 @@
 
 
 <script>
+    // $(document).ready(function(){
+    //     $('#nav-magic, #nav-magic1, #nav-magic2').click(function(){
+    //         $(this).toggleClass('open');
+    //     });
+    // });
+
     $(document).ready(function(){
-        $('#nav-icon3').click(function(){
+        $('#nav-magic, #nav-magic1, #nav-magic2').click(function(){
             $(this).toggleClass('open');
+            console.log("Clicked:", this.id); // Log which element was clicked
+            // Add or remove class to the other div based on the toggle
+            $('.menu, .header-buttons').toggleClass('other-class');
         });
     });
 
