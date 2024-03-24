@@ -85,11 +85,6 @@
 
 
 <script>
-    // $(document).ready(function(){
-    //     $('#nav-magic, #nav-magic1, #nav-magic2').click(function(){
-    //         $(this).toggleClass('open');
-    //     });
-    // });
 
     $(document).ready(function(){
         $('#nav-magic, #nav-magic1, #nav-magic2').click(function(){
