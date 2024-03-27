@@ -28,5 +28,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
         });
+
+        Gate::before(function ($user, $ability, $arguments) {
+            if (str_starts_with($ability, 'access_')) {
+                // Check if user has access to the specific permission based on some condition (e.g., status)
+                $permissionName = str_replace('access_', '', $ability);
+                return $user->hasAccessToPermission($permissionName);
+            }
+        });
     }
 }

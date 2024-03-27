@@ -14,7 +14,7 @@
     <div class="container-fluid mb-4">
         <div class="row mb-3">
             <div class="col-md-12">
-                {!! \Milon\Barcode\Facades\DNS1DFacade::getBarCodeSVG($product->product_code, $product->product_barcode_symbology, 2, 110) !!}
+                {{-- {!! \Milon\Barcode\Facades\DNS1DFacade::getBarCodeSVG($product->product_code, $product->product_barcode_symbology, 2, 110) !!} --}}
             </div>
         </div>
         <div class="row">
@@ -23,14 +23,14 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
-                                <tr>
+                                {{-- <tr>
                                     <th>Product Code</th>
                                     <td>{{ $product->product_code }}</td>
                                 </tr>
                                 <tr>
                                     <th>Barcode Symbology</th>
                                     <td>{{ $product->product_barcode_symbology }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>Name</th>
                                     <td>{{ $product->product_name }}</td>
