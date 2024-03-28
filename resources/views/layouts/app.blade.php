@@ -13,25 +13,36 @@
     <title>@yield('title') || {{ config('app.name') }}</title>
     <meta content="Fahim Anzam Dip" name="author">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/palette.css') }}">
     @include('includes.main-css')
     <style>
         .btn-primary {
             background-color: {{ $thirdValue }} !important;
         }
 
+        .bg-primary {
+            background-color: {{ $firstValue }} !important;
+        }
+
+        .page-item.active .page-link {
+            background-color: {{ $firstValue }} !important;
+            border-color: {{ $firstValue }} !important;
+
+        }
+
         .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
         .c-sidebar .c-sidebar-nav-link:hover {
-            background: {{$thirdValue}};
+            background: {{ $thirdValue }};
             color: #fff
         }
 
         .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
         .c-sidebar .c-sidebar-nav-link.c-active {
-            background:{{$thirdValue}};
+            background: {{ $thirdValue }};
             color: #fff
         }
     </style>
@@ -58,6 +69,13 @@
     </div>
 
     @include('includes.main-js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 </body>
 
 </html>
