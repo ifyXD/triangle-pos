@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="form-row">
+            {{-- <div class="form-row">
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="tax_percentage">Order Tax (%)</label>
@@ -135,7 +135,7 @@
                             value="0" required step="0.01">
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group d-flex justify-content-center flex-wrap mb-0">
                 <button wire:click="resetCart" type="button" class="btn btn-pill btn-danger mr-3"><i
