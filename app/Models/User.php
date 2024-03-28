@@ -79,4 +79,15 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(UserPermission::class);
     }
+    public function hasAccessToPermission($permissionName)
+    {
+        // Implement your logic to check if the user has access to the given permission
+        // For example, checking if status is true
+        return $this->userpermissions()
+        ->join('permissions', 'user_permissions.permission_id', '=', 'permissions.id')
+        ->where('permissions.name', $permissionName)
+        ->where('user_permissions.status', 'true')
+        ->where('user_permissions.user_id', $this->id)
+        ->exists();
+    }
 }
