@@ -1,10 +1,13 @@
 @php
-    $colorPalette = auth()->user()->themecustom->color_palette?? 'darkblue';
+    $colorPalette = auth()->user()->themecustom->color_palette ?? 'darkblue';
     $paletteArray = explode(',', $colorPalette);
-    $firstValue = trim($paletteArray[2]?? NULL);
+    $firstValue = trim($paletteArray[2] ?? null);
+    $secondValue = trim($paletteArray[1] ?? null);
+    $thirdValue = trim($paletteArray[0] ?? null);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>@yield('title') || {{ config('app.name') }}</title>
@@ -16,8 +19,20 @@
 
     @include('includes.main-css')
     <style>
-        .btn-primary{
-            background-color: {{$firstValue}} !important;
+        .btn-primary {
+            background-color: {{ $thirdValue }} !important;
+        }
+
+        .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
+        .c-sidebar .c-sidebar-nav-link:hover {
+            background: {{$thirdValue}};
+            color: #fff
+        }
+
+        .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
+        .c-sidebar .c-sidebar-nav-link.c-active {
+            background:{{$thirdValue}};
+            color: #fff
         }
     </style>
 </head>
@@ -44,4 +59,5 @@
 
     @include('includes.main-js')
 </body>
+
 </html>
