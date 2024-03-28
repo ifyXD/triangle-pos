@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="{{ asset('css/palette.css') }}">
     @include('includes.main-css')
     <style>
+        .btn-secondary {
+            background-color: {{ $secondValue }} !important;
+        }
+        .c-main {
+            background-color: {{ $secondValue }} !important;
+        }
         .btn-primary {
             background-color: {{ $thirdValue }} !important;
         }
