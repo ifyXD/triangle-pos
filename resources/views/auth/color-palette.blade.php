@@ -1,40 +1,9 @@
 @extends('auth.requirements-registration')
 @section('title', 'Pub Market Registration')
-@section('content')
-    @php
-        $userId = auth()->id(); // Get the authenticated user's ID
-$userEmail = auth()->user()->email; // Get the authenticated user's email (or any unique identifier)
-
-        // Construct session keys with a prefix using the user's unique identifier
-$selectedElementKey = 'selectedElement_' . $userId;
-$storenameKey = 'storename_' . $userId;
-// session()->forget($selectedElementKey);
-// session()->forget($storenameKey);
-// If the session variable is not set, set it to a default value
-if (!session()->has($selectedElementKey)) {
-    session([$selectedElementKey => 'first']); // or any default value you prefer
-}
-if (!session()->has($storenameKey)) {
-    session([$storenameKey => '']); // or any default value you prefer
-        }
-    @endphp
-    <div class="container-fluid {{ session($selectedElementKey) != 'first' ? 'd-none' : '' }} firstPage">
-        <h1>Let's give your store a name
-            <input value="{{ session($storenameKey) }}" class="storename"type="text" required
-                style="border: none; border-bottom: 1px solid black; background-color: transparent;">
-
-            <button type="button" class="btn btn-outlined-primary border-dark ml-3 rounded-pill"
-                id="nextBtn">Proceed</button>
-        </h1>
-
-
-    </div>
-
-    @include('auth.permission-register')
-
+@section('content') 
     <section>
-        <div class="{{ session($selectedElementKey) != 'third' ? 'd-none' : '' }}">
-
+        <div class="">
+            <button type="button" id="btn_backpallete" class="btn btn-outline-dark border-dark">Back</button>
             <h1 class="display-1"><strong>Choose</strong> a Pre-made Palette</h1>
             <p></p>
             <div class="palette-container">

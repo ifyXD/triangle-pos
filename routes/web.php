@@ -37,7 +37,18 @@ Route::get('/userlist', [HomeController::class, 'userlist']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->middleware('isRequirement')->name('home');
-    Route::get('/registration-requirements', [HomeController::class, 'requirements'])->middleware('isCheckRequirement')->name('registration.requirements');
+
+    // Requirement 1
+    Route::middleware('isCheckRequirement')->group(function () {
+        Route::get('/registration-requirements-storename', [HomeController::class, 'storename'])->name('registration.requirements-storename');
+        Route::get('/registration-requirements-permission', [HomeController::class, 'permission'])->name('registration.requirements-permission');
+        Route::get('/registration-requirements-colorpallete', [HomeController::class, 'colorpallete'])->name('registration.requirements-colorpallete');
+    });
+
+
+    
+
+    Route::post('/update-requirements', [HomeController::class, 'updaterequirements'])->name('updaterequirements');
     Route::post('/update-session/registration-requirements', [HomeController::class, 'updateSession']);
     Route::post('/update-session/registration-requirements/withpermission', [HomeController::class, 'withPermission']);
 

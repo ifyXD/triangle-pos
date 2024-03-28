@@ -115,7 +115,7 @@
                                         <td class="right">{{ format_currency($purchase->tax_amount) }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="left"><strong>Shipping)</strong></td>
+                                        <td class="left"><strong>(Shipping)</strong></td>
                                         <td class="right">{{ format_currency($purchase->shipping_amount) }}</td>
                                     </tr>
                                     <tr>

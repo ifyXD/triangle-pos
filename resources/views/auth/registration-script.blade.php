@@ -24,7 +24,6 @@
 
         $(".backBtn").click(function() {
             $.post('/update-session/registration-requirements', {
-                selectedElement: 'first',
                 storename: '{{ session('storename_' . auth()->user()->id) }}',
                 id: {{ auth()->user()->id }},
             }, function(data) {
@@ -34,6 +33,12 @@
             });
         });
 
+        $('#btn_backpallete').click(function() {
+            window.location.href = "{{ route('registration.requirements-permission') }}";
+        });
+        $('#backBtnpermission').click(function() {
+            window.location.href = "{{ route('registration.requirements-storename') }}";
+        });
         $('#permissionBtnFunc').click(function() {
 
 
@@ -81,15 +86,13 @@
                     permissions: permissions
                 })
                 .done(function(response) {
-                    // Handle success response
-                    console.log(response);
+                    //redirect to route {{ route('registration.requirements-storename') }}
+                    window.location.href = "{{ route('registration.requirements-colorpallete') }}";
                 })
                 .fail(function(xhr, status, error) {
                     // Handle failure
                     console.error(xhr.responseText);
                 });
-
-            location.reload();
 
         });
 
