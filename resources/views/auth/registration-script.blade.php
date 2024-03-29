@@ -134,7 +134,7 @@
 
                 setTimeout(function() {
                     counterInit(fValue, lValue);
-                }, 50);
+                }, 30);
 
                 if (counter_value === 100) {
                     $.ajax({

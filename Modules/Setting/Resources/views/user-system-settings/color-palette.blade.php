@@ -101,7 +101,7 @@
         <div class="">
            
             <div  id="paletteBtnSubmit" disabled class="form-group mb-0">
-                <button type="submit" id="submitNi" class="btn btn-primary"><i class="bi bi-check"></i>
+                <button type="submit" disabled id="asdSubmit" class="btn btn-primary"><i class="bi bi-check"></i>
                     Save Changes</button>
             </div>
         </div>

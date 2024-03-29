@@ -116,6 +116,32 @@ class HomeController extends Controller
         // Set status to false for permissions not present in the submitted data 
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }
+    public function withPermission_update(Request $request)
+    {
+
+        $user = auth()->user();
+
+        // Sync permissions
+        $permissions = $request->input('permissions', []);
+
+
+        // Save permissions in user_permissions table
+        foreach ($permissions as  $permission) {
+            // Create or update the record in the user_permissions table
+            UserPermission::updateOrCreate(
+                ['user_id' => $user->id, 'permission_id' => $permission['permission_id']],
+                ['status' => $permission['status']] // Set status to true since the permission is enabled
+            );
+        } 
+
+        if (auth()->user()->id != $request->id) {
+            Auth::logout();
+            return redirect()->route('register');
+        }
+        toast('Settings Updated!', 'info');
+        // Set status to false for permissions not present in the submitted data 
+        return response()->json(['message' => 'Permissions saved successfully'], 200);
+    }
 
 
     public function currentMonthChart()
@@ -450,6 +476,8 @@ class HomeController extends Controller
             ['user_id' => $user_id],
             ['color_palette' => $color_palette]
         );
+
+        toast('Settings Updated!', 'info');
 
         return response()->json([
             'message' => $request->first

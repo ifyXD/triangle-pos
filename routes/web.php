@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-requirements', [HomeController::class, 'updaterequirements'])->name('updaterequirements');
     Route::post('/update-session/registration-requirements', [HomeController::class, 'updateSession']);
     Route::post('/update-session/registration-requirements/withpermission', [HomeController::class, 'withPermission']);
+    Route::post('/update-session/registration-requirements/withpermission_update', [HomeController::class, 'withPermission_update']);
 
     Route::post('/update/registration-requirements', [HomeController::class, 'update_requirements']);
 

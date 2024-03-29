@@ -52,16 +52,16 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="company_email">Company Email <span class="text-danger">*</span></label>
+                                        <label for="company_email">Store Email <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_email"
-                                            value="{{ $settings->company_email ?? null }}" required>
+                                            value="{{ $settings->company_email ?? null }}" >
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="company_phone">Company Phone <span class="text-danger">*</span></label>
+                                        <label for="company_phone">Phone <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_phone"
-                                            value="{{ $settings->company_phone ?? null }}" required>
+                                            value="{{ $settings->company_phone ?? null }}">
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                         <label for="notification_email">Notification Email <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="notification_email"
-                                            value="{{ optional($settings)->notification_email }}" required>
+                                            value="{{ optional($settings)->notification_email }}">
                                     </div>
                                 </div>
 
@@ -112,7 +112,7 @@
                             <div class="form-row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="company_address">Company Address <span
+                                        <label for="company_address">Address <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_address"
                                             value="{{ optional($settings)->company_address }}">
@@ -173,8 +173,7 @@
         var first = '';
         var second = '';
         var third = '';
-        $(document).ready(function() {
-    
+        $(document).ready(function() { 
             $("#nextBtn").click(function() {
                 var inputValue = $("input.storename").val();
                 if (inputValue.trim() === '') {
@@ -250,7 +249,7 @@
                 });
     
                 // Send the data to the server
-                $.post('/update-session/registration-requirements/withpermission', {
+                $.post('/update-session/registration-requirements/withpermission_update', {
                         selectedElement: 'third',
                         storename: '{{ session('storename') }}',
                         id: {{ auth()->user()->id }},
@@ -285,7 +284,7 @@
                 $('.third-div-bgcolor').css('background-color', third);
     
                 //remove the disabled attr of paletteBtnSubmit id element
-                $('#paletteBtnSubmit').removeAttr('disabled');
+                $('#asdSubmit').removeAttr('disabled');
     
             });
     
@@ -334,8 +333,7 @@
             });
             $('#select-all').click(function() {
                 $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-            });
-    
+            }); 
     
         });
     </script>
