@@ -284,6 +284,7 @@
     
             // Define counterInit function
             function counterInit(fValue, lValue) {
+                $('.progressbar').removeClass('d-none');
                 var counter_value = parseInt($('.counter').text()) || 0;
                 counter_value++;
     

@@ -118,7 +118,7 @@
 
 
         <div class="counter mt-3"></div>
-        <div class="progressbar">
+        <div class="progressbar d-none">
             <span class="progress"></span>
         </div>
 
