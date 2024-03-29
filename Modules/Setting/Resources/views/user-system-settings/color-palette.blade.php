@@ -1,5 +1,12 @@
+@php
+    $colorPalette = auth()->user()->themecustom->color_palette ?? 'darkblue';
+    $paletteArray = explode(',', $colorPalette);
+    $firstValue = trim($paletteArray[2] ?? null);
+    $secondValue = trim($paletteArray[1] ?? null);
+    $thirdValue = trim($paletteArray[0] ?? null);
+@endphp
 <section>
-    <div class="">  
+    <div class=""> 
         <div class="palette-container">
             @php
                 $colors = [
@@ -46,8 +53,7 @@
                     ['#E26F31', '#F0F5F4', '#0000e6'],
                     ['#C3A67B', '#F0F5F4', '#3C485E'],
                 ];
-            @endphp
-
+            @endphp 
 
             @foreach ($colors as $key => $palette)
                 <div class="parent">
@@ -66,41 +72,45 @@
             @endforeach
 
 
-            <div style="position: absolute; right:-20%;">
+
+
+
+        </div>
+        <div class="">
+
+            <div style="">
 
                 <div class="card" style="width: 15rem;">
                     <div class="card-body">
                         <h5 class="card-title text-end">Legend</h5>
                         <hr>
-
+    
                         <div style="position: relative; margin-bottom: -15px">
-                            <div class="first-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
+                            <div class="first-div-bgcolor"
+                                style="width: 25px; height: 25px; background-color: {{$thirdValue}}">
                             </div>
                             <span class="first-color text-dark h5"
-                                style="position: absolute; top:0; right: 0;">#000000</span><br>
+                                style="position: absolute; top:0; right: 0;">{{$thirdValue}}</span><br>
                         </div>
                         <div style="position: relative; margin-bottom: -15px">
                             <div class="second-div-bgcolor"
-                                style="width: 25px; height: 25px; background-color: #000000">
+                                style="width: 25px; height: 25px; background-color: {{$secondValue}}">
                             </div>
                             <span class="second-color text-dark h5"
-                                style="position: absolute; top:0; right: 0;">#000000</span><br>
+                                style="position: absolute; top:0; right: 0;">{{$secondValue}}</span><br>
                         </div>
                         <div style="position: relative; margin-bottom: -15px">
-                            <div class="third-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">
+                            <div class="third-div-bgcolor"
+                                style="width: 25px; height: 25px; background-color: {{$firstValue}}">
                             </div>
                             <span class="third-color text-dark h5"
-                                style="position: absolute; top:0; right: 0;">#000000</span><br>
+                                style="position: absolute; top:0; right: 0;">{{$firstValue}}</span><br>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-        </div>
-        <div class="">
-           
-            <div  id="paletteBtnSubmit" disabled class="form-group mb-0">
+            <div id="paletteBtnSubmit" disabled class="form-group mb-0">
                 <button type="submit" disabled id="asdSubmit" class="btn btn-primary"><i class="bi bi-check"></i>
                     Save Changes</button>
             </div>

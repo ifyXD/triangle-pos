@@ -159,16 +159,7 @@
     </div>
 @endsection
 
-@push('page_scripts')
-    {{-- <script>
-        $(document).ready(function() {
-            $('#color-picker').on('change', function() {
-                let color = $(this).val();
-                $('.c-sidebar').css('background-color', color);
-                $('#sidebar_color_id').val(color);
-            });
-        });
-    </script> --}}
+@push('page_scripts') 
     <script>
         var first = '';
         var second = '';
