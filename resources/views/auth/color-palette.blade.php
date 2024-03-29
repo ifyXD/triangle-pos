@@ -2,7 +2,7 @@
 @section('title', 'Pub Market Registration')
 @section('content')
     <section>
-        <div class="">
+        <div class="mt-5">
             <button type="button" id="btn_backpallete" class="btn btn-outline-dark border-dark">Back</button>
             <h1 class="display-1"><strong>Choose</strong> a Pre-made Palette</h1>
             <p></p>
