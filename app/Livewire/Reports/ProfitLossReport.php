@@ -152,7 +152,7 @@ class ProfitLossReport extends Component
     public function calculateProfit() {
         $product_costs = 0;
         $revenue = $this->sales_amount - $this->sale_returns_amount;
-        $sales = Sale::completed()
+        $sales = Sale::where('user_id', auth()->user()->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
