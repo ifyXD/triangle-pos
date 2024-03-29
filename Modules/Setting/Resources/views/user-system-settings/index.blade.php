@@ -258,6 +258,7 @@
                     })
                     .done(function(response) {
                         location.reload();
+                      
                     })
                     .fail(function(xhr, status, error) {
                         // Handle failure

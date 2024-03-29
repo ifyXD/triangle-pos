@@ -204,6 +204,7 @@ class SalesReturnController extends Controller
                     'product_discount_amount' => $cart_item->options->product_discount * 100,
                     'product_discount_type' => $cart_item->options->product_discount_type,
                     'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'user_id' => auth()->user()->id,
                 ]);
 
                 if ($request->status == 'Completed') {

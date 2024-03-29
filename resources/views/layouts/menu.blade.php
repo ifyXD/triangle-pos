@@ -4,7 +4,7 @@
     </a>
 </li>
 
-@if (auth()->user()->hasAccessToPermission('access_product_categories'))
+@if (auth()->user()->hasAccessToPermission('access_products'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('products.*') || request()->routeIs('product-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">

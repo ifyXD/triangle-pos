@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -72,6 +73,30 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('Admin');
+
+         DB::table('customers')->insert([
+            'customer_name' => 'Anonymous',
+            'customer_email' => 'anonymous@example.com',
+            'customer_phone' => '123456789',
+            'city' => 'Blank City',
+            'country' => 'Blank Country',
+            'address' => 'Blank Address',
+            'user_id' => $user->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('suppliers')->insert([
+            'supplier_name' => 'Anonymous',
+            'supplier_email' => 'anonymous@example.com',
+            'supplier_phone' => '123456789',
+            'city' => 'Blank City',
+            'country' => 'Blank Country',
+            'address' => 'Blank Address',
+            'user_id' => $user->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
 
         return $user;
     }

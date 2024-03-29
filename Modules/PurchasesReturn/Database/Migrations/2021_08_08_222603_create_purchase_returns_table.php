@@ -19,11 +19,11 @@ class CreatePurchaseReturnsTable extends Migration
             $table->string('reference');
             $table->unsignedBigInteger('supplier_id')->nullable();
             $table->string('supplier_name');
-            $table->integer('tax_percentage')->default(0);
+            $table->integer('tax_percentage')->nullable()->default(0);
             $table->integer('tax_amount')->default(0);
-            $table->integer('discount_percentage')->default(0);
+            $table->integer('discount_percentage')->nullable()->default(0);
             $table->integer('discount_amount')->default(0);
-            $table->integer('shipping_amount')->default(0);
+            $table->integer('shipping_amount')->nullable()->default(0);
             $table->integer('total_amount');
             $table->integer('paid_amount');
             $table->integer('due_amount');

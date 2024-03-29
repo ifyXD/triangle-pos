@@ -36,13 +36,13 @@ class SuperUserSeeder extends Seeder
 
         $user->assignRole($superAdminRole);
 
-        $user = User::create([
-            'name' => 'Rico Ni',
-            'email' => 'ricobregildo@gmail.com',
-            'password' => bcrypt('rico1234'),
-            'is_active' => 1,
-            'reg_requirements' => null,
-        ]);
+        // $user = User::create([
+        //     'name' => 'Rico Ni',
+        //     'email' => 'ricobregildo@gmail.com',
+        //     'password' => bcrypt('rico1234'),
+        //     'is_active' => 1,
+        //     'reg_requirements' => null,
+        // ]);
 
         $adminRole = Role::where('name', 'Admin')->where('guard_name', 'web')->first();
 

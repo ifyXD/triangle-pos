@@ -4,6 +4,7 @@ namespace App\Livewire\Reports;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\People\Entities\Supplier;
 use Modules\Purchase\Entities\Purchase;
 
 class PurchasesReport extends Component
@@ -26,7 +27,7 @@ class PurchasesReport extends Component
     ];
 
     public function mount($suppliers) {
-        $this->suppliers = $suppliers;
+        $this->suppliers = Supplier::where('user_id', auth()->user()->id)->get();
         $this->start_date = today()->subDays(30)->format('Y-m-d');
         $this->end_date = today()->format('Y-m-d');
         $this->supplier_id = '';
@@ -35,7 +36,7 @@ class PurchasesReport extends Component
     }
 
     public function render() {
-        $purchases = Purchase::whereDate('date', '>=', $this->start_date)
+        $purchases = Purchase::where('user_id', auth()->user()->id)->whereDate('date', '>=', $this->start_date)
             ->whereDate('date', '<=', $this->end_date)
             ->when($this->supplier_id, function ($query) {
                 return $query->where('supplier_id', $this->supplier_id);
