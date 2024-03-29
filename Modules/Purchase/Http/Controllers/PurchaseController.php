@@ -17,6 +17,13 @@ use Modules\Purchase\Http\Requests\UpdatePurchaseRequest;
 
 class PurchaseController extends Controller
 {
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
 
     public function index(PurchaseDataTable $dataTable) {
         abort_if(Gate::denies('access_purchases'), 403);
@@ -26,7 +33,8 @@ class PurchaseController extends Controller
 
 
     public function create() {
-        abort_if(Gate::denies('create_purchases'), 403);
+        // abort_if(Gate::denies('create_purchases'), 403);
+        $this->checkPermission('create_purchases');
 
         Cart::instance('purchase')->destroy();
 
@@ -35,6 +43,7 @@ class PurchaseController extends Controller
 
 
     public function store(StorePurchaseRequest $request) {
+        $this->checkPermission('create_purchases');
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
             if ($due_amount == $request->total_amount) {
@@ -109,7 +118,8 @@ class PurchaseController extends Controller
 
 
     public function show(Purchase $purchase) {
-        abort_if(Gate::denies('show_purchases'), 403);
+        // abort_if(Gate::denies('show_purchases'), 403);
+        $this->checkPermission('show_purchases');
 
         $supplier = Supplier::findOrFail($purchase->supplier_id);
 
@@ -118,8 +128,8 @@ class PurchaseController extends Controller
 
 
     public function edit(Purchase $purchase) {
-        abort_if(Gate::denies('edit_purchases'), 403);
-
+        // abort_if(Gate::denies('edit_purchases'), 403);
+        $this->checkPermission('edit_purchases');
         $purchase_details = $purchase->purchaseDetails;
 
         Cart::instance('purchase')->destroy();
@@ -150,6 +160,7 @@ class PurchaseController extends Controller
 
 
     public function update(UpdatePurchaseRequest $request, Purchase $purchase) {
+        $this->checkPermission('edit_purchases');
         DB::transaction(function () use ($request, $purchase) {
             $due_amount = $request->total_amount - $request->paid_amount;
             if ($due_amount == $request->total_amount) {
@@ -223,7 +234,8 @@ class PurchaseController extends Controller
 
 
     public function destroy(Purchase $purchase) {
-        abort_if(Gate::denies('delete_purchases'), 403);
+        // abort_if(Gate::denies('delete_purchases'), 403);
+        $this->checkPermission('delete_purchases');
 
         $purchase->delete();
 

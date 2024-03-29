@@ -77,4 +77,6 @@ class ExpenseCategoriesController extends Controller
 
         return redirect()->route('expense-categories.index');
     }
+
+    
 }

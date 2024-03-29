@@ -645,7 +645,7 @@
             </div>
 
             <!-- Currencies Permission -->
-            <div class="col-lg-4 col-md-6 mb-3">
+            {{-- <div class="col-lg-4 col-md-6 mb-3">
                 <div class="card h-100 border-0 shadow">
                     <div class="card-header">
                         Currencies
@@ -691,7 +691,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Reports -->
             <div class="col-lg-4 col-md-6 mb-3">
@@ -704,7 +704,7 @@
                             <div class="col-6">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox"
-                                        {{ $userpermissions[59]->status === 'true' ? 'checked' : '' }}
+                                        {{ $userpermissions[55]->status === 'true' ? 'checked' : '' }}
                                         class="custom-control-input" id="access_reports" name="permissions[]"
                                         value="67">
                                     <label class="custom-control-label" for="access_reports">Access</label>

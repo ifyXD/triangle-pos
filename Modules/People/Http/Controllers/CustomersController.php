@@ -20,14 +20,15 @@ class CustomersController extends Controller
 
 
     public function create() {
-        abort_if(Gate::denies('create_customers'), 403);
-
+        // abort_if(Gate::denies('create_customers'), 403);
+        $this->checkPermission('create_customers');
         return view('people::customers.create');
     }
 
 
     public function store(Request $request) {
-        abort_if(Gate::denies('create_customers'), 403);
+        // abort_if(Gate::denies('create_customers'), 403);
+        $this->checkPermission('create_customers');
 
         $request->validate([
             'customer_name'  => 'required|string|max:255',
@@ -55,22 +56,22 @@ class CustomersController extends Controller
 
 
     public function show(Customer $customer) {
-        abort_if(Gate::denies('show_customers'), 403);
-
+        // abort_if(Gate::denies('show_customers'), 403);
+        $this->checkPermission('show_customers');
         return view('people::customers.show', compact('customer'));
     }
 
 
     public function edit(Customer $customer) {
-        abort_if(Gate::denies('edit_customers'), 403);
-
+        // abort_if(Gate::denies('edit_customers'), 403);
+        $this->checkPermission('edit_customers');
         return view('people::customers.edit', compact('customer'));
     }
 
 
     public function update(Request $request, Customer $customer) {
         // abort_if(Gate::denies('update_customers'), 403);
-
+        $this->checkPermission('edit_customers');
         $request->validate([
             'customer_name'  => 'required|string|max:255',
             'customer_phone' => 'required|max:255',
@@ -96,12 +97,19 @@ class CustomersController extends Controller
 
 
     public function destroy(Customer $customer) {
-        abort_if(Gate::denies('delete_customers'), 403);
-
+        // abort_if(Gate::denies('delete_customers'), 403);
+        $this->checkPermission('delete_customers');
         $customer->delete();
 
         toast('Customer Deleted!', 'warning');
 
         return redirect()->route('customers.index');
+    }
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
     }
 }

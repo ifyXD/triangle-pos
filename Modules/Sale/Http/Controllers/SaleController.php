@@ -26,8 +26,8 @@ class SaleController extends Controller
 
 
     public function create() {
-        abort_if(Gate::denies('create_sales'), 403);
-
+        // abort_if(Gate::denies('create_sales'), 403);
+        $this->checkPermission('create_sales');
         Cart::instance('sale')->destroy();
 
         return view('sale::create');
@@ -35,6 +35,7 @@ class SaleController extends Controller
 
 
     public function store(StoreSaleRequest $request) {
+        $this->checkPermission('create_sales');
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -110,8 +111,8 @@ class SaleController extends Controller
 
 
     public function show(Sale $sale) {
-        abort_if(Gate::denies('show_sales'), 403);
-
+        // abort_if(Gate::denies('show_sales'), 403);
+        $this->checkPermission('show_sales');
         $customer = Customer::findOrFail($sale->customer_id);
 
         return view('sale::show', compact('sale', 'customer'));
@@ -119,8 +120,8 @@ class SaleController extends Controller
 
 
     public function edit(Sale $sale) {
-        abort_if(Gate::denies('edit_sales'), 403);
-
+        // abort_if(Gate::denies('edit_sales'), 403);
+        $this->checkPermission('edit_sales');
         $sale_details = $sale->saleDetails;
 
         Cart::instance('sale')->destroy();
@@ -151,6 +152,7 @@ class SaleController extends Controller
 
 
     public function update(UpdateSaleRequest $request, Sale $sale) {
+        $this->checkPermission('edit_sales');
         DB::transaction(function () use ($request, $sale) {
 
             $due_amount = $request->total_amount - $request->paid_amount;
@@ -226,12 +228,19 @@ class SaleController extends Controller
 
 
     public function destroy(Sale $sale) {
-        abort_if(Gate::denies('delete_sales'), 403);
-
+        // abort_if(Gate::denies('delete_sales'), 403);
+        $this->checkPermission('delete_sales');
         $sale->delete();
 
         toast('Sale Deleted!', 'warning');
 
         return redirect()->route('sales.index');
+    }
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
     }
 }

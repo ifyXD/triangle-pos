@@ -20,15 +20,15 @@ class SuppliersController extends Controller
 
 
     public function create() {
-        abort_if(Gate::denies('create_suppliers'), 403);
-
+        // abort_if(Gate::denies('create_suppliers'), 403);
+        $this->checkPermission('create_suppliers');
         return view('people::suppliers.create');
     }
 
 
     public function store(Request $request) {
-        abort_if(Gate::denies('create_suppliers'), 403);
-
+        // abort_if(Gate::denies('create_suppliers'), 403);
+        $this->checkPermission('create_suppliers');
         $request->validate([
             'supplier_name'  => 'required|string|max:255',
             'supplier_phone' => 'required|max:255',
@@ -55,22 +55,23 @@ class SuppliersController extends Controller
 
 
     public function show(Supplier $supplier) {
-        abort_if(Gate::denies('show_suppliers'), 403);
-
+        // abort_if(Gate::denies('show_suppliers'), 403);
+        $this->checkPermission('show_suppliers');
         return view('people::suppliers.show', compact('supplier'));
     }
 
 
     public function edit(Supplier $supplier) {
-        abort_if(Gate::denies('edit_suppliers'), 403);
+        // abort_if(Gate::denies('edit_suppliers'), 403);
+        $this->checkPermission('edit_suppliers');
 
         return view('people::suppliers.edit', compact('supplier'));
     }
 
 
     public function update(Request $request, Supplier $supplier) {
-        abort_if(Gate::denies('edit_suppliers'), 403);
-
+        // abort_if(Gate::denies('edit_suppliers'), 403);
+        $this->checkPermission('edit_suppliers');
         $request->validate([
             'supplier_name'  => 'required|string|max:255',
             'supplier_phone' => 'required|max:255',
@@ -96,12 +97,19 @@ class SuppliersController extends Controller
 
 
     public function destroy(Supplier $supplier) {
-        abort_if(Gate::denies('delete_suppliers'), 403);
-
+        // abort_if(Gate::denies('delete_suppliers'), 403);
+        $this->checkPermission('delete_suppliers');
         $supplier->delete();
 
         toast('Supplier Deleted!', 'warning');
 
         return redirect()->route('suppliers.index');
+    }
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
     }
 }

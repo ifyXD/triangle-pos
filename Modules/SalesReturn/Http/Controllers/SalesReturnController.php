@@ -17,6 +17,13 @@ use Modules\SalesReturn\Http\Requests\UpdateSaleReturnRequest;
 
 class SalesReturnController extends Controller
 {
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
 
     public function index(SaleReturnsDataTable $dataTable) {
         abort_if(Gate::denies('access_sale_returns'), 403);
@@ -26,7 +33,8 @@ class SalesReturnController extends Controller
 
 
     public function create() {
-        abort_if(Gate::denies('create_sale_returns'), 403);
+        // abort_if(Gate::denies('create_sale_returns'), 403);
+        $this->checkPermission('create_sale_returns');
 
         Cart::instance('sale_return')->destroy();
 
@@ -35,6 +43,7 @@ class SalesReturnController extends Controller
 
 
     public function store(StoreSaleReturnRequest $request) {
+        $this->checkPermission('create_sale_returns');
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -110,7 +119,8 @@ class SalesReturnController extends Controller
 
 
     public function show(SaleReturn $sale_return) {
-        abort_if(Gate::denies('show_sale_returns'), 403);
+        // abort_if(Gate::denies('show_sale_returns'), 403);
+        $this->checkPermission('show_sale_returns');
 
         $customer = Customer::findOrFail($sale_return->customer_id);
 
@@ -119,8 +129,8 @@ class SalesReturnController extends Controller
 
 
     public function edit(SaleReturn $sale_return) {
-        abort_if(Gate::denies('edit_sale_returns'), 403);
-
+        // abort_if(Gate::denies('edit_sale_returns'), 403);
+        $this->checkPermission('edit_sale_returns');
         $sale_return_details = $sale_return->saleReturnDetails;
 
         Cart::instance('sale_return')->destroy();
@@ -151,6 +161,7 @@ class SalesReturnController extends Controller
 
 
     public function update(UpdateSaleReturnRequest $request, SaleReturn $sale_return) {
+        $this->checkPermission('edit_sale_returns');
         DB::transaction(function () use ($request, $sale_return) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -225,7 +236,8 @@ class SalesReturnController extends Controller
 
 
     public function destroy(SaleReturn $sale_return) {
-        abort_if(Gate::denies('delete_sale_returns'), 403);
+        // abort_if(Gate::denies('delete_sale_returns'), 403);
+        $this->checkPermission('delete_sale_returns');
 
         $sale_return->delete();
 
