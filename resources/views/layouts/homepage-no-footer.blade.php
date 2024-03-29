@@ -19,7 +19,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-... (hash value)" crossorigin="anonymous">
 
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-... (hash value)" crossorigin="anonymous">
 
 
 </head>
@@ -32,23 +35,31 @@
             <h1><a href="/">PM</a></h1>
         </div>
 
-        <div class="menu">
+        <div class="menu" id="nav-magic1">
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </div>
-
-
-        <div class="header-buttons">
+        <div id="nav-magic">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="header-buttons" id="nav-magic2">
             <div class="login">
-                <a href="{{route('login')}}">Login</a>
+                <a href="{{ route('login') }}">Login</a>
             </div>
             <div class="start-free">
-                <a href="{{route('register')}}">Sign up</a>
+                <a href="{{ route('register') }}">Sign up</a>
             </div>
         </div>
+
+
+
+
     </nav>
 </header>
 <main>
@@ -56,26 +67,27 @@
 @yield('content')
 
 </main>
+<script>
+    $(document).ready(function() {
+        $('#nav-magic, #nav-magic1, #nav-magic2').click(function() {
+            $(this).toggleClass('open');
+            console.log("Clicked:", this.id);
+            // Log which element was clicked
+            // Add or remove class to the other div based on the toggle
+            // $('.menu, .header-buttons').toggleClass('other-class');
+            $('.menu').toggleClass('other-class');
 
-{{--<footer>--}}
-{{--    <section>--}}
-{{--        <div class="container">--}}
-{{--            <div class="logo"><h1>RM</h1></div>--}}
-{{--            <p>Each app simplifies a process and empowers more people.--}}
-{{--                Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>--}}
-{{--            <div class="social-links">--}}
-{{--                <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>--}}
-{{--                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>--}}
-{{--                <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+            // Check if any of the elements has the 'open' class
+            // if ($('#nav-magic, #nav-magic1, #nav-magic2').hasClass('open')) {
+            //     $('nav').addClass('nav-height');
+            // } else {
+            //     $('nav').removeClass('nav-height');
+            // }
+        });
 
-{{--    <div class="copyright">--}}
-{{--        <div class="copyright-container">--}}
-{{--            <p>Copyright &copy; 2024 Joseph Tanquilan</p>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</footer>--}}
+    });
+</script>
+
+
 </body>
 </html>
