@@ -68,7 +68,7 @@
                                                 </span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th>Order Tax ({{ $global_tax }}%)</th>
                                         <td>(+) {{ format_currency(Cart::instance($cart_instance)->tax()) }}</td>
                                     </tr>
@@ -80,7 +80,7 @@
                                         <th>Shipping</th>
                                         <input type="hidden" value="{{ $shipping }}" name="shipping_amount">
                                         <td>(+) {{ format_currency($shipping) }}</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr class="text-primary">
                                         <th>Grand Total</th>
                                         @php

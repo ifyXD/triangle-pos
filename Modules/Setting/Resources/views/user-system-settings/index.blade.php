@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
                                             value="{{ auth()->user()->id }}" required>
-                                        <label for="company_name">Company Name <span class="text-danger">*</span></label>
+                                        <label for="company_name">Store Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_name"
                                             value="{{ $settings->company_name ?? null }}" required>
                                     </div>
@@ -128,6 +128,20 @@
                         </form>
                     </div>
                 </div>
+
+
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Permissions</h5>
+                    </div>
+                    <div class="card-body">
+                        @include('setting::user-system-settings.permissions') 
+                        
+                    </div>
+                </div>
+
+
 
 
 
@@ -243,8 +257,7 @@
                         permissions: permissions
                     })
                     .done(function(response) {
-                        //redirect to route {{ route('registration.requirements-storename') }}
-                        window.location.href = "{{ route('registration.requirements-colorpallete') }}";
+                        location.reload();
                     })
                     .fail(function(xhr, status, error) {
                         // Handle failure
