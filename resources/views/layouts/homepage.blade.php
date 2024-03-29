@@ -120,17 +120,8 @@
             $('#nav-magic, #nav-magic1, #nav-magic2').click(function() {
                 $(this).toggleClass('open');
                 console.log("Clicked:", this.id);
-                // Log which element was clicked
-                // Add or remove class to the other div based on the toggle
-                // $('.menu, .header-buttons').toggleClass('other-class');
                 $('.menu').toggleClass('other-class');
 
-                // Check if any of the elements has the 'open' class
-                // if ($('#nav-magic, #nav-magic1, #nav-magic2').hasClass('open')) {
-                //     $('nav').addClass('nav-height');
-                // } else {
-                //     $('nav').removeClass('nav-height');
-                // }
             });
 
         });
