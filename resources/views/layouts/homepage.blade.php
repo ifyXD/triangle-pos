@@ -14,9 +14,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Outfit:wght@100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     {{-- <style>
         nav,
@@ -67,14 +65,12 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-
             <div id="nav-magic">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
             <div class="header-buttons" id="nav-magic2">
                 <div class="login">
                     <a href="{{ route('login') }}">Login</a>
@@ -83,6 +79,10 @@
                     <a href="{{ route('register') }}">Sign up</a>
                 </div>
             </div>
+
+
+
+
         </nav>
     </header>
     <main>
@@ -100,9 +100,9 @@
                 <p>Each app simplifies a process and empowers more people.
                     Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/JosephM.Tanquilan"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/uncertainty0112/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/josephtanquilan"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </section>
@@ -119,18 +119,17 @@
         $(document).ready(function() {
             $('#nav-magic, #nav-magic1, #nav-magic2').click(function() {
                 $(this).toggleClass('open');
-                console.log("Clicked:", this.id); // Log which element was clicked
+                console.log("Clicked:", this.id);
+                // Log which element was clicked
                 // Add or remove class to the other div based on the toggle
-                $('.menu, .header-buttons').toggleClass('other-class');
+                // $('.menu, .header-buttons').toggleClass('other-class');
+                $('.menu').toggleClass('other-class');
 
                 // Check if any of the elements has the 'open' class
                 // if ($('#nav-magic, #nav-magic1, #nav-magic2').hasClass('open')) {
                 //     $('nav').addClass('nav-height');
-
                 // } else {
-
                 //     $('nav').removeClass('nav-height');
-
                 // }
             });
 
