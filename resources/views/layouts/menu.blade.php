@@ -4,7 +4,7 @@
     </a>
 </li>
 
-@if (auth()->user()->hasAccessToPermission('access_product_categories'))
+@if (auth()->user()->hasAccessToPermission('access_products'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('products.*') || request()->routeIs('product-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -340,11 +340,8 @@
         </ul>
     </li>
 @endcan
-
-@if (auth()->user()->hasAccessToPermission('access_currencies') ||
-        auth()->user()->hasAccessToPermission('access_settings'))
-    <li
-        class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('currencies*') || request()->routeIs('units*') ? 'c-show' : '' }}">
+ 
+    <li  class="c-sidebar-nav-item c-sidebar-nav-dropdown">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
         </a>
@@ -379,5 +376,4 @@
                 </li>
             </ul>
         @endif
-    </li>
-@endif
+    </li> 

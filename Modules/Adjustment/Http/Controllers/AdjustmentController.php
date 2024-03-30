@@ -16,21 +16,23 @@ class AdjustmentController extends Controller
 {
 
     public function index(AdjustmentsDataTable $dataTable) {
-        abort_if(Gate::denies('access_adjustments'), 403);
+        abort_if(Gate::denies('access_adjustments'), 403); 
 
         return $dataTable->render('adjustment::index');
     }
 
 
     public function create() {
-        abort_if(Gate::denies('create_adjustments'), 403);
+        // abort_if(Gate::denies('create_adjustments'), 403);
+        $this->checkPermission('create_adjustments');
 
         return view('adjustment::create');
     }
 
 
     public function store(Request $request) {
-        abort_if(Gate::denies('create_adjustments'), 403);
+        // abort_if(Gate::denies('create_adjustments'), 403);
+        $this->checkPermission('create_adjustments');
 
         $request->validate([
             'reference'   => 'required|string|max:255',
@@ -76,21 +78,24 @@ class AdjustmentController extends Controller
 
 
     public function show(Adjustment $adjustment) {
-        abort_if(Gate::denies('show_adjustments'), 403);
+        // abort_if(Gate::denies('show_adjustments'), 403);
+        $this->checkPermission('show_adjustments');
 
         return view('adjustment::show', compact('adjustment'));
     }
 
 
     public function edit(Adjustment $adjustment) {
-        abort_if(Gate::denies('edit_adjustments'), 403);
+        // abort_if(Gate::denies('edit_adjustments'), 403);
+        $this->checkPermission('edit_adjustments');
 
         return view('adjustment::edit', compact('adjustment'));
     }
 
 
     public function update(Request $request, Adjustment $adjustment) {
-        abort_if(Gate::denies('edit_adjustments'), 403);
+        // abort_if(Gate::denies('edit_adjustments'), 403);
+        $this->checkPermission('edit_adjustments');
 
         $request->validate([
             'reference'   => 'required|string|max:255',
@@ -153,12 +158,20 @@ class AdjustmentController extends Controller
 
 
     public function destroy(Adjustment $adjustment) {
-        abort_if(Gate::denies('delete_adjustments'), 403);
+        // abort_if(Gate::denies('delete_adjustments'), 403);
+        $this->checkPermission('delete_adjustments');
 
         $adjustment->delete();
 
         toast('Adjustment Deleted!', 'warning');
 
         return redirect()->route('adjustments.index');
+    }
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
     }
 }

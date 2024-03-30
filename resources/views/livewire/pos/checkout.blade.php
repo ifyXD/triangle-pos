@@ -86,7 +86,7 @@
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <tr>
+                            {{-- <tr>
                                 <th>Order Tax ({{ $global_tax }}%)</th>
                                 <td>(+) {{ format_currency(Cart::instance($cart_instance)->tax()) }}</td>
                             </tr>
@@ -98,7 +98,7 @@
                                 <th>Shipping</th>
                                 <input type="hidden" value="{{ $shipping }}" name="shipping_amount">
                                 <td>(+) {{ format_currency($shipping) }}</td>
-                            </tr>
+                            </tr> --}}
                             <tr class="text-primary">
                                 <th>Grand Total</th>
                                 @php
@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="form-row">
+            {{-- <div class="form-row">
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="tax_percentage">Order Tax (%)</label>
@@ -135,7 +135,7 @@
                             value="0" required step="0.01">
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group d-flex justify-content-center flex-wrap mb-0">
                 <button wire:click="resetCart" type="button" class="btn btn-pill btn-danger mr-3"><i

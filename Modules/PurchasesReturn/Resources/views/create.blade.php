@@ -37,8 +37,13 @@
                                         <div class="form-group">
                                             <label for="supplier_id">Supplier <span class="text-danger">*</span></label>
                                             <select class="form-control" name="supplier_id" id="supplier_id" required>
-                                                @foreach(\Modules\People\Entities\Supplier::all() as $supplier)
-                                                    <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
+                                                @foreach(\Modules\People\Entities\Supplier::when(auth()->user()->hasRole('Super Admin'), function ($query) {
+                                                    // If the user has the "Super Admin" role, retrieve all suppliers
+                                                }, function ($query) {
+                                                    // If not "Super Admin," filter suppliers by user_id
+                                                    $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
+                                                })->orderBy('supplier_name')->get() as $supplier)
+                                                    <option value="{{ $supplier->id }}">{{ Str::ucfirst($supplier->supplier_name) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -62,7 +67,7 @@
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
                                             <option value="Pending">Pending</option>
-                                            <option value="Shipped">Shipped</option>
+                                            {{-- <option value="Shipped">Shipped</option> --}}
                                             <option value="Completed">Completed</option>
                                         </select>
                                     </div>

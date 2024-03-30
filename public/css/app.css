@@ -11824,11 +11824,11 @@ html:not([dir=rtl]) .c-sidebar.c-sidebar-show.c-sidebar-right {
 @media (-ms-high-contrast:none),
 (hover:hover) {
 
-    .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
+    /* .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
     .c-sidebar .c-sidebar-nav-link:hover {
         background: #321fdb;
         color: #fff
-    }
+    } */
 
     .c-sidebar .c-sidebar-nav-dropdown-toggle:hover .c-sidebar-nav-icon,
     .c-sidebar .c-sidebar-nav-link:hover .c-sidebar-nav-icon {
@@ -13950,12 +13950,12 @@ h5,
 h6 {
     font-weight: 500;
     line-height: 1.2;
-    margin-bottom: .5rem
+    /* margin-bottom: .5rem; */
 }
 
 .h1,
 h1 {
-    font-size: 2.1875rem
+    font-size: 2.1875rem;
 }
 
 .h2,
@@ -20443,11 +20443,11 @@ body {
     }
 }
 
-.c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
+/* .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
 .c-sidebar .c-sidebar-nav-link.c-active {
     background: #321fdb;
     color: #fff
-}
+} */
 
 .btn:not([class*=ghost]):not([class*=link]):not([class*=outline]):not([class*=transparent]) {
     border: 0;

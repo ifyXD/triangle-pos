@@ -38,8 +38,13 @@
                                         <div class="form-group">
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
-                                                @foreach(\Modules\People\Entities\Customer::all() as $customer)
-                                                    <option {{ $sale->customer_id == $customer->id ? 'selected' : '' }} value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                                                @foreach(\Modules\People\Entities\Customer::when(auth()->user()->hasRole('Super Admin'), function ($query) {
+                                                    // If the user has the "Super Admin" role, retrieve all suppliers
+                                                }, function ($query) {
+                                                    // If not "Super Admin," filter suppliers by user_id
+                                                    $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
+                                                })->orderBy('customer_name')->get() as $customer)
+                                                    <option value="{{ $customer->id }}">{{ Str::ucfirst($customer->customer_name) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -63,7 +68,7 @@
                                         <label for="status">Status <span class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status" required>
                                             <option {{ $sale->status == 'Pending' ? 'selected' : '' }} value="Pending">Pending</option>
-                                            <option {{ $sale->status == 'Shipped' ? 'selected' : '' }} value="Shipped">Shipped</option>
+                                            {{-- <option {{ $sale->status == 'Shipped' ? 'selected' : '' }} value="Shipped">Shipped</option> --}}
                                             <option {{ $sale->status == 'Completed' ? 'selected' : '' }} value="Completed">Completed</option>
                                         </select>
                                     </div>
@@ -79,7 +84,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paid_amount">Amount Received <span class="text-danger">*</span></label>
-                                        <input id="paid_amount" type="text" class="form-control" name="paid_amount" required value="{{ $sale->paid_amount }}" readonly>
+                                        <input id="paid_amount" type="text" class="form-control" name="paid_amount" required value="{{ $sale->paid_amount }}">
                                     </div>
                                 </div>
                             </div>

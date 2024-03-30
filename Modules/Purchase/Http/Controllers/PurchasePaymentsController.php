@@ -12,6 +12,13 @@ use Modules\Purchase\Entities\PurchasePayment;
 
 class PurchasePaymentsController extends Controller
 {
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
 
     public function index($purchase_id, PurchasePaymentsDataTable $dataTable) {
         abort_if(Gate::denies('access_purchase_payments'), 403);
@@ -23,8 +30,8 @@ class PurchasePaymentsController extends Controller
 
 
     public function create($purchase_id) {
-        abort_if(Gate::denies('access_purchase_payments'), 403);
-
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+        $this->checkPermission('access_purchase_payments');
         $purchase = Purchase::findOrFail($purchase_id);
 
         return view('purchase::payments.create', compact('purchase'));
@@ -32,8 +39,8 @@ class PurchasePaymentsController extends Controller
 
 
     public function store(Request $request) {
-        abort_if(Gate::denies('access_purchase_payments'), 403);
-
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+        $this->checkPermission('access_purchase_payments');
         $request->validate([
             'date' => 'required|date',
             'reference' => 'required|string|max:255',
@@ -80,7 +87,8 @@ class PurchasePaymentsController extends Controller
 
 
     public function edit($purchase_id, PurchasePayment $purchasePayment) {
-        abort_if(Gate::denies('access_purchase_payments'), 403);
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+        $this->checkPermission('access_purchase_payments');
 
         $purchase = Purchase::findOrFail($purchase_id);
 
@@ -89,7 +97,8 @@ class PurchasePaymentsController extends Controller
 
 
     public function update(Request $request, PurchasePayment $purchasePayment) {
-        abort_if(Gate::denies('access_purchase_payments'), 403);
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+        $this->checkPermission('access_purchase_payments');
 
         $request->validate([
             'date' => 'required|date',
@@ -136,7 +145,8 @@ class PurchasePaymentsController extends Controller
 
 
     public function destroy(PurchasePayment $purchasePayment) {
-        abort_if(Gate::denies('access_purchase_payments'), 403);
+        // abort_if(Gate::denies('access_purchase_payments'), 403);
+        $this->checkPermission('access_purchase_payments');
 
         $purchasePayment->delete();
 

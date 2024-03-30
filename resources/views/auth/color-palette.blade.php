@@ -1,8 +1,8 @@
 @extends('auth.requirements-registration')
 @section('title', 'Pub Market Registration')
-@section('content') 
+@section('content')
     <section>
-        <div class="">
+        <div class="mt-5">
             <button type="button" id="btn_backpallete" class="btn btn-outline-dark border-dark">Back</button>
             <h1 class="display-1"><strong>Choose</strong> a Pre-made Palette</h1>
             <p></p>
@@ -31,26 +31,26 @@
                         ['--color-39', '--color-0', '--color-40'],
                     ];
                     $val = [
-                        ['#38383B', '#F0F5F4', '#A1A1A1'],
-                        ['#79DFC1', '#F0F5F4', '#B04A68'],
-                        ['#0A58CA', '#F0F5F4', '#ff00bb'],
-                        ['#E36FF7', '#F0F5F4', '#233D4D'],
-                        ['#E17726', '#F0F5F4', '#51344D'],
-                        ['#0F5132', '#F0F5F4', '#A38F99'],
-                        ['#3DD5F3', '#F0F5F4', '#B73B23'],
-                        ['#6610F2', '#F0F5F4', '#C97064'],
-                        ['#E56B6B', '#F0F5F4', '#4C5B5C'],
-                        ['#DFA400', '#F0F5F4', '#203878'],
-                        ['#6CB14F', '#F0F5F4', '#114B5F'],
-                        ['#6EA8FE', '#F0F5F4', '#474973'],
-                        ['#6F42C1', '#F0F5F4', '#114B5F'],
-                        ['#8B1E3F', '#F0F5F4', '#23395B'],
-                        ['#FAB803', '#F0F5F4', '#1A1423'],
-                        ['#20C997', '#F0F5F4', '#426A5A'],
-                        ['#0AA2C0', '#F0F5F4', '#DBB4AC'],
-                        ['#A370F7', '#F0F5F4', '#504746'],
-                        ['#DE6528', '#F0F5F4', '#1100FF'],
-                        ['#B99253', '#F0F5F4', '#495867'],
+                        ['#575787', '#F0F5F4', '#33333d'],
+                        ['#8CE4CC', '#F0F5F4', '#8D314B'],
+                        ['#0D74DC', '#F0F5F4', '#e800a8'],
+                        ['#F3A1FC', '#F0F5F4', '#1E3243'],
+                        ['#F19553', '#F0F5F4', '#402B41'],
+                        ['#196D49', '#F0F5F4', '#8B7D88'],
+                        ['#68DFF9', '#F0F5F4', '#97311E'],
+                        ['#7923E4', '#F0F5F4', '#B55D4F'],
+                        ['#E87979', '#F0F5F4', '#3F4E4F'],
+                        ['#E9BB00', '#F0F5F4', '#1C3B68'],
+                        ['#7FD462', '#F0F5F4', '#0C4258'],
+                        ['#7FBDFE', '#F0F5F4', '#3B3C58'],
+                        ['#7D52C8', '#F0F5F4', '#0C4258'],
+                        ['#9D2C52', '#F0F5F4', '#1F3352'],
+                        ['#FDD60F', '#F0F5F4', '#181229'],
+                        ['#34D6AC', '#F0F5F4', '#385D51'],
+                        ['#17B8D4', '#F0F5F4', '#AC7D74'],
+                        ['#B489F9', '#F0F5F4', '#46403A'],
+                        ['#E26F31', '#F0F5F4', '#0000e6'],
+                        ['#C3A67B', '#F0F5F4', '#3C485E'],
                     ];
                 @endphp
 

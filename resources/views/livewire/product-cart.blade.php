@@ -94,7 +94,7 @@
         <div class="col-md-4">
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <tr>
+                    {{-- <tr>
                         <th>Tax ({{ $global_tax }}%)</th>
                         <td>(+) {{ format_currency(Cart::instance($cart_instance)->tax()) }}</td>
                     </tr>
@@ -106,7 +106,7 @@
                         <th>Shipping</th>
                         <input type="hidden" value="{{ $shipping }}" name="shipping_amount">
                         <td>(+) {{ format_currency($shipping) }}</td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>Grand Total</th>
                         @php
@@ -123,7 +123,7 @@
 
     <input type="hidden" name="total_amount" value="{{ $total_with_shipping }}">
 
-    <div class="form-row">
+    {{-- <div class="form-row">
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="tax_percentage">Tax (%)</label>
@@ -142,5 +142,5 @@
                 <input wire:model.blur="shipping" type="number" class="form-control" name="shipping_amount" min="0" value="0" required step="0.01">
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

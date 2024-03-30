@@ -18,7 +18,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->unsignedBigInteger('purchase_id');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('product_name');
-            $table->string('product_code');
+            $table->string('product_code')->nullable();
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('unit_price');
@@ -26,10 +26,11 @@ class CreatePurchaseDetailsTable extends Migration
             $table->integer('product_discount_amount');
             $table->string('product_discount_type')->default('fixed');
             $table->integer('product_tax_amount');
-            $table->foreign('purchase_id')->references('id')
-                ->on('purchases')->cascadeOnDelete();
+            $table->foreign('purchase_id')->references('id')->on('purchases')->cascadeOnDelete();
             $table->foreign('product_id')->references('id')
                 ->on('products')->nullOnDelete();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

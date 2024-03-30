@@ -68,6 +68,14 @@ nav .logo a,
     line-height: normal;
 }
 
+nav .logo a:hover,
+.menu ul li a:hover {
+    color: #D5A076;
+}
+
+
+
+
 .menu {
     position: absolute;
     left: 50%;
@@ -93,7 +101,14 @@ nav .logo a,
     font-style: normal;
     font-weight: 500;
     line-height: 28px;
+    transition: .1s ease;
 }
+
+.login a:hover {
+    color: #D5A076;
+}
+
+
 
 .login,
 .start-free {
@@ -105,6 +120,8 @@ nav .logo a,
     border-radius: 8px;
     background: #D5A076;
 }
+
+
 
 .login a {
     color: #000;
@@ -221,6 +238,7 @@ section {
     flex: 1 0 0;
     border-radius: 8px;
     background: #D5A076;
+    transition: .1s ease;
 }
 
 .cta-container .start-now a {
@@ -230,6 +248,11 @@ section {
     line-height: 28px;
 }
 
+.near-footer-button:hover,
+.start-free:hover,
+.cta-container .start-now:hover {
+         transform: translateY(-3px);
+}
 
 
 
@@ -351,6 +374,7 @@ figure {
     gap: 10px;
     border-radius: 8px;
     background: #D5A076;
+    transition: .1s ease;
 }
 
 .near-footer-button a {
@@ -452,6 +476,10 @@ footer section .container .social-links a {
     font-size: 25px;
 }
 
+footer section .container .social-links a:hover {
+    color: #D5A076;
+    font-size: 25px;
+}
 
 
 
@@ -665,7 +693,7 @@ footer section .container .social-links a {
     nav {
         max-width: 1280px;
         padding: 0 15px;
-        background: green;
+        /* background: green; */
         margin: 0 auto;
     }
 
@@ -681,16 +709,26 @@ footer section .container .social-links a {
 
     #nav-magic1.other-class,
     #nav-magic2.other-class {
-        display: block;
+         display: block;
+         position: absolute;
+         top: 100%;
     }
 
 
+    .menu ul li {
+        display: block;
+    }
 
+    .menu ul li {
+        padding: 20px 0;
+        background: #f3f4f6;
+        width: 100vw;
+        text-align: center;
+    }
 
-
-
-
-
+    .menu ul li:nth-child(n+2) {
+        padding-top: 0;
+    }
 
 
 
@@ -783,7 +821,7 @@ footer section .container .social-links a {
 
     #nav-magic1.other-class,
     #nav-magic2.other-class {
-        display: block;
+        /* display: block; */
     }
 
 }

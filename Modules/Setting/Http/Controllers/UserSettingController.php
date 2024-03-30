@@ -3,6 +3,7 @@
 namespace Modules\Setting\Http\Controllers;
 
 use App\Models\ThemeSetting;
+use App\Models\UserPermission;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Setting;
@@ -23,9 +24,11 @@ class UserSettingController extends Controller
         } else {
             // If not "Super Admin," filter units by user_id
             $settings = Setting::where('user_id', $user->id)->first();
+            $userpermissions = UserPermission::where('user_id', $user->id)->get();
+
         }
 
-        return view('setting::user-system-settings.index', compact('settings'));
+        return view('setting::user-system-settings.index', compact('settings','userpermissions'));
     }
     public function update(Request $request)
     {

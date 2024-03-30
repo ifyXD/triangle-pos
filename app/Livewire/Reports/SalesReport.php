@@ -4,6 +4,7 @@ namespace App\Livewire\Reports;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\People\Entities\Customer;
 use Modules\Sale\Entities\Sale;
 
 class SalesReport extends Component
@@ -26,7 +27,7 @@ class SalesReport extends Component
     ];
 
     public function mount($customers) {
-        $this->customers = $customers;
+        $this->customers = Customer::where('user_id', auth()->user()->id)->get();
         $this->start_date = today()->subDays(30)->format('Y-m-d');
         $this->end_date = today()->format('Y-m-d');
         $this->customer_id = '';
@@ -35,7 +36,7 @@ class SalesReport extends Component
     }
 
     public function render() {
-        $sales = Sale::whereDate('date', '>=', $this->start_date)
+        $sales = Sale::where('user_id', auth()->user()->id)->whereDate('date', '>=', $this->start_date)
             ->whereDate('date', '<=', $this->end_date)
             ->when($this->customer_id, function ($query) {
                 return $query->where('customer_id', $this->customer_id);

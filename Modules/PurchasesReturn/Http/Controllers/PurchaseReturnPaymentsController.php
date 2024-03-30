@@ -13,8 +13,9 @@ use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 class PurchaseReturnPaymentsController extends Controller
 {
 
-    public function index($purchase_return_id, PurchaseReturnPaymentsDataTable $dataTable) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
+    public function index($purchase_return_id, PurchaseReturnPaymentsDataTable $dataTable)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403);
 
         $purchase_return = PurchaseReturn::findOrFail($purchase_return_id);
 
@@ -22,8 +23,10 @@ class PurchaseReturnPaymentsController extends Controller
     }
 
 
-    public function create($purchase_return_id) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
+    public function create($purchase_return_id)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403);
+        $this->checkPermission('access_purchase_return_payments');
 
         $purchase_return = PurchaseReturn::findOrFail($purchase_return_id);
 
@@ -31,9 +34,10 @@ class PurchaseReturnPaymentsController extends Controller
     }
 
 
-    public function store(Request $request) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
-
+    public function store(Request $request)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403);
+        $this->checkPermission('access_purchase_return_payments');
         $request->validate([
             'date' => 'required|date',
             'reference' => 'required|string|max:255',
@@ -79,18 +83,20 @@ class PurchaseReturnPaymentsController extends Controller
     }
 
 
-    public function edit($purchase_return_id, PurchaseReturnPayment $purchaseReturnPayment) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
-
+    public function edit($purchase_return_id, PurchaseReturnPayment $purchaseReturnPayment)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403);
+        $this->checkPermission('access_purchase_return_payments');
         $purchase_return = PurchaseReturn::findOrFail($purchase_return_id);
 
         return view('purchasesreturn::payments.edit', compact('purchaseReturnPayment', 'purchase_return'));
     }
 
 
-    public function update(Request $request, PurchaseReturnPayment $purchaseReturnPayment) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
-
+    public function update(Request $request, PurchaseReturnPayment $purchaseReturnPayment)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403);
+        $this->checkPermission('access_purchase_return_payments');
         $request->validate([
             'date' => 'required|date',
             'reference' => 'required|string|max:255',
@@ -135,9 +141,11 @@ class PurchaseReturnPaymentsController extends Controller
     }
 
 
-    public function destroy(PurchaseReturnPayment $purchaseReturnPayment) {
-        abort_if(Gate::denies('access_purchase_return_payments'), 403);
-
+    public function destroy(PurchaseReturnPayment $purchaseReturnPayment)
+    {
+        // abort_if(Gate::denies('access_purchase_return_payments'), 403); 
+        $this->checkPermission('access_purchase_return_payments');
+        $purchase_return->delete();
         $purchaseReturnPayment->delete();
 
         toast('Purchase Return Payment Deleted!', 'warning');

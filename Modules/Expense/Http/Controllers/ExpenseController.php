@@ -13,22 +13,28 @@ use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Exp;
 class ExpenseController extends Controller
 {
 
-    public function index(ExpensesDataTable $dataTable) {
-        abort_if(Gate::denies('access_expenses'), 403);
+    public function index(ExpensesDataTable $dataTable)
+    {
+        // abort_if(Gate::denies('access_expenses'), 403);
+        $this->checkPermission('access_expenses');
 
         return $dataTable->render('expense::expenses.index');
     }
 
 
-    public function create() {
-        abort_if(Gate::denies('create_expenses'), 403);
+    public function create()
+    {
+        // abort_if(Gate::denies('create_expenses'), 403);
+        $this->checkPermission('create_expenses');
 
         return view('expense::expenses.create');
     }
 
 
-    public function store(Request $request) {
-        abort_if(Gate::denies('create_expenses'), 403);
+    public function store(Request $request)
+    {
+        // abort_if(Gate::denies('create_expenses'), 403);
+        $this->checkPermission('create_expenses');
 
         $request->validate([
             'date' => 'required|date',
@@ -52,15 +58,22 @@ class ExpenseController extends Controller
     }
 
 
-    public function edit(Expense $expense) {
-        abort_if(Gate::denies('edit_expenses'), 403);
+    public function edit(Expense $expense)
+    {
+        // abort_if(Gate::denies('edit_expenses'), 403);
+        $this->checkPermission('edit_expenses');
 
         return view('expense::expenses.edit', compact('expense'));
     }
 
 
-    public function update(Request $request, Expense $expense) {
-        abort_if(Gate::denies('edit_expenses'), 403);
+    public function update(Request $request, Expense $expense)
+    {
+        // abort_if(Gate::denies('edit_expenses'), 403);
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission('edit_expenses')) {
+            abort(403, 'Unauthorized');
+        }
 
         $request->validate([
             'date' => 'required|date',
@@ -84,13 +97,22 @@ class ExpenseController extends Controller
     }
 
 
-    public function destroy(Expense $expense) {
-        abort_if(Gate::denies('delete_expenses'), 403);
+    public function destroy(Expense $expense)
+    {
+        // abort_if(Gate::denies('delete_expenses'), 403);
+        $this->checkPermission('delete_expenses');
 
         $expense->delete();
 
         toast('Expense Deleted!', 'warning');
 
         return redirect()->route('expenses.index');
+    }
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
     }
 }

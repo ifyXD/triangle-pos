@@ -1,6 +1,27 @@
 @extends('auth.requirements-registration')
 @section('title', 'Pub Market Registration')
 @section('content')
+
+    <style>
+
+
+
+        .container-fluid {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center; /* Center text within the h1 */
+            margin: 0;
+            padding-bottom: 40%;
+        }
+
+    </style>
+
+
     <div class="container-fluid">
         <form action="{{route('updaterequirements')}}" method="POST">
             @csrf

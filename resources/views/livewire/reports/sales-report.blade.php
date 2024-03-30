@@ -42,7 +42,7 @@
                                     <select wire:model="sale_status" class="form-control" name="sale_status">
                                         <option value="">Select Status</option>
                                         <option value="Pending">Pending</option>
-                                        <option value="Shipped">Shipped</option>
+                                        {{-- <option value="Shipped">Shipped</option> --}}
                                         <option value="Completed">Completed</option>
                                     </select>
                                 </div>

@@ -17,24 +17,35 @@ use Modules\PurchasesReturn\Http\Requests\UpdatePurchaseReturnRequest;
 
 class PurchasesReturnController extends Controller
 {
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
 
-    public function index(PurchaseReturnsDataTable $dataTable) {
+    public function index(PurchaseReturnsDataTable $dataTable)
+    {
         abort_if(Gate::denies('access_purchase_returns'), 403);
 
         return $dataTable->render('purchasesreturn::index');
     }
 
 
-    public function create() {
-        abort_if(Gate::denies('create_purchase_returns'), 403);
-
+    public function create()
+    {
+        // abort_if(Gate::denies('create_purchase_returns'), 403);
+        $this->checkPermission('create_purchase_returns');
         Cart::instance('purchase_return')->destroy();
 
         return view('purchasesreturn::create');
     }
 
 
-    public function store(StorePurchaseReturnRequest $request) {
+    public function store(StorePurchaseReturnRequest $request)
+    {
+        $this->checkPermission('create_purchase_returns');
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -109,18 +120,20 @@ class PurchasesReturnController extends Controller
     }
 
 
-    public function show(PurchaseReturn $purchase_return) {
-        abort_if(Gate::denies('show_purchase_returns'), 403);
-
+    public function show(PurchaseReturn $purchase_return)
+    {
+        // abort_if(Gate::denies('show_purchase_returns'), 403);
+        $this->checkPermission('show_purchase_returns');
         $supplier = Supplier::findOrFail($purchase_return->supplier_id);
 
         return view('purchasesreturn::show', compact('purchase_return', 'supplier'));
     }
 
 
-    public function edit(PurchaseReturn $purchase_return) {
-        abort_if(Gate::denies('edit_purchase_returns'), 403);
-
+    public function edit(PurchaseReturn $purchase_return)
+    {
+        // abort_if(Gate::denies('edit_purchase_returns'), 403);
+        $this->checkPermission('edit_purchase_returns');
         $purchase_return_details = $purchase_return->purchaseReturnDetails;
 
         Cart::instance('purchase_return')->destroy();
@@ -150,7 +163,9 @@ class PurchasesReturnController extends Controller
     }
 
 
-    public function update(UpdatePurchaseReturnRequest $request, PurchaseReturn $purchase_return) {
+    public function update(UpdatePurchaseReturnRequest $request, PurchaseReturn $purchase_return)
+    {
+        $this->checkPermission('edit_purchase_returns');
         DB::transaction(function () use ($request, $purchase_return) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -193,6 +208,7 @@ class PurchasesReturnController extends Controller
 
             foreach (Cart::instance('purchase_return')->content() as $cart_item) {
                 PurchaseReturnDetail::create([
+                    'user_id' => auth()->user()->id,
                     'purchase_return_id' => $purchase_return->id,
                     'product_id' => $cart_item->id,
                     'product_name' => $cart_item->name,
@@ -204,6 +220,7 @@ class PurchasesReturnController extends Controller
                     'product_discount_amount' => $cart_item->options->product_discount * 100,
                     'product_discount_type' => $cart_item->options->product_discount_type,
                     'product_tax_amount' => $cart_item->options->product_tax * 100,
+
                 ]);
 
                 if ($request->status == 'Shipped' || $request->status == 'Completed') {
@@ -223,9 +240,10 @@ class PurchasesReturnController extends Controller
     }
 
 
-    public function destroy(PurchaseReturn $purchase_return) {
-        abort_if(Gate::denies('delete_purchase_returns'), 403);
-
+    public function destroy(PurchaseReturn $purchase_return)
+    {
+        // abort_if(Gate::denies('delete_purchase_returns'), 403);
+        $this->checkPermission('delete_purchase_returns');
         $purchase_return->delete();
 
         toast('Purchase Return Deleted!', 'warning');

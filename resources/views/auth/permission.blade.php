@@ -5,13 +5,14 @@
         <div class="card">
             <div class="card-body">
 
-                 
+
                 <div class="form-group">
                     <label for="permissions"> Permissions <span class="text-danger">*</span>
                     </label>
 
                     <button type="button" class="btn btn-primary float-right mr-2" id="permissionBtnFunc">Continue</button>
-                    <button type="button" class="btn btn-outlined-dark border-dark float-right mr-2" id="backBtnpermission">Back</button>
+                    <button type="button" class="btn btn-outlined-dark border-dark float-right mr-2"
+                        id="backBtnpermission">Back</button>
 
                 </div>
 
@@ -280,62 +281,52 @@
                         </div>
 
                         <!-- Suppliers Permission -->
-                        {{-- <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="card h-100 border-0 shadow">
-                        <div class="card-header">
-                            Suppliers
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="access_suppliers" name="permissions[]"
-                                            value="access_suppliers">
-                                        <label class="custom-control-label"
-                                            for="access_suppliers">Access</label>
-                                    </div>
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-header">
+                                    Suppliers
                                 </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="create_suppliers" name="permissions[]"
-                                            value="create_suppliers">
-                                        <label class="custom-control-label"
-                                            for="create_suppliers">Create</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="show_suppliers" name="permissions[]"
-                                            value="show_suppliers">
-                                        <label class="custom-control-label"
-                                            for="show_suppliers">View</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="edit_suppliers" name="permissions[]"
-                                            value="edit_suppliers">
-                                        <label class="custom-control-label"
-                                            for="edit_suppliers">Edit</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="delete_customers" name="permissions[]"
-                                            value="delete_customers">
-                                        <label class="custom-control-label"
-                                            for="delete_customers">Delete</label>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_suppliers" name="permissions[]" value="37">
+                                                <label class="custom-control-label" for="access_suppliers">Access</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="create_suppliers" name="permissions[]" value="38">
+                                                <label class="custom-control-label" for="create_suppliers">Create</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="show_suppliers" name="permissions[]" value="39">
+                                                <label class="custom-control-label" for="show_suppliers">View</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="edit_suppliers" name="permissions[]" value="40">
+                                                <label class="custom-control-label" for="edit_suppliers">Edit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="delete_customers" name="permissions[]" value="41">
+                                                <label class="custom-control-label" for="delete_customers">Delete</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
 
                         <!-- Sales Permission -->
                         <div class="col-lg-4 col-md-6 mb-3">
@@ -581,7 +572,7 @@
                         </div>
 
                         <!-- Currencies Permission -->
-                        <div class="col-lg-4 col-md-6 mb-3">
+                        {{-- <div class="col-lg-4 col-md-6 mb-3">
                             <div class="card h-100 border-0 shadow">
                                 <div class="card-header">
                                     Currencies
@@ -619,7 +610,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- Reports -->
                         <div class="col-lg-4 col-md-6 mb-3">

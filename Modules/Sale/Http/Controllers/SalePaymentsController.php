@@ -13,9 +13,16 @@ use Modules\Sale\Entities\SalePayment;
 
 class SalePaymentsController extends Controller
 {
-
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
     public function index($sale_id, SalePaymentsDataTable $dataTable) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
 
         $sale = Sale::findOrFail($sale_id);
 
@@ -24,7 +31,8 @@ class SalePaymentsController extends Controller
 
 
     public function create($sale_id) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
 
         $sale = Sale::findOrFail($sale_id);
 
@@ -33,7 +41,8 @@ class SalePaymentsController extends Controller
 
 
     public function store(Request $request) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
 
         $request->validate([
             'date' => 'required|date',
@@ -81,7 +90,8 @@ class SalePaymentsController extends Controller
 
 
     public function edit($sale_id, SalePayment $salePayment) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
 
         $sale = Sale::findOrFail($sale_id);
 
@@ -90,8 +100,8 @@ class SalePaymentsController extends Controller
 
 
     public function update(Request $request, SalePayment $salePayment) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
-
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
         $request->validate([
             'date' => 'required|date',
             'reference' => 'required|string|max:255',
@@ -137,7 +147,8 @@ class SalePaymentsController extends Controller
 
 
     public function destroy(SalePayment $salePayment) {
-        abort_if(Gate::denies('access_sale_payments'), 403);
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_payments');
 
         $salePayment->delete();
 

@@ -17,8 +17,16 @@ use Modules\Sale\Http\Requests\StorePosSaleRequest;
 
 class PosController extends Controller
 {
-
+    protected function checkPermission($permissionName)
+    {
+        $user = auth()->user();
+        if (!$user->hasAccessToPermission($permissionName)) {
+            abort(403, 'Unauthorized');
+        }
+    }
     public function index() {
+        $this->checkPermission('create_pos_sales');
+
         Cart::instance('sale')->destroy();
 
         $customers = Customer::all();
