@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-
-
 Route::get('/', function () {
     return view('layouts.home.index');
 })->middleware('guest');
@@ -44,9 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/registration-requirements-permission', [HomeController::class, 'permission'])->name('registration.requirements-permission');
         Route::get('/registration-requirements-colorpallete', [HomeController::class, 'colorpallete'])->name('registration.requirements-colorpallete');
     });
-
-
-    
 
     Route::post('/update-requirements', [HomeController::class, 'updaterequirements'])->name('updaterequirements');
     Route::post('/update-session/registration-requirements', [HomeController::class, 'updateSession']);

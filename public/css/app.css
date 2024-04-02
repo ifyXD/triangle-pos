@@ -10587,7 +10587,7 @@ html:not([dir=rtl]) .c-sidebar-nav-icon:first-child {
 
 .c-sidebar-nav-dropdown {
     position: relative;
-    transition: background .3s ease-in-out
+    transition: background .3s ease-in-out;
 }
 
 .c-sidebar-nav-dropdown.c-show>.c-sidebar-nav-dropdown-items {
@@ -10956,7 +10956,7 @@ html:not([dir=rtl]) .c-sidebar-right .c-sidebar-minimizer:before {
     }
 
     .c-sidebar-minimized .c-sidebar-nav>.c-sidebar-nav-dropdown {
-        position: relative
+        position: relative;
     }
 
     .c-sidebar-minimized .c-sidebar-nav>.c-sidebar-nav-dropdown>.c-sidebar-nav-dropdown-items,
@@ -11943,7 +11943,7 @@ html:not([dir=rtl]) .c-sidebar.c-sidebar-show.c-sidebar-right {
 
 .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-dropdown-toggle,
 .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-link {
-    background: #321fdb
+    background: #321fdb;
 }
 
 .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-dropdown-toggle .c-sidebar-nav-icon,

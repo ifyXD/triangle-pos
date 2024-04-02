@@ -40,6 +40,8 @@
 
         }
 
+        .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover.c-sidebar-nav-dropdown-toggle:hover,
+        .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-link:hover,
         .c-sidebar .c-sidebar-nav-dropdown-toggle:hover,
         .c-sidebar .c-sidebar-nav-link:hover {
             background: {{ $thirdValue }};
