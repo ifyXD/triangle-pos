@@ -26,6 +26,7 @@
         .c-main {
             background-color: {{ $secondValue }} !important;
         }
+
         .btn-primary {
             background-color: {{ $thirdValue }} !important;
         }
@@ -54,6 +55,18 @@
             background: {{ $thirdValue }};
             color: #fff
         }
+
+        a {
+            color: {{ $firstValue }};
+            text-decoration: none !important;
+        }
+
+        a:hover {
+            color: {{ $thirdValue }};
+        }
+
+
+
     </style>
 </head>
 
