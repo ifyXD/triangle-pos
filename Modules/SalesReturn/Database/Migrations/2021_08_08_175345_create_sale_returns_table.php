@@ -21,7 +21,7 @@ class CreateSaleReturnsTable extends Migration
             $table->string('customer_name');
             $table->integer('tax_percentage')->nullable()->default(0);
             $table->integer('tax_amount')->default(0);
-            $table->integer('discount_percentage')->default(0);
+            $table->integer('discount_percentage')->nullable()->default(0)->default(0);
             $table->integer('discount_amount')->nullable()->default(0);
             $table->integer('shipping_amount')->nullable()->default(0);
             $table->integer('total_amount');
