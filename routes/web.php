@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartiesController;
@@ -52,6 +54,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/payment-flow/chart-data', 'HomeController@paymentChart')->name('payment-flow.chart');
 });
 
+
+
+
 Route::resources([
     'expense' => ExpenseController::class,
     'parties' => PartiesController::class,
@@ -61,4 +66,8 @@ Route::resources([
     'sale' => SaleController::class,
     'stock' => StockAdjustmentController::class,
     'user' => UserManagementController::class,
+
+    'about' => AboutController::class,
+    'contact' => ContactController::class
+
 ]);

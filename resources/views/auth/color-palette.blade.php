@@ -105,7 +105,7 @@
 
             </div>
             <div class="d-flex justify-content-end">
-                <button id="paletteBtnSubmit" disabled class="btn btn-success rounded-pill w-100 fs-5">Proceed</button>
+                <button id="paletteBtnSubmit" disabled class="progress-button btn btn-success rounded-pill fs-5">Proceed</button>
             </div>
 
 

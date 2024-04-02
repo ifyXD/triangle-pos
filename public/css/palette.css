@@ -25,70 +25,26 @@ a {
 
     --color-0: #F0F5F4;
 
-
-
-    /*--color-1: #38383B;     --color-2: #a1a1ab;*/
-    /*--color-3: #79DFC1;     --color-4: #B04A68;*/
-    /*--color-5: #0A58CA;     --color-6: #ff00bb;*/
-    /*--color-7: #E36FF7;     --color-8: #233D4D;*/
-    /*--color-9: #E17726;     --color-10: #51344D;*/
-    /*--color-11: #0F5132;    --color-12: #A38F99;*/
-    /*--color-13: #3DD5F3;    --color-14: #B73B23;*/
-    /*--color-15: #6610F2;    --color-16: #C97064;*/
-    /*--color-17: #E56B6B;    --color-18: #4C5B5C;*/
-    /*--color-19: #DFA400;    --color-20: #203878;*/
-    /*--color-21: #6CB14F;    --color-22: #114B5F;*/
-    /*--color-23: #6EA8FE;    --color-24: #474973;*/
-    /*--color-25: #6F42C1;    --color-26: #114B5F;*/
-    /*--color-27: #8B1E3F;    --color-28: #23395B;*/
-    /*--color-29: #FAB803;    --color-30: #1A1423;*/
-    /*--color-31: #20C997;    --color-32: #426A5A;*/
-    /*--color-33: #0AA2C0;    --color-34: #DBB4AC;*/
-    /*--color-35: #A370F7;    --color-36: #504746;*/
-    /*--color-37: #DE6528;    --color-38: #1100ff;*/
-    /*--color-39: #B99253;    --color-40: #495867;*/
-
-
-    --color-1: #575787;   /* Lighter shade of #3c3c6e */
-    --color-2: #33333d;   /* Darker shade of #414145 */
-    --color-3: #8CE4CC;   /* Lighter shade of #79DFC1 */
-    --color-4: #8D314B;   /* Darker shade of #B04A68 */
-    --color-5: #0D74DC;   /* Lighter shade of #0A58CA */
-    --color-6: #e800a8;   /* Darker shade of #ff00bb */
-    --color-7: #F3A1FC;   /* Lighter shade of #E36FF7 */
-    --color-8: #1E3243;   /* Darker shade of #233D4D */
-    --color-9: #F19553;   /* Lighter shade of #E17726 */
-    --color-10: #402B41;  /* Darker shade of #51344D */
-    --color-11: #196D49;  /* Lighter shade of #0F5132 */
-    --color-12: #8B7D88;  /* Darker shade of #A38F99 */
-    --color-13: #68DFF9;  /* Lighter shade of #3DD5F3 */
-    --color-14: #97311E;  /* Darker shade of #B73B23 */
-    --color-15: #7923E4;  /* Lighter shade of #6610F2 */
-    --color-16: #B55D4F;  /* Darker shade of #C97064 */
-    --color-17: #E87979;  /* Lighter shade of #E56B6B */
-    --color-18: #3F4E4F;  /* Darker shade of #4C5B5C */
-    --color-19: #E9BB00;  /* Lighter shade of #DFA400 */
-    --color-20: #1C3B68;  /* Darker shade of #203878 */
-    --color-21: #7FD462;  /* Lighter shade of #6CB14F */
-    --color-22: #0C4258;  /* Darker shade of #114B5F */
-    --color-23: #7FBDFE;  /* Lighter shade of #6EA8FE */
-    --color-24: #3B3C58;  /* Darker shade of #474973 */
-    --color-25: #7D52C8;  /* Lighter shade of #6F42C1 */
-    --color-26: #0C4258;  /* Darker shade of #114B5F */
-    --color-27: #9D2C52;  /* Lighter shade of #8B1E3F */
-    --color-28: #1F3352;  /* Darker shade of #23395B */
-    --color-29: #FDD60F;  /* Lighter shade of #FAB803 */
-    --color-30: #181229;  /* Darker shade of #1A1423 */
-    --color-31: #34D6AC;  /* Lighter shade of #20C997 */
-    --color-32: #385D51;  /* Darker shade of #426A5A */
-    --color-33: #17B8D4;  /* Lighter shade of #0AA2C0 */
-    --color-34: #AC7D74;  /* Darker shade of #DBB4AC */
-    --color-35: #B489F9;  /* Lighter shade of #A370F7 */
-    --color-36: #46403A;  /* Darker shade of #504746 */
-    --color-37: #E26F31;  /* Lighter shade of #DE6528 */
-    --color-38: #0000e6;  /* Darker shade of #1100ff */
-    --color-39: #C3A67B;  /* Lighter shade of #B99253 */
-    --color-40: #3C485E;  /* Darker shade of #495867 */
+    --color-1: #575787;     --color-2: #33333d;
+    --color-3: #8CE4CC;     --color-4: #8D314B;
+    --color-5: #0D74DC;     --color-6: #e800a8;
+    --color-7: #F3A1FC;     --color-8: #1E3243;
+    --color-9: #F19553;     --color-10: #402B41;
+    --color-11: #196D49;    --color-12: #8B7D88;
+    --color-13: #68DFF9;    --color-14: #97311E;
+    --color-15: #7923E4;    --color-16: #B55D4F;
+    --color-17: #E87979;    --color-18: #3F4E4F;
+    --color-19: #E9BB00;    --color-20: #1C3B68;
+    --color-21: #7FD462;    --color-22: #0C4258;
+    --color-23: #7FBDFE;    --color-24: #3B3C58;
+    --color-25: #7D52C8;    --color-26: #0C4258;
+    --color-27: #9D2C52;    --color-28: #1F3352;
+    --color-29: #FDD60F;    --color-30: #181229;
+    --color-31: #34D6AC;    --color-32: #385D51;
+    --color-33: #17B8D4;    --color-34: #AC7D74;
+    --color-35: #B489F9;    --color-36: #46403A;
+    --color-37: #E26F31;    --color-38: #0000e6;
+    --color-39: #C3A67B;    --color-40: #3C485E;
 
 
 
@@ -211,55 +167,12 @@ a {
 
 
 
-
-/*html {*/
-/*    box-sizing: border-box;*/
-/*}*/
-
-/**,*/
-/**::before,*/
-/**::after {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    box-sizing: inherit;*/
-/*}*/
-
-/*html,*/
-/*body {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*}*/
-
-/*body {*/
-/*    background: #333;*/
-/*    color: #fff;*/
-/*    font-size: 22px;*/
-/*    font-family: Verdana, Geneva, Tahoma, sans-serif;*/
-/*    line-height: 1.6;*/
-/*    min-height: 100vh;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
+.progress-button {
+    width: 30%;
+    height: 64px;
+}
 
 
-/*.progressbar {*/
-/*    position: relative;*/
-/*    max-width: 500px;*/
-/*    width: 100%;*/
-/*    margin: 30px auto 0;*/
-/*    height: 30px;*/
-/*    background: #274545;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*span.progress {*/
-/*    position: absolute;*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    bottom: 0;*/
-/*    width: 0;*/
-/*    background: #326666;*/
-/*    transition: all 0.3s;*/
-/*}*/
+button {
+    border-radius: 30px !important;
+}

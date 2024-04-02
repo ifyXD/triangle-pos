@@ -1449,7 +1449,7 @@ html:not([dir=rtl]) .dropleft .dropdown-toggle-split:before {
 
 .btn.disabled,
 .btn:disabled {
-    opacity: .65
+    opacity: .65;
 }
 
 .btn:not(:disabled):not(.disabled) {
@@ -15244,7 +15244,7 @@ button.bg-gray-900:hover {
 }
 
 .justify-content-end {
-    justify-content: flex-end !important;
+    justify-content: center !important;
 }
 
 .justify-content-center {
@@ -16250,7 +16250,7 @@ html:not([dir=rtl]) .float-right {
 }
 
 .w-100 {
-    width: 100% !important
+    width: 100% !important;
 }
 
 .w-auto {

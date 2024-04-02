@@ -61,8 +61,8 @@
             <div class="menu" id="nav-magic1">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ url('about') }}">About</a></li>
+                    <li><a href="{{ url('contact') }}">Contact</a></li>
                 </ul>
             </div>
             <div id="nav-magic">
