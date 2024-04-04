@@ -41,6 +41,7 @@
 
         }
 
+
         .c-sidebar.c-sidebar-minimized .c-sidebar-nav>.c-sidebar-nav-dropdown:hover,
         .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-dropdown-toggle,
         .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item:hover>.c-sidebar-nav-link,

@@ -37,7 +37,7 @@
     --dark: #636f83;
     --color: #3c4b64;
     background-color: #ebedef;
-    color: #3c4b64
+    color: #3c4b64;
 }
 
 *,
@@ -11757,7 +11757,7 @@ html:not([dir=rtl]) .c-sidebar.c-sidebar-show.c-sidebar-right {
 
 .c-sidebar {
     background: #3c4b64;
-    color: #fff
+    color: #fff;
 }
 
 [dir=rtl] .c-sidebar.c-sidebar-right {
@@ -11798,12 +11798,12 @@ html:not([dir=rtl]) .c-sidebar.c-sidebar-show.c-sidebar-right {
 .c-sidebar .c-sidebar-nav-dropdown-toggle,
 .c-sidebar .c-sidebar-nav-link {
     background: transparent;
-    color: hsla(0, 0%, 100%, .8)
+    color: hsla(0, 0%, 100%, .8);
 }
 
 .c-sidebar .c-sidebar-nav-dropdown-toggle .c-sidebar-nav-icon,
 .c-sidebar .c-sidebar-nav-link .c-sidebar-nav-icon {
-    color: hsla(0, 0%, 100%, .5)
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,

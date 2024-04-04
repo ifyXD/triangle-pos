@@ -28,20 +28,20 @@
                             <figcaption>Product</figcaption>
                         </figure>
                     </a>
-                    <a href="{{ url('stock') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/stock.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Stock Adjustments</figcaption>
-                        </figure>
-                    </a>
-                    <a href="{{ url('purchase') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/purchases.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Purchases</figcaption>
-                        </figure>
-                    </a>
+{{--                    <a href="{{ url('stock') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/stock.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Stock Adjustments</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ url('purchase') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/purchases.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Purchases</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
                     <a href="{{ url('sale') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/sale.png') }}"
@@ -49,34 +49,34 @@
                             <figcaption>Sale</figcaption>
                         </figure>
                     </a>
-                    <a href="{{ url('expense') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/expense.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Expenses</figcaption>
-                        </figure>
-                    </a>
-                    <a href="{{ url('parties') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/party.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Parties</figcaption>
-                        </figure>
-                    </a>
-                    <a href="{{ url('reports') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/report.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Reports</figcaption>
-                        </figure>
-                    </a>
-                    <a href="{{ url('user') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/user.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>User Management</figcaption>
-                        </figure>
-                    </a>
+{{--                    <a href="{{ url('expense') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/expense.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Expenses</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ url('parties') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/party.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Parties</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ url('reports') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/report.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Reports</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
+{{--                    <a href="{{ url('user') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/user.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>User Management</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
                 </div>
 
 
@@ -89,7 +89,7 @@
             <div class="feature-text-content">
                 <p><strong>Imagine a vast collection of business apps at your disposal.</strong><br>
                     Got something to improve? There is an app for that.<br>
-                    No complexity, no cost, just a one-click install.</p>
+                    No complexity, no cost, just a one-click magic.</p>
                 <p>Each app simplifies a process and empowers more people.<br>
                     Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
             </div>

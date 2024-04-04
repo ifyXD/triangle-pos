@@ -72,7 +72,7 @@
             <div class="card">
                 <div class="form-header">
                     <h1>PUB MARKET</h1>
-                    <p>Create your account</p>
+                    <p>Recover your account</p>
                 </div>
                 <form class="login-form" action="{{ url('/password/email') }}" method="post">
                     @csrf
