@@ -31,6 +31,7 @@
             background-color: {{ $thirdValue }} !important;
         }
 
+        .c-sidebar.c-sidebar-minimized .c-sidebar-nav-item,
         .bg-primary {
             background-color: {{ $firstValue }} !important;
         }
