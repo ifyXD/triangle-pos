@@ -23,11 +23,18 @@
                 <div class="content">
                     <a href="{{ url('product') }}">
                         <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"
+                            <img class="img-thumbnail" src="{{ asset('images/homepage/pos.png') }}"
                                  alt="Product Picture">
-                            <figcaption>Product</figcaption>
+                            <figcaption>POS</figcaption>
                         </figure>
                     </a>
+{{--                    <a href="{{ url('product') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/product.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Product</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
 {{--                    <a href="{{ url('stock') }}">--}}
 {{--                        <figure>--}}
 {{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/stock.png') }}"--}}
@@ -42,13 +49,13 @@
 {{--                            <figcaption>Purchases</figcaption>--}}
 {{--                        </figure>--}}
 {{--                    </a>--}}
-                    <a href="{{ url('sale') }}">
-                        <figure>
-                            <img class="img-thumbnail" src="{{ asset('images/homepage/sale.png') }}"
-                                 alt="Product Picture">
-                            <figcaption>Sale</figcaption>
-                        </figure>
-                    </a>
+{{--                    <a href="{{ url('sale') }}">--}}
+{{--                        <figure>--}}
+{{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/sale.png') }}"--}}
+{{--                                 alt="Product Picture">--}}
+{{--                            <figcaption>Sale</figcaption>--}}
+{{--                        </figure>--}}
+{{--                    </a>--}}
 {{--                    <a href="{{ url('expense') }}">--}}
 {{--                        <figure>--}}
 {{--                            <img class="img-thumbnail" src="{{ asset('images/homepage/expense.png') }}"--}}
