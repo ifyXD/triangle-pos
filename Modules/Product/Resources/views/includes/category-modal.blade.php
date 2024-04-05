@@ -14,7 +14,7 @@
             <form action="{{ route('product-categories.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group hidden">
                         <label for="category_code">Category Code <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="category_code" required value="{{ $category_code }}">
                     </div>

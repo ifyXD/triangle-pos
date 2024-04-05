@@ -11,23 +11,20 @@
                 </div>
 
                 @forelse($products as $product)
-                    <div wire:click.prevent="selectProduct({{ $product }})" class="col-lg-4 col-md-6 col-xl-3"
-                         style="cursor: pointer;">
+                    <div wire:click.prevent="selectProduct({{ $product }})" class="col-lg-4 col-md-6 col-xl-3" style="cursor: pointer;">
                         <div class="card border-0 shadow h-100">
-                            <div class="position-relative" style="height: 200px; width: 100%; overflow: hidden;">
-                                <div style="background-image: url('{{ $product->getFirstMediaUrl('images') }}'); background-size: cover; height: 100%; width: 100%;"></div>
+                            <div class="position-relative" style="height: 50px; width: 100%; overflow: hidden;">
+{{--                                <div style="background-image: url('{{ $product->getFirstMediaUrl('images') }}'); background-size: cover; height: 100%; width: 100%;"></div>--}}
                                 <div class="badge badge-info mb-3 position-absolute" style="left:10px;top: 10px;">Stock: {{ $product->product_quantity }}</div>
                             </div>
 
                             <div class="card-body">
                                 <div class="mb-2">
-                                    <h6 style="font-size: 13px;"
+                                    <h6 style="font-size: 18px;"
                                         class="card-title mb-0">{{ $product->product_name }}</h6>
-                                    <span class="badge badge-success">
-                                    {{ $product->product_code }}
-                                </span>
+                                    <span class="badge badge-success">{{ $product->product_code }}</span>
                                 </div>
-                                <p class="card-text font-weight-bold">{{ format_currency($product->product_price) }}</p>
+                                <p style="font-size: 16px; text-align: end;" class="card-text font-weight-bold">{{ format_currency($product->product_price) }}</p>
                             </div>
                         </div>
                     </div>
@@ -39,6 +36,11 @@
                     </div>
                 @endforelse
             </div>
+
+
+
+
+
 
             <div @class(['mt-3' => $products->hasPages()])>
                 {{ $products->links() }}

@@ -6107,7 +6107,7 @@ html:not([dir=rtl]) .was-validated .custom-select:invalid {
     display: flex;
     flex-wrap: wrap;
     margin-left: -15px;
-    margin-right: -15px
+    margin-right: -15px;
 }
 
 .no-gutters {
@@ -6208,7 +6208,7 @@ html:not([dir=rtl]) .was-validated .custom-select:invalid {
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
-    width: 100%
+    width: 100%;
 }
 
 .col {
@@ -16419,7 +16419,7 @@ html:not([dir=rtl]) .mfe-2 {
 
 .mb-3,
 .my-3 {
-    margin-bottom: 1rem !important
+    /* margin-bottom: 1rem !important; */
 }
 
 .ml-3,
