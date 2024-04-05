@@ -92,7 +92,8 @@ class ProductCategoriesDataTable extends DataTable
     {
         return [
             Column::make('category_code')
-                ->addClass('hidden')
+                ->addClass('text-center')
+                ->printable(false)
                 ->searchable(true),
 
             Column::make('category_name')
