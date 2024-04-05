@@ -22,6 +22,8 @@
 
     <ul class="c-sidebar-nav">
         @include('layouts.menu')
+
+
         <div class="ps__rail-x" style="left: 0; bottom: 0;">
             <div class="ps__thumb-x" tabindex="0" style="left: 0; width: 0;"></div>
         </div>

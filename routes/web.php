@@ -16,10 +16,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {return view('layouts.home.index');})->middleware('guest');
-Route::get('/trial', function () {return view('auth.trial-register');})->middleware('guest');
-Route::get('/login', function () {return view('auth.login');})->middleware('guest');
-Route::get('/trial', function () {return view('auth.login');})->middleware('guest');
+/* GI SIMPLIFY NKO WAWAWAWAWA UWU */
+//Route::get('/', function () {return view('layouts.home.index');})->middleware('guest');
+//Route::get('/trial', function () {return view('auth.trial-register');})->middleware('guest');
+//Route::get('/login', function () {return view('auth.login');})->middleware('guest');
+//Route::get('/trial', function () {return view('auth.login');})->middleware('guest');
+
+
+Route::middleware('guest')->group(function () {
+    Route::view('/', 'layouts.home.index');
+    Route::view('/trial', 'auth.trial-register');
+    Route::view('/login', 'auth.login');
+    // If '/trial' and '/login' should point to the same view, keep only one of them
+});
+
+
+
 Auth::routes(['register' => true]);
 
 Route::get('/userlist', [HomeController::class, 'userlist']);
@@ -50,7 +62,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::resources([
-    'expense' => ExpenseController::class, 'parties' => PartiesController::class, 'product' => ProductController::class, 'purchase' => PurchaseController::class, 'reports' => ReportController::class, 'sale' => SaleController::class, 'stock' => StockAdjustmentController::class, 'user' => UserManagementController::class,
+//    'expense' => ExpenseController::class,
+//    'parties' => PartiesController::class,
+//    'product' => ProductController::class,
+//    'purchase' => PurchaseController::class,
+//    'reports' => ReportController::class,
+//    'sale' => SaleController::class,
+//    'stock' => StockAdjustmentController::class,
+//    'user' => UserManagementController::class,
 
     'about' => AboutController::class,
     'contact' => ContactController::class

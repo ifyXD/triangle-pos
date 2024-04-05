@@ -1,3 +1,12 @@
+<style>
+    .hidden {
+        display: none !important;
+    }
+
+</style>
+
+
+
 <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
     <i class="bi bi-list" style="font-size: 2rem;"></i>
 </button>
@@ -12,7 +21,7 @@
 <ul class="c-header-nav ml-auto mr-4">
     @can('create_pos_sales')
     <li class="c-header-nav-item mr-3">
-        <a class="btn btn-primary btn-pill {{ request()->routeIs('app.pos.index') ? 'disabled' : '' }}" href="{{ route('app.pos.index') }}">
+        <a class="btn btn-primary btn-pill {{ request()->routeIs('app.pos.index') ? 'hidden' : '' }}" href="{{ route('app.pos.index') }}">
             <i class="bi bi-cart mr-1"></i> POS System
         </a>
     </li>

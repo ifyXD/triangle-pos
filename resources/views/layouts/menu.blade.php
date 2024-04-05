@@ -253,14 +253,14 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->hasAccessToPermission('access_suppliers'))
+            {{--@if (auth()->user()->hasAccessToPermission('access_suppliers'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('suppliers.*') ? 'c-active' : '' }}"
                         href="{{ route('suppliers.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-people-fill" style="line-height: 1;"></i> Suppliers
                     </a>
                 </li>
-            @endif
+            @endif--}}
         </ul>
     </li>
 @endif
@@ -340,7 +340,7 @@
         </ul>
     </li>
 @endcan
- 
+
     <li  class="c-sidebar-nav-item c-sidebar-nav-dropdown">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
@@ -376,4 +376,4 @@
                 </li>
             </ul>
         @endif
-    </li> 
+    </li>

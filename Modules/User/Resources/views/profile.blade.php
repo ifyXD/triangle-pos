@@ -30,11 +30,12 @@
 
                             <div class="form-group">
                                 <label for="image">Profile Image <span class="text-danger">*</span></label>
-                                <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ auth()->user()->image == 'avatar.png' ?
-                                auth()->user()->getFirstMediaUrl('avatars') :
-                                asset(auth()->user()->image) }}" alt="Profile Image">
+                                <div style="width: 100px; height: 100px; overflow: hidden;" class="d-block mx-auto img-thumbnail mb-2 rounded-circle">
+                                    <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" src="{{ auth()->user()->image == 'avatar.png' ? auth()->user()->getFirstMediaUrl('avatars') : asset(auth()->user()->image) }}" alt="Profile Image">
+                                </div>
                                 <input id="image" type="file" name="image" data-max-file-size="500KB">
                             </div>
+
 
                             <div class="form-group">
                                 <label for="name">Name <span class="text-danger">*</span></label>
