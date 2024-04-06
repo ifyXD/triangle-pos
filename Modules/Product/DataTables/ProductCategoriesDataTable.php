@@ -19,7 +19,7 @@ class ProductCategoriesDataTable extends DataTable
             ->addColumn('action', function ($data) {
                 return view('product::categories.partials.actions', compact('data'));
             });
-         
+
     }
 
 
@@ -40,7 +40,7 @@ class ProductCategoriesDataTable extends DataTable
                     ->orWhere('user_id', 1);
             })
             ->orderBy('category_name');
-    } 
+    }
 
     public function html()
     {
@@ -64,7 +64,7 @@ class ProductCategoriesDataTable extends DataTable
         //         Button::make('reload')
         //             ->text('<i class="bi bi-arrow-repeat"></i> Reload')
         //     );
-        
+
 
 
 
@@ -100,23 +100,23 @@ class ProductCategoriesDataTable extends DataTable
             Column::make('category_name')
                 ->addClass('text-center')
                 ->searchable(true),
-    
+
             Column::make('products_count')
                 ->addClass('text-center')
                 ->searchable(false), // Assuming you don't want to search on products_count
-    
+
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center')
                 ->searchable(false), // Assuming you don't want to search on actions
-    
+
             Column::make('created_at')
                 ->visible(false)
                 ->searchable(false), // Assuming you don't want to search on created_at
         ];
     }
-    
+
 
     protected function filename(): string
     {

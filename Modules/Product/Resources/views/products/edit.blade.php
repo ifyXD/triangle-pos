@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-row">
-                                
+
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="barcode_symbology">Barcode Symbology <span class="text-danger">*</span></label>
