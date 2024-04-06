@@ -6099,7 +6099,7 @@ html:not([dir=rtl]) .was-validated .custom-select:invalid {
     .container-sm,
     .container-xl,
     .container-xxl {
-        max-width: 1320px
+        max-width: 1320px;
     }
 }
 

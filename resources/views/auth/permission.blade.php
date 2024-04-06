@@ -4,18 +4,11 @@
     <div class="col-12 mt-5 permissionForm">
         <div class="card">
             <div class="card-body">
-
-
                 <div class="form-group">
-                    <label for="permissions"> Permissions <span class="text-danger">*</span>
-                    </label>
-
+                    <label for="permissions"> Permissions <span class="text-danger">*</span></label>
                     <button type="button" class="btn btn-primary float-right mr-2" id="permissionBtnFunc">Continue</button>
-                    <button type="button" class="btn btn-outlined-dark border-dark float-right mr-2"
-                        id="backBtnpermission">Back</button>
-
+                    <button type="button" class="btn btn-outlined-dark border-dark float-right mr-2" id="backBtnpermission">Back</button>
                 </div>
-
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" checked class="custom-control-input" id="select-all">
@@ -32,41 +25,32 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_total_stats" name="permissions[]" value="3">
-                                                <label class="custom-control-label" for="show_total_stats">Total
-                                                    Stats</label>
+                                                <input type="checkbox" checked class="custom-control-input" id="show_total_stats" name="permissions[]" value="3">
+                                                <label class="custom-control-label" for="show_total_stats">Total Stats</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_notifications" name="permissions[]" value="7">
-                                                <label class="custom-control-label"
-                                                    for="show_notifications">Notifications</label>
+                                                <input type="checkbox" checked class="custom-control-input" id="show_notifications" name="permissions[]" value="7">
+                                                <label class="custom-control-label" for="show_notifications">Notifications</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_month_overview" name="permissions[]" value="4">
-                                                <label class="custom-control-label" for="show_month_overview">Month
-                                                    Overview</label>
+                                                <input type="checkbox" checked class="custom-control-input" id="show_month_overview" name="permissions[]" value="4">
+                                                <label class="custom-control-label" for="show_month_overview">Month Overview</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_weekly_sales_purchases" name="permissions[]" value="5">
+                                                <input type="checkbox" checked class="custom-control-input" id="show_weekly_sales_purchases" name="permissions[]" value="5">
                                                 <label class="custom-control-label" for="show_weekly_sales_purchases">Weekly Sales & Purchases</label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_monthly_cashflow" name="permissions[]" value="6">
-                                                <label class="custom-control-label" for="show_monthly_cashflow">Monthly
-                                                    Cashflow</label>
+                                                <input type="checkbox" checked class="custom-control-input" id="show_monthly_cashflow" name="permissions[]" value="6">
+                                                <label class="custom-control-label" for="show_monthly_cashflow">Monthly Cashflow</label>
                                             </div>
                                         </div>
                                     </div>
@@ -84,45 +68,38 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="access_products" name="permissions[]" value="8">
+                                                <input type="checkbox" checked class="custom-control-input" id="access_products" name="permissions[]" value="8">
                                                 <label class="custom-control-label" for="access_products">Access</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="show_products" name="permissions[]" value="10">
+                                                <input type="checkbox" checked class="custom-control-input" id="show_products" name="permissions[]" value="10">
                                                 <label class="custom-control-label" for="show_products">View</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="create_products" name="permissions[]" value="9">
+                                                <input type="checkbox" checked class="custom-control-input" id="create_products" name="permissions[]" value="9">
                                                 <label class="custom-control-label" for="create_products">Create</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="edit_products" name="permissions[]" value="11">
+                                                <input type="checkbox" checked class="custom-control-input" id="edit_products" name="permissions[]" value="11">
                                                 <label class="custom-control-label" for="edit_products">Edit</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="delete_products" name="permissions[]" value="12">
+                                                <input type="checkbox" checked class="custom-control-input" id="delete_products" name="permissions[]" value="12">
                                                 <label class="custom-control-label" for="delete_products">Delete</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" checked class="custom-control-input"
-                                                    id="access_product_categories" name="permissions[]" value="13">
-                                                <label class="custom-control-label"
-                                                    for="access_product_categories">Category</label>
+                                                <input type="checkbox" checked class="custom-control-input" id="access_product_categories" name="permissions[]" value="13">
+                                                <label class="custom-control-label" for="access_product_categories">Category</label>
                                             </div>
                                         </div>
                                     </div>
@@ -132,9 +109,7 @@
                         <!-- Adjustments Permission -->
                         <div class="col-lg-4 col-md-6 mb-3">
                             <div class="card h-100 border-0 shadow">
-                                <div class="card-header">
-                                    Adjustments
-                                </div>
+                                <div class="card-header">Adjustments</div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6">
@@ -277,52 +252,53 @@
                         </div>
 
                         <!-- Suppliers Permission -->
-{{--                        <div class="col-lg-4 col-md-6 mb-3">--}}
-{{--                            <div class="card h-100 border-0 shadow">--}}
-{{--                                <div class="card-header">--}}
-{{--                                    Suppliers--}}
-{{--                                </div>--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_suppliers" name="permissions[]" value="37">--}}
-{{--                                                <label class="custom-control-label" for="access_suppliers">Access</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="create_suppliers" name="permissions[]" value="38">--}}
-{{--                                                <label class="custom-control-label" for="create_suppliers">Create</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="show_suppliers" name="permissions[]" value="39">--}}
-{{--                                                <label class="custom-control-label" for="show_suppliers">View</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="edit_suppliers" name="permissions[]" value="40">--}}
-{{--                                                <label class="custom-control-label" for="edit_suppliers">Edit</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="delete_customers" name="permissions[]" value="41">--}}
-{{--                                                <label class="custom-control-label" for="delete_customers">Delete</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-header">
+                                    Suppliers
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_suppliers" name="permissions[]" value="37">
+                                                <label class="custom-control-label" for="access_suppliers">Access</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="create_suppliers" name="permissions[]" value="38">
+                                                <label class="custom-control-label" for="create_suppliers">Create</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="show_suppliers" name="permissions[]" value="39">
+                                                <label class="custom-control-label" for="show_suppliers">View</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="edit_suppliers" name="permissions[]" value="40">
+                                                <label class="custom-control-label" for="edit_suppliers">Edit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="delete_customers" name="permissions[]" value="41">
+                                                <label class="custom-control-label" for="delete_customers">Delete</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- Sales Permission -->
                         <div class="col-lg-4 col-md-6 mb-3">
@@ -450,163 +426,165 @@
                         </div>
 
                         <!-- Purchases Permission -->
-{{--                        <div class="col-lg-4 col-md-6 mb-3">--}}
-{{--                            <div class="card h-100 border-0 shadow">--}}
-{{--                                <div class="card-header">--}}
-{{--                                    Purchases--}}
-{{--                                </div>--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_purchases" name="permissions[]" value="55">--}}
-{{--                                                <label class="custom-control-label" for="access_purchases">Access</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="create_purchases" name="permissions[]" value="56">--}}
-{{--                                                <label class="custom-control-label" for="create_purchases">Create</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="show_purchases" name="permissions[]" value="57">--}}
-{{--                                                <label class="custom-control-label" for="show_purchases">View</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="edit_purchases" name="permissions[]" value="58">--}}
-{{--                                                <label class="custom-control-label" for="edit_purchases">Edit</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="delete_purchases" name="permissions[]" value="59">--}}
-{{--                                                <label class="custom-control-label" for="delete_purchases">Delete</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_purchase_payments" name="permissions[]" value="60">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="access_purchase_payments">Payments</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+
+
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-header">
+                                    Purchases
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_purchases" name="permissions[]" value="55">
+                                                <label class="custom-control-label" for="access_purchases">Access</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="create_purchases" name="permissions[]" value="56">
+                                                <label class="custom-control-label" for="create_purchases">Create</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="show_purchases" name="permissions[]" value="57">
+                                                <label class="custom-control-label" for="show_purchases">View</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="edit_purchases" name="permissions[]" value="58">
+                                                <label class="custom-control-label" for="edit_purchases">Edit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="delete_purchases" name="permissions[]" value="59">
+                                                <label class="custom-control-label" for="delete_purchases">Delete</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_purchase_payments" name="permissions[]" value="60">
+                                                <label class="custom-control-label"
+                                                    for="access_purchase_payments">Payments</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Purchases Returns Permission -->
-{{--                        <div class="col-lg-4 col-md-6 mb-3">--}}
-{{--                            <div class="card h-100 border-0 shadow">--}}
-{{--                                <div class="card-header">--}}
-{{--                                    Purchase Returns--}}
-{{--                                </div>--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_purchase_returns" name="permissions[]" value="61">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="access_purchase_returns">Access</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="create_purchase_returns" name="permissions[]" value="62">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="create_purchase_returns">Create</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="show_purchase_returns" name="permissions[]" value="63">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="show_purchase_returns">View</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="edit_purchase_returns" name="permissions[]" value="64">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="edit_purchase_returns">Edit</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="delete_purchase_returns" name="permissions[]" value="65">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="delete_purchase_returns">Delete</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_purchase_return_payments" name="permissions[]"--}}
-{{--                                                    value="66">--}}
-{{--                                                <label class="custom-control-label"--}}
-{{--                                                    for="access_purchase_return_payments">Payments</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-header">
+                                    Purchase Returns
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_purchase_returns" name="permissions[]" value="61">
+                                                <label class="custom-control-label"
+                                                    for="access_purchase_returns">Access</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="create_purchase_returns" name="permissions[]" value="62">
+                                                <label class="custom-control-label"
+                                                    for="create_purchase_returns">Create</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="show_purchase_returns" name="permissions[]" value="63">
+                                                <label class="custom-control-label"
+                                                    for="show_purchase_returns">View</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="edit_purchase_returns" name="permissions[]" value="64">
+                                                <label class="custom-control-label"
+                                                    for="edit_purchase_returns">Edit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="delete_purchase_returns" name="permissions[]" value="65">
+                                                <label class="custom-control-label"
+                                                    for="delete_purchase_returns">Delete</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_purchase_return_payments" name="permissions[]"
+                                                    value="66">
+                                                <label class="custom-control-label"
+                                                    for="access_purchase_return_payments">Payments</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Currencies Permission -->
-{{--                         <div class="col-lg-4 col-md-6 mb-3">--}}
-{{--                            <div class="card h-100 border-0 shadow">--}}
-{{--                                <div class="card-header">--}}
-{{--                                    Currencies--}}
-{{--                                </div>--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="access_currencies" name="permissions[]" value="68">--}}
-{{--                                                <label class="custom-control-label" for="access_currencies">Access</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="create_currencies" name="permissions[]" value="69">--}}
-{{--                                                <label class="custom-control-label" for="create_currencies">Create</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="edit_currencies" name="permissions[]" value="70">--}}
-{{--                                                <label class="custom-control-label" for="edit_currencies">Edit</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-6">--}}
-{{--                                            <div class="custom-control custom-switch">--}}
-{{--                                                <input type="checkbox" checked class="custom-control-input"--}}
-{{--                                                    id="delete_currencies" name="permissions[]" value="71">--}}
-{{--                                                <label class="custom-control-label" for="delete_currencies">Delete</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--<div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-header">
+                                    Currencies
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="access_currencies" name="permissions[]" value="68">
+                                                <label class="custom-control-label" for="access_currencies">Access</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="create_currencies" name="permissions[]" value="69">
+                                                <label class="custom-control-label" for="create_currencies">Create</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="edit_currencies" name="permissions[]" value="70">
+                                                <label class="custom-control-label" for="edit_currencies">Edit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" checked class="custom-control-input"
+                                                    id="delete_currencies" name="permissions[]" value="71">
+                                                <label class="custom-control-label" for="delete_currencies">Delete</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>--}}
 
                         <!-- Reports -->
                         <div class="col-lg-4 col-md-6 mb-3">
@@ -633,8 +611,57 @@
         </div>
 
     </div>
+
+{{--<style>--}}
+{{--    body {--}}
+{{--        background: #FFF;--}}
+{{--    }--}}
+
+{{--    label, h1 {--}}
+{{--        margin: 0;--}}
+{{--    }--}}
+
+{{--    .container {--}}
+{{--        height: 100%;--}}
+{{--    }--}}
+{{--</style>--}}
+
+{{--<div class="permission-wrapper">--}}
+{{--    <div class="permission-wrapper-wrapper">--}}
+{{--        <h1>Select all that apply.</h1>--}}
+{{--        <div class="permission-container">--}}
+{{--            <div class="buttons-container">--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Dashboard</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Expenses</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Product</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Adjustment</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Customers</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Sales</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Sale Returns</label>--}}
+{{--                <label class="checkbox-button"><input type="checkbox">Reports</label>--}}
+{{--            </div>--}}
+
+
+{{--            <button class="next-button" type="submit" id="permissionBtnFunc">NEXT</button>--}}
+
+{{--        </div>--}}
+
+{{--        <div class="back-button">--}}
+{{--            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><mask id="mask0_244_440" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_244_440)"><path d="M10 22L0 12L10 2L11.775 3.775L3.55 12L11.775 20.225L10 22Z" fill="#1C1B1F"/></g></svg>--}}
+{{--            <p>BACK</p>--}}
+{{--        </div>--}}
+
+{{--    </div>--}}
+{{--</div>--}}
+
+
+
+
+
 @endsection
 
 @push('scripts')
     @include('auth.registration-script')
 @endpush
+
+
