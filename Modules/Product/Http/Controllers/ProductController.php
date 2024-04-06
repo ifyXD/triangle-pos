@@ -31,11 +31,7 @@ class ProductController extends Controller
 
         return view('product::products.create');
     }
-    public function toExcel($id)
-    {
-        echo $id;
-    }
-
+ 
     public function store(StoreProductRequest $request)
     {
         $this->checkPermission('create_products');
@@ -62,7 +58,8 @@ class ProductController extends Controller
     {
         // abort_if(Gate::denies('show_products'), 403);
         $this->checkPermission('show_products');
-        return view('product::products.show', compact('product'));
+        $product->user_id = auth()->user()->id;
+                return view('product::products.show', compact('product'));
     }
 
 
@@ -71,6 +68,7 @@ class ProductController extends Controller
         // abort_if(Gate::denies('edit_products'), 403);
         $this->checkPermission('edit_products');
 
+        
         return view('product::products.edit', compact('product'));
     }
 

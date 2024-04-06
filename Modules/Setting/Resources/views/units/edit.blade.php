@@ -32,7 +32,7 @@
                                         <input type="text" class="form-control" name="short_name" required value="{{ $unit->short_name }}">
                                     </div>
                                 </div>
-                                <div class="col-lg-2">
+                                {{-- <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="operator">Operator</label>
                                         <input type="text" class="form-control" name="operator" value="{{ $unit->operator }}">
@@ -43,7 +43,7 @@
                                         <label for="operation_value">Operation Value</label>
                                         <input type="text" class="form-control" name="operation_value" value="{{ $unit->operation_value }}">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-12 d-flex justify-content-end">
                                     <div class="form-group">
                                         <button class="btn btn-primary">Update Unit <i class="bi bi-check"></i></button>

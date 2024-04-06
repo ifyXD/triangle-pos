@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Figures\Product;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,6 +80,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(UserPermission::class);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    
     public function hasAccessToPermission($permissionName)
     {
         // Implement your logic to check if the user has access to the given permission

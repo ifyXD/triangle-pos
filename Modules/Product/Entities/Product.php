@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Product\Notifications\NotifyQuantityAlert;
@@ -21,6 +22,10 @@ class Product extends Model implements HasMedia
     public function category() {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+    public function user() {
+        return $this->hasOne(User::class, 'user_id', 'id');
+    }
+    
 
     public function registerMediaCollections(): void {
         $this->addMediaCollection('images')
