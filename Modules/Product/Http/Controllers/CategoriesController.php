@@ -23,12 +23,12 @@ class CategoriesController extends Controller
         abort_if(Gate::denies('access_product_categories'), 403);
 
         $request->validate([
-            'category_code' => 'required|unique:categories,category_code',
+            // 'category_code' => 'required|unique:categories,category_code',
             'category_name' => 'required'
         ]);
 
         Category::create([
-            'category_code' => $request->category_code,
+            // 'category_code' => $request->category_code,
             'category_name' => $request->category_name,
             'user_id' => auth()->user()->id,
         ]);
@@ -52,12 +52,12 @@ class CategoriesController extends Controller
         abort_if(Gate::denies('access_product_categories'), 403);
 
         $request->validate([
-            'category_code' => 'required|unique:categories,category_code,' . $id,
+            // 'category_code' => 'required|unique:categories,category_code,' . $id,
             'category_name' => 'required'
         ]);
 
         Category::findOrFail($id)->update([
-            'category_code' => $request->category_code,
+            // 'category_code' => $request->category_code,
             'category_name' => $request->category_name,
         ]);
 

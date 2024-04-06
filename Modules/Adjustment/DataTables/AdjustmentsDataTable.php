@@ -51,7 +51,11 @@ class AdjustmentsDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('reference')
-                ->className('text-center align-middle'),
+                ->className('text-center align-middle')
+                ->visible(false)
+                ->printable(false)
+                ->searchable(false),
+
 
             Column::make('adjusted_products_count')
                 ->title('Products')

@@ -33,8 +33,8 @@
                                     <th class="align-middle">No.</th>
                                     <th class="align-middle">Name</th>
                                     <th class="align-middle">Short Name</th>
-                                    <th class="align-middle">Operator</th>
-                                    <th class="align-middle">Operation Value</th>
+                                    {{-- <th class="align-middle">Operator</th>
+                                    <th class="align-middle">Operation Value</th> --}}
                                     <th class="align-middle">Action</th>
                                 </tr>
                                 </thead>
@@ -44,8 +44,8 @@
                                         <td class="align-middle">{{ $key + 1 }}</td>
                                         <td class="align-middle">{{ $unit->name }}</td>
                                         <td class="align-middle">{{ $unit->short_name }}</td>
-                                        <td class="align-middle">{{ $unit->operator }}</td>
-                                        <td class="align-middle">{{ $unit->operation_value }}</td>
+                                        {{-- <td class="align-middle">{{ $unit->operator }}</td>
+                                        <td class="align-middle">{{ $unit->operation_value }}</td> --}}
                                         <td class="align-middle">
                                             <a href="{{ route('units.edit', $unit) }}" class="btn btn-primary btn-sm">
                                                 <i class="bi bi-pencil"></i>
@@ -84,20 +84,20 @@
             dom: "<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4 justify-content-end'f>>tr<'row'<'col-md-5'i><'col-md-7 mt-2'p>>",
             "buttons": [
                 // {extend: 'excel',text: '<i class="bi bi-file-earmark-excel-fill"></i> Excel'},
-                {extend: 'csv',text: '<i class="bi bi-file-earmark-excel-fill"></i> CSV'},
-                {extend: 'print',
-                    text: '<i class="bi bi-printer-fill"></i> Print',
-                    title: "Units",
-                    exportOptions: {
-                        columns: [ 0, 1, 2, 3, 4 ]
-                    },
-                    customize: function (win) {
-                        $(win.document.body).find('h1').css('font-size', '15pt');
-                        $(win.document.body).find('h1').css('text-align', 'center');
-                        $(win.document.body).find('h1').css('margin-bottom', '20px');
-                        $(win.document.body).css('margin', '35px 25px');
-                    }
-                },
+                // {extend: 'csv',text: '<i class="bi bi-file-earmark-excel-fill"></i> CSV'},
+                // {extend: 'print',
+                //     text: '<i class="bi bi-printer-fill"></i> Print',
+                //     title: "Units",
+                //     exportOptions: {
+                //         columns: [ 0, 1, 2, 3, 4 ]
+                //     },
+                //     customize: function (win) {
+                //         $(win.document.body).find('h1').css('font-size', '15pt');
+                //         $(win.document.body).find('h1').css('text-align', 'center');
+                //         $(win.document.body).find('h1').css('margin-bottom', '20px');
+                //         $(win.document.body).css('margin', '35px 25px');
+                //     }
+                // },
             ],
             ordering: false,
         });

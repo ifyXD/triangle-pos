@@ -14,7 +14,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/print-barcode', 'BarcodeController@printBarcode')->name('barcode.print');
     Route::get('/printToExcel/{id}', 'ProductController@toExcel')->name('category.printToExcel.id');
     Route::resource('products', 'ProductController');
-
+    Route::get('/products', 'ProductController@index')->name('products.index');
 
     // Route::middleware([CheckPermission::class . ':access_product_categories'])->group(function () {
     //Product Category

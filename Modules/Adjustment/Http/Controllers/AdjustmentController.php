@@ -35,7 +35,7 @@ class AdjustmentController extends Controller
         $this->checkPermission('create_adjustments');
 
         $request->validate([
-            'reference'   => 'required|string|max:255',
+            // 'reference'   => 'required|string|max:255',
             'date'        => 'required|date',
             'note'        => 'nullable|string|max:1000',
             'product_ids' => 'required',
@@ -98,7 +98,7 @@ class AdjustmentController extends Controller
         $this->checkPermission('edit_adjustments');
 
         $request->validate([
-            'reference'   => 'required|string|max:255',
+            // 'reference'   => 'required|string|max:255',
             'date'        => 'required|date',
             'note'        => 'nullable|string|max:1000',
             'product_ids' => 'required',
@@ -108,7 +108,7 @@ class AdjustmentController extends Controller
 
         DB::transaction(function () use ($request, $adjustment) {
             $adjustment->update([
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'date'      => $request->date,
                 'note'      => $request->note
             ]);
@@ -116,15 +116,15 @@ class AdjustmentController extends Controller
             foreach ($adjustment->adjustedProducts as $adjustedProduct) {
                 $product = Product::findOrFail($adjustedProduct->product->id);
 
-                if ($adjustedProduct->type == 'add') {
-                    $product->update([
-                        'product_quantity' => $product->product_quantity - $adjustedProduct->quantity
-                    ]);
-                } elseif ($adjustedProduct->type == 'sub') {
-                    $product->update([
-                        'product_quantity' => $product->product_quantity + $adjustedProduct->quantity
-                    ]);
-                }
+                // if ($adjustedProduct->type == 'add') {
+                //     $product->update([
+                //         'product_quantity' => $product->product_quantity + $adjustedProduct->quantity
+                //     ]);
+                // } elseif ($adjustedProduct->type == 'sub') {
+                //     $product->update([
+                //         'product_quantity' => $product->product_quantity - $adjustedProduct->quantity
+                //     ]);
+                // }
 
                 $adjustedProduct->delete();
             }

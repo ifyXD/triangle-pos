@@ -31,7 +31,7 @@
                                         <input type="text" class="form-control" name="short_name" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-2">
+                                {{-- <div class="col-lg-2">
                                     <div class="form-group">
                                         <label for="operator">Operator</label>
                                         <input type="text" class="form-control" name="operator" placeholder="ex: * / + -">
@@ -42,7 +42,7 @@
                                         <label for="operation_value">Operation Value</label>
                                         <input type="text" class="form-control" name="operation_value" placeholder="Enter a number">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-12 d-flex justify-content-end">
                                     <div class="form-group">
                                         <button class="btn btn-primary">Create Unit <i class="bi bi-check"></i></button>

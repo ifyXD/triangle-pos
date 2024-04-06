@@ -21,10 +21,10 @@
                         <form action="{{ route('product-categories.update', $category->id) }}" method="POST">
                             @csrf
                             @method('patch')
-                            <div class="form-group hidden">
+                            {{-- <div class="form-group">
                                 <label class="font-weight-bold" for="category_code">Category Code <span class="text-danger">*</span></label>
                                 <input class="form-control" type="text" name="category_code" required value="{{ $category->category_code }}">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label class="font-weight-bold" for="category_name">Category Name <span class="text-danger">*</span></label>
                                 <input class="form-control" type="text" name="category_name" required value="{{ $category->category_name }}">

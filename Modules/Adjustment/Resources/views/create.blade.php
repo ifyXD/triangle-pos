@@ -26,12 +26,12 @@
                         <form action="{{ route('adjustments.store') }}" method="POST">
                             @csrf
                             <div class="form-row">
-                                <div class="col-lg-6">
+                                {{-- <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required readonly value="ADJ">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-6">
                                     <div class="from-group">
                                         <div class="form-group">

@@ -1,7 +1,7 @@
-@php
+{{-- @php
     $category_max_id = \Modules\Product\Entities\Category::max('id') + 1;
     $category_code = "CA_" . str_pad($category_max_id, 2, '0', STR_PAD_LEFT)
-@endphp
+@endphp --}}
 <div class="modal fade" id="categoryCreateModal" tabindex="-1" role="dialog" aria-labelledby="categoryCreateModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -14,10 +14,10 @@
             <form action="{{ route('product-categories.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group hidden">
+                    {{-- <div class="form-group">
                         <label for="category_code">Category Code <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="category_code" required value="{{ $category_code }}">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="category_name">Category Name <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" name="category_name" required>

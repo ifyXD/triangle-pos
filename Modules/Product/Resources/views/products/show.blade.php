@@ -62,7 +62,7 @@
                                     <th>Alert Quantity</th>
                                     <td>{{ $product->product_stock_alert }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th>Tax (%)</th>
                                     <td>{{ $product->product_order_tax ?? 'N/A' }}</td>
                                 </tr>
@@ -76,7 +76,7 @@
                                         @else
                                             N/A
                                         @endif
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 <tr>
                                     <th>Note</th>
