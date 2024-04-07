@@ -17,12 +17,6 @@
     <link rel="stylesheet" href="{{ asset('css/merged-styles.css') }}">
 
 
-    {{-- permission --}}
-    <link rel="stylesheet" href="{{ asset('css/permission.css') }}">
-    {{-- color palette --}}
-    <link rel="stylesheet" href="{{ asset('css/palette.css') }}">
-
-
     {{--    <link rel="icon" href="{{ asset('images/favicon.png') }}">--}}
     {{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}" crossorigin="anonymous">--}}
     {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">--}}

@@ -1,3 +1,4 @@
+{{--<span class="kami-kami-span">Main</span>--}}
 <li class="c-sidebar-nav-item {{ request()->routeIs('home') ? 'c-active' : '' }}">
     <a class="c-sidebar-nav-link" href="{{ route('home') }}">
         <i class="c-sidebar-nav-icon bi bi-house" style="line-height: 1;"></i> Home
@@ -5,6 +6,7 @@
 </li>
 
 @if (auth()->user()->hasAccessToPermission('access_products'))
+    <span class="kami-kami-span">Inventory</span>
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('products.*') || request()->routeIs('product-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -53,6 +55,7 @@
     </li>
 @endif
 @if (auth()->user()->hasAccessToPermission('access_adjustments'))
+
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('adjustments.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1;"></i> Stock Adjustments
@@ -152,8 +155,8 @@
 {{--@endif--}}
 
 @if (auth()->user()->hasAccessToPermission('access_sales'))
-    <li
-        class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('sales.*') || request()->routeIs('sale-payments*') ? 'c-show' : '' }}">
+<span class="kami-kami-span">Sales</span>
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('sales.*') || request()->routeIs('sale-payments*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-receipt" style="line-height: 1;"></i> Sales
         </a>
@@ -205,6 +208,7 @@
     </li>
 @endif
 @if (auth()->user()->hasAccessToPermission('access_expenses'))
+    <span class="kami-kami-span">Expense</span>
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('expenses.*') || request()->routeIs('expense-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -239,6 +243,7 @@
 
 @if (auth()->user()->hasAccessToPermission('access_suppliers') ||
         auth()->user()->hasAccessToPermission('access_customers'))
+    <span class="kami-kami-span">Management</span>
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('customers.*') || request()->routeIs('suppliers.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -340,7 +345,7 @@
         </ul>
     </li>
 @endcan
-
+{{--<span class="kami-kami-span">Settings</span>--}}
     <li  class="c-sidebar-nav-item c-sidebar-nav-dropdown">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings

@@ -17,8 +17,10 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('css/palette.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu-styling.css') }}">
     @include('includes.main-css')
+
+
     <style>
         .btn-secondary {
             background-color: {{ $secondValue }} !important;
