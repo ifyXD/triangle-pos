@@ -1,0 +1,135 @@
+/* this is the stylesheet of selecting a store name, feature, and color palette */
+
+*,
+*::before,
+*::after {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* -------------------------------------------------------------------- */
+
+
+/* general style sht */
+h1 {
+    color: #000;
+    font-family: Outfit, sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 250;
+    line-height: normal;
+}
+
+h1 span {
+    font-weight: 400;
+}
+
+
+
+
+/* store name */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.store .store-container {
+    display: flex;
+    width: 660px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.store .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 120px;
+    width: 100%;
+}
+
+.headline {
+    text-align: center;
+    width: 100%;
+}
+
+.button-next {
+    display: flex;
+    width: 248px;
+    padding: 16px 0px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 40px;
+    background: #000;
+
+
+    color: #FBFAF7;
+    font-family: Outfit, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
+.store .storename {
+    display: flex;
+    /*width: 660px;*/
+    width: 580px;
+    height: 65px;
+    padding: 10px 0;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-bottom: 2px solid #D9D9D9;
+
+    color: #000;
+    font-family: Outfit, sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    text-align: center;
+}
+
+
+
+
+input[type=text], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    /* padding: 3px 0px 3px 3px; */
+    /*margin: 5px 1px 3px 0px;*/
+    /*border: 1px solid #DDDDDD;*/
+}
+
+input[type=text]:focus, textarea:focus {
+    /*box-shadow: 0 0 5px 0 rgba(81, 203, 238, 1);*/
+    /*padding: 0 0 3px 0;*/
+    /*margin: 5px 1px 3px 0px;*/
+    /*margin: 0 0 3px 0;*/
+    width: 660px;
+    border: none;
+    border-bottom: 2px solid rgba(81, 203, 238, 1);
+}
