@@ -61,7 +61,7 @@ class ProductController extends Controller
                 return view('product::products.show', compact('product'));
     }
 
-
+    
     public function edit(Product $product)
     {
         // abort_if(Gate::denies('edit_products'), 403);
