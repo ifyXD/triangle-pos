@@ -55,6 +55,22 @@
         </ul>
     </li>
 @endif
+@if (auth()->user()->hasAccessToPermission('access_prices'))
+
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('prices.*') ? 'c-show' : '' }}">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+            <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1;"></i> Prices
+        </a>
+        <ul class="c-sidebar-nav-dropdown-items"> 
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
+                   href="{{ route('prices.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Prices
+                </a>
+            </li>
+        </ul>
+    </li>
+@endif
 @if (auth()->user()->hasAccessToPermission('access_adjustments'))
 
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('adjustments.*') ? 'c-show' : '' }}">
@@ -79,6 +95,7 @@
         </ul>
     </li>
 @endif
+
 
 {{-- @can('access_quotations')
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('quotations.*') ? 'c-show' : '' }}">

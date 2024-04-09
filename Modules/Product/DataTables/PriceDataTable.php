@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductDataTable extends DataTable
+class PriceDataTable extends DataTable
 {
 
     public function dataTable($query)
@@ -100,7 +100,7 @@ class ProductDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::computed('product_quantity')
-                ->title('Quantity | Units')
+                ->title('Quantity')
                 ->className('text-center align-middle'),
 
             Column::computed('action')

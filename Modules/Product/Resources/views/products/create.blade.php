@@ -146,7 +146,7 @@
                                             title="This short text will be placed after Product Quantity."></i> <span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <select class="form-control" name="product_unit" id="product_unit">
+                                        <select class="form-control" multiple name="product_unit[]" id="product_unit">
                                             <option value="" selected disabled>Select Unit</option>
 
                                             @foreach (\Modules\Setting\Entities\Unit::orderBy('name')->get() as $unit)

@@ -31,15 +31,22 @@ class ProductController extends Controller
 
         return view('product::products.create');
     }
- 
+
     public function store(StoreProductRequest $request)
     {
         $this->checkPermission('create_products');
-        
+
         // Set user_id from the authenticated user
         $request->merge(['user_id' => auth()->user()->id]);
 
-        $product = Product::create($request->except('document'));
+        // Convert the array of selected units to a comma-separated string
+        $productUnits = implode(',', $request->input('product_unit', []));
+
+        // Create the product with the units
+        $productData = $request->except(['document', 'product_unit']);
+        $productData['product_unit'] = $productUnits;
+
+        $product = Product::create($productData);
 
         if ($request->has('document')) {
             foreach ($request->input('document', []) as $file) {
@@ -53,12 +60,16 @@ class ProductController extends Controller
     }
 
 
+
+
+
+
     public function show(Product $product)
     {
         // abort_if(Gate::denies('show_products'), 403);
         $this->checkPermission('show_products');
         $product->user_id = auth()->user()->id;
-                return view('product::products.show', compact('product'));
+        return view('product::products.show', compact('product'));
     }
 
 
@@ -67,7 +78,7 @@ class ProductController extends Controller
         // abort_if(Gate::denies('edit_products'), 403);
         $this->checkPermission('edit_products');
 
-        
+
         return view('product::products.edit', compact('product'));
     }
 
