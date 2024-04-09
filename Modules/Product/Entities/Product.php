@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Entities;
 
+use App\Models\Price;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,5 +53,9 @@ class Product extends Model implements HasMedia
 
     public function getProductPriceAttribute($value) {
         return ($value / 100);
+    }
+    public function prices()
+    {
+        return $this->hasMany(Price::class);
     }
 }

@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="form-row">
-                                
+
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="barcode_symbology">Barcode Symbology <span
@@ -162,10 +162,9 @@
                                             @endforeach
                                         </select>
                                         <div class="input-group-append d-flex">
-                                            <a href="{{url('units/create')}}"  
-                                                class="btn btn-outline-primary">
+                                            <a href="{{ url('units/create') }}" class="btn btn-outline-primary">
                                                 Add
-                                        </a>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

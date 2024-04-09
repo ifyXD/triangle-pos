@@ -57,6 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/current-month/chart-data', 'HomeController@currentMonthChart')->name('current-month.chart');
     Route::get('/payment-flow/chart-data', 'HomeController@paymentChart')->name('payment-flow.chart');
     Route::resource('prices', 'PriceController');
+    Route::get('prices/create/{id}', 'PriceController@create');
+    Route::patch('prices/store/{id}', 'PriceController@store')->name('prices.store');
+    Route::get('prices/show/{id}', 'PriceController@show')->name('prices.show');
+
 });
 
 
