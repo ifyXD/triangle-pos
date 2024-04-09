@@ -91,10 +91,12 @@ class ProductDataTable extends DataTable
 
             Column::computed('product_cost')
                 ->title('Cost')
+                   ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::computed('product_price')
                 ->title('Price')
+                   ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::computed('product_quantity')

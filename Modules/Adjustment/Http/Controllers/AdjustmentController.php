@@ -113,21 +113,21 @@ class AdjustmentController extends Controller
                 'note'      => $request->note
             ]);
 
-            foreach ($adjustment->adjustedProducts as $adjustedProduct) {
-                $product = Product::findOrFail($adjustedProduct->product->id);
+            // foreach ($adjustment->adjustedProducts as $adjustedProduct) {
+            //     $product = Product::findOrFail($adjustedProduct->product->id);
 
-                // if ($adjustedProduct->type == 'add') {
-                //     $product->update([
-                //         'product_quantity' => $product->product_quantity + $adjustedProduct->quantity
-                //     ]);
-                // } elseif ($adjustedProduct->type == 'sub') {
-                //     $product->update([
-                //         'product_quantity' => $product->product_quantity - $adjustedProduct->quantity
-                //     ]);
-                // }
+            //     if ($adjustedProduct->type == 'add') {
+            //         $product->update([
+            //             'product_quantity' => $product->product_quantity + $adjustedProduct->quantity
+            //         ]);
+            //     } elseif ($adjustedProduct->type == 'sub') {
+            //         $product->update([
+            //             'product_quantity' => $product->product_quantity - $adjustedProduct->quantity
+            //         ]);
+            //     }
 
-                $adjustedProduct->delete();
-            }
+            //     $adjustedProduct->delete();
+            // }
 
             foreach ($request->product_ids as $key => $id) {
                 AdjustedProduct::create([

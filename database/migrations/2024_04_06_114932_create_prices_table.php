@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->integer('product_cost');
+            $table->integer('product_price');
             // $table->unsignedBigInteger('category_id');
             // $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete();
             // $table->unsignedBigInteger('units_id');

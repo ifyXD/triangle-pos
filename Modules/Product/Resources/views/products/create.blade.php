@@ -87,7 +87,7 @@
                                 </div> --}}
                             </div>
 
-                            <div class="form-row">
+                            {{-- <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_cost">Cost <span class="text-danger">*</span></label>
@@ -102,7 +102,7 @@
                                             required value="{{ old('product_price') }}">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row">
                                 <div class="col-md-6">

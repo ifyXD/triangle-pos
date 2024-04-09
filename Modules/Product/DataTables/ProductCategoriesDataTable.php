@@ -18,8 +18,7 @@ class ProductCategoriesDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function ($data) {
                 return view('product::categories.partials.actions', compact('data'));
-            });
-
+            }); 
     }
 
 
