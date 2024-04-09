@@ -39,61 +39,37 @@
         $('#backBtnpermission').click(function() {
             window.location.href = "{{ route('registration.requirements-storename') }}";
         });
+
         $('#permissionBtnFunc').click(function() {
-
-
-            // $('.form-control').removeClass('is-invalid');
-            // $('.invalid-feedback').text('');
-            // $('.permissionForm').addClass('d-none');
-            // $('.registrationForm').removeClass('d-none');
-
-
-            // Serialize the form data
-            var formData = $('#permissions-form').serializeArray();
-
-            // Convert the form data to an object
-            var data = {};
-            $.each(formData, function(index, field) {
-                data[field.name] = field.value;
+            
+            var checkedValues = [];
+            $('input[name="permissions[]"]:checked').each(function() {
+                // Split comma-separated values and add them to the checkedValues array
+                var values = $(this).val().split(',');
+                checkedValues = checkedValues.concat(values);
             });
 
-            // Get an array of all checkbox values (permission_ids)
-            var permissionIds = $('input[name="permissions[]"]').map(function() {
-                return $(this).val();
-            }).get();
+            // Remove duplicate values
+            checkedValues = [...new Set(checkedValues)];
 
-            // Create an array to hold all permissions with their statuses
-            var permissions = [];
-
-            // Iterate through all permission_ids and check their statuses
-            $.each(permissionIds, function(index, permissionId) {
-                // Check if the checkbox with this permission_id is checked
-                var status = $('input[name="permissions[]"][value="' + permissionId + '"]').is(
-                    ':checked');
-
-                // Push the permission with its status to the array
-                permissions.push({
-                    permission_id: permissionId,
-                    status: status
-                });
+            // Send the checkedValues array to your Laravel controller using AJAX
+            $.ajax({
+                url: '/update-session/registration-requirements/withpermission',
+                type: 'POST',
+                data: {
+                    permissions: checkedValues
+                },
+                success: function(response) {
+                    // Handle success response
+                    // console.log(response);
+                    window.location.href =
+                        "{{ route('registration.requirements-colorpallete') }}";
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr, status, error);
+                }
             });
-
-            // Send the data to the server
-            $.post('/update-session/registration-requirements/withpermission', {
-                    selectedElement: 'third',
-                    storename: '{{ session('storename') }}',
-                    id: {{ auth()->user()->id }},
-                    permissions: permissions
-                })
-                .done(function(response) {
-                    //redirect to route {{ route('registration.requirements-storename') }}
-                    window.location.href = "{{ route('registration.requirements-colorpallete') }}";
-                })
-                .fail(function(xhr, status, error) {
-                    // Handle failure
-                    console.error(xhr.responseText);
-                });
-
         });
 
 
