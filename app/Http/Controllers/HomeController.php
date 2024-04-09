@@ -91,31 +91,35 @@ class HomeController extends Controller
     }
     public function withPermission(Request $request)
     {
-
         $user = auth()->user();
 
         // Sync permissions
         $permissions = $request->input('permissions', []);
 
-
         // Save permissions in user_permissions table
-        foreach ($permissions as  $permission) {
+        foreach ($permissions as $permissionId) {
             // Create or update the record in the user_permissions table
             UserPermission::updateOrCreate(
-                ['user_id' => $user->id, 'permission_id' => $permission['permission_id']],
-                ['status' => $permission['status']] // Set status to true since the permission is enabled
+                ['user_id' => $user->id, 'permission_id' => $permissionId],
+                ['status' => 'true'] // Set status to true since the permission is enabled
             );
         }
-        User::where('id', auth()->id())->update(['reg_requirements' => 3]);
 
-        if (auth()->user()->id != $request->id) {
-            Auth::logout();
-            return redirect()->route('register');
-        }
+        // Update registration requirements
+        $user->reg_requirements = 3;
+        $user->save();
+
+        // Logout if the user ID does not match the authenticated user's ID
+        // if ($user->id != $request->id) {
+        //     Auth::logout();
+        //     return redirect()->route('register');
+        // }
 
         // Set status to false for permissions not present in the submitted data 
+
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }
+
     public function withPermission_update(Request $request)
     {
 
@@ -132,7 +136,7 @@ class HomeController extends Controller
                 ['user_id' => $user->id, 'permission_id' => $permission['permission_id']],
                 ['status' => $permission['status']] // Set status to true since the permission is enabled
             );
-        } 
+        }
 
         if (auth()->user()->id != $request->id) {
             Auth::logout();
