@@ -121,8 +121,6 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
-
-
     public function destroy(Product $product)
     {
         // abort_if(Gate::denies('delete_products'), 403);
