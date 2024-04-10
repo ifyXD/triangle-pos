@@ -28,7 +28,7 @@
 
 
 
-                    <a class="button-back" href="">
+                    {{--<a class="button-back" href="{{ url("/") }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <mask id="mask0_262_436" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                                   height="24">
@@ -39,7 +39,7 @@
                             </g>
                         </svg>
                         <span>BACK</span>
-                    </a>
+                    </a>--}}
                 </form>
 
 

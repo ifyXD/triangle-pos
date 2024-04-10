@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartiesController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
@@ -79,6 +80,7 @@ Route::resources([
 //    'sale' => SaleController::class,
 //    'stock' => StockAdjustmentController::class,
 //    'user' => UserManagementController::class,
+    'pos' => POSController::class,
 
     'about' => AboutController::class,
     'contact' => ContactController::class

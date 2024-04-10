@@ -3,7 +3,7 @@
 @section('content')
     <div class="permission-wrapper">
         <h1 class="headline">Select <span>feature</span> that apply.</h1>
-        <form id="permissions-form"> 
+        <form id="permissions-form">
             <div class="permission-container">
                 <div class="buttons-container">
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="dashboardCheck"
@@ -24,6 +24,8 @@
                             value="67" checked>Reports</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="priceCheck"
                             value="74" checked>Prices</label>
+                    <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="settingCheck"
+                            value="41" checked>Settings</label>
                 </div>
                 <button class="button-next" type="button" id="permissionBtnFunc">NEXT</button>
             </div>

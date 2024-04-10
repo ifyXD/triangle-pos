@@ -54,7 +54,7 @@
                 @endphp
                 @foreach ($colors as $key => $palette)
                     <div class="parent">
-                        <div class="palette">
+                        <div class="palette" tabindex="0"> <!-- Add tabindex="0" to make it focusable -->
                             <div class="left-color" data-color="{{ $val[$key][0] }}"
                                  style="background: var({{ $palette[0] }});">
                             </div>

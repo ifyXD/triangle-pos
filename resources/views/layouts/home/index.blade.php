@@ -22,7 +22,7 @@
         <div class="container">
             <div class="feature-content">
                 <div class="content">
-                    <a href="{{ url('product') }}">
+                    <a href="{{ url('pos') }}">
                         <figure>
                             <img class="img-thumbnail" src="{{ asset('images/homepage/pos.png') }}"
                                  alt="Product Picture">
