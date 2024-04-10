@@ -28,7 +28,14 @@
                                     <span class="badge badge-success">{{ $product->product_code }}</span>
                                 </div>
                                 <p style="font-size: 16px; text-align: end;" class="card-text font-weight-bold">
-                                    {{ format_currency($product->product_price) }}</p>
+                                    @if ($product->min_price == $product->max_price)
+                                        {{ format_currency($product->min_price) }}
+                                    @else
+                                        {{ format_currency($product->min_price) }} -
+                                        {{ format_currency($product->max_price) }}
+                                    @endif
+                                </p>
+
                             </div>
                         </div>
                     </div>
@@ -39,17 +46,58 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                                    <h5 class="modal-title" id="exampleModalLabel">Price: <span
+                                            id="selectedPrice">{{ format_currency($product_selected_price) }}</span>
+                                    </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="product_quantity">Quantity <span
+                                                        class="text-danger">*</span></label>
+                                                <input id="product_quantity" type="number" class="form-control"
+                                                    name="product_quantity" required value="1" min="1"
+                                                    max="{{ $product->product_quantity }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="product_stock_alert">Unit <span
+                                                        class="text-danger">*</span></label>
+                                                <select class="form-control" name="product_{{ $product->id }}"
+                                                    id="product_{{ $product->id }}">
+                                                    @php
+                                                        $unitPricePairs = explode('|', $product->all_prices);
+                                                    @endphp
+                                                    <option value="0" selected disabled>Select Unit</option>
+                                                    @foreach ($unitPricePairs as $unitPricePair)
+                                                        @php
+                                                            [$unit, $price] = explode(':', $unitPricePair);
+                                                        @endphp
+                                                        <option value="{{ $price }}">{{ $unit }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
 
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="product_stock_alert">Grand Total: </label>
+                                                <input type="number" disabled readonly id="grand_total_number"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary "
+                                    <button type="button" class="btn btn-primary proceed_click"
                                         wire:click.prevent="selectProduct({{ $product }})">Proceed</button>
                                 </div>
                             </div>
@@ -76,11 +124,34 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            alert('asd');
-        });
-    </script>
-    
-</div>
 
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.proceed_click').click(function() {
+            $('.close').click();
+        });
+        $('select.form-control').change(function() {
+            // Get the selected price value
+            var selectedPriceString = $(this).val(); // Get the value as string
+            // Remove currency symbol and ".00" from the string, then parse to float
+            var selectedPrice = parseFloat(selectedPriceString.replace('₱', '').replace(',', ''));
+
+            var product_quantity = parseInt($('input#product_quantity').val());
+            var total = selectedPrice *
+            product_quantity; // Multiply the selectedPrice and product_quantity
+
+            console.log(total);
+
+            // Update the content of the target element with the selected price
+            $('#selectedPrice').text(selectedPriceString);
+            $('#grand_total_number').val(total.toFixed(
+                2)); // Use toFixed(2) to ensure two decimal places
+        });
+
+
+
+
+    });
+</script>
