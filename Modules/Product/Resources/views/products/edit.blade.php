@@ -67,7 +67,7 @@
                                 </div> --}}
                             </div>
 
-                            <div class="form-row">
+                            {{-- <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_cost">Cost <span class="text-danger">*</span></label>
@@ -80,7 +80,7 @@
                                         <input id="product_price" type="text" class="form-control" min="0" name="product_price" required value="{{ $product->product_price }}">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row">
                                 <div class="col-md-6">
@@ -117,12 +117,23 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="This short text will be placed after Product Quantity."></i> <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="product_unit" id="product_unit" required>
-                                            <option value="" selected >Select Unit</option>
-                                            @foreach(\Modules\Setting\Entities\Unit::all() as $unit)
-                                                <option {{ $product->product_unit == $unit->short_name ? 'selected' : '' }} value="{{ $unit->short_name }}">{{ $unit->name . ' | ' . $unit->short_name }}</option>
+                                        <select class="form-control" multiple name="product_unit[]" id="product_unit">
+                                            <option value="" selected disabled>Select Unit</option>
+                                            @foreach (\Modules\Setting\Entities\Unit::orderBy('name')->get() as $unit)
+                                                @php
+                                                    $selected = false;
+                                                    $selectedUnits = $product->product_unit ? explode(',', $product->product_unit) : [];
+                                                    if (in_array($unit->short_name, $selectedUnits)) {
+                                                        $selected = true;
+                                                    }
+                                                @endphp
+                                                <option value="{{ $unit->short_name }}" {{ $selected ? 'selected' : '' }}>
+                                                    {{ $unit->name . ' | ' . $unit->short_name }}
+                                                </option>
                                             @endforeach
                                         </select>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>

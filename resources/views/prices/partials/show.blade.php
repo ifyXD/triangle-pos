@@ -5,7 +5,7 @@
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('prices.index') }}">Prices</a></li>
         <li class="breadcrumb-item active">Details</li>
     </ol>
 @endsection
@@ -23,65 +23,64 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-0">
-                                {{-- <tr>
-                                    <th>Product Code</th>
-                                    <td>{{ $product->product_code }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Barcode Symbology</th>
-                                    <td>{{ $product->product_barcode_symbology }}</td>
-                                </tr> --}}
-                                <tr>
-                                    <th>Name</th>
-                                    <td>{{ $product->product_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Category</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Cost</th>
-                                    <td>{{ format_currency($product->product_cost) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <td>{{ format_currency($product->product_price) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Quantity</th>
-                                    <td>{{ $product->product_quantity . ' ' . $product->product_unit }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Stock Worth</th>
-                                    <td>
-                                        COST:: {{ format_currency($product->product_cost * $product->product_quantity) }} /
-                                        PRICE:: {{ format_currency($product->product_price * $product->product_quantity) }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Alert Quantity</th>
-                                    <td>{{ $product->product_stock_alert }}</td>
-                                </tr>
-                                {{-- <tr>
-                                    <th>Tax (%)</th>
-                                    <td>{{ $product->product_order_tax ?? 'N/A' }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tax Type</th>
-                                    <td>
-                                        @if($product->product_tax_type == 1)
-                                            Exclusive
-                                        @elseif($product->product_tax_type == 2)
-                                            Inclusive
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td> --}}
-                                </tr>
-                                <tr>
-                                    <th>Note</th>
-                                    <td>{{ $product->product_note ?? 'N/A' }}</td>
-                                </tr>
+
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{{ $product->product_name }}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Unit</th>
+                                        <th>Cost</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($prices as $item)
+                                        <tr>
+                                            <td>{{ $item->product_unit }}</td>
+                                            <td>{{ format_currency($item->product_cost) }}</td>
+                                            <td>{{ format_currency($item->product_price) }}</td>
+                                            <td>
+                                                @if (auth()->user()->hasAccessToPermission('access_prices'))
+                                                    <a href="{{ url('prices/edit/' . $item->id) }}"
+                                                        class="btn btn-info btn-sm">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                @endif
+
+                                                @if (auth()->user()->hasAccessToPermission('delete_products'))
+                                                    <button id="delete" class="btn btn-danger btn-sm"
+                                                        onclick="event.preventDefault();
+                                                            if (confirm('Are you sure? It will delete the data permanently!')) {
+                                                                document.getElementById('destroy{{ $item->id }}').submit()
+                                                            }
+                                                            ">
+                                                        <i class="bi bi-trash"></i>
+                                                        <form id="destroy{{ $item->id }}" class="d-none"
+                                                            action="{{ route('prices.destroy', $item->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('delete')
+                                                        </form>
+                                                    </button>
+                                                @endif
+
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -91,17 +90,16 @@
             <div class="col-lg-3">
                 <div class="card h-100">
                     <div class="card-body">
-                        {{-- @forelse($product->getMedia('images') as $media)
+
+                        
+                        @forelse($product->getMedia('images') as $media)
                             <img src="{{ $media->getUrl() }}" alt="Product Image" class="img-fluid img-thumbnail mb-2">
                         @empty
                             <img src="{{ $product->getFirstMediaUrl('images') }}" alt="Product Image" class="img-fluid img-thumbnail mb-2">
-                        @endforelse --}}
+                        @endforelse
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-
-

@@ -86,7 +86,17 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $this->checkPermission('edit_products');
-        $product->update($request->except('document'));
+
+        $productUnits = implode(',', $request->input('product_unit', []));
+
+        $product->update([
+            'category_id' => $request->input('category_id'),
+            'product_name' => $request->input('product_name'),
+            'product_stock_alert' => $request->input('product_stock_alert'), 
+            'product_quantity' => $request->input('product_quantity'), 
+            'product_note' => $request->input('product_note'), 
+            'product_unit' => $productUnits,
+        ]);
 
         if ($request->has('document')) {
             if (count($product->getMedia('images')) > 0) {
@@ -110,6 +120,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
+
 
 
     public function destroy(Product $product)
