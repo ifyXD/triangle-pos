@@ -42,14 +42,12 @@ class SearchProduct extends Component
             $this->search_results = Product::where(function ($query) use ($user) {
                 $query->where('user_id', $user->id)
                     ->where(function ($nestedQuery) {
-                        $nestedQuery->where('product_name', 'like', '%' . $this->query . '%')
-                            ->orWhere('product_code', 'like', '%' . $this->query . '%');
+                        $nestedQuery->where('product_name', 'like', '%' . $this->query . '%') ;
                     });
             })
                 ->orWhere(function ($query) use ($user) {
                     $query->where('user_id', 1)
-                        ->where('product_name', 'like', '%' . $this->query . '%')
-                        ->orWhere('product_code', 'like', '%' . $this->query . '%');
+                        ->where('product_name', 'like', '%' . $this->query . '%');
                 })
                 ->take($this->how_many)
                 ->get();
