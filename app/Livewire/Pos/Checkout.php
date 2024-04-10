@@ -49,7 +49,7 @@ class Checkout extends Component
         })->get();
 
         $cart_items = Cart::instance($this->cart_instance)->content();
-
+       
         return view('livewire.pos.checkout', [
             'cart_items' => $cart_items
         ]);
@@ -89,18 +89,20 @@ class Checkout extends Component
             'name'    => $product['product_name'],
             'qty'     => 1,
             'price'   => $this->calculate($product)['price'],
-            'weight'  => 1,
+            'weight'  => 1, 
             'options' => [
                 'product_discount'      => 0.00,
                 'product_discount_type' => 'fixed',
                 'sub_total'             => $this->calculate($product)['sub_total'],
                 // 'code'                  => $product['product_code'],
                 'stock'                 => $product['product_quantity'],
-                'unit'                  => $product['product_unit'],
+                // 'unit'                  => $product['product_unit'],
                 'product_tax'           => $this->calculate($product)['product_tax'],
                 'unit_price'            => $this->calculate($product)['unit_price']
             ]
         ]);
+
+        
 
         $this->check_quantity[$product['id']] = $product['product_quantity'];
         $this->quantity[$product['id']] = 1;
