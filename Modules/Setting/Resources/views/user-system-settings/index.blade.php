@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+    <link rel="stylesheet" href="{{ asset('css/merged-styles.css') }}">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -19,7 +20,8 @@
                         <h5 class="mb-0">General Settings</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('system-settings.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('system-settings.update') }}" method="POST"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="col-lg-12">
@@ -27,15 +29,15 @@
                                     <div class="form-group text-center">
                                         @if (auth()->user()->setting && auth()->user()->setting->image)
                                             <img style="width: 100px; height: 100px; object-fit: cover;"
-                                                class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
-                                                src="{{ auth()->user()->setting->image == 'avatar.png'
+                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
+                                                 src="{{ auth()->user()->setting->image == 'avatar.png'
                                                     ? asset('images/logo.png')
                                                     : asset('storage/' . auth()->user()->setting->image) }}"
-                                                alt="Profile Image">
+                                                 alt="Profile Image">
                                         @else
                                             <img style="width: 100px; height: 100px;"
-                                                class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
-                                                src="{{ asset('images/logo.png') }}" alt="Default Image">
+                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
+                                                 src="{{ asset('images/logo.png') }}" alt="Default Image">
                                         @endif
                                         <input id="image" type="file" name="image" data-max-file-size="500KB">
                                     </div>
@@ -44,24 +46,25 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
-                                            value="{{ auth()->user()->id }}" required>
+                                               value="{{ auth()->user()->id }}" required>
                                         <label for="company_name">Store Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_name"
-                                            value="{{ $settings->company_name ?? null }}" required>
+                                               value="{{ $settings->company_name ?? null }}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="company_email">Store Email <span class="text-danger">*</span></label>
+                                        <label for="company_email">Store Email <span
+                                                    class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_email"
-                                            value="{{ $settings->company_email ?? null }}" >
+                                               value="{{ $settings->company_email ?? null }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="company_phone">Phone <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_phone"
-                                            value="{{ $settings->company_phone ?? null }}">
+                                               value="{{ $settings->company_phone ?? null }}">
                                     </div>
                                 </div>
                             </div>
@@ -70,13 +73,13 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="default_currency_id">Default Currency <span
-                                                class="text-danger">*</span></label>
+                                                    class="text-danger">*</span></label>
                                         <select name="default_currency_id" id="default_currency_id" class="form-control"
-                                            required>
+                                                required>
                                             @foreach (\Modules\Currency\Entities\Currency::all() as $currency)
                                                 <option
-                                                    {{ optional($settings)->default_currency_id == $currency->id ? 'selected' : '' }}
-                                                    value="{{ $currency->id ?? null }}">{{ $currency->currency_name }}
+                                                        {{ optional($settings)->default_currency_id == $currency->id ? 'selected' : '' }}
+                                                        value="{{ $currency->id ?? null }}">{{ $currency->currency_name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -85,15 +88,17 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="default_currency_position">Default Currency Position <span
-                                                class="text-danger">*</span></label>
+                                                    class="text-danger">*</span></label>
                                         <select name="default_currency_position" id="default_currency_position"
-                                            class="form-control" required>
+                                                class="form-control" required>
                                             <option
-                                                {{ optional($settings)->default_currency_position == 'prefix' ? 'selected' : '' }}
-                                                value="prefix">Prefix</option>
+                                                    {{ optional($settings)->default_currency_position == 'prefix' ? 'selected' : '' }}
+                                                    value="prefix">Prefix
+                                            </option>
                                             <option
-                                                {{ optional($settings)->default_currency_position == 'suffix' ? 'selected' : '' }}
-                                                value="suffix">Suffix</option>
+                                                    {{ optional($settings)->default_currency_position == 'suffix' ? 'selected' : '' }}
+                                                    value="suffix">Suffix
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -101,9 +106,9 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="notification_email">Notification Email <span
-                                                class="text-danger">*</span></label>
+                                                    class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="notification_email"
-                                            value="{{ optional($settings)->notification_email }}">
+                                               value="{{ optional($settings)->notification_email }}">
                                     </div>
                                 </div>
 
@@ -113,9 +118,9 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="company_address">Address <span
-                                                class="text-danger">*</span></label>
+                                                    class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_address"
-                                            value="{{ optional($settings)->company_address }}">
+                                               value="{{ optional($settings)->company_address }}">
                                     </div>
                                 </div>
                             </div>
@@ -123,12 +128,12 @@
 
                             <div class="form-group mb-0">
                                 <button type="submit" id="submitNi" class="btn btn-primary"><i class="bi bi-check"></i>
-                                    Save Changes</button>
+                                    Save Changes
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
-
 
 
                 <div class="card">
@@ -140,9 +145,6 @@
 
                     </div>
                 </div>
-
-
-
 
 
                 <div class="card">
@@ -164,8 +166,8 @@
         var first = '';
         var second = '';
         var third = '';
-        $(document).ready(function() {
-            $("#nextBtn").click(function() {
+        $(document).ready(function () {
+            $("#nextBtn").click(function () {
                 var inputValue = $("input.storename").val();
                 if (inputValue.trim() === '') {
                     alert("Please enter a store name.");
@@ -175,32 +177,32 @@
                         selectedElement: 'second',
                         storename: inputValue,
                         id: {{ auth()->user()->id }},
-                    }, function(data) {
+                    }, function (data) {
                         location.reload();
-                    }).fail(function() {
+                    }).fail(function () {
                         alert('An error occurred while updating the session.');
                     });
                 }
             });
 
-            $(".backBtn").click(function() {
+            $(".backBtn").click(function () {
                 $.post('/update-session/registration-requirements', {
                     storename: '{{ session('storename_' . auth()->user()->id) }}',
                     id: {{ auth()->user()->id }},
-                }, function(data) {
+                }, function (data) {
                     location.reload();
-                }).fail(function() {
+                }).fail(function () {
                     alert('An error occurred while updating the session.');
                 });
             });
 
-            $('#btn_backpallete').click(function() {
+            $('#btn_backpallete').click(function () {
                 window.location.href = "{{ route('registration.requirements-permission') }}";
             });
-            $('#backBtnpermission').click(function() {
+            $('#backBtnpermission').click(function () {
                 window.location.href = "{{ route('registration.requirements-storename') }}";
             });
-            $('#permissionBtnFunc').click(function() {
+            $('#permissionBtnFunc').click(function () {
 
 
                 // $('.form-control').removeClass('is-invalid');
@@ -214,12 +216,12 @@
 
                 // Convert the form data to an object
                 var data = {};
-                $.each(formData, function(index, field) {
+                $.each(formData, function (index, field) {
                     data[field.name] = field.value;
                 });
 
                 // Get an array of all checkbox values (permission_ids)
-                var permissionIds = $('input[name="permissions[]"]').map(function() {
+                var permissionIds = $('input[name="permissions[]"]').map(function () {
                     return $(this).val();
                 }).get();
 
@@ -227,7 +229,7 @@
                 var permissions = [];
 
                 // Iterate through all permission_ids and check their statuses
-                $.each(permissionIds, function(index, permissionId) {
+                $.each(permissionIds, function (index, permissionId) {
                     // Check if the checkbox with this permission_id is checked
                     var status = $('input[name="permissions[]"][value="' + permissionId + '"]').is(
                         ':checked');
@@ -241,9 +243,9 @@
 
                 // Send the data to the server
                 $.post('/update-session/registration-requirements/withpermission_update', {
-                        selectedElement: 'third',
-                        storename: '{{ session('storename') }}',
-                        id: {{ auth()->user()->id }},
+                    selectedElement: 'third',
+                    storename: '{{ session('storename') }}',
+                    id: {{ auth()->user()->id }},
                         permissions: permissions
                     })
                     .done(function(response) {
