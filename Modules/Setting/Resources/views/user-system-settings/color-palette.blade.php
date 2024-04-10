@@ -183,17 +183,17 @@
         <div class="legend-container">
             <div class="single-legend">
                 <div class="square-legend first-div-bgcolor"></div>
-                <p class="legend-text first-color">#000000</p>
+                <p class="legend-text first-color" style="margin: 0;">#000000</p>
             </div>
 
             <div class="single-legend">
                 <div class="square-legend second-div-bgcolor"></div>
-                <p class="legend-text second-color">#000000</p>
+                <p class="legend-text second-color" style="margin: 0;">#000000</p>
             </div>
 
             <div class="single-legend">
                 <div class="square-legend third-div-bgcolor"></div>
-                <p class="legend-text third-color">#000000</p>
+                <p class="legend-text third-color" style="margin: 0;">#000000</p>
             </div>
 
 
@@ -207,3 +207,19 @@
 
     </div>
 </div>
+
+<div class="progressbar" style="top: 45px; left: 0; position: absolute; width: 100% !important;">
+    <span class="progress" style="width: 100%  !important;"></span>
+</div>
+<div class="counter" style="
+    left: 0;
+    height: 20px;
+    top: 60px;
+    width: 100%;
+    "></div>
+<script>
+    document.getElementById("paletteBtnSubmit").addEventListener("click", function () {
+        document.querySelector(".progress").style.background = "#34D6AC"; // add color sa progress hays
+    });
+
+</script>

@@ -100,7 +100,7 @@ h6 {
 
 p {
     margin-bottom: 1rem;
-    margin-top: 0
+    margin-top: 0;
 }
 
 abbr[data-original-title],
@@ -10189,17 +10189,18 @@ html:not([dir=rtl]) .pagination-sm .page-item:last-child .page-link {
 }
 
 .progress {
-    background-color: #ebedef;
-    border-radius: .25rem;
-    font-size: .65625rem;
-    height: 1rem;
-    line-height: 0
+    /* background-color: #ebedef; */
+    /* border-radius: .25rem; */
+    /* font-size: .65625rem; */
+    /* height: 1rem; */
+    /* line-height: 0; */
 }
 
 .progress,
 .progress-bar {
     display: flex;
-    overflow: hidden
+    overflow: hidden;
+    /* width: 100px; */
 }
 
 .progress-bar {

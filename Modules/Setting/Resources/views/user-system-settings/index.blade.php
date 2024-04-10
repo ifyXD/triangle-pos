@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active">System Settings</li>
     </ol>
 @endsection
- 
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +26,7 @@
                                     <label for="image">Profile Image <span class="text-danger">*</span></label>
                                     <div class="form-group text-center">
                                         @if (auth()->user()->setting && auth()->user()->setting->image)
-                                            <img style="width: 100px; height: 100px;"
+                                            <img style="width: 100px; height: 100px; object-fit: cover;"
                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
                                                 src="{{ auth()->user()->setting->image == 'avatar.png'
                                                     ? asset('images/logo.png')
@@ -136,8 +136,8 @@
                         <h5 class="mb-0">Permissions</h5>
                     </div>
                     <div class="card-body">
-                        @include('setting::user-system-settings.permissions') 
-                        
+                        @include('setting::user-system-settings.permissions')
+
                     </div>
                 </div>
 
@@ -150,8 +150,8 @@
                         <h5 class="mb-0">Theme Customizer</h5>
                     </div>
                     <div class="card-body">
-                        @include('setting::user-system-settings.color-palette') 
-                        
+                        @include('setting::user-system-settings.color-palette')
+
                     </div>
                 </div>
             </div>
@@ -159,12 +159,12 @@
     </div>
 @endsection
 
-@push('page_scripts') 
+@push('page_scripts')
     <script>
         var first = '';
         var second = '';
         var third = '';
-        $(document).ready(function() { 
+        $(document).ready(function() {
             $("#nextBtn").click(function() {
                 var inputValue = $("input.storename").val();
                 if (inputValue.trim() === '') {
@@ -182,7 +182,7 @@
                     });
                 }
             });
-    
+
             $(".backBtn").click(function() {
                 $.post('/update-session/registration-requirements', {
                     storename: '{{ session('storename_' . auth()->user()->id) }}',
@@ -193,7 +193,7 @@
                     alert('An error occurred while updating the session.');
                 });
             });
-    
+
             $('#btn_backpallete').click(function() {
                 window.location.href = "{{ route('registration.requirements-permission') }}";
             });
@@ -201,44 +201,44 @@
                 window.location.href = "{{ route('registration.requirements-storename') }}";
             });
             $('#permissionBtnFunc').click(function() {
-    
-    
+
+
                 // $('.form-control').removeClass('is-invalid');
                 // $('.invalid-feedback').text('');
                 // $('.permissionForm').addClass('d-none');
                 // $('.registrationForm').removeClass('d-none');
-    
-    
+
+
                 // Serialize the form data
                 var formData = $('#permissions-form').serializeArray();
-    
+
                 // Convert the form data to an object
                 var data = {};
                 $.each(formData, function(index, field) {
                     data[field.name] = field.value;
                 });
-    
+
                 // Get an array of all checkbox values (permission_ids)
                 var permissionIds = $('input[name="permissions[]"]').map(function() {
                     return $(this).val();
                 }).get();
-    
+
                 // Create an array to hold all permissions with their statuses
                 var permissions = [];
-    
+
                 // Iterate through all permission_ids and check their statuses
                 $.each(permissionIds, function(index, permissionId) {
                     // Check if the checkbox with this permission_id is checked
                     var status = $('input[name="permissions[]"][value="' + permissionId + '"]').is(
                         ':checked');
-    
+
                     // Push the permission with its status to the array
                     permissions.push({
                         permission_id: permissionId,
                         status: status
                     });
                 });
-    
+
                 // Send the data to the server
                 $.post('/update-session/registration-requirements/withpermission_update', {
                         selectedElement: 'third',
@@ -248,56 +248,56 @@
                     })
                     .done(function(response) {
                         location.reload();
-                      
+
                     })
                     .fail(function(xhr, status, error) {
                         // Handle failure
                         console.error(xhr.responseText);
                     });
-    
+
             });
-    
-    
+
+
             $('.parent').click(function() {
                 $('.parent').removeClass('border-parent');
                 $(this).addClass('border-parent');
-    
+
                 first = $(this).find('.left-color').data('color');
                 second = $(this).find('.middle-color').data('color');
                 third = $(this).find('.right-color').data('color');
-    
+
                 $('.first-color').text(first);
                 $('.second-color').text(second);
                 $('.third-color').text(third);
-    
+
                 $('.first-div-bgcolor').css('background-color', first);
                 $('.second-div-bgcolor').css('background-color', second);
                 $('.third-div-bgcolor').css('background-color', third);
-    
+
                 //remove the disabled attr of paletteBtnSubmit id element
                 $('#asdSubmit').removeAttr('disabled');
-    
+
             });
-    
-    
+
+
             var progress = $('.progressbar .progress');
-    
+
             // Define counterInit function
             function counterInit(fValue, lValue) {
                 $('.progressbar').removeClass('d-none');
                 var counter_value = parseInt($('.counter').text()) || 0;
                 counter_value++;
-    
+
                 if (counter_value <= 100) {
                     $('.counter').text(counter_value + '%');
                     $('.progress').css({
                         'width': counter_value + '%'
                     });
-    
+
                     setTimeout(function() {
                         counterInit(fValue, lValue);
                     }, 10);
-    
+
                     if (counter_value === 100) {
                         $.ajax({
                             method: 'POST',
@@ -317,17 +317,17 @@
                     }
                 }
             }
-    
-    
+
+
             // Bind click event to start counting
             $('#paletteBtnSubmit').click(function() {
                 counterInit(0, 100); // Start counting when the button is clicked
             });
             $('#select-all').click(function() {
                 $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-            }); 
-    
+            });
+
         });
     </script>
-     
+
 @endpush

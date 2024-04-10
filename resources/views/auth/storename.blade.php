@@ -15,7 +15,7 @@
 
     <div class="store">
         <div class="container-fluid">
-                <form class="store-container" action="{{route('updaterequirements')}}" method="post">
+                <form class="store-container" action="{{route('updaterequirements')}}" method="post" style="transform: translateY(clamp(10px, 20vh, 30vh));">
                     @csrf
                     <h1 class="headline">Let's give your store a <span>name</span> </h1>
                     <div class="input-container">

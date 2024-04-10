@@ -220,6 +220,7 @@ input[type=text]:focus, textarea:focus {
     gap: 60px;
     /* transform: translateY(10vh); */
     margin: 0 auto;
+    padding: 50px 0;
 }
 
 .permission-container {
@@ -295,11 +296,13 @@ input[type=text]:focus, textarea:focus {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 60px;
+    gap: 40px;
     align-self: stretch;
     /* transform: translateY(10%); */
     width: 898px;
     margin: 0 auto;
+
+    padding: 50px 0;
 }
 
 .palette-container-container {
@@ -312,12 +315,19 @@ input[type=text]:focus, textarea:focus {
 
 .palette-container {
     display: flex;
-    width: 898px;
     padding: 10px;
     align-items: flex-start;
     align-content: flex-start;
     gap: 20px;
     flex-wrap: wrap;
+    /*display: flex;*/
+    /*width: 1200px;*/
+    /*padding: 10px;*/
+    /*align-items: flex-start;*/
+    /*align-content: flex-start;*/
+    /*gap: 20px;*/
+    /*flex-wrap: wrap;*/
+    /*justify-content: space-evenly;*/
 }
 
 .palette {
