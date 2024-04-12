@@ -29,7 +29,7 @@ class PosController extends Controller
 
         Cart::instance('sale')->destroy();
 
-        $customers = Customer::all();
+        $customers = Customer::where('user_id', auth()->user()->id)->get();
         $product_categories = Category::all();
 
         return view('sale::pos.index', compact('product_categories', 'customers'));

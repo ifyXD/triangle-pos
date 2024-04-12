@@ -31,17 +31,24 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table tablecart">
                         <thead>
                             <tr class="text-center">
                                 <th class="align-middle">Product</th>
                                 <th class="align-middle">Price/Unit</th>
                                 <th class="align-middle">Quantity</th>
+                                <th class="align-middle">Sub Total</th>
                                 <th class="align-middle">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <tr>
+                                <td colspan="9" class="text-center no-product-message">
+                                    <span class="text-danger">
+                                        Please search & select products!
+                                    </span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -50,28 +57,22 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-striped"> 
+                        <table class="table table-total table-striped">
                             <tr class="text-primary">
                                 <th>Grand Total</th>
-                                {{-- @php
-                                    $total_with_shipping = Cart::instance($cart_instance)->total() + (float) $shipping;
-                                @endphp
-                                <th>
-                                    (=) {{ format_currency($total_with_shipping) }}
-                                </th> --}}
+                                <th>(=) 0.00</th>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
 
-            
+
             <div class="form-group d-flex justify-content-center flex-wrap mb-0">
                 <button wire:click="resetCart" type="button" class="btn btn-pill btn-danger mr-3"><i
                         class="bi bi-x"></i> Reset</button>
                 <button wire:loading.attr="disabled" wire:click="proceed" type="button"
-                    class="btn btn-pill btn-primary" ><i
-                        class="bi bi-check"></i> Proceed</button>
+                    class="btn btn-pill btn-primary"><i class="bi bi-check"></i> Proceed</button>
             </div>
         </div>
     </div>
