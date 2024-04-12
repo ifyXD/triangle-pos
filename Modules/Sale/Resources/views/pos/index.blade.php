@@ -24,7 +24,9 @@
                 <livewire:pos.product-list :categories="$product_categories"/>
             </div>
             <div class="col-lg-5">
-                <livewire:pos.checkout :cart-instance="'sale'" :customers="$customers"/>            
+                {{-- <livewire:pos.checkout :cart-instance="'sale'" :customers="$customers"/>             --}}
+                @include('sale::pos.checkout')
+
             </div>
         </div>
     </div>
@@ -65,3 +67,38 @@
     </script>
 
 @endpush
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.proceed_click').click(function() {
+            let id = $(this).data('id');
+
+            $(`.close${id}`).click();
+        });
+
+
+        $('.changePrice').change(function() {
+            let id = $(this).data('id');
+            // Get the selected price value
+            var selectedPriceString = $(`.selectpricehere${id}`).val(); // Get the value as string
+            // Remove currency symbol and ".00" from the string, then parse to float
+            var selectedPrice = parseFloat(selectedPriceString.replace('₱', '').replace(',', ''));
+
+            var product_quantity = parseInt($(`input#product_quantity${id}`).val());
+            var total = selectedPrice *
+                product_quantity; // Multiply the selectedPrice and product_quantity
+
+            console.log(total);
+
+            // Update the content of the target element with the selected price
+            $(`#selectedPrice${id}`).text(selectedPriceString);
+            $(`#grand_total_number${id}`).val(total.toFixed(
+                2)); // Use toFixed(2) to ensure two decimal places
+        });
+
+
+
+
+    });
+</script>
+
