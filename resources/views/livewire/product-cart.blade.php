@@ -35,10 +35,10 @@
                             <tr>
                                 <td class="align-middle">
                                     {{ $cart_item->name }} <br>
-                                    <span class="badge badge-success">
+                                    {{-- <span class="badge badge-success">
                                         {{ $cart_item->options->code }}
                                     </span>
-                                    @include('livewire.includes.product-cart-modal')
+                                    @include('livewire.includes.product-cart-modal') --}}
                                 </td>
 
                                 <td x-data="{ open{{ $cart_item->id }}: false }" class="align-middle text-center">
@@ -50,7 +50,7 @@
                                 </td>
 
                                 <td class="align-middle text-center text-center">
-                                    <span class="badge badge-info">{{ $cart_item->options->stock . ' ' . $cart_item->options->unit }}</span>
+                                    <span class="badge badge-info">{{ $cart_item->options->stock}}</span>
                                 </td>
 
                                 <td class="align-middle text-center">
