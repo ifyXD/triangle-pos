@@ -36,7 +36,8 @@
                         <thead>
                             <tr class="text-center">
                                 <th class="align-middle">Product</th>
-                                <th class="align-middle">Price/Unit</th>
+                                <th class="align-middle">Price</th>
+                                <th class="align-middle">Unit</th>
                                 <th class="align-middle">Quantity</th>
                                 <th class="align-middle">Sub Total</th>
                                 <th class="align-middle">Action</th>
@@ -44,7 +45,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="9" class="text-center no-product-message">
+                                <td colspan="10" class="text-center no-product-message">
                                     <span class="text-danger">
                                         Please search & select products!
                                     </span>

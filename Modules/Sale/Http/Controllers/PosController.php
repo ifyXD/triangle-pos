@@ -55,9 +55,9 @@ class PosController extends Controller
                 'reference' => 'PSL',
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
-                'tax_percentage' => $request->tax_percentage,
-                'discount_percentage' => $request->discount_percentage,
-                'shipping_amount' => $request->shipping_amount * 100,
+                // 'tax_percentage' => $request->tax_percentage,
+                // 'discount_percentage' => $request->discount_percentage,
+                // 'shipping_amount' => $request->shipping_amount * 100,
                 'paid_amount' => $request->paid_amount * 100,
                 'total_amount' => $request->total_amount * 100,
                 'due_amount' => $due_amount * 100,
@@ -65,30 +65,48 @@ class PosController extends Controller
                 'payment_status' => $payment_status,
                 'payment_method' => $request->payment_method,
                 'note' => $request->note,
-                'tax_amount' => Cart::instance('sale')->tax() * 100,
-                'discount_amount' => Cart::instance('sale')->discount() * 100,
+                // 'tax_amount' => Cart::instance('sale')->tax() * 100,
+                // 'discount_amount' => Cart::instance('sale')->discount() * 100,
                 'user_id' => auth()->user()->id,
             ]);
 
-            foreach (Cart::instance('sale')->content() as $cart_item) {
+            // foreach (Cart::instance('sale')->content() as $cart_item) {
+            //     SaleDetails::create([
+            //         'sale_id' => $sale->id,
+            //         'product_id' => $cart_item->id,
+            //         'product_name' => $cart_item->name,
+            //         'product_code' => $cart_item->options->code,
+            //         'quantity' => $cart_item->qty,
+            //         'price' => $cart_item->price * 100,
+            //         'unit_price' => $cart_item->options->unit_price * 100,
+            //         'sub_total' => $cart_item->options->sub_total * 100,
+            //         'product_discount_amount' => $cart_item->options->product_discount * 100,
+            //         'product_discount_type' => $cart_item->options->product_discount_type,
+            //         'product_tax_amount' => $cart_item->options->product_tax * 100,
+            //         'user_id' => auth()->user()->id,
+            //     ]);
+
+            //     $product = Product::findOrFail($cart_item->id);
+            //     $product->update([
+            //         'product_quantity' => $product->product_quantity - $cart_item->qty
+            //     ]);
+            // }
+            foreach ($request->cartDetails as $cartDetail) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
-                    'product_id' => $cart_item->id,
-                    'product_name' => $cart_item->name,
-                    'product_code' => $cart_item->options->code,
-                    'quantity' => $cart_item->qty,
-                    'price' => $cart_item->price * 100,
-                    'unit_price' => $cart_item->options->unit_price * 100,
-                    'sub_total' => $cart_item->options->sub_total * 100,
-                    'product_discount_amount' => $cart_item->options->product_discount * 100,
-                    'product_discount_type' => $cart_item->options->product_discount_type,
-                    'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'product_id' => $cartDetail['productId'],
+                    'product_name' => $cartDetail['productName'],
+                    'quantity' => $cartDetail['quantity'],
+                    'price' => $cartDetail['pricePerProductUnit'],
+                    'unit_price' => $cartDetail['pricePerUnit'],
+                    'sub_total' => $cartDetail['subTotal'],
+                    // Add other fields from $cartDetail array as needed
                     'user_id' => auth()->user()->id,
                 ]);
-
-                $product = Product::findOrFail($cart_item->id);
+            
+                $product = Product::findOrFail($cartDetail['productId']);
                 $product->update([
-                    'product_quantity' => $product->product_quantity - $cart_item->qty
+                    'product_quantity' => $product->product_quantity - $cartDetail['quantity']
                 ]);
             }
 
@@ -108,6 +126,9 @@ class PosController extends Controller
 
         toast('POS Sale Created!', 'success');
 
-        return redirect()->route('sales.index');
+        // return redirect()->route('sales.index');
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }

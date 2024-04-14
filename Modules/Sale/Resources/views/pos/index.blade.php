@@ -72,7 +72,7 @@
             $('.tablecart tbody tr').each(function() {
 
                 let subTotal = parseFloat($(this).find('.sub-total').text());
-                console.log(subTotal);
+                // console.log(subTotal);
                 grandTotal += subTotal;
             });
 
@@ -105,17 +105,19 @@
 
                 if (existingRow.length > 0) {
                     // Update the existing row
-                    existingRow.find('.price-per-unit').text(priceValue + ' / ' + priceText);
+                    existingRow.find('.price-per-product-unit').text(priceValue);
+                    existingRow.find('.price-per-unit').text(priceText);
                     existingRow.find('.quantity').text(qty);
                     existingRow.find('.sub-total').text((parseFloat(priceValue) * parseInt(qty)).toFixed(2));
-                    
+
                 } else {
-                      
+
                     // Append a new row for the product
                     tbody.append(`
                 <tr data-product-id="${id}" class="text-center">
                     <td>${product_name}</td>
-                    <td class="price-per-unit">${priceValue} / ${priceText}</td>
+                    <td class="price-per-product-unit">${priceValue}</td>
+                    <td class="price-per-unit">${priceText}</td>
                     <td class="quantity">${qty}</td>
                     <td class="sub-total">${(parseFloat(priceValue) * parseInt(qty)).toFixed(2)}</td>
                     <td class="align-middle text-center">
@@ -130,8 +132,9 @@
                 $(`.close${id}`).click();
             } else {
                 alert('Please select a unit price');
-            } 
+            }
             updateGrandTotal();
+
         }
 
 
@@ -181,6 +184,10 @@
             });
 
             $('#customer_id').change(function() {
+
+
+
+
                 // Check if tbody in table with id tablecart contains a td with the class no-product-message
                 if ($('.tablecart tbody').find('td').hasClass('no-product-message') || $(this).val() ===
                     '') {
@@ -195,7 +202,63 @@
 
 
 
+            $('#submit_product_data_sale').click(function() {
+                var cartDetails = [];
+                var customer_id = $('#customer_id').val();
+                var paid_amount = $('#paid_amount').val();
+                var total_amount = $('#total_amount').val();
+                var payment_method = $('#payment_method').val();
+                var note = $('#note').val();
 
+                // Iterate over each <tr> element
+                $('tr[data-product-id]').each(function() {
+                    // Extract data from the current <tr>
+                    var productId = $(this).data('product-id');
+                    var productName = $(this).find('td:eq(0)').text();
+                    var pricePerProductUnit = $(this).find('.price-per-product-unit').text();
+                    var pricePerUnit = $(this).find('.price-per-unit').text();
+                    var quantity = $(this).find('.quantity').text();
+                    var subTotal = $(this).find('.sub-total').text();
+
+                    // Create an object to represent the cart detail
+                    var cartDetail = {
+                        productId: productId,
+                        productName: productName,
+                        pricePerProductUnit: pricePerProductUnit,
+                        pricePerUnit: pricePerUnit,
+                        quantity: quantity,
+                        subTotal: subTotal
+                    };
+
+                    // Push the cart detail object into the array
+                    cartDetails.push(cartDetail);
+                });
+
+                // Output the cart details array to console for testing
+                // console.log(cartDetails);
+                // Make an AJAX POST request to send the cart details to the server
+                // Make an AJAX POST request to send the cart details to the server
+                $.post('{{ route('app.pos.store') }}', {
+                        cartDetails: cartDetails,
+                        customer_id: customer_id,
+                        paid_amount: paid_amount,
+                        total_amount: total_amount,
+                        payment_method: payment_method,
+                        note: note,
+                    })
+                    .done(function(response) {
+                        // Success callback
+                        console.log(cartDetails);
+                        // You can perform further actions here based on the server response
+                    })
+                    .fail(function(xhr, status, error) {
+                        // Failure callback
+                        console.error('Request failed:', status, error);
+                        // You can handle errors or show an error message to the user
+                    });
+
+
+            });
 
 
 
