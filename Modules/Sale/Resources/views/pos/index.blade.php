@@ -248,12 +248,13 @@
                     })
                     .done(function(response) {
                         // Success callback
-                        console.log(cartDetails);
+                        // console.log(cartDetails);
+                        window.location = "{{route('sales.index')}}";
                         // You can perform further actions here based on the server response
                     })
                     .fail(function(xhr, status, error) {
                         // Failure callback
-                        console.error('Request failed:', status, error);
+                        console.error(xhr);
                         // You can handle errors or show an error message to the user
                     });
 

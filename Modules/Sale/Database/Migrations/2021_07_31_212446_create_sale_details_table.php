@@ -21,7 +21,7 @@ class CreateSaleDetailsTable extends Migration
             // $table->string('product_code')->nullable();
             $table->integer('quantity');
             $table->integer('price');
-            $table->integer('unit_price');
+            $table->string('unit_price');
             $table->integer('sub_total');
             // $table->integer('product_discount_amount');
             // $table->string('product_discount_type')->default('fixed');

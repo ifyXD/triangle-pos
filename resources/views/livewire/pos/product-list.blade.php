@@ -42,13 +42,19 @@
                                 </div>
                             </div>
                         </div>
+                    @else
+                        <div class="col-12">
+                            <div class="alert alert-warning mb-0">
+                                Products Not Found...
+                            </div>
+                        </div>
                     @endif
 
                     <!-- Modal -->
                     <div class="modal fade" id="viewModal{{ $product->id }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content parentcontent{{$product->id}}">
+                            <div class="modal-content parentcontent{{ $product->id }}">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Price: <span
                                             id="selectedPrice{{ $product->id }}">{{ format_currency($product_selected_price) }}</span>
@@ -69,7 +75,8 @@
                                                     name="product_quantity" required value="1" min="1"
                                                     max="{{ $product->product_quantity }}">
                                                 <input id="product_name{{ $product->id }}" type="hidden"
-                                                    class="form-control changePrice" value="{{$product->product_name}}">
+                                                    class="form-control changePrice"
+                                                    value="{{ $product->product_name }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -114,7 +121,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary proceed_click" onclick="proceedProduct({{$product->id}})">Proceed</button>
+                                    <button type="button" class="btn btn-primary proceed_click"
+                                        onclick="proceedProduct({{ $product->id }})">Proceed</button>
 
                                 </div>
                             </div>
