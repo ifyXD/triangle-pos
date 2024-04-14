@@ -21,10 +21,11 @@
                                 <i class="bi bi-person-plus"></i>
                             </a>
                         </div>
-                        <select wire:model.live="customer_id" id="customer_id" class="form-control">
+                        <select id="customer_id" class="form-control">
                             <option value="" selected>Select Customer</option>
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                                <option value="{{ $customer->id }}">
+                                    {{ $customer->customer_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,15 +70,14 @@
 
 
             <div class="form-group d-flex justify-content-center flex-wrap mb-0">
-                <button wire:click="resetCart" type="button" class="btn btn-pill btn-danger mr-3"><i
-                        class="bi bi-x"></i> Reset</button>
-                <button wire:loading.attr="disabled" wire:click="proceed" type="button"
+                <button type="button" class="btn btn-pill btn-danger mr-3"><i class="bi bi-x"></i> Reset</button>
+                <button type="button" data-toggle="modal" data-target="#cartSelect" id="proceed_cart" disabled
                     class="btn btn-pill btn-primary"><i class="bi bi-check"></i> Proceed</button>
             </div>
         </div>
     </div>
 
     {{-- Checkout Modal --}}
-    {{-- @include('livewire.pos.includes.checkout-modal') --}}
+    @include('livewire.pos.includes.checkout-modal')
 
 </div>

@@ -24,7 +24,8 @@ class PosController extends Controller
             abort(403, 'Unauthorized');
         }
     }
-    public function index() {
+    public function index()
+    {
         $this->checkPermission('create_pos_sales');
 
         Cart::instance('sale')->destroy();
@@ -36,7 +37,8 @@ class PosController extends Controller
     }
 
 
-    public function store(StorePosSaleRequest $request) {
+    public function store(StorePosSaleRequest $request)
+    {
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
@@ -95,7 +97,7 @@ class PosController extends Controller
             if ($sale->paid_amount > 0) {
                 SalePayment::create([
                     'date' => now()->format('Y-m-d'),
-                    'reference' => 'INV/'.$sale->reference,
+                    'reference' => 'INV/' . $sale->reference,
                     'amount' => $sale->paid_amount,
                     'sale_id' => $sale->id,
                     'user_id' => auth()->user()->id,

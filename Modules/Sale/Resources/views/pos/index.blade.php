@@ -78,10 +78,12 @@
 
             // Update the grand total in the table
             $('.table-total th:last-child').text('(=) ' + grandTotal.toFixed(2));
+            $('#total_amount').val(grandTotal.toFixed(2));
         }
 
 
         function proceedProduct(id) {
+
             let product_name = $(`.parentcontent${id}`).find(`#product_name${id}`).val();
             let qty = $(`.parentcontent${id}`).find(`#product_quantity${id}`).val();
             // Assuming `.selectpricehere${id}` is a select element
@@ -95,6 +97,7 @@
                 if (tbody.find('tr').length == 1 && tbody.find('.no-product-message').length > 0) {
                     // Remove the "Please search & select products!" message
                     tbody.empty();
+                    $('#proceed_cart').prop('disabled', true);
                 }
 
                 // Check if a row for this product already exists in the table
@@ -102,10 +105,12 @@
 
                 if (existingRow.length > 0) {
                     // Update the existing row
-                    existingRow.find('.price-per-unit').text(priceText);
+                    existingRow.find('.price-per-unit').text(priceValue + ' / ' + priceText);
                     existingRow.find('.quantity').text(qty);
                     existingRow.find('.sub-total').text((parseFloat(priceValue) * parseInt(qty)).toFixed(2));
+                    
                 } else {
+                      
                     // Append a new row for the product
                     tbody.append(`
                 <tr data-product-id="${id}" class="text-center">
@@ -125,7 +130,7 @@
                 $(`.close${id}`).click();
             } else {
                 alert('Please select a unit price');
-            }
+            } 
             updateGrandTotal();
         }
 
@@ -148,6 +153,15 @@
                                 </tr>
                              `);
                 }
+
+                if ($('.tablecart tbody').find('td').hasClass('no-product-message') || $(this).val() ===
+                    '') {
+                    // If tbody contains a td with the class no-product-message or the value of the selected element is empty, disable the button with id proceed_cart
+                    $('#proceed_cart').prop('disabled', true);
+                } else {
+                    // If tbody does not contain a td with the class no-product-message and the value of the selected element is not empty, enable the button with id proceed_cart
+                    $('#proceed_cart').prop('disabled', false);
+                }
             });
 
             $('.changePrice').change(function() {
@@ -165,6 +179,23 @@
                 $(`#grand_total_number${id}`).val(total.toFixed(
                     2)); // Use toFixed(2) to ensure two decimal places
             });
+
+            $('#customer_id').change(function() {
+                // Check if tbody in table with id tablecart contains a td with the class no-product-message
+                if ($('.tablecart tbody').find('td').hasClass('no-product-message') || $(this).val() ===
+                    '') {
+                    // If tbody contains a td with the class no-product-message or the value of the selected element is empty, disable the button with id proceed_cart
+                    $('#proceed_cart').prop('disabled', true);
+                } else {
+                    // If tbody does not contain a td with the class no-product-message and the value of the selected element is not empty, enable the button with id proceed_cart
+                    $('#proceed_cart').prop('disabled', false);
+                    $('.customer_id_selected').val($(this).val());
+                }
+            });
+
+
+
+
 
 
 
