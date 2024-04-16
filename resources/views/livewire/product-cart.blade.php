@@ -33,23 +33,19 @@
                 <tbody>
                     @if ($cart_items->isNotEmpty())
                         @foreach ($cart_items as $cart_item)
-                            <tr>
+                            <tr data-product-id="{{ $cart_item->id }}">
                                 <td class="align-middle">
-                                    {{ $cart_item->name }} <br>
-                                    {{-- <span class="badge badge-success">
-                                        {{ $cart_item->options->code }}
-                                    </span>
-                                    @include('livewire.includes.product-cart-modal') --}}
+                                    {{ $cart_item->name }} <br> 
                                 </td>
 
                                 <td class="align-middle text-center">
                                     <input style="min-width: 40px;max-width: 100%;" type="text" readonly
-                                        id="priceValue_{{ $cart_item->id }}" class="form-control" min="0"
+                                        id="priceValue_{{ $cart_item->id }}" class="form-control price-per-product-unit" min="0"
                                         value="0">
                                     <select name="unit_select_{{ $cart_item->id }}"
                                         onchange="selectedUnit({{ $cart_item->id }}, $(this).val());"
                                         id="unit_select_{{ $cart_item->id }}" style="min-width: 40px;max-width: 100%;"
-                                        class="form-control">
+                                        class="form-control price-per-unit">
                                         <option value="" disabled selected>Select Unit</option>
                                         @foreach ($cart_item->options['prices'] as $priceOption)
                                             <option value="{{ $priceOption['price'] }}">
@@ -67,21 +63,21 @@
                                     <div class="input-group d-flex justify-content-center">
                                         <input id="qtyval_{{ $cart_item->id }}"
                                             onchange="quantity({{ $cart_item->id }}, $(this).val());"
-                                            style="min-width: 40px;max-width: 90px;" type="number" class="form-control"
+                                            style="min-width: 40px;max-width: 90px;" type="number" class="form-control quantity"
                                             value="{{ $cart_item->qty }}" min="1"
                                             max="{{ $cart_item->options['stock'] }}">
                                     </div>
 
                                 </td>
 
-                                <td class="align-middle text-center tdClass" id="td_{{ $cart_item->id }}">
+                                <td class="align-middle text-center tdClass sub-total" id="td_{{ $cart_item->id }}">
                                     {{ format_currency($cart_item->options->sub_total) }}
                                 </td>
 
                                 <td class="align-middle text-center">
-                                    <a href="#" wire:click.prevent="removeItem('{{ $cart_item->rowId }}')">
+                                    <button href="#" onclick="removeItem($(this));">
                                         <i class="bi bi-x-circle font-2xl text-danger"></i>
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -98,25 +94,22 @@
             </table>
         </div>
     </div>
-
+    <input type="hidden" name="total_amount" id="total_amount">
     <div class="row justify-content-md-end">
         <div class="col-md-4">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th>Grand Total</th>
-                        
+
                         <th id="grand_total">
-                            (=) 
+                            (=)
                         </th>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-
-    <input type="hidden" name="total_amount">
-
 
     <div class="form-row">
         <div class="col-lg-4">
@@ -164,7 +157,7 @@
     </div>
 
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" id="submitCreateSale">
             Create Sale <i class="bi bi-check"></i>
         </button>
     </div>
@@ -190,9 +183,16 @@
             }
         });
 
+
         // Set the grand total in your desired element
         $('#grand_total').text('₱' + grandTotal.toFixed(2));
-        
+        $('#total_amount').val(grandTotal.toFixed(2));
+
+    }
+
+    function removeItem(element) {
+        element.closest('tr').remove();
+        grandTotal();
     }
 
     function selectedUnit(id, price) {
@@ -211,7 +211,65 @@
         grandTotal();
 
     }
-    // $(document).ready(function() {
+    $(document).ready(function() {
+        $('#submitCreateSale').click(function() {
+            let customer_id = $('#customer_id').val();
+            let amount = $('#paid_amount').val();
+            let paid_amount = parseFloat(amount.replace('₱', '').trim());
+            let total_amount = $('#total_amount').val();
+            let payment_method = $('#payment_method').val();
+            let note = $('#note').val();
+            let status = $('#status').val();
+            let date = $('#date').val();
 
-    // });
+            var cartDetails = [];
+
+            $('tr[data-product-id]').each(function() {
+                // Extract data from the current <tr>
+                var productId = $(this).data('product-id');
+                var productName = $(this).find('td:eq(0)').text();
+                var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
+                var pricePerUnit = $(this).find('select.price-per-unit').find(':selected').text();
+                var quantity = $(this).find('.quantity').val();
+                var subTotalVal = $(this).find('.sub-total').text();
+                var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
+                // Create an object to represent the cart detail
+                var cartDetail = {
+                    productId: productId,
+                    productName: productName,
+                    pricePerProductUnit: pricePerProductUnit,
+                    pricePerUnit: pricePerUnit,
+                    quantity: quantity,
+                    subTotal: subTotal
+                };
+
+                // Push the cart detail object into the array
+                cartDetails.push(cartDetail);
+            });
+            console.log(cartDetails);
+
+            $.post('{{ route('sales.store') }}', {
+                        cartDetails: cartDetails,
+                        customer_id: customer_id,
+                        paid_amount: paid_amount,
+                        total_amount: total_amount,
+                        payment_method: payment_method,
+                        note: note,
+                        status: status,
+                        date: date,
+                    })
+                    .done(function(response) {
+                        // Success callback
+                        // console.log(cartDetails);
+                        window.location = "{{ route('sales.index') }}";
+                        // You can perform further actions here based on the server response
+                    })
+                    .fail(function(xhr, status, error) {
+                        // Failure callback
+                        console.error(xhr);
+                        // You can handle errors or show an error message to the user
+                    });
+
+        });
+    });
 </script>
