@@ -117,6 +117,58 @@
 
     <input type="hidden" name="total_amount">
 
+
+    <div class="form-row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="status">Status <span class="text-danger">*</span></label>
+                <select class="form-control" name="status" id="status" required>
+                    <option value="Pending">Pending</option>
+                    {{-- <option value="Shipped">Shipped</option> --}}
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="from-group">
+                <div class="form-group">
+                    <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
+                    <select class="form-control" name="payment_method" id="payment_method" required>
+                        <option value="Cash">Cash</option>
+                        {{-- <option value="Credit Card">Credit Card</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Cheque">Cheque</option>
+                        <option value="Other">Other</option> --}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="paid_amount">Amount Received <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input id="paid_amount" type="text" class="form-control" name="paid_amount" required>
+                    <div class="input-group-append">
+                        {{-- <button id="getTotalAmount" class="btn btn-primary" type="button">
+                            <i class="bi bi-check-square"></i>
+                        </button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="note">Note (If Needed)</label>
+        <textarea name="note" id="note" rows="5" class="form-control"></textarea>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            Create Sale <i class="bi bi-check"></i>
+        </button>
+    </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
