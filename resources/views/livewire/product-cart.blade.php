@@ -10,6 +10,7 @@
                 </div>
             </div>
         @endif
+        
         <div class="table-responsive position-relative">
             <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center"
                 style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
@@ -35,21 +36,24 @@
                         @foreach ($cart_items as $cart_item)
                             <tr data-product-id="{{ $cart_item->id }}">
                                 <td class="align-middle">
-                                    {{ $cart_item->name }} <br> 
+                                    {{ $cart_item->name}} <br>
+                                    
                                 </td>
-
                                 <td class="align-middle text-center">
                                     <input style="min-width: 40px;max-width: 100%;" type="text" readonly
-                                        id="priceValue_{{ $cart_item->id }}" class="form-control price-per-product-unit" min="0"
-                                        value="0">
+                                        id="priceValue_{{ $cart_item->id }}" value="{{$cart_item->price}}" class="form-control price-per-product-unit"
+                                        min="0" value="0">
                                     <select name="unit_select_{{ $cart_item->id }}"
                                         onchange="selectedUnit({{ $cart_item->id }}, $(this).val());"
                                         id="unit_select_{{ $cart_item->id }}" style="min-width: 40px;max-width: 100%;"
                                         class="form-control price-per-unit">
                                         <option value="" disabled selected>Select Unit</option>
-                                        @foreach ($cart_item->options['prices'] as $priceOption)
-                                            <option value="{{ $priceOption['price'] }}">
-                                                {{ $priceOption['product_unit'] }}</option>
+                                        @foreach ($cart_item->options['prices'] as $key=>$priceOption)
+                                            <option {{$cart_item->options['unit_price'] == $priceOption['product_unit']? 'selected' : ''  }} value="{{ $priceOption['price'] }}">
+                                                {{-- {{ $cart_item->unit }} --}}
+                                                {{-- {{ $cart_item->$key->unit_price }} --}}
+                                                {{ $priceOption['product_unit'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -63,8 +67,8 @@
                                     <div class="input-group d-flex justify-content-center">
                                         <input id="qtyval_{{ $cart_item->id }}"
                                             onchange="quantity({{ $cart_item->id }}, $(this).val());"
-                                            style="min-width: 40px;max-width: 90px;" type="number" class="form-control quantity"
-                                            value="{{ $cart_item->qty }}" min="1"
+                                            style="min-width: 40px;max-width: 90px;" type="number"
+                                            class="form-control quantity" value="{{ $cart_item->qty }}" min="1"
                                             max="{{ $cart_item->options['stock'] }}">
                                     </div>
 
@@ -75,9 +79,9 @@
                                 </td>
 
                                 <td class="align-middle text-center">
-                                    <button href="#" onclick="removeItem($(this));">
+                                    <a href="#" onclick="removeItem($(this));">
                                         <i class="bi bi-x-circle font-2xl text-danger"></i>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -110,57 +114,10 @@
             </div>
         </div>
     </div>
+    @foreach ($cart_items as $item)
+        {{ $item->selected_unit }}
+    @endforeach
 
-    <div class="form-row">
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label for="status">Status <span class="text-danger">*</span></label>
-                <select class="form-control" name="status" id="status" required>
-                    <option value="Pending">Pending</option>
-                    {{-- <option value="Shipped">Shipped</option> --}}
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="from-group">
-                <div class="form-group">
-                    <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
-                    <select class="form-control" name="payment_method" id="payment_method" required>
-                        <option value="Cash">Cash</option>
-                        {{-- <option value="Credit Card">Credit Card</option>
-                        <option value="Bank Transfer">Bank Transfer</option>
-                        <option value="Cheque">Cheque</option>
-                        <option value="Other">Other</option> --}}
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="form-group">
-                <label for="paid_amount">Amount Received <span class="text-danger">*</span></label>
-                <div class="input-group">
-                    <input id="paid_amount" type="text" class="form-control" name="paid_amount" required>
-                    <div class="input-group-append">
-                        {{-- <button id="getTotalAmount" class="btn btn-primary" type="button">
-                            <i class="bi bi-check-square"></i>
-                        </button> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="note">Note (If Needed)</label>
-        <textarea name="note" id="note" rows="5" class="form-control"></textarea>
-    </div>
-
-    <div class="mt-3">
-        <button type="button" class="btn btn-primary" id="submitCreateSale">
-            Create Sale <i class="bi bi-check"></i>
-        </button>
-    </div>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -229,7 +186,8 @@
                 var productId = $(this).data('product-id');
                 var productName = $(this).find('td:eq(0)').text();
                 var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
-                var pricePerUnit = $(this).find('select.price-per-unit').find(':selected').text();
+                var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
+                    .text();
                 var quantity = $(this).find('.quantity').val();
                 var subTotalVal = $(this).find('.sub-total').text();
                 var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
@@ -249,26 +207,26 @@
             console.log(cartDetails);
 
             $.post('{{ route('sales.store') }}', {
-                        cartDetails: cartDetails,
-                        customer_id: customer_id,
-                        paid_amount: paid_amount,
-                        total_amount: total_amount,
-                        payment_method: payment_method,
-                        note: note,
-                        status: status,
-                        date: date,
-                    })
-                    .done(function(response) {
-                        // Success callback
-                        // console.log(cartDetails);
-                        window.location = "{{ route('sales.index') }}";
-                        // You can perform further actions here based on the server response
-                    })
-                    .fail(function(xhr, status, error) {
-                        // Failure callback
-                        console.error(xhr);
-                        // You can handle errors or show an error message to the user
-                    });
+                    cartDetails: cartDetails,
+                    customer_id: customer_id,
+                    paid_amount: paid_amount,
+                    total_amount: total_amount,
+                    payment_method: payment_method,
+                    note: note,
+                    status: status,
+                    date: date,
+                })
+                .done(function(response) {
+                    // Success callback
+                    // console.log(cartDetails);
+                    window.location = "{{ route('sales.index') }}";
+                    // You can perform further actions here based on the server response
+                })
+                .fail(function(xhr, status, error) {
+                    // Failure callback
+                    console.error(xhr);
+                    // You can handle errors or show an error message to the user
+                });
 
         });
     });

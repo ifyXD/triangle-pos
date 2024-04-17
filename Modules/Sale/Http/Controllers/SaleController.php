@@ -2,6 +2,7 @@
 
 namespace Modules\Sale\Http\Controllers;
 
+use App\Models\Price;
 use Modules\Sale\DataTables\SalesDataTable;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Routing\Controller;
@@ -70,7 +71,7 @@ class SaleController extends Controller
                 'user_id' => auth()->user()->id
             ]);
 
-           
+
 
             foreach ($request->cartDetails as $cartDetail) {
                 SaleDetails::create([
@@ -80,17 +81,17 @@ class SaleController extends Controller
                     'quantity' => $cartDetail['quantity'],
                     'price' => $cartDetail['pricePerProductUnit'],
                     'unit_price' => $cartDetail['pricePerUnit'],
-                    'sub_total' => $cartDetail['subTotal'],
+                    'sub_total' => $cartDetail['subTotal']*100,
                     // Add other fields from $cartDetail array as needed
                     'user_id' => auth()->user()->id,
                 ]);
-            
+
                 $product = Product::findOrFail($cartDetail['productId']);
                 $product->update([
                     'product_quantity' => $product->product_quantity - $cartDetail['quantity']
                 ]);
             }
-            
+
             Cart::instance('sale')->destroy();
 
             if ($sale->paid_amount > 0) {
@@ -128,32 +129,54 @@ class SaleController extends Controller
     {
         // abort_if(Gate::denies('edit_sales'), 403);
         $this->checkPermission('edit_sales');
-        $sale_details = $sale->saleDetails;
+        // $sale_details = $sale->saleDetails;
+        $sale_details = SaleDetails::where('sale_id', $sale->id)->get();
+
 
         Cart::instance('sale')->destroy();
-
+        // echo $sale->id;
         $cart = Cart::instance('sale');
 
         foreach ($sale_details as $sale_detail) {
+            $prices = Price::where('product_id', $sale_detail->product_id)->get();
+            $priceOptions = [];
+
+            $units = $sale_detail->unit_price;
+
+            foreach ($prices as $price) {
+                // Assuming each price has fields like 'price', 'start_date', 'end_date', etc.
+
+                $priceOptions[] = [
+                    'price'      => $price['product_price'],
+                    'product_unit' => $price['product_unit'],
+                    // Add any other fields you need
+                ];
+            }
+
+
+
             $cart->add([
                 'id'      => $sale_detail->product_id,
                 'name'    => $sale_detail->product_name,
                 'qty'     => $sale_detail->quantity,
                 'price'   => $sale_detail->price,
+                // 'unit_price'   => $sale_detail->unit_price,
                 'weight'  => 1,
                 'options' => [
-                    'product_discount' => $sale_detail->product_discount_amount,
-                    'product_discount_type' => $sale_detail->product_discount_type,
+                    // 'product_discount' => $sale_detail->product_discount_amount,
+                    // 'product_discount_type' => $sale_detail->product_discount_type,
                     'sub_total'   => $sale_detail->sub_total,
-                    'code'        => $sale_detail->product_code,
                     'stock'       => Product::findOrFail($sale_detail->product_id)->product_quantity,
-                    'product_tax' => $sale_detail->product_tax_amount,
-                    'unit_price'  => $sale_detail->unit_price
+                    // 'unit'        => $product['product_unit'],
+                    'code'        => $sale_detail->product_code,
+                    // 'product_tax' => $sale_detail->product_tax_amount,
+                    'unit_price'  => $sale_detail->unit_price,
+                    'prices'                => $priceOptions, // Add prices options here
                 ]
             ]);
         }
 
-        return view('sale::edit', compact('sale'));
+        return view('sale::edit', compact('sale', 'sale_details'));
     }
 
 
@@ -197,23 +220,23 @@ class SaleController extends Controller
                 'payment_status' => $payment_status,
                 'payment_method' => $request->payment_method,
                 'note' => $request->note,
-                'tax_amount' => Cart::instance('sale')->tax() * 100,
-                'discount_amount' => Cart::instance('sale')->discount() * 100,
+                // 'tax_amount' => Cart::instance('sale')->tax() * 100,
+                // 'discount_amount' => Cart::instance('sale')->discount() * 100,
             ]);
 
-            foreach (Cart::instance('sale')->content() as $cart_item) {
+            foreach ($request->cartDetails as $cart_item) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
-                    'product_id' => $cart_item->id,
-                    'product_name' => $cart_item->name,
-                    'product_code' => $cart_item->options->code,
-                    'quantity' => $cart_item->qty,
-                    'price' => $cart_item->price * 100,
-                    'unit_price' => $cart_item->options->unit_price * 100,
-                    'sub_total' => $cart_item->options->sub_total * 100,
-                    'product_discount_amount' => $cart_item->options->product_discount * 100,
-                    'product_discount_type' => $cart_item->options->product_discount_type,
-                    'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'product_id' => $cart_item['productId'],
+                    'product_name' => $cart_item['productName'],
+                    // 'product_code' => $cart_item->options->code,
+                    'quantity' => $cart_item['quantity'],
+                    'price' => $cart_item['pricePerProductUnit'],
+                    'unit_price' => $cart_item['pricePerUnit'],
+                    'sub_total' => $cart_item['subTotal'] * 100,
+                    // 'product_discount_amount' => $cart_item->options->product_discount * 100,
+                    // 'product_discount_type' => $cart_item->options->product_discount_type,
+                    // 'product_tax_amount' => $cart_item->options->product_tax * 100,
                     'user_id' => auth()->user()->id,
                 ]);
 
@@ -230,7 +253,7 @@ class SaleController extends Controller
 
         toast('Sale Updated!', 'info');
 
-        return redirect()->route('sales.index');
+        return response()->json(['message' => 'success']);
     }
 
 

@@ -214,7 +214,7 @@
 
                 // Send the checkedValues array to your Laravel controller using AJAX
                 $.ajax({
-                    url: '/update-session/registration-requirements/withpermission',
+                    url: '/update-session/registration-requirements/withpermission_update',
                     type: 'POST',
                     data: {
                         permissions: checkedValues

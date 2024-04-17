@@ -14,6 +14,7 @@ class SaleDetails extends Model
 
     protected $with = ['product'];
 
+
     public function product() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
@@ -23,12 +24,13 @@ class SaleDetails extends Model
     }
 
     public function getPriceAttribute($value) {
-        return $value / 100;
+        return $value;
     }
 
-    public function getUnitPriceAttribute($value) {
-        return $value / 100;
-    }
+    // public function getUnitPriceAttribute($value) {
+    //     return $value;
+    // }
+
 
     public function getSubTotalAttribute($value) {
         return $value / 100;
