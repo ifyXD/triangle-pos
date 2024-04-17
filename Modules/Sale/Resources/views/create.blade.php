@@ -49,7 +49,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="date">Date <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" name="date" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                                            <input type="date" id="date" class="form-control" name="date" required value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -96,14 +96,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                             <div class="form-group">
                                 <label for="note">Note (If Needed)</label>
                                 <textarea name="note" id="note" rows="5" class="form-control"></textarea>
                             </div>
-
+                        
                             <div class="mt-3">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" id="submitCreateSale">
                                     Create Sale <i class="bi bi-check"></i>
                                 </button>
                             </div>

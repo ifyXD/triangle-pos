@@ -28,6 +28,8 @@ class HomeController extends Controller
         $user = auth()->user();
 
         $salesQuery = Sale::completed();
+
+
         $saleReturnsQuery = SaleReturn::completed();
         $purchaseReturnsQuery = PurchaseReturn::completed();
 
@@ -39,7 +41,9 @@ class HomeController extends Controller
         }
 
         $sales = $salesQuery->sum('total_amount');
+
         $saleReturns = $saleReturnsQuery->sum('total_amount');
+
         $purchaseReturns = $purchaseReturnsQuery->sum('total_amount');
 
         $product_costs = 0;
@@ -55,6 +59,8 @@ class HomeController extends Controller
         $revenue = ($sales - $saleReturns) / 100;
         $profit = $revenue - $product_costs;
 
+
+        // dd($salesQuery);
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,

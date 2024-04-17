@@ -203,11 +203,11 @@ input[type=text], textarea {
     outline: none;
 }
 
-input[type=text]:focus, textarea:focus {
-    width: 660px;
-    border: none;
-    border-bottom: 2px solid rgba(81, 203, 238, 1);
-}
+/*input[type=text]:focus, textarea:focus {*/
+/*    width: 660px;*/
+/*    border: none;*/
+/*    border-bottom: 2px solid rgba(81, 203, 238, 1);*/
+/*}*/
 
 
 /* PERMISSION */

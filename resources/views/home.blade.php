@@ -10,7 +10,7 @@
     <div class="container-fluid">
         @can('show_total_stats')
             <div class="row">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
                             <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
                             <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3">
+                {{-- <div class="col-md-6 col-lg-4">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
                             <div class="bg-gradient-success p-4 mfe-3 rounded-left">
@@ -50,9 +50,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="card border-0">
                         <div class="card-body p-0 d-flex align-items-center shadow-sm">
                             <div class="bg-gradient-info p-4 mfe-3 rounded-left">
