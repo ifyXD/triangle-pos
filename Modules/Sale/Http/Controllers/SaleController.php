@@ -95,7 +95,7 @@ class SaleController extends Controller
             if ($sale->paid_amount > 0) {
                 SalePayment::create([
                     'date' => $request->date,
-                    'reference' => 'INV/'.$sale->reference,
+                    // 'reference' => 'INV/'.$sale->reference,
                     'amount' => $sale->paid_amount,
                     'sale_id' => $sale->id,
                     'user_id' => auth()->user()->id,
@@ -177,7 +177,7 @@ class SaleController extends Controller
 
             $sale->update([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 // 'tax_percentage' => $request->tax_percentage,

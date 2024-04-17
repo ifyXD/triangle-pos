@@ -66,23 +66,21 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="product_stock_alert">Unit <span
-                                                        class="text-danger">*</span></label>
-                                                <select class="form-control" name="product_{{ $product->id }}"
-                                                    id="product_{{ $product->id }}">
-                                                    @php
-                                                        $unitPricePairs = explode('|', $product->all_prices);
-                                                    @endphp
+                                                <label for="product_stock_alert">Unit <span class="text-danger">*</span></label>
+                                                <select class="form-control" name="product_{{ $product->id }}" id="product_{{ $product->id }}">
                                                     <option value="0" selected disabled>Select Unit</option>
+                                                    @php
+                                                        $unitPricePairs = $product->all_prices ? explode('|', $product->all_prices) : [];
+                                                    @endphp
                                                     @foreach ($unitPricePairs as $unitPricePair)
                                                         @php
-                                                            [$unit, $price] = explode(':', $unitPricePair);
+                                                            $pair = explode(':', $unitPricePair);
+                                                            $unit = isset($pair[0]) ? $pair[0] : '';
+                                                            $price = isset($pair[1]) ? $pair[1] : '';
                                                         @endphp
-                                                        <option value="{{ $price }}">{{ $unit }}
-                                                        </option>
+                                                        <option value="{{ $price }}">{{ $unit }}</option>
                                                     @endforeach
                                                 </select>
-
 
                                             </div>
                                         </div>

@@ -18,7 +18,7 @@ class CreateSalePaymentsTable extends Migration
             $table->unsignedBigInteger('sale_id');
             $table->integer('amount');
             $table->date('date');
-            $table->string('reference');
+            $table->string('reference')->nullable();
             $table->string('payment_method');
             $table->text('note')->nullable();
             $table->foreign('sale_id')->references('id')->on('sales')->cascadeOnDelete();

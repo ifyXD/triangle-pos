@@ -2,6 +2,7 @@
 
 namespace Modules\Sale\Http\Controllers;
 
+use App\Models\Price;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -28,8 +29,8 @@ class PosController extends Controller
         $this->checkPermission('create_pos_sales');
 
         Cart::instance('sale')->destroy();
-
-        $customers = Customer::all();
+        $price = Price::all();
+        $customers = Customer::all();   
         $product_categories = Category::all();
 
         return view('sale::pos.index', compact('product_categories', 'customers'));

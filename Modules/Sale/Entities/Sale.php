@@ -24,7 +24,7 @@ class Sale extends Model
 
         static::creating(function ($model) {
             $number = Sale::max('id') + 1;
-            $model->reference = make_reference_id('SL', $number);
+            // $model->reference = make_reference_id('SL', $number);
         });
     }
 
