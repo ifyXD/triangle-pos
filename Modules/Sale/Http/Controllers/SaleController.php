@@ -241,9 +241,9 @@ class SaleController extends Controller
                 ]);
 
                 if ($request->status == 'Shipped' || $request->status == 'Completed') {
-                    $product = Product::findOrFail($cart_item->id);
+                    $product = Product::findOrFail($cart_item['productId']);
                     $product->update([
-                        'product_quantity' => $product->product_quantity - $cart_item->qty
+                        'product_quantity' => $product->product_quantity - $cart_item['quantity']
                     ]);
                 }
             }

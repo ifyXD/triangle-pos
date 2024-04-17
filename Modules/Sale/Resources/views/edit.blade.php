@@ -26,7 +26,7 @@
                         <form id="sale-form" action="{{ route('sales.update', $sale) }}" method="POST">
                             @csrf
                             @method('patch')
-                          
+
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -41,15 +41,15 @@
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
                                                 @foreach (\Modules\People\Entities\Customer::when(
-            auth()->user()->hasRole('Super Admin'),
-            function ($query) {
-                // If the user has the "Super Admin" role, retrieve all suppliers
-            },
-            function ($query) {
-                // If not "Super Admin," filter suppliers by user_id
-                $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
-            },
-        )->orderBy('customer_name')->get() as $customer)
+                                                    auth()->user()->hasRole('Super Admin'),
+                                                    function ($query) {
+                                                        // If the user has the "Super Admin" role, retrieve all suppliers
+                                                    },
+                                                    function ($query) {
+                                                        // If not "Super Admin," filter suppliers by user_id
+                                                        $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
+                                                    },
+                                                )->orderBy('customer_name')->get() as $customer)
                                                     <option value="{{ $customer->id }}">
                                                         {{ Str::ucfirst($customer->customer_name) }}</option>
                                                 @endforeach
@@ -89,8 +89,7 @@
                                             <label for="payment_method">Payment Method <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="payment_method"
-                                                name="payment_method" required value="{{ $sale->payment_method }}"
-                                                readonly>
+                                                name="payment_method" required value="{{ $sale->payment_method }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -125,6 +124,7 @@
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
         grandTotal();
+
         function grandTotal() {
             var grandTotal = 0;
 
