@@ -206,7 +206,7 @@ class SaleController extends Controller
 
             $sale->update([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 // 'tax_percentage' => $request->tax_percentage,

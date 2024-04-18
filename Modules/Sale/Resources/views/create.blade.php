@@ -27,13 +27,8 @@
                             @csrf
 
                             <div class="form-row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required readonly value="SL">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
+                            
+                                <div class="col-lg-4 mt -ml-6">
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
