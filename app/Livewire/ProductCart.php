@@ -149,14 +149,9 @@ class ProductCart extends Component
         Cart::instance($this->cart_instance)->setGlobalDiscount((int)$this->global_discount);
     }
 
-<<<<<<< HEAD
-    public function updateQuantity($row_id, $product_id) { 
-        if  ($this->cart_instance == 'sale' || $this->cart_instance == 'purchase_return') {
-=======
     public function updateQuantity($row_id, $product_id)
     {
         if ($this->cart_instance == 'sale' || $this->cart_instance == 'purchase_return') {
->>>>>>> 336c3407c75b03824706f2759e434780a0be65d5
             if ($this->check_quantity[$product_id] < $this->quantity[$product_id]) {
                 session()->flash('message', 'The requested quantity is not available in stock.');
                 return;

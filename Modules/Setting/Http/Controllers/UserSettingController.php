@@ -24,7 +24,7 @@ class UserSettingController extends Controller
         } else {
             // If not "Super Admin," filter units by user_id
             $settings = Setting::where('user_id', $user->id)->first();
-            $userpermissions = UserPermission::where('user_id', $user->id)->get();
+            $userpermissions = UserPermission::where('user_id', $user->id)->orderBy('id', 'asc')->get();
 
         }
 
