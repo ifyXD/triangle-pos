@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         $saleReturns = $saleReturnsQuery->sum('total_amount');
 
-        $purchaseReturns = $purchaseReturnsQuery->sum('total_amount');
+        // $purchaseReturns = $purchaseReturnsQuery->sum('total_amount');
 
         $product_costs = 0;
 
@@ -64,7 +64,7 @@ class HomeController extends Controller
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
-            'purchase_returns' => $purchaseReturns / 100,
+            // 'purchase_returns' => $purchaseReturns / 100,
             'profit' => $profit,
         ]);
     }
@@ -97,19 +97,27 @@ class HomeController extends Controller
     }
     public function withPermission(Request $request)
     {
+        $user_id = auth()->id(); // Assuming you're using Laravel's built-in authentication
         $user = auth()->user();
+        // Get the checked and unchecked permission arrays from the request
+        $checked_permissions = $request->input('checked_permissions', []);
+        $unchecked_permissions = $request->input('unchecked_permissions', []);
 
-        // Sync permissions
-        $permissions = $request->input('permissions', []);
-
-        // Save permissions in user_permissions table
-        foreach ($permissions as $permissionId) {
-            // Create or update the record in the user_permissions table
+        // Set the status for unchecked permissions to 'false' and for checked permissions to 'true'
+        foreach ($unchecked_permissions as $permission_id) {
             UserPermission::updateOrCreate(
-                ['user_id' => $user->id, 'permission_id' => $permissionId],
-                ['status' => 'true'] // Set status to true since the permission is enabled
+                ['user_id' => $user_id, 'permission_id' => $permission_id],
+                ['status' => 'false']
             );
         }
+
+        foreach ($checked_permissions as $permission_id) {
+            UserPermission::updateOrCreate(
+                ['user_id' => $user_id, 'permission_id' => $permission_id],
+                ['status' => 'true']
+            );
+        }
+
 
         // Update registration requirements
         $user->reg_requirements = 3;
@@ -126,28 +134,33 @@ class HomeController extends Controller
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }
 
+    
     public function withPermission_update(Request $request)
     {
+        // Get the user ID from the authenticated user or wherever it's available
+        $user_id = auth()->id(); // Assuming you're using Laravel's built-in authentication
 
-        $user = auth()->user();
+        // Get the checked and unchecked permission arrays from the request
+        $checked_permissions = $request->input('checked_permissions', []);
+        $unchecked_permissions = $request->input('unchecked_permissions', []);
 
-        // Sync permissions
-        $permissions = $request->input('permissions', []);
-
-
-        // Save permissions in user_permissions table
-        foreach ($permissions as  $permission) {
-            // Create or update the record in the user_permissions table
+        // Set the status for unchecked permissions to 'false' and for checked permissions to 'true'
+        foreach ($unchecked_permissions as $permission_id) {
             UserPermission::updateOrCreate(
-                ['user_id' => $user->id, 'permission_id' => $permission['permission_id']],
-                ['status' => $permission['status']] // Set status to true since the permission is enabled
+                ['user_id' => $user_id, 'permission_id' => $permission_id],
+                ['status' => 'false']
             );
         }
 
-        if (auth()->user()->id != $request->id) {
-            Auth::logout();
-            return redirect()->route('register');
+        foreach ($checked_permissions as $permission_id) {
+            UserPermission::updateOrCreate(
+                ['user_id' => $user_id, 'permission_id' => $permission_id],
+                ['status' => 'true']
+            );
         }
+
+
+        // You can return a response if needed
         toast('Settings Updated!', 'info');
         // Set status to false for permissions not present in the submitted data 
         return response()->json(['message' => 'Permissions saved successfully'], 200);

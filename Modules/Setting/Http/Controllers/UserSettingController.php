@@ -28,6 +28,8 @@ class UserSettingController extends Controller
 
         }
 
+        
+
         return view('setting::user-system-settings.index', compact('settings','userpermissions'));
     }
     public function update(Request $request)

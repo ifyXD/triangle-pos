@@ -26,9 +26,9 @@ class SaleReturnDetail extends Model
         return $value / 100;
     }
 
-    public function getUnitPriceAttribute($value) {
-        return $value / 100;
-    }
+    // public function getUnitPriceAttribute($value) {
+    //     return $value / 100;
+    // }
 
     public function getSubTotalAttribute($value) {
         return $value / 100;
