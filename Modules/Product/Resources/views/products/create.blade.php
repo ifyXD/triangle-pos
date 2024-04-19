@@ -35,29 +35,32 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="category_id">Category <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <select class="form-control" name="category_id" id="category_id" required>
-                                            <option value="" selected disabled>Select Category</option>
-                                            @foreach (\Modules\Product\Entities\Category::orderBy('category_name')->get() as $category)
-                                                @if (auth()->user()->hasRole('Super Admin'))
-                                                    <option value="{{ $category->id }}">{{ $category->category_name }}
-                                                    </option>
-                                                @else
-                                                    @if ($category->user_id == auth()->user()->id || $category->user_id == 1)
+                                    <div class="form-group">
+                                        <label for="category_id">Category <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <select class="form-control" name="category_id" id="category_id" required>
+                                                <option value="" selected disabled>Select Category</option>
+                                                @foreach (\Modules\Product\Entities\Category::orderBy('category_name')->get() as $category)
+                                                    @if (auth()->user()->hasRole('Super Admin'))
                                                         <option
                                                             value="{{ $category->id }}">{{ $category->category_name }}
                                                         </option>
+                                                    @else
+                                                        @if ($category->user_id == auth()->user()->id || $category->user_id == 1)
+                                                            <option
+                                                                value="{{ $category->id }}">{{ $category->category_name }}
+                                                            </option>
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            @endforeach
+                                                @endforeach
 
-                                        </select>
-                                        <div class="input-group-append d-flex">
-                                            <button data-toggle="modal" data-target="#categoryCreateModal"
-                                                    class="btn btn-outline-primary" type="button">
-                                                Add
-                                            </button>
+                                            </select>
+                                            <div class="input-group-append d-flex">
+                                                <button data-toggle="modal" data-target="#categoryCreateModal"
+                                                        class="btn btn-outline-primary" type="button">
+                                                    Add
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +98,10 @@
                                         </i>
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <div class="input-group">
+                                    <div class="input-group-append d-flex form-group">
+                                        <a href="{{ url('units/create') }}" class="btn btn-outline-primary">Add</a>
+                                    </div>
+                                    <div class="input-group form-group flex-column">
                                         {{--<select class="form-control" multiple name="product_unit[]" id="product_unit">
                                             --}}{{--<option value="" selected disabled>Select Unit</option>--}}{{--
                                             @foreach (Unit::orderBy('name')->get() as $unit)
@@ -115,26 +121,72 @@
                                             @endforeach
                                         </select>--}}
 
-{{--                                        <select class="form-control" multiple name="product_unit[]" id="product_unit">--}}
-{{--                                            @foreach (Unit::where('user_id', auth()->user()->id)->orWhere('user_id', 1)->orderBy('name')->get() as $unit)--}}
-{{--                                                <option value="{{ $unit->short_name }}">{{ $unit->name .' | '. $unit->short_name }}</option>--}}
-{{--                                            @endforeach--}}
-{{--                                        </select>--}}
+                                        {{--<select class="form-control" multiple name="product_unit[]" id="product_unit">
+                                            @foreach (Unit::where('user_id', auth()->user()->id)->orWhere('user_id', 1)->orderBy('name')->get() as $unit)
+                                                <option value="{{ $unit->short_name }}">{{ $unit->name .' | '. $unit->short_name }}</option>
+                                            @endforeach
+                                        </select>--}}
+
+
+
+{{--                                        @foreach (Unit::where('user_id', auth()->user()->id)->orWhere('user_id', 1)->orderBy('name')->get() as $unit)--}}
+{{--                                            <div class="form-check">--}}
+{{--                                                <input class="form-check-input" type="checkbox" name="product_unit[]" id="unit_{{ $unit->id }}" value="{{ $unit->short_name }}">--}}
+{{--                                                <label class="form-check-label" for="unit_{{ $unit->id }}">--}}
+{{--                                                    {{ $unit->name .' | '. $unit->short_name }}--}}
+{{--                                                    {{ $unit->name }}--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                @php
+                                                    $units = Unit::where('user_id', auth()->user()->id)->orWhere('user_id', 1)->orderBy('name')->get();
+                                                    $halfCount = ceil($units->count() / 2);
+                                                    $firstHalf = $units->slice(0, $halfCount);
+                                                @endphp
+                                                @foreach ($firstHalf as $unit)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="product_unit[]" id="unit_{{ $unit->id }}" value="{{ $unit->short_name }}">
+                                                        <label class="form-check-label" for="unit_{{ $unit->id }}">
+                                                            {{ $unit->name }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="col-md-6">
+                                                @php
+                                                    $secondHalf = $units->slice($halfCount);
+                                                @endphp
+                                                @foreach ($secondHalf as $unit)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="product_unit[]" id="unit_{{ $unit->id }}" value="{{ $unit->short_name }}">
+                                                        <label class="form-check-label" for="unit_{{ $unit->id }}">
+                                                            {{ $unit->name }}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
 
 
                                     </div>
-                                    <div class="input-group-append d-flex"
-                                         style="flex-direction: row; justify-content: flex-end;">
-                                        <a href="{{ url('units/create') }}" class="btn btn-outline-primary">Add</a>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="product_note">Note</label>
+                                        <textarea name="product_note" id="product_note" rows="4 "
+                                                  class="form-control"></textarea>
                                     </div>
                                 </div>
+
                             </div>
 
-                            <div class="form-group">
-                                <label for="product_note">Note</label>
-                                <textarea name="product_note" id="product_note" rows="4 "
-                                          class="form-control"></textarea>
-                            </div>
+
                         </div>
                     </div>
                 </div>
