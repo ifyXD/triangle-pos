@@ -81,10 +81,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
+<<<<<<< HEAD
 
                                                 <label for="product_stock_alert">Unit <span class="text-danger">*</span></label>
                                                 <select class="form-control" name="product_{{ $product->id }}" id="product_{{ $product->id }}">
 =======
+=======
+>>>>>>> 59ff4322830d4a26f58bdb56423658ec0dac2051
                                                 <label for="product_stock_alert">Unit <span
                                                         class="text-danger">*</span></label>
                                                 <select
@@ -94,7 +97,6 @@
                                                     @php
                                                         $unitPricePairs = explode('|', $product->all_prices);
                                                     @endphp
->>>>>>> 336c3407c75b03824706f2759e434780a0be65d5
                                                     <option value="0" selected disabled>Select Unit</option>
                                                     @php
                                                         $unitPricePairs = $product->all_prices ? explode('|', $product->all_prices) : [];

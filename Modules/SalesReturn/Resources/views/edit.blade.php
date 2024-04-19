@@ -30,7 +30,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" required value="{{ $sale_return->reference }}" readonly>
+                                        <input type="text" id="reference" class="form-control" name="reference" required value="{{ $sale_return->reference }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -54,7 +54,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="date">Date <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" name="date" required value="{{ $sale_return->date }}">
+                                            <input type="date" id="date" class="form-control" name="date" required value="{{ $sale_return->date }}">
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="payment_method" required value="{{ $sale_return->payment_method }}" readonly>
+                                            <input type="text" class="form-control" name="payment_method" id="payment_method" required value="{{ $sale_return->payment_method }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                             </div>
 
                             <div class="mt-3">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" id="editSaveBtnReturn">
                                     Update Sale Return <i class="bi bi-check"></i>
                                 </button>
                             </div>
@@ -110,6 +110,7 @@
 @push('page_scripts')
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
+        grandTotal();
         $(document).ready(function () {
             $('#paid_amount').maskMoney({
                 prefix:'{{ settings()->currency->symbol }}',
@@ -123,6 +124,76 @@
             $('#sale-return-form').submit(function () {
                 var paid_amount = $('#paid_amount').maskMoney('unmasked')[0];
                 $('#paid_amount').val(paid_amount);
+            });
+            
+
+            $('#editSaveBtnReturn').click(function() {
+                let customer_id = $('#customer_id').val();
+                let amount = $('#paid_amount').val();
+                let paid_amount = parseFloat(amount.replace('₱', '').trim());
+                let total_amount = $('#total_amount').val();
+                let payment_method = $('#payment_method').val();
+                let note = $('#note').val();
+                let status = $('#status').val();
+                let date = $('#date').val();
+                let reference = $('#reference').val();
+
+                var cartDetails = [];
+
+                $('tr[data-product-id]').each(function() {
+                    // Extract data from the current <tr>
+                    var productId = $(this).data('product-id');
+                    var productName = $(this).find('td:eq(0)').text();
+                    var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
+                    var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
+                        .text();
+                    var quantity = $(this).find('.quantity').val();
+                    var subTotalVal = $(this).find('.sub-total').text();
+                    var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
+                    // Create an object to represent the cart detail
+                    var cartDetail = {
+                        productId: productId,
+                        productName: productName,
+                        pricePerProductUnit: pricePerProductUnit,
+                        pricePerUnit: pricePerUnit,
+                        quantity: quantity,
+                        subTotal: subTotal
+                    };
+
+                    // Push the cart detail object into the array
+                    cartDetails.push(cartDetail);
+                });
+                // console.log(total_amount);
+
+                $.ajax({
+                    url: '{{ route('sale-returns.update', $sale_return) }}',
+                    type: 'PATCH',
+                    data: {
+                        cartDetails: cartDetails,
+                        customer_id: customer_id,
+                        paid_amount: paid_amount,
+                        total_amount: total_amount,
+                        payment_method: payment_method,
+                        note: note,
+                        status: status,
+                        date: date,
+                        reference: reference,
+                    },
+                    success: function(response) {
+                        // Success callback
+                        // console.log(response);
+                        window.location = "{{ route('sale-returns.index') }}";
+                        // You can perform further actions here based on the server response
+                    },
+                    error: function(xhr, status, error) {
+                        // Failure callback
+                        console.error(xhr);
+                        // You can handle errors or show an error message to the user
+                    }
+                });
+
+
+
             });
         });
     </script>
