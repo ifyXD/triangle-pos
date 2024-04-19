@@ -19,7 +19,6 @@
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
 
     <link rel="stylesheet" href="{{ asset('css/menu-styling.css') }}">
-
     @include('includes.main-css')
 
     <!-- MDB -->
