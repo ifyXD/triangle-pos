@@ -17,15 +17,15 @@
 
     <section class="bg-200">
         <div class="shape illustration_doodle"
-             style="background-image: url('{{ asset('images/homepage/03.svg')}}');"></div>
+             style="background-image: url('{{ asset('images/homepage/01.svg')}}');"></div>
 
         <div class="container">
-            <div class="feature-content">
-                <div class="content">
-                    <h1 class="display-1"> {{ strtoupper(request()->segment(1)) }}</h1>
+            <div class="feature-content feature-content-destroyer">
+                <div class="content content-change">
+                    <img class="image-pachuychuy"
+                         src="{{ asset('images/landingpage/Screenshot 2024-04-20 010422.png') }}"
+                         alt="pos-image">
                 </div>
-
-
             </div>
         </div>
     </section>
