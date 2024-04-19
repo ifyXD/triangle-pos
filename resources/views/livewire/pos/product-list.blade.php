@@ -81,13 +81,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-<<<<<<< HEAD
-
                                                 <label for="product_stock_alert">Unit <span class="text-danger">*</span></label>
                                                 <select class="form-control" name="product_{{ $product->id }}" id="product_{{ $product->id }}">
-=======
-=======
->>>>>>> 59ff4322830d4a26f58bdb56423658ec0dac2051
                                                 <label for="product_stock_alert">Unit <span
                                                         class="text-danger">*</span></label>
                                                 <select
