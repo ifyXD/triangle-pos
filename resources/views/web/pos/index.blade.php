@@ -4,8 +4,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="display-1">DiYAWAAeatures!</h1>
-                {{--                <h1 class="display-1"> This is {{ ucfirst(request()->segment(1)) }}</h1>--}}
-                {{--                <h1 class="display-3">Discover the Power of Our POS</h1>--}}
+                <h1 class="display-3">Discover the Power of Our POS</h1>
                 <div class="cta-container">
                     <div class="start-now">
                         <a href="{{route('register')}}">Start now - It’s free</a>
