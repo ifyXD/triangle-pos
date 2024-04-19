@@ -3,14 +3,16 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="display-1">DiYAWAAeatures!</h1>
+                <h1 class="display-1">Point of Sales!</h1>
                 {{--                <h1 class="display-1"> This is {{ ucfirst(request()->segment(1)) }}</h1>--}}
                 {{--                <h1 class="display-3">Discover the Power of Our POS</h1>--}}
                 <div class="cta-container">
                     <div class="start-now">
                         <a href="{{route('register')}}">Start now - It’s free</a>
+                        
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -20,11 +22,16 @@
              style="background-image: url('{{ asset('images/homepage/03.svg')}}');"></div>
 
         <div class="container">
+
             <div class="feature-content">
+
                 <div class="content">
-                    <h1 class="display-1"> {{ strtoupper(request()->segment(1)) }}</h1>
+                    
+                        <h1 class="display-1"> {{ strtoupper(request()->segment(1)) }}</h1>
+                        
                 </div>
 
+                <div class="landingpage" style="background-image: url('{{asset('images/landingpage/rename.png')}}')"> </div>
 
             </div>
         </div>

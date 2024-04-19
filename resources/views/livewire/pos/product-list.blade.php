@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-<<<<<<< HEAD
+
                                                 <label for="product_stock_alert">Unit <span class="text-danger">*</span></label>
                                                 <select class="form-control" name="product_{{ $product->id }}" id="product_{{ $product->id }}">
 =======
@@ -102,17 +102,12 @@
                                                     @foreach ($unitPricePairs as $unitPricePair)
                                                         @php
                                                             $pair = explode(':', $unitPricePair);
-<<<<<<< HEAD
-                                                            $unit = isset($pair[0]) ? $pair[0] : '';
-                                                            $price = isset($pair[1]) ? $pair[1] : '';
-=======
                                                             if (isset($pair[0], $pair[1])) {
                                                                 [$unit, $price] = $pair;
                                                             } else {
                                                                 // Handle the case where the pair cannot be properly split
                                                                 continue; // Skip this iteration
                                                             }
->>>>>>> 336c3407c75b03824706f2759e434780a0be65d5
                                                         @endphp
                                                         <option value="{{ $price }}">{{ $unit }}</option>
                                                     @endforeach
