@@ -3,10 +3,6 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-<<<<<<< HEAD
-                <h1 class="display-1">Point of Sales!</h1>
-=======
->>>>>>> parent of e81e4ba (da)
                 <h1 class="display-1">DiYAWAAeatures!</h1>
                 {{--                <h1 class="display-1"> This is {{ ucfirst(request()->segment(1)) }}</h1>--}}
                 {{--                <h1 class="display-3">Discover the Power of Our POS</h1>--}}
