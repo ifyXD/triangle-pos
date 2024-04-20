@@ -81,8 +81,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="product_stock_alert">Unit <span class="text-danger">*</span></label>
-                                                <select class="form-control" name="product_{{ $product->id }}" id="product_{{ $product->id }}">
                                                 <label for="product_stock_alert">Unit <span
                                                         class="text-danger">*</span></label>
                                                 <select
@@ -99,8 +97,6 @@
                                                     @foreach ($unitPricePairs as $unitPricePair)
                                                         @php
                                                             $pair = explode(':', $unitPricePair);
-                                                            $unit = isset($pair[0]) ? $pair[0] : '';
-                                                            $price = isset($pair[1]) ? $pair[1] : '';
                                                             if (isset($pair[0], $pair[1])) {
                                                                 [$unit, $price] = $pair;
                                                             } else {
@@ -128,6 +124,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary proceed_click"
                                         onclick="proceedProduct({{ $product->id }})">Proceed</button>
+
                                 </div>
                             </div>
                         </div>
@@ -142,6 +139,12 @@
                     </div>
                 @endforelse
             </div>
+
+
+
+
+
+
             <div @class(['mt-3' => $products->hasPages()])>
                 {{ $products->links() }}
             </div>

@@ -125,29 +125,6 @@
     <script>
         grandTotal();
 
-        function grandTotal() {
-            var grandTotal = 0;
-
-            // Iterate through each <td> element in the table body
-            $(`#cart_product tbody .tdClass`).each(function() {
-                // Get the text content of the current <td>
-                var text = $(this).text();
-
-                // Remove the currency sign (₱) and any leading/trailing whitespace
-                var value = parseFloat(text.replace('₱', '').trim());
-
-                // Add the value to the grand total
-                if (!isNaN(value)) {
-                    grandTotal += value;
-                }
-            });
-
-
-            // Set the grand total in your desired element
-            $('#grand_total').text('₱' + grandTotal.toFixed(2));
-            $('#total_amount').val(grandTotal.toFixed(2));
-
-        }
         $(document).ready(function() {
             $('#paid_amount').maskMoney({
                 prefix: '{{ settings()->currency->symbol }}',
@@ -226,9 +203,6 @@
                         // You can handle errors or show an error message to the user
                     }
                 });
-
-
-
             });
         });
     </script>

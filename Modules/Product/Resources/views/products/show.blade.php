@@ -39,25 +39,25 @@
                                     <th>Category</th>
                                     <td>{{ $product->category->category_name }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th>Cost</th>
                                     <td>{{ format_currency($product->product_cost) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Price</th>
                                     <td>{{ format_currency($product->product_price) }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>Quantity</th>
                                     <td>{{ $product->product_quantity . ' ' . $product->product_unit }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th>Stock Worth</th>
                                     <td>
                                         COST:: {{ format_currency($product->product_cost * $product->product_quantity) }} /
                                         PRICE:: {{ format_currency($product->product_price * $product->product_quantity) }}
                                     </td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>Alert Quantity</th>
                                     <td>{{ $product->product_stock_alert }}</td>
@@ -76,8 +76,8 @@
                                         @else
                                             N/A
                                         @endif
-                                    </td> --}}
-                                </tr>
+                                    </td>
+                                </tr> --}}
                                 <tr>
                                     <th>Note</th>
                                     <td>{{ $product->product_note ?? 'N/A' }}</td>
