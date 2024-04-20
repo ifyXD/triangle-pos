@@ -98,7 +98,7 @@ class AdjustmentController extends Controller
         $this->checkPermission('edit_adjustments');
 
         $request->validate([
-            // 'reference'   => 'required|string|max:255',
+            'reference'   => 'required|string|max:255',
             'date'        => 'required|date',
             'note'        => 'nullable|string|max:1000',
             'product_ids' => 'required',
