@@ -19,11 +19,11 @@ class CreateSaleReturnsTable extends Migration
             $table->string('reference')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->string('customer_name');
-            $table->integer('tax_percentage')->nullable()->default(0);
-            $table->integer('tax_amount')->default(0);
-            $table->integer('discount_percentage')->nullable()->default(0)->default(0);
-            $table->integer('discount_amount')->nullable()->default(0);
-            $table->integer('shipping_amount')->nullable()->default(0);
+            // $table->integer('tax_percentage')->nullable()->default(0);
+            // $table->integer('tax_amount')->default(0);
+            // $table->integer('discount_percentage')->nullable()->default(0)->default(0);
+            // $table->integer('discount_amount')->nullable()->default(0);
+            // $table->integer('shipping_amount')->nullable()->default(0);
             $table->integer('total_amount');
             $table->integer('paid_amount');
             $table->integer('due_amount');
@@ -33,7 +33,7 @@ class CreateSaleReturnsTable extends Migration
             $table->text('note')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

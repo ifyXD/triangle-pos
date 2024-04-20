@@ -200,24 +200,32 @@
                 window.location.href = "{{ route('registration.requirements-storename') }}";
             });
             $('#submitNiBay').click(function() {
-
-
                 var checkedValues = [];
-                $('input[name="permissions[]"]:checked').each(function() {
-                    // Split comma-separated values and add them to the checkedValues array
-                    var values = $(this).val().split(',');
-                    checkedValues = checkedValues.concat(values);
+                var uncheckedValues = [];
+
+                // Loop through each checkbox
+                $('input[name="permissions[]"]').each(function() {
+                    var values = $(this).val().split(',').filter(Boolean); // Remove empty values
+                    if ($(this).is(':checked')) {
+                        checkedValues.push(...values); // Concatenate checked values
+                    } else {
+                        uncheckedValues.push(...values); // Concatenate unchecked values
+                    }
                 });
 
                 // Remove duplicate values
                 checkedValues = [...new Set(checkedValues)];
+                uncheckedValues = [...new Set(uncheckedValues)];
 
-                // Send the checkedValues array to your Laravel controller using AJAX
+                console.log(uncheckedValues);
+
+                // Send the checked and unchecked values to your Laravel controller using AJAX
                 $.ajax({
                     url: '/update-session/registration-requirements/withpermission_update',
                     type: 'POST',
                     data: {
-                        permissions: checkedValues
+                        checked_permissions: checkedValues,
+                        unchecked_permissions: uncheckedValues
                     },
                     success: function(response) {
                         // Handle success response
@@ -229,8 +237,8 @@
                         console.error(xhr, status, error);
                     }
                 });
-
             });
+
 
 
             $('.parent').click(function() {
