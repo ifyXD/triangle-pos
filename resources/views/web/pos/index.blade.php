@@ -8,6 +8,9 @@
 =======
                 <h1 class="display-1">DiYAWAAeatures!</h1>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 0672c8f (okok)
+=======
 >>>>>>> parent of 0672c8f (okok)
 =======
 >>>>>>> parent of 0672c8f (okok)
