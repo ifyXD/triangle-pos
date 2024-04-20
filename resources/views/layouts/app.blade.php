@@ -19,13 +19,7 @@
     <link rel="icon" href="{{ asset('images/favicon.png') }}">
 
     <link rel="stylesheet" href="{{ asset('css/menu-styling.css') }}">
-
     @include('includes.main-css')
-
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.min.css" rel="stylesheet"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
-
 
 
     <style>
@@ -109,8 +103,6 @@
             }
         });
     </script>
-
-
 </body>
 
 </html>

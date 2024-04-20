@@ -160,6 +160,7 @@ class SaleController extends Controller
                 'name'    => $sale_detail->product_name,
                 'qty'     => $sale_detail->quantity,
                 'price'   => $sale_detail->price,
+                // 'unit_price'   => $sale_detail->unit_price,
                 'weight'  => 1,
                 'options' => [
                     // 'product_discount' => $sale_detail->product_discount_amount,

@@ -17,7 +17,7 @@
             @if (auth()->user()->hasAccessToPermission('access_product_categories'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('product-categories.*') ? 'c-active' : '' }}"
-                       href="{{ route('product-categories.index') }}">
+                        href="{{ route('product-categories.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Categories
                     </a>
                 </li>
@@ -25,7 +25,7 @@
             @if (auth()->user()->hasAccessToPermission('create_products'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('products.create') ? 'c-active' : '' }}"
-                       href="{{ route('products.create') }}">
+                        href="{{ route('products.create') }}">
                         <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Create Product
                     </a>
                 </li>
@@ -33,7 +33,7 @@
             @if (auth()->user()->hasAccessToPermission('access_products'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('products.index') ? 'c-active' : '' }}"
-                       href="{{ route('products.index') }}">
+                        href="{{ route('products.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Products
                     </a>
                 </li>
@@ -41,17 +41,18 @@
             @if (auth()->user()->hasAccessToPermission('access_prices'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
-                       href="{{ route('prices.index') }}">
+                        href="{{ route('prices.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Prices
                     </a>
                 </li>
             @endif
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('units.index') ? 'c-active' : '' }}"
-                   href="{{ route('units.index') }}">
+                    href="{{ route('units.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
                 </a>
             </li>
+
         </ul>
     </li>
 @endif
@@ -94,7 +95,7 @@
         </ul>
     </li>
 @endif
-
+ 
 @if (auth()->user()->hasAccessToPermission('access_sales'))
     {{--    <span class="kami-kami-span">Sales</span> --}}
     <li

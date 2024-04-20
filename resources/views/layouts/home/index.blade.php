@@ -16,8 +16,8 @@
 
     <section class="bg-200">
         <div class="shape illustration_doodle"
-             style="background-image: url('{{ asset('images/homepage/03.svg')}}');"></div>
-             {{--style="background-image: url('{{ asset('images/homepage/wave.svg')}}');">--}}</div>
+{{--             style="background-image: url('{{ asset('images/homepage/03.svg')}}');"></div>--}}
+             style="background-image: url('{{ asset('images/homepage/wave.svg')}}');"></div>
 
         <div class="container">
             <div class="feature-content">

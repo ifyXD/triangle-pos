@@ -41,31 +41,23 @@
         });
 
         $('#permissionBtnFunc').click(function() {
-
+            
             var checkedValues = [];
-            var uncheckedValues = [];
-
-            // Loop through each checkbox
-            $('input[name="permissions[]"]').each(function() {
-                var values = $(this).val().split(',').filter(Boolean); // Remove empty values
-                if ($(this).is(':checked')) {
-                    checkedValues.push(...values); // Concatenate checked values
-                } else {
-                    uncheckedValues.push(...values); // Concatenate unchecked values
-                }
+            $('input[name="permissions[]"]:checked').each(function() {
+                // Split comma-separated values and add them to the checkedValues array
+                var values = $(this).val().split(',');
+                checkedValues = checkedValues.concat(values);
             });
 
             // Remove duplicate values
             checkedValues = [...new Set(checkedValues)];
-            uncheckedValues = [...new Set(uncheckedValues)];
 
             // Send the checkedValues array to your Laravel controller using AJAX
             $.ajax({
                 url: '/update-session/registration-requirements/withpermission',
                 type: 'POST',
                 data: {
-                    checked_permissions: checkedValues,
-                    unchecked_permissions: uncheckedValues
+                    permissions: checkedValues
                 },
                 success: function(response) {
                     // Handle success response

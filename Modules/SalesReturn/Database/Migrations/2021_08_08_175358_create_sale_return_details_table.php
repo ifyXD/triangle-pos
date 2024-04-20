@@ -18,14 +18,14 @@ class CreateSaleReturnDetailsTable extends Migration
             $table->unsignedBigInteger('sale_return_id');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('product_name');
-            // $table->string('product_code')->nullable();
+            $table->string('product_code')->nullable();
             $table->integer('quantity');
             $table->integer('price');
-            $table->string('unit_price');
+            $table->integer('unit_price');
             $table->integer('sub_total');
-            // $table->integer('product_discount_amount');
-            // $table->string('product_discount_type')->default('fixed');
-            // $table->integer('product_tax_amount');
+            $table->integer('product_discount_amount');
+            $table->string('product_discount_type')->default('fixed');
+            $table->integer('product_tax_amount');
             $table->foreign('sale_return_id')->references('id')
                 ->on('sale_returns')->cascadeOnDelete();
             $table->foreign('product_id')->references('id')
