@@ -3,7 +3,7 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="display-1">DiYAWAAeatures!</h1>
+                <h1 class="display-1">Point of Sale!</h1>
                 <h1 class="display-3">Discover the Power of Our POS</h1>
                 <div class="cta-container">
                     <div class="start-now">
@@ -22,7 +22,7 @@
             <div class="feature-content feature-content-destroyer">
                 <div class="content content-change">
                     <img class="image-pachuychuy"
-                         src="{{ asset('images/landingpage/Screenshot 2024-04-20 010422.png') }}"
+                         src="{{ asset('images/landingpage/tae.png') }}"
                          alt="pos-image">
                 </div>
             </div>
@@ -32,12 +32,13 @@
     <section class="bg-200">
         <div class="container">
             <div class="feature-text-content">
-                <p><strong>Imagine a vast collection of business apps at your disposal.</strong><br>
-                    Got something to improve? There is an app for that.<br>
-                    No complexity, no cost, just a one-click install.</p>
-                <p>Each app simplifies a process and empowers more people.<br>
-                    Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
-            </div>
+                <div style="text-align: justify;">
+                    <p><strong>Imagine a vast collection of business apps at your disposal.</strong><br>
+                      
+                    <p>
+                        <br>
+                        In the context of the public market in Valencia, implementing a point of sale (POS) system would revolutionize operations. It would streamline transactions, making them faster and more accurate. Inventory management would become more efficient, reducing the risk of overstocking or stockouts. Sales data could be analyzed to understand customer preferences and trends, enabling vendors to make informed decisions about their offerings. The system could also facilitate loyalty programs and personalized customer experiences, enhancing customer satisfaction and retention. Overall, implementing a POS system in the public market in Valencia would modernize operations, improve efficiency, and ultimately drive business growth..<br>
+                </div>
 
         </div>
     </section>
