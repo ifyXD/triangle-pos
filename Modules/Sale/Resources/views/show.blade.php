@@ -23,10 +23,10 @@
                             href="{{ route('sales.pdf', $sale->id) }}">
                             <i class="bi bi-printer"></i> Print
                         </a>
-                        <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none"
+                        {{-- <a target="_blank" class="btn btn-sm btn-info mfe-1 d-print-none"
                             href="{{ route('sales.pdf', $sale->id) }}">
                             <i class="bi bi-save"></i> Save
-                        </a>
+                        </a> --}}
                     </div>
                     <div class="card-body">
                         <div class="row mb-4">
@@ -82,7 +82,8 @@
                                                 </span> --}}
                                             </td>
 
-                                            <td class="align-middle">{{ format_currency($item->price) }} / {{$item->unit_price}}</td>
+                                            <td class="align-middle">{{ format_currency($item->price) }} /
+                                                {{ $item->unit_price }}</td>
 
                                             <td class="align-middle">
                                                 {{ $item->quantity }}
@@ -97,7 +98,7 @@
                                         </td> --}}
 
                                             <td class="align-middle">
-                                                {{ format_currency($item->sub_total) }}
+                                                {{ format_currency($item->sub_total * 100) }}
                                             </td>
                                         </tr>
                                     @endforeach

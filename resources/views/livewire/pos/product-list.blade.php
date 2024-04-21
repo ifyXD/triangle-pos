@@ -12,7 +12,13 @@
 
                 @forelse($products as $product)
                     {{-- <div wire:click.prevent="selectProduct({{ $product }})" class="col-lg-4 col-md-6 col-xl-3" --}}
-                    @if ($product->min_price)
+                    @if (!$product->min_price || $product->product_quantity === 0)
+                        <div class="col-12">
+                            <div class="alert alert-warning mb-0">
+                                Products Not Found...
+                            </div>
+                        </div>
+                    @else
                         <div class="col-lg-4 col-md-6 col-xl-3" data-toggle="modal"
                             data-target="#viewModal{{ $product->id }}" style="cursor: pointer;">
                             <div class="card border-0 shadow h-100">
@@ -42,12 +48,6 @@
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <div class="col-12">
-                            <div class="alert alert-warning mb-0">
-                                Products Not Found...
-                            </div>
-                        </div>
                     @endif
 
                     <!-- Modal -->
@@ -68,7 +68,7 @@
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="product_quantity">Quantity <span
+                                                <label for="product_quantity">Quantitys <span
                                                         class="text-danger">*</span></label>
                                                 <input id="product_quantity{{ $product->id }}" type="number"
                                                     class="form-control changePrice" data-id="{{ $product->id }}"
@@ -92,7 +92,9 @@
                                                     @endphp
                                                     <option value="0" selected disabled>Select Unit</option>
                                                     @php
-                                                        $unitPricePairs = $product->all_prices ? explode('|', $product->all_prices) : [];
+                                                        $unitPricePairs = $product->all_prices
+                                                            ? explode('|', $product->all_prices)
+                                                            : [];
                                                     @endphp
                                                     @foreach ($unitPricePairs as $unitPricePair)
                                                         @php
@@ -104,7 +106,8 @@
                                                                 continue; // Skip this iteration
                                                             }
                                                         @endphp
-                                                        <option value="{{ $price }}">{{ $unit }}</option>
+                                                        <option value="{{ $price }}">{{ $unit }}
+                                                        </option>
                                                     @endforeach
 
                                                 </select>
