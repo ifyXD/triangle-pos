@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -74,7 +75,7 @@ class RegisterController extends Controller
 
         $user->assignRole('Admin');
 
-         DB::table('customers')->insert([
+        DB::table('customers')->insert([
             'customer_name' => 'Anonymous',
             'customer_email' => 'anonymous@example.com',
             'customer_phone' => '123456789',
@@ -100,5 +101,8 @@ class RegisterController extends Controller
 
         return $user;
     }
-    
+    protected function registered(Request $request, $user)
+    {
+        $user->sendEmailVerificationNotification();
+    }
 }
