@@ -42,7 +42,7 @@
                                                     <option value="{{ $category->id }}">{{ $category->category_name }}
                                                     </option>
                                                 @else
-                                                    @if ($category->user_id == auth()->user()->id || $category->user_id == 1)
+                                                    @if ($category->store_id == auth()->user()->store->id)
                                                         <option value="{{ $category->id }}">{{ $category->category_name }}
                                                         </option>
                                                     @endif
@@ -57,14 +57,12 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
-
-                            <div class="form-row"> 
-                            </div>
- 
 
                             <div class="form-row">
+                            </div>
+                            {{-- <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_quantity">Quantity <span class="text-danger">*</span></label>
@@ -80,7 +78,7 @@
                                             value="{{ old('product_stock_alert', 0) }}" min="0" max="100">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row">
                                 {{-- <div class="col-md-4">
@@ -100,7 +98,7 @@
                                         </select>
                                     </div>
                                 </div> --}}
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info"
                                             data-toggle="tooltip" data-placement="top"
                                             title="This short text will be placed after Product Quantity."></i> <span
@@ -127,12 +125,12 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="form-group">
-                                <label for="product_note">Note</label>
-                                <textarea name="product_note" id="product_note" rows="4 " class="form-control"></textarea>
+                                <label for="product_description">Product Description</label>
+                                <textarea name="product_description" id="product_description" rows="4 " class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

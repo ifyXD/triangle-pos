@@ -30,7 +30,7 @@ class CategoriesController extends Controller
         Category::create([
             // 'category_code' => $request->category_code,
             'category_name' => $request->category_name,
-            'user_id' => auth()->user()->id,
+            'store_id' => auth()->user()->store->id,
         ]);
 
         toast('Product Category Created!', 'success');

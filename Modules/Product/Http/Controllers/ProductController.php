@@ -37,14 +37,15 @@ class ProductController extends Controller
         $this->checkPermission('create_products');
 
         // Set user_id from the authenticated user
-        $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['store_id' => auth()->user()->store->id]);
 
         // Convert the array of selected units to a comma-separated string
-        $productUnits = implode(',', $request->input('product_unit', []));
+        // $productUnits = implode(',', $request->input('product_unit', []));
 
         // Create the product with the units
-        $productData = $request->except(['document', 'product_unit']);
-        $productData['product_unit'] = $productUnits;
+        // $productData = $request->except(['document', 'product_unit']);
+        $productData = $request->except(['document']);
+        // $productData['product_unit'] = $productUnits;
 
         $product = Product::create($productData);
 

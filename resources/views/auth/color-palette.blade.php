@@ -124,35 +124,7 @@
 
     </script>
 
-    {{--     <div style="position: absolute; right:-20%;">--}}
-
-    {{--         <div class="card" style="width: 15rem;">--}}
-    {{--             <div class="card-body">--}}
-    {{--                 <h5 class="card-title text-end">Legend</h5>--}}
-    {{--                 <hr>--}}
-
-    {{--                 <div style="position: relative; margin-bottom: -15px">--}}
-    {{--                     <div class="first-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">--}}
-    {{--                     </div>--}}
-    {{--                     <span class="first-color text-dark h5"--}}
-    {{--                         style="position: absolute; top:0; right: 0;">#000000</span><br>--}}
-    {{--                 </div>--}}
-    {{--                 <div style="position: relative; margin-bottom: -15px">--}}
-    {{--                     <div class="second-div-bgcolor"--}}
-    {{--                         style="width: 25px; height: 25px; background-color: #000000">--}}
-    {{--                     </div>--}}
-    {{--                     <span class="second-color text-dark h5"--}}
-    {{--                         style="position: absolute; top:0; right: 0;">#000000</span><br>--}}
-    {{--                 </div>--}}
-    {{--                 <div style="position: relative; margin-bottom: -15px">--}}
-    {{--                     <div class="third-div-bgcolor" style="width: 25px; height: 25px; background-color: #000000">--}}
-    {{--                     </div>--}}
-    {{--                     <span class="third-color text-dark h5"--}}
-    {{--                         style="position: absolute; top:0; right: 0;">#000000</span><br>--}}
-    {{--                 </div>--}}
-    {{--             </div>--}}
-    {{--         </div>--}}
-    {{--     </div>--}}
+     
 
 @endsection
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\ThemeSetting;
 use App\Models\User;
 use App\Models\UserPermission;
@@ -84,10 +85,20 @@ class HomeController extends Controller
     {
         $redirect = '';
         if ($request->requestdata === 'storename') {
-            Setting::updateOrCreate(
+            // First, define the validation rules
+            $rules = [
+                'storename' => 'required', // 'required' rule makes the field mandatory
+            ];
+
+            // Validate the request data
+            $request->validate($rules);
+
+            // Proceed with the updateOrCreate method
+            Store::updateOrCreate(
                 ['user_id' => auth()->user()->id], // Use the user's ID
-                ['company_name' => $request->storename]
+                ['store_name' => $request->storename]
             );
+
 
             User::where('id', auth()->id())->update(['reg_requirements' => 2]);
 
@@ -134,7 +145,7 @@ class HomeController extends Controller
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }
 
-    
+
     public function withPermission_update(Request $request)
     {
         // Get the user ID from the authenticated user or wherever it's available

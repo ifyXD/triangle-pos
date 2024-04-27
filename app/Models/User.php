@@ -26,7 +26,9 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'password',
         'is_active',
@@ -75,6 +77,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     public function themecustom()
     {
         return $this->hasOne(ThemeSetting::class);
+    }
+    public function store()
+    {
+        return $this->hasOne(Store::class);
     }
     public function userpermissions()
     {
