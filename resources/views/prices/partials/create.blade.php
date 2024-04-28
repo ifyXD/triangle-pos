@@ -39,11 +39,9 @@
                                     <div class="form-group">
                                         <label for="product_name">Units <span class="text-danger">*</span></label>
                                         <select class="form-control" name="product_unit" id="product_unit" required>
-                                            <option value="" selected disabled>Select Units</option>
-                                            @foreach ($units as $unit)
-                                                @if (!in_array($unit, $savedUnits))
-                                                    <option value="{{ $unit }}">{{ $unit }}</option>
-                                                @endif
+                                            <option value="" selected disabled>Select Unit</option>
+                                            @foreach ($unitArray as $unit)
+                                                    <option value="{{ $unit['id'] }}">{{ $unit['name']. ' | '. $unit['short_name'] }}</option>
                                             @endforeach
                                         </select>
                                         
