@@ -34,39 +34,12 @@ class ProductCategoriesDataTable extends DataTable
         // If not "Super Admin," apply the original condition
         return $model->newQuery()
             ->withCount('products')
-            ->where(function ($query) use ($user) {
-                $query->where('user_id', $user->id)
-                    ->orWhere('user_id', 1);
-            })
+            ->where('store_id', $user->store->id)
             ->orderBy('category_name');
     }
 
     public function html()
     {
-
-        // $auth = auth()->user()->id;
-        // $route = route('category.printToExcel.id', $auth);
-        // return $this->builder()
-        //     ->setTableId('product_categories-table')
-        //     ->columns($this->getColumns())
-        //     ->minifiedAjax()
-        //     ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>>" .
-        //             "'tr'" .
-        //             "<'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-        //     ->orderBy(4)
-        //     ->buttons(
-        //         "<a href='{$route}' class='btn btn-primary'><i class='bi bi-file-earmark-excel-fill'></i> Excel</a>",
-        //         Button::make('print')
-        //             ->text('<i class="bi bi-printer-fill border"></i> Print'),
-        //         Button::make('reset')
-        //             ->text('<i class="bi bi-x-circle"></i> Reset'),
-        //         Button::make('reload')
-        //             ->text('<i class="bi bi-arrow-repeat"></i> Reload')
-        //     );
-
-
-
-
         return $this->builder()
             ->setTableId('product_categories-table')
             ->columns($this->getColumns())
@@ -74,10 +47,8 @@ class ProductCategoriesDataTable extends DataTable
             ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-            ->orderBy(4)
+            ->orderBy(1) // Assuming you want to order by the second column (category_name)
             ->buttons(
-                // Button::make('excel')
-                //     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
                 Button::make('reset')
@@ -90,12 +61,6 @@ class ProductCategoriesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('category_code')
-            ->addClass('text-center')
-            ->searchable(false)
-            ->visible(false)
-            ->printable(false),
-
             Column::make('category_name')
                 ->addClass('text-center')
                 ->searchable(true),

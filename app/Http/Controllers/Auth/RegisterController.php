@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,7 +52,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,9 +66,10 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
+    {   
         $user = User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'is_active' => 1
@@ -74,7 +77,7 @@ class RegisterController extends Controller
 
         $user->assignRole('Admin');
 
-         DB::table('customers')->insert([
+        DB::table('customers')->insert([
             'customer_name' => 'Anonymous',
             'customer_email' => 'anonymous@example.com',
             'customer_phone' => '123456789',
@@ -85,20 +88,12 @@ class RegisterController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('suppliers')->insert([
-            'supplier_name' => 'Anonymous',
-            'supplier_email' => 'anonymous@example.com',
-            'supplier_phone' => '123456789',
-            'city' => 'Blank City',
-            'country' => 'Blank Country',
-            'address' => 'Blank Address',
-            'user_id' => $user->id,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
+        
 
         return $user;
     }
-    
+    protected function registered(Request $request, $user)
+    {
+        $user->sendEmailVerificationNotification();
+    }
 }

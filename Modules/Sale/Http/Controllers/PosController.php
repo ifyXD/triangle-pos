@@ -40,7 +40,9 @@ class PosController extends Controller
 
     public function store(StorePosSaleRequest $request)
     {
-        DB::transaction(function () use ($request) {
+        $sale_id = 0;
+       
+        DB::transaction(function () use ($request, &$sale_id) {
             $due_amount = $request->total_amount - $request->paid_amount;
 
             if ($due_amount == $request->total_amount) {
@@ -70,28 +72,7 @@ class PosController extends Controller
                 // 'discount_amount' => Cart::instance('sale')->discount() * 100,
                 'user_id' => auth()->user()->id,
             ]);
-
-            // foreach (Cart::instance('sale')->content() as $cart_item) {
-            //     SaleDetails::create([
-            //         'sale_id' => $sale->id,
-            //         'product_id' => $cart_item->id,
-            //         'product_name' => $cart_item->name,
-            //         'product_code' => $cart_item->options->code,
-            //         'quantity' => $cart_item->qty,
-            //         'price' => $cart_item->price * 100,
-            //         'unit_price' => $cart_item->options->unit_price * 100,
-            //         'sub_total' => $cart_item->options->sub_total * 100,
-            //         'product_discount_amount' => $cart_item->options->product_discount * 100,
-            //         'product_discount_type' => $cart_item->options->product_discount_type,
-            //         'product_tax_amount' => $cart_item->options->product_tax * 100,
-            //         'user_id' => auth()->user()->id,
-            //     ]);
-
-            //     $product = Product::findOrFail($cart_item->id);
-            //     $product->update([
-            //         'product_quantity' => $product->product_quantity - $cart_item->qty
-            //     ]);
-            // }
+        
             foreach ($request->cartDetails as $cartDetail) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
@@ -123,13 +104,15 @@ class PosController extends Controller
                     'payment_method' => $request->payment_method
                 ]);
             }
+            $sale_id = $sale->id;
         });
 
         toast('POS Sale Created!', 'success');
 
         // return redirect()->route('sales.index');
         return response()->json([
-            'message' => 'success'
+            'message' => 'success',
+            'id' => $sale_id,
         ]);
     }
 }

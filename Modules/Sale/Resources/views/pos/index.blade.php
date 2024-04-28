@@ -249,7 +249,7 @@
                     .done(function(response) {
                         // Success callback
                         // console.log(cartDetails);
-                        window.location = "{{ route('sales.index') }}";
+                        window.location = `{{ url('sales') }}/${response.id}`;
                         // You can perform further actions here based on the server response
                     })
                     .fail(function(xhr, status, error) {

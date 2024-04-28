@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
@@ -26,7 +26,9 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'password',
         'is_active',
@@ -75,6 +77,10 @@ class User extends Authenticatable implements HasMedia
     public function themecustom()
     {
         return $this->hasOne(ThemeSetting::class);
+    }
+    public function store()
+    {
+        return $this->hasOne(Store::class);
     }
     public function userpermissions()
     {

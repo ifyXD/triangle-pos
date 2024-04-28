@@ -35,24 +35,21 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="category_id">Category <span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <select class="form-control" name="category_id" id="category_id" required>
-                                                <option value="" selected disabled>Select Category</option>
-                                                @foreach (\Modules\Product\Entities\Category::orderBy('category_name')->get() as $category)
-                                                    @if (auth()->user()->hasRole('Super Admin'))
-                                                        <option
-                                                            value="{{ $category->id }}">{{ $category->category_name }}
+                                    <label for="category_id">Category <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="category_id" id="category_id" required>
+                                            <option value="" selected disabled>Select Category</option>
+                                            @foreach (\Modules\Product\Entities\Category::orderBy('category_name')->get() as $category)
+                                                @if (auth()->user()->hasRole('Super Admin'))
+                                                    <option value="{{ $category->id }}">{{ $category->category_name }}
+                                                    </option>
+                                                @else
+                                                    @if ($category->user_id == auth()->user()->id || $category->user_id == 1)
+                                                        <option value="{{ $category->id }}">{{ $category->category_name }}
                                                         </option>
-                                                    @else
-                                                        @if ($category->user_id == auth()->user()->id || $category->user_id == 1)
-                                                            <option
-                                                                value="{{ $category->id }}">{{ $category->category_name }}
-                                                            </option>
-                                                        @endif
                                                     @endif
-                                                @endforeach
+                                                @endif
+                                            @endforeach
 
                                             </select>
                                             <div class="input-group-append d-flex">
@@ -68,7 +65,7 @@
 
                             <div class="form-row">
                             </div>
-
+ 
 
                             <div class="form-row">
                                 <div class="col-md-6">
@@ -87,24 +84,36 @@
                                                value="{{ old('product_stock_alert', 0) }}" min="0" max="100">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="product_unit">Unit
-                                        <i class="bi bi-question-circle-fill text-info"
-                                           data-toggle="tooltip" data-placement="top"
-                                           title="Select the appropriate unit required for the product's use.">
-                                        </i>
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group-append d-flex form-group">
-                                        <a href="{{ url('units/create') }}" class="btn btn-outline-primary">Add</a>
+                                {{-- <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="product_order_tax">Tax (%)</label>
+                                        <input type="number" class="form-control" name="product_order_tax"
+                                            value="{{ old('product_order_tax') }}" min="1">
                                     </div>
-                                    <div class="input-group form-group flex-column">
-                                        {{--<select class="form-control" multiple name="product_unit[]" id="product_unit">
-                                            --}}{{--<option value="" selected disabled>Select Unit</option>--}}{{--
-                                            @foreach (Unit::orderBy('name')->get() as $unit)
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="product_tax_type">Tax type</label>
+                                        <select class="form-control" name="product_tax_type" id="product_tax_type">
+                                            <option value="" selected>Select Tax Type</option>
+                                            <option value="1">Exclusive</option>
+                                            <option value="2">Inclusive</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <div class="col-md-6">
+                                    <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="This short text will be placed after Product Quantity."></i> <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <select class="form-control" multiple name="product_unit[]" id="product_unit">
+                                            <option value="" selected disabled>Select Unit</option>
+
+                                            @foreach (\Modules\Setting\Entities\Unit::orderBy('name')->get() as $unit)
                                                 @if (auth()->user()->hasRole('Super Admin'))
                                                     <option
                                                         value="{{ $unit->short_name }}">
@@ -174,16 +183,12 @@
 
 
                                     </div>
-
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="product_note">Note</label>
-                                        <textarea name="product_note" id="product_note" rows="4 "
-                                                  class="form-control"></textarea>
-                                    </div>
-                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="product_note">Note</label>
+                                <textarea name="product_note" id="product_note" rows="4 " class="form-control"></textarea>
                             </div>
 
 

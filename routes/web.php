@@ -33,15 +33,18 @@ Route::middleware('guest')->group(function () {
 
 
 
-Auth::routes(['register' => true]);
+Auth::routes([
+    'register' => true,
+    'verify' => true
+]);
 
 Route::get('/userlist', [HomeController::class, 'userlist']);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index')->middleware('isRequirement')->name('home');
+    Route::get('/home', 'HomeController@index')->middleware('verified','isRequirement')->name('home');
 
     // Requirement 1
-    Route::middleware('isCheckRequirement')->group(function () {
+    Route::middleware('verified','isCheckRequirement')->group(function () {
         Route::get('/registration-requirements-storename', [HomeController::class, 'storename'])->name('registration.requirements-storename');
         Route::get('/registration-requirements-permission', [HomeController::class, 'permission'])->name('registration.requirements-permission');
         Route::get('/registration-requirements-colorpallete', [HomeController::class, 'colorpallete'])->name('registration.requirements-colorpallete');
