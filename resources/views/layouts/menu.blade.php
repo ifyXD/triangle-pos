@@ -38,6 +38,14 @@
                     </a>
                 </li>
             @endif
+            @if (auth()->user()->hasAccessToPermission('access_products'))
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('stocks.index') ? 'c-active' : '' }}"
+                        href="{{ route('stocks.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Stocks
+                    </a>
+                </li>
+            @endif
             @if (auth()->user()->hasAccessToPermission('access_prices'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"

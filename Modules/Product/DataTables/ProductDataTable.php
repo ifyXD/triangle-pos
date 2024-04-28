@@ -20,8 +20,8 @@ class ProductDataTable extends DataTable
                 return view('product::products.partials.actions', compact('data'));
             })
             ->addColumn('product_image', function ($data) {
-                $url = $data->getFirstMediaUrl('images', 'thumb'); 
-                return '<img src="'.$url.'" border="0" width="50" class="img-thumbnail" align="center"/>';
+                $url = $data->getFirstMediaUrl('images', 'thumb');
+                return '<img src="' . $url . '" border="0" width="50" class="img-thumbnail" align="center"/>';
             })
             ->addColumn('product_price', function ($data) {
                 return format_currency($data->product_price);
@@ -38,36 +38,36 @@ class ProductDataTable extends DataTable
     public function query(Product $model)
     {
         $user = auth()->user();
-    
+
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             return $model->newQuery()->with('category');
-        }   
-    
+        }
+
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id', 1)->with('category');
+        return $model->newQuery()->where('store_id', auth()->user()->store->id)->with('category');
     }
 
     public function html()
     {
         return $this->builder()
-                    ->setTableId('product-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
+            ->setTableId('product-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom("<'row'<'col-md-3'l><'col-md-5 mb-2'B><'col-md-4'f>> .
                                 'tr' .
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
-                    ->orderBy(7)
-                    ->buttons(
-                        // Button::make('excel')
-                        //     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
-                        Button::make('print')
-                            ->text('<i class="bi bi-printer-fill"></i> Print'),
-                        Button::make('reset')
-                            ->text('<i class="bi bi-x-circle"></i> Reset'),
-                        Button::make('reload')
-                            ->text('<i class="bi bi-arrow-repeat"></i> Reload')
-                    );
+            ->orderBy(7)
+            ->buttons(
+                // Button::make('excel')
+                //     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
+                Button::make('print')
+                    ->text('<i class="bi bi-printer-fill"></i> Print'),
+                // Button::make('reset')
+                //     ->text('<i class="bi bi-x-circle"></i> Reset'),
+                Button::make('reload')
+                    ->text('<i class="bi bi-arrow-repeat"></i> Reload')
+            );
     }
 
     protected function getColumns()
@@ -81,26 +81,23 @@ class ProductDataTable extends DataTable
                 ->title('Category')
                 ->className('text-center align-middle'),
 
-            // Column::make('product_code')
-            //     ->title('Code')
-            //     ->className('text-center align-middle'),
-
             Column::make('product_name')
                 ->title('Name')
                 ->className('text-center align-middle'),
 
             Column::computed('product_cost')
                 ->title('Cost')
-                   ->visible(false)
+                ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::computed('product_price')
                 ->title('Price')
-                   ->visible(false)
+                ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::computed('product_quantity')
                 ->title('Quantity | Units')
+                ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::computed('action')

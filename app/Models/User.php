@@ -68,7 +68,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     }
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'user_id', 'id');
+        return $this->belongsToMany(Category::class, 'store_id', 'id');
     }
     public function setting()
     {
