@@ -84,7 +84,7 @@
                                                value="{{ old('product_stock_alert', 0) }}" min="0" max="100">
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div> 
 
                             <div class="form-row">
                                 {{-- <div class="col-md-4">
@@ -128,7 +128,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                        </select>--}}
+                                        </select>
 
                                         {{--<select class="form-control" multiple name="product_unit[]" id="product_unit">
                                             @foreach (Unit::where('user_id', auth()->user()->id)->orWhere('user_id', 1)->orderBy('name')->get() as $unit)
