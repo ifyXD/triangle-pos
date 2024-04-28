@@ -20,6 +20,7 @@ use Modules\Sale\Entities\SalePayment;
 use Modules\SalesReturn\Entities\SaleReturn;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
 use Modules\Setting\Entities\Setting;
+use Modules\Setting\Entities\Unit;
 
 class HomeController extends Controller
 {
@@ -102,6 +103,140 @@ class HomeController extends Controller
 
             User::where('id', auth()->id())->update(['reg_requirements' => 2]);
 
+            $units = [
+                [
+                    'name' => 'Piece',
+                    'short_name' => 'pc',
+                    'operator' => '*',
+                    'operation_value' => 1,
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Gram',
+                    'short_name' => 'g',
+                    'operator' => '*',
+                    'operation_value' => 1,
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Kilogram',
+                    'short_name' => 'kg',
+                    'operator' => '*',
+                    'operation_value' => 1000, // 1 kg = 1000 g
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Metric ton',
+                    'short_name' => 't',
+                    'operator' => '*',
+                    'operation_value' => 1000000, // 1 t = 1000 kg = 1000000 g
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Pound',
+                    'short_name' => 'lb',
+                    'operator' => '*',
+                    'operation_value' => 453.592, // 1 lb = 453.592 g
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Ounce',
+                    'short_name' => 'oz',
+                    'operator' => '*',
+                    'operation_value' => 28.3495, // 1 oz = 28.3495 g
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Liter',
+                    'short_name' => 'L',
+                    'operator' => '*',
+                    'operation_value' => 1000, // 1 L = 1000 mL
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Milliliter',
+                    'short_name' => 'ml',
+                    'operator' => '*',
+                    'operation_value' => 1,
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Cubic meter',
+                    'short_name' => 'm³',
+                    'operator' => '*',
+                    'operation_value' => 1000000, // 1 m³ = 1000 L = 1000000 mL
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Cubic centimeter',
+                    'short_name' => 'cm³ or cc',
+                    'operator' => '*',
+                    'operation_value' => 1,
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Gallon',
+                    'short_name' => 'gal',
+                    'operator' => '*',
+                    'operation_value' => 3785.41, // 1 gal = 3785.41 mL
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Quart',
+                    'short_name' => 'qt',
+                    'operator' => '*',
+                    'operation_value' => 946.353, // 1 qt = 946.353 mL
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Meter',
+                    'short_name' => 'm',
+                    'operator' => '*',
+                    'operation_value' => 1,
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Centimeter',
+                    'short_name' => 'cm',
+                    'operator' => '*',
+                    'operation_value' => 0.01, // 1 cm = 0.01 m
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Kilometer',
+                    'short_name' => 'km',
+                    'operator' => '*',
+                    'operation_value' => 1000, // 1 km = 1000 m
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Inch',
+                    'short_name' => 'in',
+                    'operator' => '*',
+                    'operation_value' => 0.0254, // 1 in = 0.0254 m
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Foot',
+                    'short_name' => 'ft',
+                    'operator' => '*',
+                    'operation_value' => 0.3048, // 1 ft = 0.3048 m
+                    'store_id' => auth()->user()->store->id
+                ],
+                [
+                    'name' => 'Yard',
+                    'short_name' => 'yd',
+                    'operator' => '*',
+                    'operation_value' => 0.9144, // 1 yd = 0.9144 m
+                    'store_id' => auth()->user()->store->id
+                ],
+            ];
+    
+            // Loop through the unit data and create records
+            foreach ($units as $unit) {
+                Unit::create($unit);
+            }
+
             $redirect = redirect()->route('registration.requirements-permission');
         }
         return $redirect;
@@ -170,9 +305,11 @@ class HomeController extends Controller
             );
         }
 
+       
+
 
         // You can return a response if needed
-        toast('Settings Updated!', 'info');
+        // toast('Settings Updated!', 'info');
         // Set status to false for permissions not present in the submitted data 
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }

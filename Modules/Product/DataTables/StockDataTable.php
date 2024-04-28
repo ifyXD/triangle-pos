@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PriceDataTable extends DataTable
+class StockDataTable extends DataTable
 {
 
     public function dataTable($query)
@@ -17,7 +17,7 @@ class PriceDataTable extends DataTable
         return datatables()
             ->eloquent($query)->with('category')
             ->addColumn('action', function ($data) {
-                return view('prices.partials.actions', compact('data'));
+                return view('stocks.partials.actions', compact('data'));
             })
             ->addColumn('product_image', function ($data) {
                 $url = $data->getFirstMediaUrl('images', 'thumb');

@@ -51,8 +51,8 @@ class ProductCategoriesDataTable extends DataTable
             ->buttons(
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
-                Button::make('reset')
-                    ->text('<i class="bi bi-x-circle"></i> Reset'),
+                // Button::make('reset')
+                //     ->text('<i class="bi bi-x-circle"></i> Reset'),
                 Button::make('reload')
                     ->text('<i class="bi bi-arrow-repeat"></i> Reload')
             );

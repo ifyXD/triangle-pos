@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/current-month/chart-data', 'HomeController@currentMonthChart')->name('current-month.chart');
     Route::get('/payment-flow/chart-data', 'HomeController@paymentChart')->name('payment-flow.chart');
     Route::resource('prices', 'PriceController');
+    Route::resource('stocks', 'StockController');
 
     Route::get('prices/create/{id}', 'PriceController@create');
     Route::patch('prices/store/{id}', 'PriceController@store')->name('prices.store');
@@ -68,6 +69,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('prices/show/{id}', 'PriceController@show')->name('prices.show');
     Route::get('prices/edit/{id}', 'PriceController@edit');
     Route::delete('prices/delete/{id}', 'PriceController@destroy')->name('prices.destroy');
+    
+    Route::get('stocks/create/{id}', 'StockController@create');
+    Route::patch('stocks/store/{id}', 'StockController@store')->name('stocks.store');
+    Route::patch('stocks/update/{id}', 'StockController@update')->name('stocks.update');
+    Route::get('stocks/show/{id}', 'StockController@show')->name('stocks.show');
+    Route::get('stocks/edit/{id}', 'StockController@edit');
+    Route::delete('stocks/delete/{id}', 'StockController@destroy')->name('stocks.destroy');
 
 });
 
