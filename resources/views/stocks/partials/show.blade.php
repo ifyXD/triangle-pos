@@ -65,7 +65,7 @@
                                                             ">
                                                         <i class="bi bi-trash"></i>
                                                         <form id="destroy{{ $item->stock_id }}" class="d-none"
-                                                            action="{{ route('prices.destroy', $item->stock_id) }}"
+                                                            action="{{ route('stocks.destroy', $item->stock_id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('delete')

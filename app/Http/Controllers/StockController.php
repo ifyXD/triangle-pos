@@ -15,13 +15,13 @@ class StockController extends Controller
 {
     public function index(StockDataTable $dataTable)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
         return $dataTable->render('stocks.index');
     }
     public function create($id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
         $units = Unit::where('store_id', auth()->user()->store->id)->orderBy('name', 'asc')->get();
         $data = Product::find($id);
@@ -30,7 +30,7 @@ class StockController extends Controller
 
     public function store(Request $request, $id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
         Stock::create([
             'product_id' => $request->product_id,
@@ -40,11 +40,11 @@ class StockController extends Controller
             'store_id' => auth()->user()->store->id,
         ]);
 
-        return redirect('prices/show/' . $id);
+        return redirect('stocks/show/' . $id);
     }
     public function edit(Request $request, $id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
         $units = Unit::where('store_id', auth()->user()->store->id)->orderBy('name', 'asc')->get();
         $data = Product::find($id);
@@ -52,23 +52,26 @@ class StockController extends Controller
         $stock = Stock::find($id);
         return view('stocks.partials.edit', compact('id','stock_id', 'data', 'units','stock'));
 
-        // return redirect('prices/show/' . $id);
+        // return redirect('products/show/' . $id);
     }
     public function update(Request $request, $id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
-        $price = Price::find($id);
-        $price->update([
-            'product_cost' => $request->product_cost,
-            'product_price' => $request->product_price,
+        $stock = Stock::find($id);
+        $stock->update([
+            'unit_id' => $request->unit_id,
+            'product_quantity' => $request->product_quantity,
+            'product_stock_alert' => $request->product_stock_alert,
         ]);
 
-        return redirect('prices/show/' . $price->product_id)->with('success', 'Price Updated!');
+        
+
+        return redirect('stocks/show/' . $id)->with('success', 'Price Updated!');
     }
     public function show($id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
         $product = Product::find($id);
         $stocks = DB::table('stocks')
@@ -89,12 +92,12 @@ class StockController extends Controller
     }
     public function destroy($id)
     {
-        abort_if(Gate::denies('access_prices'), 403);
+        abort_if(Gate::denies('access_products'), 403);
 
-        Price::find($id)->delete();
+        Stock::find($id)->delete();
 
-        toast('Product Deleted!', 'warning');
+        toast('Stock Deleted!', 'warning');
 
-        return redirect()->back()->with('success', 'Price Deleted!');
+        return redirect()->back()->with('success', 'Stock Deleted!');
     }
 }
