@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="container-fluid mb-4">
-        <form id="product-form" action="{{ route('prices.update', $id) }}" method="POST">
+        <form id="product-form" action="{{ route('stocks.update', $id) }}" method="POST">
             @csrf
             @method('patch')
             <div class="row">
@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label for="product_quantity">Quantity <span class="text-danger">*</span></label>
                                         <input type="number" class="form-control" name="product_quantity" required
-                                            value="1" min="1">
+                                            value="{{$stock->product_quantity}}" min="1">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -63,7 +63,7 @@
                                         <label for="product_stock_alert">Alert Quantity <span
                                                 class="text-danger">*</span></label>
                                         <input type="number" class="form-control" name="product_stock_alert" required
-                                            value="{{ old('product_stock_alert', 0) }}" min="0" max="100">
+                                            value="{{$stock->product_stock_alert}}" min="0" max="100">
                                     </div>
                                 </div>
                             </div>
