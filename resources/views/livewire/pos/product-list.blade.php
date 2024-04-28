@@ -91,7 +91,7 @@
                                                         $unitPricePairs = explode('|', $product->all_prices);
                                                     @endphp
                                                     <option value="0" selected disabled>Select Unit</option>
-                                                    @php
+                                                @php
                                                         $unitPricePairs = $product->all_prices ? explode('|', $product->all_prices) : [];
                                                     @endphp
                                                     @foreach ($unitPricePairs as $unitPricePair)
