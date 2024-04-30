@@ -41,15 +41,15 @@
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
                                                 @foreach (\Modules\People\Entities\Customer::when(
-                                                    auth()->user()->hasRole('Super Admin'),
-                                                    function ($query) {
-                                                        // If the user has the "Super Admin" role, retrieve all suppliers
-                                                    },
-                                                    function ($query) {
-                                                        // If not "Super Admin," filter suppliers by user_id
-                                                        $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
-                                                    },
-                                                )->orderBy('customer_name')->get() as $customer)
+            auth()->user()->hasRole('Super Admin'),
+            function ($query) {
+                // If the user has the "Super Admin" role, retrieve all suppliers
+            },
+            function ($query) {
+                // If not "Super Admin," filter suppliers by user_id
+                $query->where('user_id', auth()->user()->id)->orWhere('user_id', 1);
+            },
+        )->orderBy('customer_name')->get() as $customer)
                                                     <option value="{{ $customer->id }}">
                                                         {{ Str::ucfirst($customer->customer_name) }}</option>
                                                 @endforeach
@@ -159,6 +159,10 @@
                     var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
                     var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
                         .text();
+                    var price_id = $(this).find('select.price-per-unit').find(':selected')
+                        .data('price_id');
+                    var stock_id = $(this).find('select.price-per-unit').find(':selected')
+                        .data('stock_id');
                     var quantity = $(this).find('.quantity').val();
                     var subTotalVal = $(this).find('.sub-total').text();
                     var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
@@ -168,6 +172,8 @@
                         productName: productName,
                         pricePerProductUnit: pricePerProductUnit,
                         pricePerUnit: pricePerUnit,
+                        price_id: price_id,
+                        stock_id: stock_id,
                         quantity: quantity,
                         subTotal: subTotal
                     };
@@ -175,7 +181,7 @@
                     // Push the cart detail object into the array
                     cartDetails.push(cartDetail);
                 });
-                // console.log(total_amount);
+                // console.log(cartDetails);
 
                 $.ajax({
                     url: '{{ route('sales.update', $sale) }}',

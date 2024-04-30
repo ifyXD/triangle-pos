@@ -18,12 +18,12 @@ class CreateSalePaymentsTable extends Migration
             $table->unsignedBigInteger('sale_id');
             $table->integer('amount');
             $table->date('date');
-            $table->string('reference')->nullable();
+            // $table->string('reference')->nullable();
             $table->string('payment_method');
             $table->text('note')->nullable();
             $table->foreign('sale_id')->references('id')->on('sales')->cascadeOnDelete();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }

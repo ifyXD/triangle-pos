@@ -24,19 +24,19 @@ class PriceController extends Controller
         abort_if(Gate::denies('access_prices'), 403);
 
         $data = Product::find($id);
-        $units = Stock::where('product_id', $id)->select('unit_id')->get();
+        $units = Stock::where('product_id', $id)->select('unit_id','id')->get();
         $savedUnits = Price::where('product_id', $id)->get('unit_id');
 
         $unitArray = array();
 
         foreach($units as $unit){
             $units_list = Unit::where('id',$unit->unit_id)->get();
-
             foreach($units_list as $unitl){
                 $unitArray[] = [
                     'id' => $unitl->id,
                     'name' => $unitl->name,
                     'short_name' => $unitl->short_name,
+                    'stock_id' => $unit->id,
                 ];
             }
         }
@@ -53,6 +53,7 @@ class PriceController extends Controller
             'unit_id' => $request->product_unit,
             'product_cost' => $request->product_cost,
             'product_price' => $request->product_price,
+            'stock_id' => $request->stock_id,
         ]);
 
         return redirect('prices/show/' . $id);

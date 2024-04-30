@@ -21,8 +21,7 @@ class Filter extends Component
         $user = auth()->user();
 
         $this->categories = Category::when(!$user->hasRole('Super Admin'), function ($query) use ($user) {
-            return $query->where('user_id', $user->id)
-                         ->where('user_id', '=', 1);
+            return $query->where('store_id', $user->store->id);
         })->get();
 
         return view('livewire.pos.filter');

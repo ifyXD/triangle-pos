@@ -10,7 +10,7 @@
                 </div>
             </div>
         @endif
-        
+
         <div class="table-responsive position-relative">
             <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center"
                 style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
@@ -36,26 +36,28 @@
                         @foreach ($cart_items as $cart_item)
                             <tr data-product-id="{{ $cart_item->id }}">
                                 <td class="align-middle">
-                                    {{ $cart_item->name}} <br>
-                                    
+                                    {{ $cart_item->name }} <br>
+
                                 </td>
                                 <td class="align-middle text-center">
                                     <input style="min-width: 40px;max-width: 100%;" type="text" readonly
-                                        id="priceValue_{{ $cart_item->id }}" value="{{$cart_item->price}}" class="form-control price-per-product-unit"
-                                        min="0" value="0">
+                                        id="priceValue_{{ $cart_item->id }}" value="{{ $cart_item->price }}"
+                                        class="form-control price-per-product-unit" min="0" value="0">
                                     <select name="unit_select_{{ $cart_item->id }}"
                                         onchange="selectedUnit({{ $cart_item->id }}, $(this).val());"
                                         id="unit_select_{{ $cart_item->id }}" style="min-width: 40px;max-width: 100%;"
                                         class="form-control price-per-unit">
-                                        <option value="" disabled selected>Select Unit</option>
-                                        @foreach ($cart_item->options['prices'] as $key=>$priceOption)
-                                            <option {{$cart_item->options['unit_price'] == $priceOption['product_unit']? 'selected' : ''  }} value="{{ $priceOption['price'] }}">
-                                                {{-- {{ $cart_item->unit }} --}}
-                                                {{-- {{ $cart_item->$key->unit_price }} --}}
-                                                {{ $priceOption['product_unit'] }}
-                                            </option>
+                                        <option value="" disabled selected>Select Unit</option> 
+                                        @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $cart_item->id)->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
+                                            <option {{ $cart_item->price == $unit->product_price ? 'selected' : ''}} data-unit_id="{{ $unit->unit_id }}"
+                                                data-price_id="{{ $unit->price_id }}"
+                                                data-stock_id="{{ $unit->stock_id }}"
+                                                value="{{ $unit->product_price }}">
+                                                {{ $unit->name . ' | ' . $unit->short_name }}</option>
                                         @endforeach
                                     </select>
+
+
                                 </td>
 
                                 <td class="align-middle text-center text-center">
@@ -69,7 +71,7 @@
                                             onchange="quantity({{ $cart_item->id }}, $(this).val());"
                                             style="min-width: 40px;max-width: 90px;" type="number"
                                             class="form-control quantity" value="{{ $cart_item->qty }}" min="1"
-                                            max="{{ $cart_item->options['stock'] }}">
+                                            max="">
                                     </div>
 
                                 </td>
@@ -184,19 +186,20 @@
             $('tr[data-product-id]').each(function() {
                 // Extract data from the current <tr>
                 var productId = $(this).data('product-id');
-                var productName = $(this).find('td:eq(0)').text();
-                var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
-                var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
-                    .text();
+                var productName = $(this).find('td:eq(0)').text(); 
+                var price_id = $(this).find('select.price-per-unit').find(':selected')
+                    .data('price_id');
+                var stock_id = $(this).find('select.price-per-unit').find(':selected')
+                    .data('stock_id');
                 var quantity = $(this).find('.quantity').val();
                 var subTotalVal = $(this).find('.sub-total').text();
                 var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
                 // Create an object to represent the cart detail
                 var cartDetail = {
                     productId: productId,
+                    price_id: price_id,
+                    stock_id: stock_id,
                     productName: productName,
-                    pricePerProductUnit: pricePerProductUnit,
-                    pricePerUnit: pricePerUnit,
                     quantity: quantity,
                     subTotal: subTotal
                 };

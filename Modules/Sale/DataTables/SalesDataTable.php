@@ -12,7 +12,8 @@ use Yajra\DataTables\Services\DataTable;
 class SalesDataTable extends DataTable
 {
 
-    public function dataTable($query) {
+    public function dataTable($query)
+    {
         return datatables()
             ->eloquent($query)
             ->addColumn('total_amount', function ($data) {
@@ -35,19 +36,21 @@ class SalesDataTable extends DataTable
             });
     }
 
-    public function query(Sale $model) {
+    public function query(Sale $model)
+    {
         $user = auth()->user();
-    
+
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             return $model->newQuery();
         }
-    
+
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id',1);  
+        return $model->newQuery()->where('store_id', $user->store->id);
     }
 
-    public function html() {
+    public function html()
+    {
         return $this->builder()
             ->setTableId('sales-table')
             ->columns($this->getColumns())
@@ -68,9 +71,11 @@ class SalesDataTable extends DataTable
             );
     }
 
-    protected function getColumns() {
+    protected function getColumns()
+    {
         return [
-            Column::make('reference')
+            Column::make('customer_name')
+                ->visible(false)
                 ->className('text-center align-middle'),
 
             Column::make('customer_name')
@@ -102,7 +107,8 @@ class SalesDataTable extends DataTable
         ];
     }
 
-    protected function filename(): string {
+    protected function filename(): string
+    {
         return 'Sales_' . date('YmdHis');
     }
 }

@@ -120,15 +120,15 @@ class ProductCart extends Component
                 // 'product_discount_type' => 'fixed',
                 // 'code'                  => $product['product_code'],
                 'sub_total'             => $this->calculate($product)['sub_total'],
-                'stock'                 => $product['product_quantity'],
-                'unit'                  => $product['product_unit'],
+                // 'stock'                 => $product['product_quantity'],
+                // 'unit'                  => $product['product_unit'],
                 'product_tax'           => $this->calculate($product)['product_tax'],
                 'unit_price'            => $this->calculate($product)['unit_price'],
                 'prices'                => $priceOptions, // Add prices options here
             ]
         ]);
 
-        $this->check_quantity[$product['id']] = $product['product_quantity'];
+        // $this->check_quantity[$product['id']] = $product['product_quantity'];
         $this->quantity[$product['id']] = 1;
         $this->discount_type[$product['id']] = 'fixed';
         $this->item_discount[$product['id']] = 0;
@@ -240,11 +240,11 @@ class ProductCart extends Component
         if ($new_price) {
             $product_price = $new_price;
         } else {
-            $this->unit_price[$product['id']] = $product['product_price'];
+            // $this->unit_price[$product['id']] = $product['product_price'];
             if ($this->cart_instance == 'purchase' || $this->cart_instance == 'purchase_return') {
                 $this->unit_price[$product['id']] = $product['product_cost'];
             }
-            $product_price = $this->unit_price[$product['id']];
+            // $product_price = $this->unit_price[$product['id']];
         }
         $price = 0;
         $unit_price = 0;
