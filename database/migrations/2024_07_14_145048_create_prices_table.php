@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('product_unit');
+            $table->unsignedBigInteger('unit_id');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->integer('product_cost');
             $table->integer('product_price');
-            // $table->unsignedBigInteger('category_id');
-            // $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete();
+            $table->unsignedBigInteger('stock_id');
+            $table->foreign('stock_id')->references('id')->on('stocks')->restrictOnDelete();
             // $table->unsignedBigInteger('units_id');
             // $table->foreign('units_id')->references('id')->on('units')->restrictOnDelete();
             $table->timestamps();

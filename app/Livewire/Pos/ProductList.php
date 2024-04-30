@@ -35,28 +35,21 @@ class ProductList extends Component
         $products = Product::when($this->category_id, function ($query) {
             return $query->where('category_id', $this->category_id);
         })
-        ->leftJoin('prices', 'prices.product_id', '=', 'products.id')
-        ->select(
-            'products.id',
-            'products.product_quantity',
-            'products.product_name',
-            DB::raw('MIN(prices.product_price) as min_price'),
-            DB::raw('MAX(prices.product_price) as max_price'),
-            DB::raw("GROUP_CONCAT(CONCAT(prices.product_unit, ':', prices.product_price) SEPARATOR '|') as all_prices")
-        )
-        ->groupBy('products.id', 'products.product_name', 'products.product_quantity');
-        
-       
-
-
-
-
+            ->leftJoin('prices', 'prices.product_id', '=', 'products.id')
+            ->select(
+                'products.id',
+                'products.product_name',
+                DB::raw('MIN(prices.product_price) as min_price'),
+                DB::raw('MAX(prices.product_price) as max_price'),
+                 
+            )
+            ->groupBy('products.id', 'products.product_name');
 
         // Apply hasRole check for 'Super Admin'
         if (auth()->user()->hasRole('Super Admin')) {
             $products = $products->paginate($this->limit);
         } else {
-            $products = $products->where('user_id', auth()->user()->id)->orWhere('user_id', 1)->paginate($this->limit);
+            $products = $products->where('store_id', auth()->user()->store->id)->paginate($this->limit);
         }
 
         return view('livewire.pos.product-list', ['products' => $products]);

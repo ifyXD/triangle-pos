@@ -3,6 +3,7 @@
 namespace Modules\Sale\Http\Controllers;
 
 use App\Models\Price;
+use App\Models\Stock;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -55,38 +56,29 @@ class PosController extends Controller
 
             $sale = Sale::create([
                 'date' => now()->format('Y-m-d'),
-                'reference' => 'PSL',
+                // 'reference' => 'PSL',
                 'customer_id' => $request->customer_id,
-                'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
-                // 'tax_percentage' => $request->tax_percentage,
-                // 'discount_percentage' => $request->discount_percentage,
-                // 'shipping_amount' => $request->shipping_amount * 100,
+                'customer_name' => Customer::findOrFail($request->customer_id)->customer_name, 
                 'paid_amount' => $request->paid_amount * 100,
-                'total_amount' => $request->total_amount * 100,
                 'due_amount' => $due_amount * 100,
+                'total_amount' => $request->total_amount * 100,
                 'status' => 'Completed',
                 'payment_status' => $payment_status,
                 'payment_method' => $request->payment_method,
                 'note' => $request->note,
-                // 'tax_amount' => Cart::instance('sale')->tax() * 100,
-                // 'discount_amount' => Cart::instance('sale')->discount() * 100,
-                'user_id' => auth()->user()->id,
+                'store_id' => auth()->user()->store->id,
             ]);
         
             foreach ($request->cartDetails as $cartDetail) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
-                    'product_id' => $cartDetail['productId'],
-                    'product_name' => $cartDetail['productName'],
+                    'product_id' => $cartDetail['productId'], 
                     'quantity' => $cartDetail['quantity'],
-                    'price' => $cartDetail['pricePerProductUnit'],
-                    'unit_price' => $cartDetail['pricePerUnit'],
-                    'sub_total' => $cartDetail['subTotal'],
-                    // Add other fields from $cartDetail array as needed
-                    'user_id' => auth()->user()->id,
+                    'price_id' => $cartDetail['price_id'], 
+                    'store_id' => auth()->user()->store->id,
                 ]);
             
-                $product = Product::findOrFail($cartDetail['productId']);
+                $product = Stock::findOrFail($cartDetail['stock_id']);
                 $product->update([
                     'product_quantity' => $product->product_quantity - $cartDetail['quantity']
                 ]);
@@ -96,11 +88,10 @@ class PosController extends Controller
 
             if ($sale->paid_amount > 0) {
                 SalePayment::create([
-                    'date' => now()->format('Y-m-d'),
-                    'reference' => 'INV/' . $sale->reference,
-                    'amount' => $sale->paid_amount,
                     'sale_id' => $sale->id,
-                    'user_id' => auth()->user()->id,
+                    'amount' => $sale->paid_amount,
+                    'date' => now()->format('Y-m-d'),
+                    'store_id' => auth()->user()->store->id,
                     'payment_method' => $request->payment_method
                 ]);
             }

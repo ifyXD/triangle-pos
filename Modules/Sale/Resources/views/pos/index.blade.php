@@ -88,6 +88,9 @@
             let qty = $(`.parentcontent${id}`).find(`#product_quantity${id}`).val();
             // Assuming `.selectpricehere${id}` is a select element
             let selectedOption = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`);
+            let price_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('price_id');
+            let unit_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('unit_id');
+            let stock_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('stock_id');
             let priceText = selectedOption.text();
             let priceValue = selectedOption.val();
 
@@ -114,7 +117,7 @@
 
                     // Append a new row for the product
                     tbody.append(`
-                <tr data-product-id="${id}" class="text-center">
+                <tr data-stock_id="${stock_id}" data-unit_id="${unit_id}" data-price_id="${price_id}" data-product-id="${id}" class="text-center">
                     <td>${product_name}</td>
                     <td class="price-per-product-unit">${priceValue}</td>
                     <td class="price-per-unit">${priceText}</td>
@@ -214,6 +217,9 @@
                 $('tr[data-product-id]').each(function() {
                     // Extract data from the current <tr>
                     var productId = $(this).data('product-id');
+                    var price_id = $(this).data('price_id');
+                    var unit_id = $(this).data('unit_id');
+                    var stock_id = $(this).data('stock_id');
                     var productName = $(this).find('td:eq(0)').text();
                     var pricePerProductUnit = $(this).find('.price-per-product-unit').text();
                     var pricePerUnit = $(this).find('.price-per-unit').text();
@@ -223,6 +229,9 @@
                     // Create an object to represent the cart detail
                     var cartDetail = {
                         productId: productId,
+                        price_id: price_id,
+                        unit_id: unit_id,
+                        stock_id: stock_id,
                         productName: productName,
                         pricePerProductUnit: pricePerProductUnit,
                         pricePerUnit: pricePerUnit,

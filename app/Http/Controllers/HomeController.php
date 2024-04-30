@@ -35,12 +35,7 @@ class HomeController extends Controller
         $saleReturnsQuery = SaleReturn::completed();
         $purchaseReturnsQuery = PurchaseReturn::completed();
 
-        // If the user is not a "Super Admin," filter the queries by user_id
-        if (!$user->hasRole('Super Admin')) {
-            $salesQuery->where('user_id', $user->id);
-            $saleReturnsQuery->where('user_id', $user->id);
-            $purchaseReturnsQuery->where('user_id', $user->id);
-        }
+        // If the user is not a "Super Admin," filter the queries by user
 
         $sales = $salesQuery->sum('total_amount');
 

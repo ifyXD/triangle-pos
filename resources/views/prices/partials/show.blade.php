@@ -47,7 +47,7 @@
                                 <tbody>
                                     @foreach ($prices as $item)
                                         <tr>
-                                            <td>{{ $item->product_unit }}</td>
+                                            <td>{{ $item->name. ' | '. $item->short_name }}</td>
                                             <td>{{ format_currency($item->product_cost) }}</td>
                                             <td>{{ format_currency($item->product_price) }}</td>
                                             <td>

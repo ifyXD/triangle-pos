@@ -68,7 +68,7 @@
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="product_quantity">Quantitys <span
+                                                <label for="product_quantity">Quantity<span
                                                         class="text-danger">*</span></label>
                                                 <input id="product_quantity{{ $product->id }}" type="number"
                                                     class="form-control changePrice" data-id="{{ $product->id }}"
@@ -87,29 +87,15 @@
                                                     class="form-control changePrice selectpricehere{{ $product->id }}"
                                                     data-id="{{ $product->id }}" name="product_{{ $product->id }}"
                                                     id="product_{{ $product->id }}">
-                                                    @php
-                                                        $unitPricePairs = explode('|', $product->all_prices);
-                                                    @endphp
                                                     <option value="0" selected disabled>Select Unit</option>
-                                                    @php
-                                                        $unitPricePairs = $product->all_prices
-                                                            ? explode('|', $product->all_prices)
-                                                            : [];
-                                                    @endphp
-                                                    @foreach ($unitPricePairs as $unitPricePair)
-                                                        @php
-                                                            $pair = explode(':', $unitPricePair);
-                                                            if (isset($pair[0], $pair[1])) {
-                                                                [$unit, $price] = $pair;
-                                                            } else {
-                                                                // Handle the case where the pair cannot be properly split
-                                                                continue; // Skip this iteration
-                                                            }
-                                                        @endphp
-                                                        <option value="{{ $price }}">{{ $unit }}
-                                                        </option>
-                                                    @endforeach
 
+                                                    @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $product->id)->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
+                                                        <option data-unit_id="{{ $unit->unit_id }}"
+                                                            data-price_id="{{ $unit->price_id }}"
+                                                            data-stock_id="{{ $unit->stock_id }}"
+                                                            value="{{ $unit->product_price }}">
+                                                            {{ $unit->name . ' | ' . $unit->short_name }}</option>
+                                                    @endforeach
                                                 </select>
 
                                             </div>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Figures\Product;
 use App\Models\Price;
+use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\Product\DataTables\PriceDataTable;
+use Modules\Setting\Entities\Unit;
 
 class PriceController extends Controller
 {
@@ -21,9 +24,25 @@ class PriceController extends Controller
         abort_if(Gate::denies('access_prices'), 403);
 
         $data = Product::find($id);
-        $units = explode(',', $data->product_unit);
-        $savedUnits = Price::where('product_id', $id)->pluck('product_unit')->toArray(); // Array of saved units
-        return view('prices.partials.create', compact('id', 'data', 'units', 'savedUnits'));
+        $units = Stock::where('product_id', $id)->select('unit_id','id')->get();
+        $savedUnits = Price::where('product_id', $id)->get('unit_id');
+
+        $unitArray = array();
+
+        foreach($units as $unit){
+            $units_list = Unit::where('id',$unit->unit_id)->get();
+            foreach($units_list as $unitl){
+                $unitArray[] = [
+                    'id' => $unitl->id,
+                    'name' => $unitl->name,
+                    'short_name' => $unitl->short_name,
+                    'stock_id' => $unit->id,
+                ];
+            }
+        }
+        // echo $savedUnits;
+        
+        return view('prices.partials.create', compact('id', 'data', 'unitArray', 'savedUnits'));
     }
 
     public function store(Request $request, $id)
@@ -31,9 +50,10 @@ class PriceController extends Controller
         abort_if(Gate::denies('access_prices'), 403);
         Price::create([
             'product_id' => $request->product_id,
-            'product_unit' => $request->product_unit,
+            'unit_id' => $request->product_unit,
             'product_cost' => $request->product_cost,
             'product_price' => $request->product_price,
+            'stock_id' => $request->stock_id,
         ]);
 
         return redirect('prices/show/' . $id);
@@ -43,10 +63,11 @@ class PriceController extends Controller
         abort_if(Gate::denies('access_prices'), 403); 
       
         $data = Price::find($id);
-        $units = explode(',', $data->product_unit);
-        $savedUnits = Price::where('product_id', $id)->pluck('product_unit')->toArray(); // Array of saved units
-        $prices = Price::where('product_id', $id)->orderBy('product_unit', 'asc')->get();
-        return view('prices.partials.edit', compact('id', 'data', 'prices','units', 'savedUnits'));
+        // $units = explode(',', $data->product_unit);
+      
+        $unit = DB::table('prices')->where('prices.id',$id)->join('units','prices.unit_id', 'units.id')->select('units.name as name', 'units.short_name as short_name')->first();
+        
+        return view('prices.partials.edit', compact('id', 'data','unit'));
 
         // return redirect('prices/show/' . $id);
     }
@@ -68,7 +89,11 @@ class PriceController extends Controller
         abort_if(Gate::denies('access_prices'), 403);
 
         $product = Product::find($id);
-        $prices = Price::where('product_id', $id)->orderBy('product_unit', 'asc')->get();
+        $prices = DB::table('prices')
+        ->join('units', 'prices.unit_id', 'units.id')
+        ->where('prices.product_id', $id)
+        ->select('prices.id as id','prices.unit_id as product_id','prices.product_cost as product_cost','prices.product_price as product_price', 'units.id as unit_id', 'units.name as name', 'units.short_name as short_name')
+        ->get();
         return view('prices.partials.show', compact('id', 'product', 'prices'));
     }
     public function destroy($id)

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add Price')
+@section('title', 'Edit Price')
 
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="product_name">Units <span class="text-danger">*</span></label>
+                                        <label for="product_name">Unit <span class="text-danger">*</span></label>
                                         {{-- <select class="form-control" name="product_unit" id="product_unit" required>
                                             <option value="" selected disabled>Select Units</option>
                                             @foreach ($units as $unit)
@@ -46,7 +46,8 @@
                                                 @endif
                                             @endforeach
                                         </select> --}}
-                                        <input type="text" class="form-control" readonly value="{{$data->product_unit}}">
+                                        <input type="text" class="form-control" readonly
+                                            value="{{ $unit->name . ' | ' . $unit->short_name }}">
 
                                     </div>
                                 </div>

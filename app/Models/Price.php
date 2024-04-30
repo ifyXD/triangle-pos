@@ -11,7 +11,7 @@ class Price extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_id', 'product_unit', 'product_cost', 'product_price'
+        'product_id', 'unit_id', 'product_cost', 'product_price', 'stock_id'
     ];
 
     public function product()

@@ -64,7 +64,7 @@
                                         <label for="product_stock_alert">Alert Quantity <span
                                                 class="text-danger">*</span></label>
                                         <input type="number" class="form-control" name="product_stock_alert" required
-                                            value="{{ old('product_stock_alert', 0) }}" min="0" max="100">
+                                            value="1" min="0" max="100">
                                     </div>
                                 </div>
                             </div>

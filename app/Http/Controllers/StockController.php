@@ -47,7 +47,8 @@ class StockController extends Controller
         abort_if(Gate::denies('access_products'), 403);
 
         $units = Unit::where('store_id', auth()->user()->store->id)->orderBy('name', 'asc')->get();
-        $data = Product::find($id);
+        $product_id = Stock::find($id)->product_id;
+        $data = Product::find($product_id);
         $stock_id = Stock::find($id)->unit_id;
         $stock = Stock::find($id);
         return view('stocks.partials.edit', compact('id','stock_id', 'data', 'units','stock'));

@@ -3,6 +3,7 @@
 namespace Modules\Sale\Http\Controllers;
 
 use App\Models\Price;
+use App\Models\Stock;
 use Modules\Sale\DataTables\SalesDataTable;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Routing\Controller;
@@ -53,7 +54,7 @@ class SaleController extends Controller
 
             $sale = Sale::create([
                 'date' => $request->date,
-                'reference' => 'PSL',
+                // 'reference' => 'PSL',
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 // 'tax_percentage' => $request->tax_percentage,
@@ -68,7 +69,7 @@ class SaleController extends Controller
                 'note' => $request->note,
                 // 'tax_amount' => Cart::instance('sale')->tax() * 100,
                 // 'discount_amount' => Cart::instance('sale')->discount() * 100,
-                'user_id' => auth()->user()->id
+                'store_id' => auth()->user()->store->id
             ]);
 
 
@@ -77,16 +78,12 @@ class SaleController extends Controller
                 SaleDetails::create([
                     'sale_id' => $sale->id,
                     'product_id' => $cartDetail['productId'],
-                    'product_name' => $cartDetail['productName'],
                     'quantity' => $cartDetail['quantity'],
-                    'price' => $cartDetail['pricePerProductUnit'],
-                    'unit_price' => $cartDetail['pricePerUnit'],
-                    'sub_total' => $cartDetail['subTotal']*100,
-                    // Add other fields from $cartDetail array as needed
-                    'user_id' => auth()->user()->id,
+                    'price_id' => $cartDetail['price_id'],
+                    'store_id' => auth()->user()->store->id
                 ]);
 
-                $product = Product::findOrFail($cartDetail['productId']);
+                $product = Stock::findOrFail($cartDetail['stock_id']);
                 $product->update([
                     'product_quantity' => $product->product_quantity - $cartDetail['quantity']
                 ]);
@@ -96,11 +93,10 @@ class SaleController extends Controller
 
             if ($sale->paid_amount > 0) {
                 SalePayment::create([
-                    'date' => $request->date,
-                    'reference' => 'INV/' . $sale->reference,
-                    'amount' => $sale->paid_amount,
                     'sale_id' => $sale->id,
-                    'user_id' => auth()->user()->id,
+                    'amount' => $sale->paid_amount,
+                    'date' => $request->date,
+                    'store_id' => auth()->user()->store->id,
                     'payment_method' => $request->payment_method
                 ]);
             }
@@ -130,7 +126,10 @@ class SaleController extends Controller
         // abort_if(Gate::denies('edit_sales'), 403);
         $this->checkPermission('edit_sales');
         // $sale_details = $sale->saleDetails;
-        $sale_details = SaleDetails::where('sale_id', $sale->id)->get();
+        $sale_details = SaleDetails::join('products', 'sale_details.product_id', 'products.id')
+            ->join('prices', 'sale_details.price_id', 'prices.id')
+            ->where('sale_details.sale_id', $sale->id)
+            ->get();
 
 
         Cart::instance('sale')->destroy();
@@ -159,13 +158,13 @@ class SaleController extends Controller
                 'id'      => $sale_detail->product_id,
                 'name'    => $sale_detail->product_name,
                 'qty'     => $sale_detail->quantity,
-                'price'   => $sale_detail->price,
+                'price'   => $sale_detail->product_price,
                 'weight'  => 1,
                 'options' => [
                     // 'product_discount' => $sale_detail->product_discount_amount,
                     // 'product_discount_type' => $sale_detail->product_discount_type,
                     'sub_total'   => $sale_detail->sub_total,
-                    'stock'       => Product::findOrFail($sale_detail->product_id)->product_quantity,
+                    // 'stock'       => Product::findOrFail($sale_detail->product_id)->product_quantity,
                     // 'unit'        => $product['product_unit'],
                     'code'        => $sale_detail->product_code,
                     // 'product_tax' => $sale_detail->product_tax_amount,
@@ -194,15 +193,15 @@ class SaleController extends Controller
                 $payment_status = 'Paid';
             }
 
-            foreach ($sale->saleDetails as $sale_detail) {
-                if ($sale->status == 'Shipped' || $sale->status == 'Completed') {
-                    $product = Product::findOrFail($sale_detail->product_id);
-                    $product->update([
-                        'product_quantity' => $product->product_quantity + $sale_detail->quantity
-                    ]);
-                }
-                $sale_detail->delete();
-            }
+            // foreach ($sale->saleDetails as $sale_detail) {
+            //     if ($sale->status == 'Shipped' || $sale->status == 'Completed') {
+            //         $product = Product::findOrFail($sale_detail->product_id);
+            //         $product->update([
+            //             'product_quantity' => $product->product_quantity + $sale_detail->quantity
+            //         ]);
+            //     }
+            //     $sale_detail->delete();
+            // }
 
             $sale->update([
                 'date' => $request->date,
@@ -226,21 +225,14 @@ class SaleController extends Controller
             foreach ($request->cartDetails as $cart_item) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
-                    'product_id' => $cart_item['productId'],
-                    'product_name' => $cart_item['productName'],
-                    // 'product_code' => $cart_item->options->code,
+                    'product_id' => $cart_item['productId'],  
                     'quantity' => $cart_item['quantity'],
-                    'price' => $cart_item['pricePerProductUnit'],
-                    'unit_price' => $cart_item['pricePerUnit'],
-                    'sub_total' => $cart_item['subTotal'] * 100,
-                    // 'product_discount_amount' => $cart_item->options->product_discount * 100,
-                    // 'product_discount_type' => $cart_item->options->product_discount_type,
-                    // 'product_tax_amount' => $cart_item->options->product_tax * 100,
-                    'user_id' => auth()->user()->id,
+                    'price_id' => $cart_item['price_id'],   
+                    'store_id' => auth()->user()->store->id,
                 ]);
 
                 if ($request->status == 'Shipped' || $request->status == 'Completed') {
-                    $product = Product::findOrFail($cart_item['productId']);
+                    $product = Stock::findOrFail($cart_item['stock_id']);
                     $product->update([
                         'product_quantity' => $product->product_quantity - $cart_item['quantity']
                     ]);
