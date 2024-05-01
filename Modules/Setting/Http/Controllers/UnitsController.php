@@ -19,7 +19,7 @@ class   UnitsController extends Controller
             $units = Unit::all();
         } else {
             // If not "Super Admin," filter units by user_id
-            $units = Unit::where('user_id', $user->id)->orWhere('user_id', 1)->get();
+            $units = Unit::where('store_id', $user->store->id)->get();
         }
 
         return view('setting::units.index', [

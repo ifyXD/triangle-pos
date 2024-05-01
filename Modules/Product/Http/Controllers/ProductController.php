@@ -69,7 +69,7 @@ class ProductController extends Controller
     {
         // abort_if(Gate::denies('show_products'), 403);
         $this->checkPermission('show_products');
-        $product->user_id = auth()->user()->id;
+        $product->user_id = auth()->user()->store->id;
         return view('product::products.show', compact('product'));
     }
 

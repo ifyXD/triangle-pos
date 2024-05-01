@@ -76,21 +76,19 @@ class StockController extends Controller
 
         $product = Product::find($id);
         $stocks = DB::table('stocks')
-            ->select([
-                'stocks.product_quantity as product_quantity',
-                'stocks.id as stock_id',
-                'units.id as unit_id',
-                'units.name as name',
-                'units.short_name as short_name'
-            ])
-            ->join('units', 'stocks.unit_id', 'units.id')
-            ->where('stocks.product_id', $id)
-            ->get();
+        ->select([
+            'stocks.product_quantity as product_quantity',
+            'stocks.id as stock_id',
+            'units.id as unit_id',
+            'units.name as name',
+            'units.short_name as short_name'
+        ])
+        ->join('units', 'stocks.unit_id', 'units.id')
+        ->where('stocks.product_id', $id)
+        ->get();
 
-
-
-        return view('stocks.partials.show', compact('id', 'product', 'stocks'));
-    }
+    return view('stocks.partials.show', compact('id', 'product', 'stocks'));
+}
     public function destroy($id)
     {
         abort_if(Gate::denies('access_products'), 403);
