@@ -30,8 +30,8 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="reference" id="reference" required readonly
-                                            value="SLRN">
+                                        <input type="text" class="form-control" name="reference" id="reference" required
+                                            readonly value="SLRN">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -60,8 +60,8 @@
                                     <div class="from-group">
                                         <div class="form-group">
                                             <label for="date">Date <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" name="date" required id="date"
-                                                value="{{ now()->format('Y-m-d') }}">
+                                            <input type="date" class="form-control" name="date" required
+                                                id="date" value="{{ now()->format('Y-m-d') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -71,31 +71,18 @@
 
                             <div class="form-row">
                                 <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="status" id="status" required>
-                                            <option value="Pending">Pending</option>
-                                            {{-- <option value="Shipped">Shipped</option> --}}
-                                            <option value="Completed">Completed</option>
+                                        <div class="form-group">
+                                        <label for="returnOption">Select Return Option<span class="text-danger">*</span></label>
+                                        <select class="form-control" name="returnOption" id="returnOption" required>
+                                            <option value="return">Return to Inventory</option>
+                                            <option value="loss">Damage Product/s</option>
                                         </select>
                                     </div>
+                                    <input type="hidden" name="status" id="status" value="completed">
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="from-group">
-                                        <div class="form-group">
-                                            <label for="payment_method">Payment Method <span
-                                                    class="text-danger">*</span></label>
-                                            <select class="form-control" name="payment_method" id="payment_method" required>
-                                                <option value="Cash">Cash</option>
-                                                {{-- <option value="Credit Card">Credit Card</option>
-                                                <option value="Bank Transfer">Bank Transfer</option>
-                                                <option value="Cheque">Cheque</option>
-                                                <option value="Other">Other</option> --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
+                                    <input type="hidden" name="payment_method" id="payment_method" value="Cash">
+
                                     <div class="form-group">
                                         <label for="paid_amount">Amount Received <span class="text-danger">*</span></label>
                                         <div class="input-group">
@@ -108,6 +95,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{-- <div class="from-group">
+                                        <div class="form-group">
+                                            <label for="payment_method">Payment Method <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-control" name="payment_method" id="payment_method" required>
+                                                <option value="Cash">Cash</option>
+                                              
+                                            </select>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <div class="col-lg-4">
+                                   
                                 </div>
                             </div>
 
@@ -158,6 +158,7 @@
                 let status = $('#status').val();
                 let date = $('#date').val();
                 let reference = $('#reference').val();
+                let returnOption = $('#returnOption').val();
 
                 var cartDetails = [];
 
@@ -168,6 +169,10 @@
                     var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
                     var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
                         .text();
+                    var price_id = $(this).find('select.price-per-unit').find(':selected')
+                        .data('price_id');
+                    var stock_id = $(this).find('select.price-per-unit').find(':selected')
+                        .data('stock_id');
                     var quantity = $(this).find('.quantity').val();
                     var subTotalVal = $(this).find('.sub-total').text();
                     var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
@@ -178,13 +183,15 @@
                         pricePerProductUnit: pricePerProductUnit,
                         pricePerUnit: pricePerUnit,
                         quantity: quantity,
+                        price_id: price_id,
+                        stock_id: stock_id,
                         subTotal: subTotal,
                     };
 
                     // Push the cart detail object into the array
                     cartDetails.push(cartDetail);
                 });
-                console.log(cartDetails);
+                // console.log(cartDetails);
 
                 $.post('{{ route('sale-returns.store') }}', {
                         cartDetails: cartDetails,
@@ -196,6 +203,7 @@
                         status: status,
                         date: date,
                         reference: reference,
+                        returnOption: returnOption,
                     })
                     .done(function(response) {
                         // Success callback

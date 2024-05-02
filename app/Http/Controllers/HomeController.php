@@ -328,7 +328,7 @@ class HomeController extends Controller
                 ->whereYear('date', date('Y'))
                 ->sum('amount') / 100;
         } else {
-            $currentMonthSales = Sale::where('user_id', $user->id)->where('status', 'Completed')->whereMonth('date', date('m'))
+            $currentMonthSales = Sale::where('store_id', $user->store->id)->where('status', 'Completed')->whereMonth('date', date('m'))
                 ->whereYear('date', date('Y'))
                 ->sum('total_amount') / 100;
             $currentMonthPurchases = Purchase::where('user_id', $user->id)->where('status', 'Completed')->whereMonth('date', date('m'))
@@ -418,7 +418,7 @@ class HomeController extends Controller
                 ->get()->pluck('amount', 'month');
         } else {
 
-            $sale_payments = SalePayment::where('user_id', $user->id)->where('date', '>=', $date_range)
+            $sale_payments = SalePayment::where('store_id', $user->store->id)->where('date', '>=', $date_range)
                 ->select([
                     DB::raw("DATE_FORMAT(date, '%m-%Y') as month"),
                     DB::raw("SUM(amount) as amount")
@@ -426,7 +426,7 @@ class HomeController extends Controller
                 ->groupBy('month')->orderBy('month')
                 ->get()->pluck('amount', 'month');
 
-            $sale_return_payments = SaleReturnPayment::where('user_id', $user->id)->where('date', '>=', $date_range)
+            $sale_return_payments = SaleReturnPayment::where('store_id', $user->store->id)->where('date', '>=', $date_range)
                 ->select([
                     DB::raw("DATE_FORMAT(date, '%m-%Y') as month"),
                     DB::raw("SUM(amount) as amount")
@@ -513,7 +513,7 @@ class HomeController extends Controller
                 ])
                 ->pluck('count', 'date');
         } else {
-            $sales = Sale::where('user_id', $user->id)->where('status', 'Completed')
+            $sales = Sale::where('store_id', $user->store->id)->where('status', 'Completed')
                 ->where('date', '>=', $date_range)
                 ->groupBy(DB::raw("DATE_FORMAT(date,'%d-%m-%y')"))
                 ->orderBy('date')

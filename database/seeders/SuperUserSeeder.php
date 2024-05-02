@@ -20,6 +20,7 @@ class SuperUserSeeder extends Seeder
             'first_name' => 'Administrator',
             'last_name' => 'Secret',
             'email' => 'super.admin@test.com',
+            'email_verified_at' => now()->format('Y-m-d'),
             'password' => bcrypt('12345678'),
             'is_active' => 1,
             'reg_requirements' => null,
