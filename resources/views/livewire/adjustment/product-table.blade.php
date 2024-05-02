@@ -21,7 +21,7 @@
                 <th class="align-middle">#</th>
                 <th class="align-middle">Product Name</th>
                 {{-- <th class="align-middle">Code</th> --}}
-                <th class="align-middle">Stock</th>
+                <th class="align-middle">Stocks/Units</th>
                 <th class="align-middle">Quantity</th>
                 <th class="align-middle">Type</th>
                 <th class="align-middle">Action</th>

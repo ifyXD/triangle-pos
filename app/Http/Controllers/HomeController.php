@@ -270,7 +270,7 @@ class HomeController extends Controller
         //     return redirect()->route('register');
         // }
 
-        // Set status to false for permissions not present in the submitted data 
+        // Set status to false for permissions not present in the submitted data
 
         return response()->json(['message' => 'Permissions saved successfully'], 200);
     }
@@ -524,7 +524,7 @@ class HomeController extends Controller
                 ->pluck('count', 'date');
         }
 
-        // If not "Super Admin," apply the original condition 
+        // If not "Super Admin," apply the original condition
         $dates = $dates->merge($sales);
 
         $data = [];

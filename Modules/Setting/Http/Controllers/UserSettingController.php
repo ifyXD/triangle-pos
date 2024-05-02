@@ -28,7 +28,7 @@ class UserSettingController extends Controller
 
         }
 
-        
+
 
         return view('setting::user-system-settings.index', compact('settings','userpermissions'));
     }
@@ -39,7 +39,7 @@ class UserSettingController extends Controller
         if ($request->hasFile('image')) {
             // If an image is uploaded, save it to the public/images/settings/user directory
             $imagePath = $request->file('image')->store('images/settings/user', 'public');
-    
+
             // Delete the previous image (if any)
             if ($setting && $setting->image) {
                 Storage::disk('public')->delete($setting->image);
@@ -82,13 +82,13 @@ class UserSettingController extends Controller
 
         if ($setting == null) {
             ThemeSetting::create([
-                'sidebar_color' => $request->sidebar_color, 
-                'user_id' => auth()->user()->id, 
+                'sidebar_color' => $request->sidebar_color,
+                'user_id' => auth()->user()->id,
             ]);
         } else {
             $setting->update([
-                'sidebar_color' => $request->sidebar_color, 
-                'user_id' => auth()->user()->id, 
+                'sidebar_color' => $request->sidebar_color,
+                'user_id' => auth()->user()->id,
             ]);
         }
         toast('Settings Updated!', 'info');

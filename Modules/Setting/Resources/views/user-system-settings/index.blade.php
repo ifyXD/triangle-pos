@@ -68,38 +68,38 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="default_currency_id">Default Currency <span
-                                                class="text-danger">*</span></label>
-                                        <select name="default_currency_id" id="default_currency_id" class="form-control"
-                                            required>
-                                            @foreach (\Modules\Currency\Entities\Currency::all() as $currency)
+                                    {{-- <div class="form-group">
+                                            <label for="default_currency_id">Default Currency <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="default_currency_id" id="default_currency_id" class="form-control"
+                                                required>
+                                                @foreach (\Modules\Currency\Entities\Currency::all() as $currency)
+                                                    <option
+                                                        {{ optional($settings)->default_currency_id == $currency->id ? 'selected' : '' }}
+                                                        value="{{ $currency->id ?? null }}">{{ $currency->currency_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>  <div class="col-lg-4">
+                                    
+                                        </div>
+                                    </div> --}}
+                                    {{-- <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="default_currency_position">Default Currency Position <span
+                                                    class="text-danger">*</span></label>
+                                            <select name="default_currency_position" id="default_currency_position"
+                                                class="form-control" required>
                                                 <option
-                                                    {{ optional($settings)->default_currency_id == $currency->id ? 'selected' : '' }}
-                                                    value="{{ $currency->id ?? null }}">{{ $currency->currency_name }}
+                                                    {{ optional($settings)->default_currency_position == 'prefix' ? 'selected' : '' }}
+                                                    value="prefix">Prefix
                                                 </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="default_currency_position">Default Currency Position <span
-                                                class="text-danger">*</span></label>
-                                        <select name="default_currency_position" id="default_currency_position"
-                                            class="form-control" required>
-                                            <option
-                                                {{ optional($settings)->default_currency_position == 'prefix' ? 'selected' : '' }}
-                                                value="prefix">Prefix
-                                            </option>
-                                            <option
-                                                {{ optional($settings)->default_currency_position == 'suffix' ? 'selected' : '' }}
-                                                value="suffix">Suffix
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
+                                                <option
+                                                    {{ optional($settings)->default_currency_position == 'suffix' ? 'selected' : '' }}
+                                                    value="suffix">Suffix
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div> --}}
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -113,7 +113,7 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-5">
                                     <div class="form-group">
                                         <label for="company_address">Address <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="company_address"
@@ -131,8 +131,6 @@
                         </form>
                     </div>
                 </div>
-
-
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">Permissions</h5>

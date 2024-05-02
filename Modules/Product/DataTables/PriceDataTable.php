@@ -77,17 +77,25 @@ class PriceDataTable extends DataTable
                 ->title('Image')
                 ->className('text-center align-middle'),
 
-            Column::make('category.category_name')
-                ->title('Category')
-                ->visible(false)
-                ->className('text-center align-middle'),
-
+       
+        
             // Column::make('product_code')
             //     ->title('Code')
             //     ->className('text-center align-middle'),
 
             Column::make('product_name')
                 ->title('Name')
+                ->className('text-center align-middle'),
+                Column::make('category.category_name')
+                ->title('Category')
+                ->visible(false)
+                ->className('text-center align-middle'),
+                Column::make('created_at')
+                ->title('Created At')
+                ->className('text-center align-middle'),
+        
+            Column::make('updated_at')
+                ->title('Updated At')
                 ->className('text-center align-middle'),
 
             Column::computed('product_cost')

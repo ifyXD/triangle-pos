@@ -76,8 +76,8 @@
                                         @else
                                             N/A
                                         @endif
-                                    </td> --}}
-                                </tr>
+                                    </td>
+                                </tr> --}}
                                 <tr>
                                     <th>Note</th>
                                     <td>{{ $product->product_note ?? 'N/A' }}</td>

@@ -26,16 +26,14 @@ class SalesReturnController extends Controller
         }
     }
 
-    public function index(SaleReturnsDataTable $dataTable)
-    {
+    public function index(SaleReturnsDataTable $dataTable) {
         abort_if(Gate::denies('access_sale_returns'), 403);
 
         return $dataTable->render('salesreturn::index');
     }
 
 
-    public function create()
-    {
+    public function create() {
         // abort_if(Gate::denies('create_sale_returns'), 403);
         $this->checkPermission('create_sale_returns');
 
@@ -45,8 +43,7 @@ class SalesReturnController extends Controller
     }
 
 
-    public function store(StoreSaleReturnRequest $request)
-    {
+    public function store(StoreSaleReturnRequest $request) {
         $this->checkPermission('create_sale_returns');
         DB::transaction(function () use ($request) {
             $due_amount = $request->total_amount - $request->paid_amount;
@@ -126,8 +123,7 @@ class SalesReturnController extends Controller
     }
 
 
-    public function show(SaleReturn $sale_return)
-    {
+    public function show(SaleReturn $sale_return) {
         // abort_if(Gate::denies('show_sale_returns'), 403);
         $this->checkPermission('show_sale_returns');
 
@@ -137,8 +133,7 @@ class SalesReturnController extends Controller
     }
 
 
-    public function edit(SaleReturn $sale_return)
-    {
+    public function edit(SaleReturn $sale_return) {
         // abort_if(Gate::denies('edit_sale_returns'), 403);
         $this->checkPermission('edit_sale_returns');
         $sale_return_details = $sale_return->saleReturnDetails;

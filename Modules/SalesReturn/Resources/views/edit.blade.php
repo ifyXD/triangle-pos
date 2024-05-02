@@ -125,7 +125,7 @@
                 var paid_amount = $('#paid_amount').maskMoney('unmasked')[0];
                 $('#paid_amount').val(paid_amount);
             });
-            
+
 
             $('#editSaveBtnReturn').click(function() {
                 let customer_id = $('#customer_id').val();

@@ -23,7 +23,7 @@ class ProductCart extends Component
     public $item_discount;
     public $unit_price;
     public $data;
-   
+
 
 
 
@@ -76,7 +76,7 @@ class ProductCart extends Component
             'cart_items' => $cart_items
         ]);
     }
-   
+
     public function productSelected($product)
     {
         $cart = Cart::instance($this->cart_instance);
