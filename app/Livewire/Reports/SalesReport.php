@@ -36,7 +36,7 @@ class SalesReport extends Component
     }
 
     public function render() {
-        $sales = Sale::where('user_id', auth()->user()->id)->whereDate('date', '>=', $this->start_date)
+        $sales = Sale::where('store_id', auth()->user()->store->id)->whereDate('date', '>=', $this->start_date)
             ->whereDate('date', '<=', $this->end_date)
             ->when($this->customer_id, function ($query) {
                 return $query->where('customer_id', $this->customer_id);

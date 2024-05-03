@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Figures\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Sale\Entities\SaleDetails;
 
 class Price extends Model
 {
@@ -17,5 +18,8 @@ class Price extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function detail() {
+        return $this->belongsTo(SaleDetails::class, 'price_id', 'id');
     }
 }

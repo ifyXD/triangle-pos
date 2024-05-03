@@ -73,17 +73,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sale->saleDetails as $item)
+                                    @foreach ($sales_details as $item)
                                         <tr>
                                             <td class="align-middle">
                                                 {{ $item->product_name }} <br>
-                                                {{-- <span class="badge badge-success">
-                                                    {{ $item->product_code }}
-                                                </span> --}}
                                             </td>
 
-                                            <td class="align-middle">{{ format_currency($item->price) }} /
-                                                {{ $item->unit_price }}</td>
+                                            <td class="align-middle">{{ $item->product_price }} /
+                                                {{ $item->name}}</td>
 
                                             <td class="align-middle">
                                                 {{ $item->quantity }}

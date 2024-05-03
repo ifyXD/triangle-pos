@@ -84,8 +84,7 @@
                         </div>
                         <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Reference</th>
+                            <th>Date</th> 
                             <th>Customer</th>
                             <th>Status</th>
                             <th>Total</th>
@@ -97,8 +96,7 @@
                         <tbody>
                         @forelse($sales as $sale)
                             <tr>
-                                <td>{{ \Carbon\Carbon::parse($sale->date)->format('d M, Y') }}</td>
-                                <td>{{ $sale->reference }}</td>
+                                <td>{{ \Carbon\Carbon::parse($sale->date)->format('d M, Y') }}</td> 
                                 <td>{{ $sale->customer_name }}</td>
                                 <td>
                                     @if ($sale->status == 'Pending')

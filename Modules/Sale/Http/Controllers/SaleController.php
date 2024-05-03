@@ -3,6 +3,7 @@
 namespace Modules\Sale\Http\Controllers;
 
 use App\Models\Price;
+use App\Models\ProductLoss;
 use App\Models\Stock;
 use Modules\Sale\DataTables\SalesDataTable;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -80,6 +81,7 @@ class SaleController extends Controller
                     'product_id' => $cartDetail['productId'],
                     'quantity' => $cartDetail['quantity'],
                     'price_id' => $cartDetail['price_id'],
+                    'unit_id' => $cartDetail['unit_id'], 
                     'store_id' => auth()->user()->store->id
                 ]);
 
@@ -100,6 +102,7 @@ class SaleController extends Controller
                     'payment_method' => $request->payment_method
                 ]);
             }
+           
         });
 
         toast('Sale Created!', 'success');
@@ -116,8 +119,10 @@ class SaleController extends Controller
         // abort_if(Gate::denies('show_sales'), 403);
         $this->checkPermission('show_sales');
         $customer = Customer::findOrFail($sale->customer_id);
+        $sales_details = SaleDetails::where('sale_details.sale_id', $sale->id)->join('units', 'sale_details.unit_id', 'units.id')->join('products', 'sale_details.product_id', 'products.id')->join('prices', 'sale_details.price_id', 'prices.id')->get();
 
-        return view('sale::show', compact('sale', 'customer'));
+        
+        return view('sale::show', compact('sale', 'customer','sales_details'));
     }
 
 
@@ -227,7 +232,8 @@ class SaleController extends Controller
                     'sale_id' => $sale->id,
                     'product_id' => $cart_item['productId'],  
                     'quantity' => $cart_item['quantity'],
-                    'price_id' => $cart_item['price_id'],   
+                    'price_id' => $cart_item['price_id'],
+                    'unit_id' => $cart_item['unit_id'], 
                     'store_id' => auth()->user()->store->id,
                 ]);
 

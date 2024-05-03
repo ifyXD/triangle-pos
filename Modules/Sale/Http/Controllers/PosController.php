@@ -75,6 +75,7 @@ class PosController extends Controller
                     'product_id' => $cartDetail['productId'], 
                     'quantity' => $cartDetail['quantity'],
                     'price_id' => $cartDetail['price_id'], 
+                    'unit_id' => $cartDetail['unit_id'], 
                     'store_id' => auth()->user()->store->id,
                 ]);
             

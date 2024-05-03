@@ -203,7 +203,7 @@
                         status: status,
                         date: date,
                         reference: reference,
-                        returnOption: returnOption,
+                        return_status: returnOption,
                     })
                     .done(function(response) {
                         // Success callback

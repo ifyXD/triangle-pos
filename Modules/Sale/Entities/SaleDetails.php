@@ -2,6 +2,7 @@
 
 namespace Modules\Sale\Entities;
 
+use App\Models\Price;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Product\Entities\Product;
@@ -17,6 +18,9 @@ class SaleDetails extends Model
 
     public function product() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+    public function price() {
+        return $this->hasOne(Price::class, 'price_id', 'id');
     }
 
     public function sale() {
