@@ -382,6 +382,7 @@ class HomeController extends Controller
                     DB::raw("DATE_FORMAT(date, '%m-%Y') as month"),
                     DB::raw("SUM(amount) as amount")
                 ])
+                // 
                 ->groupBy('month')->orderBy('month')
                 ->get()->pluck('amount', 'month');
 
