@@ -60,25 +60,26 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="status" id="status" required>
-                                            <option value="Pending">Pending</option>
-                                            {{-- <option value="Shipped">Shipped</option> --}}
+                                        {{-- <label for="status">Status <span class="text-danger">*</span></label> --}}
+                                        {{-- <select class="form-control" name="status" id="status" required>
+                                            <option value="Pending">Pending</option> 
                                             <option value="Completed">Completed</option>
-                                        </select>
+                                        </select> --}}
+                                        <input type="hidden" name="status" id="status" value="Completed">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
+                                            {{-- <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
                                             <select class="form-control" name="payment_method" id="payment_method" required>
                                                 <option value="Cash">Cash</option>
-                                                {{-- <option value="Credit Card">Credit Card</option>
+                                                <option value="Credit Card">Credit Card</option>
                                                 <option value="Bank Transfer">Bank Transfer</option>
                                                 <option value="Cheque">Cheque</option>
-                                                <option value="Other">Other</option> --}}
-                                            </select>
+                                                <option value="Other">Other</option>
+                                            </select> --}}
+                                            <input type="hidden" name="payment_method" id="payment_method" value="Cash">
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +119,8 @@
 @push('page_scripts')
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
+
+        
         $(document).ready(function () {
             $('#paid_amount').maskMoney({
                 prefix:'{{ settings()->currency->symbol }}',

@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('stocks/update/{id}', 'StockController@update')->name('stocks.update');
     Route::get('stocks/show/{id}', 'StockController@show')->name('stocks.show');
     Route::get('stocks/edit/{id}', 'StockController@edit');
+    Route::get('fetch-product-details/{id}', 'StockController@edit');
     Route::delete('stocks/delete/{id}', 'StockController@destroy')->name('stocks.destroy');
 
 });

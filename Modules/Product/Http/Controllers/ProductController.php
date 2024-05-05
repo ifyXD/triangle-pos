@@ -6,6 +6,7 @@ use Modules\Product\DataTables\ProductDataTable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Modules\Product\Entities\Product;
@@ -139,5 +140,21 @@ class ProductController extends Controller
         if (!$user->hasAccessToPermission($permissionName)) {
             abort(403, 'Unauthorized');
         }
+    }
+
+
+    // ajax
+
+    public function productDetails(Request $request, $id){
+        $prices = DB::table('prices')->where('prices.product_id', $id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('unitss', 'prices.unit_id', 'units.id')->select('stocks.product_quantity as product_quantity', 'prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get();
+
+        $options = '';
+        foreach($prices as $price){
+            $options[] =  `<option value="$price->product_price">$price->name | $price->short_name</option>`;
+        }
+        return response()->json([
+            'prices' => $prices,
+            'options' => $options,
+        ]);
     }
 }

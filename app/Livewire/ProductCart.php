@@ -12,7 +12,7 @@ class ProductCart extends Component
 {
 
     public $listeners = ['productSelected', 'discountModalRefresh'];
-
+    public $iterate = 0;
     public $cart_instance;
     public $global_discount;
     public $global_tax;
@@ -86,7 +86,42 @@ class ProductCart extends Component
         });
 
         if ($exists->isNotEmpty()) {
-            session()->flash('message', 'Product exists in the cart!');
+            $this->product = $product;
+
+            $prices = Price::where('product_id', $product['id'])->get();
+    
+            // Prepare price options
+            $priceOptions = [];
+            foreach ($prices as $price) {
+                // Assuming each price has fields like 'price', 'start_date', 'end_date', etc.
+                $priceOptions[] = [
+                    'price'      => $price['product_price'],
+                    'product_unit' => $price['product_unit'],
+                    // Add any other fields you need
+                ];
+            }
+    
+            // Add product to cart with prices options
+            $cart->add([
+                'id'      => 'copied'.','.$product['id'].','.$this->iterate++,
+                'name'    => $product['product_name'],
+                'qty'     => 1,
+                'price'   => $this->calculate($product)['price'],
+                // 'unit'   => $product['unit_price'],
+                // 'unit_price' =>$product['unit_price'],
+                'weight'  => 1,
+                'options' => [
+                    // 'product_discount'      => 0.00,
+                    // 'product_discount_type' => 'fixed',
+                    // 'code'                  => $product['product_code'],
+                    'sub_total'             => $this->calculate($product)['sub_total'],
+                    // 'stock'                 => $product['product_quantity'],
+                    // 'unit'                  => $product['product_unit'],
+                    'product_tax'           => $this->calculate($product)['product_tax'],
+                    'unit_price'            => $this->calculate($product)['unit_price'],
+                    'prices'                => $priceOptions, // Add prices options here
+                ]
+            ]);
 
             return;
         }

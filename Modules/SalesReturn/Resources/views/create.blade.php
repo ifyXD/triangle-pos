@@ -71,8 +71,9 @@
 
                             <div class="form-row">
                                 <div class="col-lg-4">
-                                        <div class="form-group">
-                                        <label for="returnOption">Select Return Option<span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <label for="returnOption">Select Return Option<span
+                                                class="text-danger">*</span></label>
                                         <select class="form-control" name="returnOption" id="returnOption" required>
                                             <option value="return">Return to Inventory</option>
                                             <option value="loss">Damage Product/s</option>
@@ -107,7 +108,7 @@
                                     </div> --}}
                                 </div>
                                 <div class="col-lg-4">
-                                   
+
                                 </div>
                             </div>
 
@@ -132,7 +133,11 @@
 @push('page_scripts')
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
+       
+
+
         $(document).ready(function() {
+
             $('#paid_amount').maskMoney({
                 prefix: '{{ settings()->currency->symbol }}',
                 thousands: '{{ settings()->currency->thousand_separator }}',

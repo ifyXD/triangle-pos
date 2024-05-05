@@ -34,38 +34,34 @@
                 <tbody>
                     @if ($cart_items->isNotEmpty())
                         @foreach ($cart_items as $cart_item)
-                            <tr data-product-id="{{ $cart_item->id }}">
+                            <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}">
                                 <td class="align-middle">
                                     {{ $cart_item->name }} <br>
-
                                 </td>
                                 <td class="align-middle text-center">
                                     <input style="min-width: 40px;max-width: 100%;" type="text" readonly
                                         id="priceValue_{{ $cart_item->id }}" value="{{ $cart_item->price }}"
                                         class="form-control price-per-product-unit" min="0" value="0">
                                     <select name="unit_select_{{ $cart_item->id }}"
-                                        onchange="selectedUnit({{ $cart_item->id }}, $(this).val());"
+                                        onchange="selectedUnit({{ $cart_item->id }},$(this).find(':selected').data('product_quantity'), $(this).val());"
                                         id="unit_select_{{ $cart_item->id }}" style="min-width: 40px;max-width: 100%;"
                                         class="form-control price-per-unit">
-                                        <option value="" disabled selected>Select Unit</option> 
-                                        @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $cart_item->id)->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
-                                            <option {{ $cart_item->price == $unit->product_price ? 'selected' : ''}} data-unit_id="{{ $unit->unit_id }}"
+                                        <option value="" disabled selected>Select Unit</option>
+                                        @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $cart_item->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('stocks.product_quantity as product_quantity', 'prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
+                                            <option {{ $cart_item->price == $unit->product_price ? 'selected' : '' }}
+                                                data-unit_id="{{ $unit->unit_id }}"
                                                 data-price_id="{{ $unit->price_id }}"
                                                 data-stock_id="{{ $unit->stock_id }}"
+                                                data-product_quantity="{{ $unit->product_quantity }}"
                                                 value="{{ $unit->product_price }}">
                                                 {{ $unit->name . ' | ' . $unit->short_name }}</option>
                                         @endforeach
                                     </select>
-
-
                                 </td>
-
                                 <td class="align-middle text-center text-center">
-                                    <span class="badge badge-info">{{ $cart_item->options->stock }}</span>
+                                    <span class="badge badge-info" id="stock_{{ $cart_item->id }}"></span>
                                 </td>
-
                                 <td class="align-middle text-center">
-                                    {{-- @include('livewire.includes.product-cart-quantity') --}}
                                     <div class="input-group d-flex justify-content-center">
                                         <input id="qtyval_{{ $cart_item->id }}"
                                             onchange="quantity({{ $cart_item->id }}, $(this).val());"
@@ -73,13 +69,10 @@
                                             class="form-control quantity" value="{{ $cart_item->qty }}" min="1"
                                             max="">
                                     </div>
-
                                 </td>
-
                                 <td class="align-middle text-center tdClass sub-total" id="td_{{ $cart_item->id }}">
                                     {{ format_currency($cart_item->options->sub_total) }}
                                 </td>
-
                                 <td class="align-middle text-center">
                                     <a href="#" onclick="removeItem($(this));">
                                         <i class="bi bi-x-circle font-2xl text-danger"></i>
@@ -154,11 +147,17 @@
         grandTotal();
     }
 
-    function selectedUnit(id, price) {
+    function selectedUnit(id, stock, price) {
         let qty = $(`#qtyval_${id}`).val();
+
         let sub_total = qty * price;
         $(`#priceValue_${id}`).val(price);
         $(`#td_${id}`).text('₱' + sub_total + '.00');
+
+        $(`#parent_tr_${id}`).find(`#stock_${id}`).text(stock);
+        $(`#qtyval_${id}`).attr('max', stock);
+
+
         grandTotal();
     }
 
@@ -170,7 +169,11 @@
         grandTotal();
 
     }
+
     $(document).ready(function() {
+
+
+        // Event handler for clicking the "Dup" lin
         $('#submitCreateSale').click(function() {
             let customer_id = $('#customer_id').val();
             let amount = $('#paid_amount').val();
@@ -186,9 +189,11 @@
             $('tr[data-product-id]').each(function() {
                 // Extract data from the current <tr>
                 var productId = $(this).data('product-id');
-                var productName = $(this).find('td:eq(0)').text(); 
+                var productName = $(this).find('td:eq(0)').text();
                 var price_id = $(this).find('select.price-per-unit').find(':selected')
                     .data('price_id');
+                var unit_id = $(this).find('select.price-per-unit').find(':selected')
+                    .data('unit_id');
                 var stock_id = $(this).find('select.price-per-unit').find(':selected')
                     .data('stock_id');
                 var quantity = $(this).find('.quantity').val();
@@ -198,6 +203,7 @@
                 var cartDetail = {
                     productId: productId,
                     price_id: price_id,
+                    unit_id: unit_id,
                     stock_id: stock_id,
                     productName: productName,
                     quantity: quantity,
@@ -234,3 +240,4 @@
         });
     });
 </script>
+
