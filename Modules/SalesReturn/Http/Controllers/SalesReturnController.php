@@ -87,7 +87,7 @@ class SalesReturnController extends Controller
                     // 'product_name' => $cartDetail['productName'],
                     'quantity' => $cartDetail['quantity'],
                     'price_id' => $cartDetail['price_id'],
-                    'unit_price' => $cartDetail['pricePerUnit'],
+                    'unit_id' => $cartDetail['unit_id'],
                     // 'sub_total' => $cartDetail['subTotal'] * 100,
                     // 'product_discount_amount' => $cart_item->options->product_discount * 100,
                     // 'product_discount_type' => $cart_item->options->product_discount_type,
@@ -97,18 +97,23 @@ class SalesReturnController extends Controller
 
 
 
-                if ($request->status == 'Completed') {
-                    $product = Stock::findOrFail($cartDetail['stock_id']);
-                    $product->update([
-                        'product_quantity' => $product->product_quantity + $cartDetail['quantity']
-                    ]);
-                }
-                if($request->returnOption == 'loss'){
+                // if ($request->status == 'Completed') {
+                //     $product = Stock::findOrFail($cartDetail['stock_id']);
+                //     $product->update([
+                //         'product_quantity' => $product->product_quantity + $cartDetail['quantity']
+                //     ]);
+                // }
+                if($request->return_status == 'loss'){
                     ProductLoss::create([
                         'sale_return_id' => $sale_return->id,
                         'product_id' => $cartDetail['productId'],
                         'stock_id' => $cartDetail['stock_id'],
                         'store_id' => auth()->user()->store->id,
+                    ]);
+                }else{
+                    $product = Stock::findOrFail($cartDetail['stock_id']);
+                    $product->update([
+                        'product_quantity' => $product->product_quantity + $cartDetail['quantity']
                     ]);
                 }
             }
@@ -117,8 +122,7 @@ class SalesReturnController extends Controller
 
             if ($sale_return->paid_amount > 0) {
                 SaleReturnPayment::create([
-                    'date' => $request->date,
-                    // 'reference' => 'INV/' . $sale_return->reference,
+                    'date' => $request->date, 
                     'amount' => $sale_return->paid_amount,
                     'sale_return_id' => $sale_return->id,
                     'payment_method' => $request->payment_method,
@@ -222,8 +226,7 @@ class SalesReturnController extends Controller
             }
 
             $sale_return->update([
-                'date' => $request->date,
-                'reference' => $request->reference,
+                'date' => $request->date, 
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
                 // 'tax_percentage' => $request->tax_percentage,

@@ -31,17 +31,16 @@
 
 
 
-    {{-- @can('show_notifications')
+    @can('show_notifications')
         <li class="c-header-nav-item dropdown d-md-down-none mr-2">
             <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="bi bi-bell" style="font-size: 20px;"></i>
                 <span class="badge badge-pill badge-danger">
                     @php
-                        $low_quantity_products = auth()
-                            ->user()
-                            ->products()
-                            ->select('id', 'product_quantity', 'product_stock_alert')
+                        $low_quantity_products = \App\Models\Stock::
+                            select('id', 'product_quantity', 'product_stock_alert')
+                            ->where('store_id', auth()->user()->store->id)
                             ->whereColumn('product_quantity', '<=', 'product_stock_alert')
                             ->get();
                         echo $low_quantity_products->count();
@@ -64,7 +63,7 @@
                 @endforelse
             </div>
         </li>
-    @endcan --}}
+    @endcan
 
 
     <li class="c-header-nav-item dropdown">

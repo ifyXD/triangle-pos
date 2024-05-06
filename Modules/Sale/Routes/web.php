@@ -35,9 +35,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/sales/pos/pdf/{id}', function ($id) {
         $sale = \Modules\Sale\Entities\Sale::findOrFail($id);
+        $sale_details = \Modules\Sale\Entities\SaleDetails::where('sale_id',$id)->get();
 
         $pdf = FacadePdf::loadView('sale::print-pos', [
             'sale' => $sale,
+            'sale_details' => $sale_details,
         ])->setPaper('a7')
             ->setOption('margin-top', 8)
             ->setOption('margin-bottom', 8)

@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     @if ($cart_items->isNotEmpty())
-                        @foreach ($cart_items as $cart_item)
+                        @foreach ($cart_items as $cart_item) 
                             <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}">
                                 <td class="align-middle">
                                     {{ $cart_item->name }} <br>
@@ -148,6 +148,8 @@
     }
 
     function selectedUnit(id, stock, price) {
+
+        console.log(id);
         let qty = $(`#qtyval_${id}`).val();
 
         let sub_total = qty * price;
@@ -240,4 +242,3 @@
         });
     });
 </script>
-

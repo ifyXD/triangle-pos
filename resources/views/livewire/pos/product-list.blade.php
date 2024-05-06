@@ -89,7 +89,7 @@
                                                     id="product_{{ $product->id }}">
                                                     <option value="0" selected disabled>Select Unit</option>
 
-                                                    @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $product->id)->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
+                                                    @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('stocks.product_quantity', '>' , 0)->where('prices.product_id', $product->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
                                                         <option data-unit_id="{{ $unit->unit_id }}"
                                                             data-price_id="{{ $unit->price_id }}"
                                                             data-stock_id="{{ $unit->stock_id }}"

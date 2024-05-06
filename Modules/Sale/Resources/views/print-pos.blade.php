@@ -57,7 +57,7 @@
 <div style="max-width:400px;margin:0 auto">
     <div id="receipt-data">
         <div class="centered">
-            <h2 style="margin-bottom: 5px">{{ strtoupper(auth()->user()->setting->company_name) }}</h2>
+            <h2 style="margin-bottom: 5px">{{ strtoupper(settings()->company_name) }}</h2>
 
             <p style="font-size: 11px;line-height: 15px;margin-top: 0">
                 {{ settings()->company_email }}, {{ settings()->company_phone }}

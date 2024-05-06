@@ -82,6 +82,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasOne(Store::class);
     }
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
     public function userpermissions()
     {
         return $this->hasMany(UserPermission::class);

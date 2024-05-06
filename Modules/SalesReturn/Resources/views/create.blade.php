@@ -28,11 +28,11 @@
 
                             <div class="form-row">
                                 <div class="col-lg-4">
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" id="reference" required
                                             readonly value="SLRN">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
@@ -162,7 +162,7 @@
                 let note = $('#note').val();
                 let status = $('#status').val();
                 let date = $('#date').val();
-                let reference = $('#reference').val();
+               
                 let returnOption = $('#returnOption').val();
 
                 var cartDetails = [];
@@ -176,6 +176,8 @@
                         .text();
                     var price_id = $(this).find('select.price-per-unit').find(':selected')
                         .data('price_id');
+                    var unit_id = $(this).find('select.price-per-unit').find(':selected')
+                        .data('unit_id');
                     var stock_id = $(this).find('select.price-per-unit').find(':selected')
                         .data('stock_id');
                     var quantity = $(this).find('.quantity').val();
@@ -188,6 +190,7 @@
                         pricePerProductUnit: pricePerProductUnit,
                         pricePerUnit: pricePerUnit,
                         quantity: quantity,
+                        unit_id: unit_id,
                         price_id: price_id,
                         stock_id: stock_id,
                         subTotal: subTotal,
@@ -206,8 +209,7 @@
                         payment_method: payment_method,
                         note: note,
                         status: status,
-                        date: date,
-                        reference: reference,
+                        date: date, 
                         return_status: returnOption,
                     })
                     .done(function(response) {

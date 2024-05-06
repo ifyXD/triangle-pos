@@ -44,7 +44,7 @@ class SaleReturnsDataTable extends DataTable
         }
     
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->where('user_id', $user->id)->orWhere('user_id',1); 
+        return $model->newQuery()->where('store_id', $user->store->id); 
     }
 
     public function html() {
@@ -70,9 +70,9 @@ class SaleReturnsDataTable extends DataTable
 
     protected function getColumns() {
         return [
-            Column::make('reference')
-                ->className('text-center align-middle'),
-
+            Column::make('customer_name')
+                ->className('text-center align-middle')
+                ->visible(false),
             Column::make('customer_name')
                 ->title('Customer')
                 ->className('text-center align-middle'),
