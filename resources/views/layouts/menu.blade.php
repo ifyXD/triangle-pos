@@ -48,7 +48,7 @@
             @endif
             @if (auth()->user()->hasAccessToPermission('access_prices'))
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index')  ? 'c-active' : '' }}"
                        href="{{ route('prices.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Prices
                     </a>
@@ -157,8 +157,8 @@
         </ul>
     </li>
 @endif
-@if (auth()->user()->hasAccessToPermission('access_expenses'))
-    {{--    <span class="kami-kami-span">Expense</span> --}}
+{{-- @if (auth()->user()->hasAccessToPermission('access_expenses'))
+   
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('expenses.*') || request()->routeIs('expense-categories.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -189,7 +189,7 @@
             </li>
         </ul>
     </li>
-@endif
+@endif --}}
 
 @if (auth()->user()->hasAccessToPermission('access_suppliers') ||
         auth()->user()->hasAccessToPermission('access_customers'))

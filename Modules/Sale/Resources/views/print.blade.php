@@ -16,7 +16,7 @@
             <div class="col-xs-12">
                 <div style="text-align: center;margin-bottom: 25px;">
                     {{-- <img width="180" src="{{ public_path('images/logo-dark.png') }}" alt="Logo"> --}}
-                    <h4>{{ strtoupper(auth()->user()->setting->company_name) }}
+                    <h4>{{ strtoupper(auth()->user()->store->store_name) }}
                     </h4>
                 </div>
                 <div class="card">
@@ -24,7 +24,7 @@
 
 
                         <div class="table-responsive-sm" style="margin-top: 30px;">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="sale_details">
                                 <thead>
                                     <tr>
                                         <th class="align-middle">Item</th>
@@ -34,22 +34,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sale->saleDetails as $item)
-                                        <tr>
+                                    @foreach ($sale_details as $item)
+                                        <tr
+                                            data-id="{{$item->id}}"
+                                            data-price="{{$item->product_price}}"
+                                            data-quantity="{{$item->quantity}}"
+                                        >
                                             <td class="align-middle">
                                                 {{ $item->product_name }} <br>
-                                                <span class="badge badge-success">
-                                                    {{ $item->product_code }}
-                                                </span>
+
                                             </td>
 
-                                            <td class="align-middle">{{ $item->price }}.00 / {{$item->unit_price}}</td>
+                                            <td class="align-middle">{{ $item->product_price }}.00 /
+                                                {{ $item->unit_name }}</td>
 
                                             <td class="align-middle">
                                                 {{ $item->quantity }}
                                             </td>
                                             <td class="align-middle">
-                                                {{ $item->sub_total * 100 }}.00
+                                                {{($item->product_price*$item->quantity) }}.00
                                             </td>
                                         </tr>
                                     @endforeach
@@ -60,11 +63,12 @@
                             <div class="col-xs-4 col-xs-offset-8">
                                 <table class="table">
                                     <tbody>
-                                        
+
                                         <tr>
                                             <td class="left"><strong>Grand Total</strong></td>
                                             <td class="right">
-                                                <strong>{{ $sale->total_amount }}.00</strong></td>
+                                                <strong>{{ $sale->total_amount }}.00</strong>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -81,6 +85,7 @@
             </div>
         </div>
     </div>
+    @include('includes.main-js')
 </body>
 
 </html>

@@ -11,6 +11,8 @@
             </div>
         @endif
 
+
+
         <div class="table-responsive position-relative">
             <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center"
                 style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
@@ -32,42 +34,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- @if (count($stocks) > 0)  --}}
                     @if ($cart_items->isNotEmpty())
-                        @foreach ($cart_items as $cart_item) 
-                            <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}">
+                        @foreach ($cart_items as $cart_item)
+                            <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}"
+                                data-product_price="{{ $cart_item->options->price_value }}">
                                 <td class="align-middle">
                                     {{ $cart_item->name }} <br>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <input style="min-width: 40px;max-width: 100%;" type="text" readonly
-                                        id="priceValue_{{ $cart_item->id }}" value="{{ $cart_item->price }}"
-                                        class="form-control price-per-product-unit" min="0" value="0">
-                                    <select name="unit_select_{{ $cart_item->id }}"
-                                        onchange="selectedUnit({{ $cart_item->id }},$(this).find(':selected').data('product_quantity'), $(this).val());"
-                                        id="unit_select_{{ $cart_item->id }}" style="min-width: 40px;max-width: 100%;"
-                                        class="form-control price-per-unit">
-                                        <option value="" disabled selected>Select Unit</option>
-                                        @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('prices.product_id', $cart_item->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('stocks.product_quantity as product_quantity', 'prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
-                                            <option {{ $cart_item->price == $unit->product_price ? 'selected' : '' }}
-                                                data-unit_id="{{ $unit->unit_id }}"
-                                                data-price_id="{{ $unit->price_id }}"
-                                                data-stock_id="{{ $unit->stock_id }}"
-                                                data-product_quantity="{{ $unit->product_quantity }}"
-                                                value="{{ $unit->product_price }}">
-                                                {{ $unit->name . ' | ' . $unit->short_name }}</option>
-                                        @endforeach
-                                    </select>
+                                    {{ $cart_item->options->price_value }} / {{ $cart_item->options->unit }}
+
                                 </td>
                                 <td class="align-middle text-center text-center">
-                                    <span class="badge badge-info" id="stock_{{ $cart_item->id }}"></span>
+                                    <span class="badge badge-info"
+                                        id="stock_{{ $cart_item->id }}">{{ $cart_item->options->stock }}</span>
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="input-group d-flex justify-content-center">
                                         <input id="qtyval_{{ $cart_item->id }}"
                                             onchange="quantity({{ $cart_item->id }}, $(this).val());"
-                                            style="min-width: 40px;max-width: 90px;" type="number"
-                                            class="form-control quantity" value="{{ $cart_item->qty }}" min="1"
-                                            max="">
+                                            {{-- wire:change="updateQuantity({{$cart_item->id, $cart_item->options->product_id}})" --}} style="min-width: 40px;max-width: 90px;"
+                                            type="number" class="form-control quantity" value="{{ $cart_item->qty }}"
+                                            min="1" max="{{ $cart_item->options->stock }}">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center tdClass sub-total" id="td_{{ $cart_item->id }}">
@@ -164,13 +153,27 @@
     }
 
     function quantity(id, value) {
-        let price = $(`#priceValue_${id}`).val();
+        let price = $(`#parent_tr_${id}`).data('product_price');
         let sub_total = value * price;
         $(`#td_${id}`).text('₱' + sub_total + '.00');
 
         grandTotal();
+        tableSubtotal();
 
     }
+
+    function tableSubtotal() {
+        $.each($(`#cart_product tbody tr`), function(key, val) {
+            let id = $(val).data('product-id');
+            let qty = $(val).find('.quantity').val();
+            let price = $(val).data('product_price');
+            let sub_total = qty * price;
+            $(`#td_${id}`).text('₱' + sub_total + '.00');
+
+            grandTotal();
+        });
+    }
+
 
     $(document).ready(function() {
 

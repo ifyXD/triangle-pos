@@ -7,6 +7,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Modules\Product\Entities\Product;
+use Modules\Setting\Entities\Unit;
 
 class ProductCart extends Component
 {
@@ -77,12 +78,13 @@ class ProductCart extends Component
         ]);
     }
 
-    public function productSelected($product)
+    public function productSelected($stock)
     {
+        $product = Product::find($stock['product_id']);
         $cart = Cart::instance($this->cart_instance);
 
-        $exists = $cart->search(function ($cartItem, $rowId) use ($product) {
-            return $cartItem->id == $product['id'];
+        $exists = $cart->search(function ($cartItem, $rowId) use ($stock) {
+            return $cartItem->id == $stock['id'];
         });
 
         if ($exists->isNotEmpty()) {
@@ -92,7 +94,9 @@ class ProductCart extends Component
         $this->product = $product;
 
         $prices = Price::where('product_id', $product['id'])->get();
-
+        $unit = Unit::find($stock['unit_id']);
+        $price_value = Price::where('stock_id', $stock['id'])->first();
+        // dd($unit);
         // Prepare price options
         $priceOptions = [];
         foreach ($prices as $price) {
@@ -104,13 +108,14 @@ class ProductCart extends Component
             ];
         }
 
+
         // Add product to cart with prices options
         $cart->add([
-            'id'      => $product['id'],
+            'id'      => $stock['id'],
             'name'    => $product['product_name'],
             'qty'     => 1,
             'price'   => $this->calculate($product)['price'],
-            // 'unit'   => $product['unit_price'],
+            // 'unit'   => $product['product_name'],
             // 'unit_price' =>$product['unit_price'],
             'weight'  => 1,
             'options' => [
@@ -118,8 +123,10 @@ class ProductCart extends Component
                 // 'product_discount_type' => 'fixed',
                 // 'code'                  => $product['product_code'],
                 'sub_total'             => $this->calculate($product)['sub_total'],
-                // 'stock'                 => $product['product_quantity'],
-                // 'unit'                  => $product['product_unit'],
+                'stock'                 => $stock['product_quantity'],
+                'product_id'                 => $product['id'],
+                'unit'                  => $unit->name,
+                'price_value'           => $price_value->product_price,
                 'product_tax'           => $this->calculate($product)['product_tax'],
                 'unit_price'            => $this->calculate($product)['unit_price'],
                 'prices'                => $priceOptions, // Add prices options here
@@ -269,17 +276,12 @@ class ProductCart extends Component
         return ['price' => $price, 'unit_price' => $unit_price, 'product_tax' => $product_tax, 'sub_total' => $sub_total];
     }
 
-    public function updateCartOptions($row_id, $product_id, $cart_item, $discount_amount)
+    public function updateCartOptions($row_id, $product_id, $cart_item)
     {
         Cart::instance($this->cart_instance)->update($row_id, ['options' => [
-            'sub_total'             => $cart_item->price * $cart_item->qty,
-            'code'                  => $cart_item->options->code,
-            'stock'                 => $cart_item->options->stock,
-            'unit'                  => $cart_item->options->unit,
-            'product_tax'           => $cart_item->options->product_tax,
-            'unit_price'            => $cart_item->options->unit_price,
-            'product_discount'      => $discount_amount,
-            'product_discount_type' => $this->discount_type[$product_id],
+            'sub_total'             => $cart_item->options->product_price * $cart_item->qty,
+
         ]]);
     }
+     
 }

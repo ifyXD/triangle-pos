@@ -13,6 +13,7 @@
 
 // use Barryvdh\DomPDF\Facade as PDF;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Modules\Sale\Entities\SaleDetails;
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -23,11 +24,18 @@ Route::group(['middleware' => 'auth'], function () {
     //Generate PDF
     Route::get('/sales/pdf/{id}', function ($id) {
         $sale = \Modules\Sale\Entities\Sale::findOrFail($id);
+        $sale_details = SaleDetails::where('sale_details.sale_id', $id)
+            ->join('products', 'sale_details.product_id', 'products.id')
+            ->join('units', 'sale_details.unit_id', 'units.id')
+            ->join('prices', 'sale_details.price_id', 'prices.id')
+            ->select('products.product_name as product_name', 'units.name as unit_name', 'prices.product_price as product_price', 'sale_details.quantity as quantity', 'sale_details.id as id' )
+            ->get();
         $customer = \Modules\People\Entities\Customer::findOrFail($sale->customer_id);
 
         $pdf = FacadePdf::loadView('sale::print', [
             'sale' => $sale,
             'customer' => $customer,
+            'sale_details' => $sale_details,
         ])->setPaper('a4');
 
         return $pdf->stream('sale-' . $sale->reference . '.pdf');
@@ -35,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/sales/pos/pdf/{id}', function ($id) {
         $sale = \Modules\Sale\Entities\Sale::findOrFail($id);
-        $sale_details = \Modules\Sale\Entities\SaleDetails::where('sale_id',$id)->get();
+        $sale_details = \Modules\Sale\Entities\SaleDetails::where('sale_id', $id)->get();
 
         $pdf = FacadePdf::loadView('sale::print-pos', [
             'sale' => $sale,
@@ -46,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
             ->setOption('margin-left', 5)
             ->setOption('margin-right', 5);
 
-           
+
         return $pdf->stream('sale-' . $sale->reference . '.pdf');
     })->name('sales.pos.pdf');
 

@@ -1,3 +1,4 @@
+
 <div>
     <div class="card border-0 shadow-sm mt-3">
         <div class="card-body">
@@ -73,7 +74,7 @@
                                                 <input id="product_quantity{{ $product->id }}" type="number"
                                                     class="form-control changePrice" data-id="{{ $product->id }}"
                                                     name="product_quantity" required value="1" min="1"
-                                                    max="{{ $product->product_quantity }}">
+                                                    >
                                                 <input id="product_name{{ $product->id }}" type="hidden"
                                                     class="form-control changePrice"
                                                     value="{{ $product->product_name }}">
@@ -84,17 +85,21 @@
                                                 <label for="product_stock_alert">Unit <span
                                                         class="text-danger">*</span></label>
                                                 <select
+                                                    onchange="selectedUnit({{ $product->id }}, $(this));"
                                                     class="form-control changePrice selectpricehere{{ $product->id }}"
                                                     data-id="{{ $product->id }}" name="product_{{ $product->id }}"
                                                     id="product_{{ $product->id }}">
                                                     <option value="0" selected disabled>Select Unit</option>
 
-                                                    @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('stocks.product_quantity', '>' , 0)->where('prices.product_id', $product->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name')->get() as $unit)
-                                                        <option data-unit_id="{{ $unit->unit_id }}"
+                                                    @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('stocks.product_quantity', '>', 0)->where('prices.product_id', $product->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name', 'stocks.product_quantity as product_quantity')->get() as $unit)
+                                                        <option 
+                                                            data-product_quantity="{{ $unit->product_quantity }}"
+                                                            data-unit_id="{{ $unit->unit_id }}"
                                                             data-price_id="{{ $unit->price_id }}"
                                                             data-stock_id="{{ $unit->stock_id }}"
                                                             value="{{ $unit->product_price }}">
-                                                            {{ $unit->name . ' | ' . $unit->short_name }}</option>
+                                                            {{ $unit->name . ' | ' . $unit->short_name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
 
@@ -106,6 +111,12 @@
                                                 <input type="number" disabled readonly
                                                     id="grand_total_number{{ $product->id }}" class="form-control">
                                             </div>
+                                        </div> 
+                                        <div class="col-md-12">
+                                            <label>Stock/s per unit</label> <br>
+                                            @foreach (\Illuminate\Support\Facades\DB::table('prices')->where('stocks.product_quantity', '>', 0)->where('prices.product_id', $product->id)->join('stocks', 'prices.stock_id', 'stocks.id')->join('units', 'prices.unit_id', 'units.id')->select('prices.stock_id as stock_id', 'prices.unit_id as unit_id', 'prices.id as price_id', 'prices.product_price as product_price', 'units.name as name', 'units.short_name as short_name', 'stocks.product_quantity as product_quantity')->get() as $unit)
+                                                <span>{{ $unit->name . ' | ' . $unit->short_name }}</span><span> : {{$unit->product_quantity}}</span> <br>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

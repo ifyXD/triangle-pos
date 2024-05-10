@@ -20,7 +20,25 @@
                 @include('utils.alerts')
             </div>
             <div class="col-lg-7">
-                <livewire:search-product />
+                {{-- <livewire:search-product /> --}}
+                {{-- search --}}
+                <div class="position-relative">
+                    <div class="card mb-0 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="form-group mb-0">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="bi bi-search text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control searchProduct" placeholder="Type product name....">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- search --}}
                 <livewire:pos.product-list :categories="$product_categories" />
             </div>
             <div class="col-lg-5">
@@ -81,6 +99,11 @@
             $('#total_amount').val(grandTotal.toFixed(2));
         }
 
+        function selectedUnit(id, element) {
+            let product_quantity = element.find(`option:selected`).data('product_quantity');
+            element.closest(`#viewModal${id}`).find(`#product_quantity${id}`).attr('max', product_quantity);
+
+        }
 
         function proceedProduct(id) {
 
@@ -90,6 +113,8 @@
             let selectedOption = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`);
             let price_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('price_id');
             let unit_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('unit_id');
+            let product_quantity = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data(
+                'product_quantity');
             let stock_id = $(`.parentcontent${id}`).find(`.selectpricehere${id} option:selected`).data('stock_id');
             let priceText = selectedOption.text();
             let priceValue = selectedOption.val();
@@ -100,11 +125,11 @@
                 if (tbody.find('tr').length == 1 && tbody.find('.no-product-message').length > 0) {
                     // Remove the "Please search & select products!" message
                     tbody.empty();
-                    $('#proceed_cart').prop('disabled', true);
+                    // $('#proceed_cart').prop('disabled', true);
                 }
 
                 // Check if a row for this product already exists in the table
-                let existingRow = tbody.find(`tr[data-product-id="${id}"]`);
+                let existingRow = tbody.find(`tr[data-stock_id="${stock_id}"]`);
 
                 if (existingRow.length > 0) {
                     // Update the existing row
@@ -117,10 +142,16 @@
 
                     // Append a new row for the product
                     tbody.append(`
-                <tr data-stock_id="${stock_id}" data-unit_id="${unit_id}" data-price_id="${price_id}" data-product-id="${id}" class="text-center">
+                <tr 
+                    data-stock_id="${stock_id}" 
+                    data-unit_id="${unit_id}" 
+                    data-price_id="${price_id}" 
+                    data-product-id="${id}" 
+                    data-product_quantity="${product_quantity}" 
+                    class="text-center">
                     <td>${product_name}</td>
-                    <td class="price-per-product-unit">${priceValue}</td>
                     <td class="price-per-unit">${priceText}</td>
+                    <td class="price-per-product-unit">${priceValue}</td>
                     <td class="quantity">${qty}</td>
                     <td class="sub-total">${(parseFloat(priceValue) * parseInt(qty)).toFixed(2)}</td>
                     <td class="align-middle text-center">
@@ -138,6 +169,12 @@
             }
             updateGrandTotal();
 
+            // $(`#viewModal${id}`).on('hidden.bs.modal', function() {
+            $('#product_quantity' + id).val(1);
+            $(`.selectpricehere${id}`).prop('selectedIndex', 0);
+            $(`#grand_total_number${id}`).val('');
+            $('#proceed_cart').prop('disabled', false);
+            // });
         }
 
 
@@ -163,10 +200,10 @@
                 if ($('.tablecart tbody').find('td').hasClass('no-product-message') || $(this).val() ===
                     '') {
                     // If tbody contains a td with the class no-product-message or the value of the selected element is empty, disable the button with id proceed_cart
-                    $('#proceed_cart').prop('disabled', true);
+                    // $('#proceed_cart').prop('disabled', true);
                 } else {
                     // If tbody does not contain a td with the class no-product-message and the value of the selected element is not empty, enable the button with id proceed_cart
-                    $('#proceed_cart').prop('disabled', false);
+                    // $('#proceed_cart').prop('disabled', false);
                 }
             });
 
@@ -195,10 +232,10 @@
                 if ($('.tablecart tbody').find('td').hasClass('no-product-message') || $(this).val() ===
                     '') {
                     // If tbody contains a td with the class no-product-message or the value of the selected element is empty, disable the button with id proceed_cart
-                    $('#proceed_cart').prop('disabled', true);
+                    // $('#proceed_cart').prop('disabled', true);
                 } else {
                     // If tbody does not contain a td with the class no-product-message and the value of the selected element is not empty, enable the button with id proceed_cart
-                    $('#proceed_cart').prop('disabled', false);
+                    // $('#proceed_cart').prop('disabled', false);
                     $('.customer_id_selected').val($(this).val());
                 }
             });
@@ -273,6 +310,33 @@
 
 
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".searchProduct").on("keyup", function() {
+                $(".col-md-6 ").removeClass("d-none");
+                // $('.nodata').addClass('d-none');
+
+                var search = $(this).val().toLowerCase();
+
+                if (search != "") {
+                    $(".col-md-6").each(function() {
+                        var cardTitle = $(this).find(".card-title").text()
+                    .toLowerCase(); //text of each card example card 1 
+
+                        if (cardTitle.indexOf(search) === -1) {
+                            $(this).addClass("d-none");
+                        }
+                    });
+
+                    // Check if no cards are found
+                    if ($('.col-md-6').not('.d-none').length === 0) {
+                        // $('.nodata').removeClass('d-none');
+                    }
+                }
+            });
         });
     </script>
 @endpush
