@@ -2,14 +2,21 @@
 
 namespace Modules\Sale\Http\Controllers;
 
+use App\Models\Stock;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Sale\DataTables\SalePaymentsDataTable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Modules\People\Entities\Customer;
 use Modules\Sale\Entities\Sale;
+use Modules\Sale\Entities\SaleDetails;
 use Modules\Sale\Entities\SalePayment;
+use Modules\SalesReturn\Entities\SaleReturn;
+use Modules\SalesReturn\Entities\SaleReturnDetail;
+use Modules\SalesReturn\Entities\SaleReturnPayment;
 
 class SalePaymentsController extends Controller
 {
@@ -20,7 +27,8 @@ class SalePaymentsController extends Controller
             abort(403, 'Unauthorized');
         }
     }
-    public function index($sale_id, SalePaymentsDataTable $dataTable) {
+    public function index($sale_id, SalePaymentsDataTable $dataTable)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
 
@@ -30,7 +38,8 @@ class SalePaymentsController extends Controller
     }
 
 
-    public function create($sale_id) {
+    public function create($sale_id)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
 
@@ -40,7 +49,8 @@ class SalePaymentsController extends Controller
     }
 
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
 
@@ -89,7 +99,8 @@ class SalePaymentsController extends Controller
     }
 
 
-    public function edit($sale_id, SalePayment $salePayment) {
+    public function edit($sale_id, SalePayment $salePayment)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
 
@@ -99,7 +110,8 @@ class SalePaymentsController extends Controller
     }
 
 
-    public function update(Request $request, SalePayment $salePayment) {
+    public function update(Request $request, SalePayment $salePayment)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
         $request->validate([
@@ -146,7 +158,8 @@ class SalePaymentsController extends Controller
     }
 
 
-    public function destroy(SalePayment $salePayment) {
+    public function destroy(SalePayment $salePayment)
+    {
         // abort_if(Gate::denies('access_sale_payments'), 403);
         $this->checkPermission('access_sale_payments');
 
@@ -155,5 +168,65 @@ class SalePaymentsController extends Controller
         toast('Sale Payment Deleted!', 'warning');
 
         return redirect()->route('sales.index');
+    }
+    public function dispatch($id)
+    {
+        // abort_if(Gate::denies('access_sale_payments'), 403);
+        $this->checkPermission('access_sale_returns');
+        $sale = Sale::findOrfail($id);
+        $sale_details = SaleDetails::where('sale_id', $id)->get();
+
+        $sale_return = SaleReturn::create([
+            'date' => now()->format('Y-m-d'),
+            'customer_id' => $sale->customer_id,
+            'customer_name' => Customer::findOrFail($sale->customer_id)->customer_name,
+            'total_amount' => $sale->total_amount,
+            'paid_amount' => $sale->paid_amount,
+            'due_amount' => $sale->due_amount,
+            'status' => $sale->status,
+            'payment_status' => $sale->payment_status,
+            'payment_method' => $sale->payment_method,
+            'note' => $sale->note,
+            'store_id' => auth()->user()->store->id,
+        ]);
+
+        foreach ($sale_details as $cartDetail) {
+
+           
+
+            SaleReturnDetail::create([
+                'sale_return_id' => $sale_return->id,
+                'product_id' => $cartDetail->product_id,
+                'quantity' => $cartDetail->quantity,
+                'price_id' => $cartDetail->price_id,
+                'unit_id' => $cartDetail->unit_id,
+                'store_id' => auth()->user()->store->id,
+            ]);
+
+            $stock = Stock::find($cartDetail->stock_id);
+            $t_qty = $cartDetail->quantity+$stock->product_quantity;
+            $stock->update([
+                'product_quantity' => $t_qty,
+            ]);
+        }
+
+        Cart::instance('sale_return')->destroy();
+
+        if ($sale_return->paid_amount > 0) {
+            SaleReturnPayment::create([
+                'date' => now()->format('Y-m-d'),
+                'amount' => $sale->paid_amount,
+                'sale_return_id' => $sale_return->id,
+                'payment_method' => $sale->payment_method,
+                'store_id' => auth()->user()->store->id,
+            ]);
+        }
+
+
+        Sale::findOrFail($id)->delete();
+
+        toast('Sale Return Created!', 'success');
+
+        return redirect('sale-returns');
     }
 }

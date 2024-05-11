@@ -17,7 +17,7 @@
             @if (auth()->user()->hasAccessToPermission('access_product_categories'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('product-categories.*') ? 'c-active' : '' }}"
-                       href="{{ route('product-categories.index') }}">
+                        href="{{ route('product-categories.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-collection" style="line-height: 1;"></i> Categories
                     </a>
                 </li>
@@ -25,7 +25,7 @@
             @if (auth()->user()->hasAccessToPermission('create_products'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('products.create') ? 'c-active' : '' }}"
-                       href="{{ route('products.create') }}">
+                        href="{{ route('products.create') }}">
                         <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Create Product
                     </a>
                 </li>
@@ -33,7 +33,7 @@
             @if (auth()->user()->hasAccessToPermission('access_products'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('products.index') ? 'c-active' : '' }}"
-                       href="{{ route('products.index') }}">
+                        href="{{ route('products.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Products
                     </a>
                 </li>
@@ -48,15 +48,15 @@
             @endif
             @if (auth()->user()->hasAccessToPermission('access_prices'))
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index')  ? 'c-active' : '' }}"
-                       href="{{ route('prices.index') }}">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
+                        href="{{ route('prices.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Prices
                     </a>
                 </li>
             @endif
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('units.index') ? 'c-active' : '' }}"
-                   href="{{ route('units.index') }}">
+                    href="{{ route('units.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
                 </a>
             </li>
@@ -128,9 +128,19 @@
                 </a>
             </li>
         </ul>
+        @if (auth()->user()->hasAccessToPermission('access_sale_returns'))
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('sale-returns.index') ? 'c-active' : '' }}"
+                        href="{{ route('sale-returns.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Sale Returns
+                    </a>
+                </li>
+            </ul>
+        @endif
     </li>
 @endif
-@if (auth()->user()->hasAccessToPermission('access_sale_returns'))
+{{-- @if (auth()->user()->hasAccessToPermission('access_sale_returns'))
     <li
         class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('sale-returns.*') || request()->routeIs('sale-return-payments.*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
@@ -147,16 +157,18 @@
                 </li>
             </ul>
         @endif
-        <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('sale-returns.index') ? 'c-active' : '' }}"
-                    href="{{ route('sale-returns.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Sale Returns
-                </a>
-            </li>
-        </ul>
+        @if (auth()->user()->hasAccessToPermission('access_sale_returns'))
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('sale-returns.index') ? 'c-active' : '' }}"
+                        href="{{ route('sale-returns.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Sale Returns
+                    </a>
+                </li>
+            </ul>
+        @endif
     </li>
-@endif
+@endif --}}
 {{-- @if (auth()->user()->hasAccessToPermission('access_expenses'))
    
     <li

@@ -28,7 +28,7 @@ class CreateSaleReturnsTable extends Migration
             $table->integer('paid_amount');
             $table->integer('due_amount');
             $table->string('status');
-            $table->string('return_status')->comment('Return to Inventory | Damage Product/s');
+            // $table->string('return_status')->comment('Return to Inventory | Damage Product/s');
             $table->string('payment_status');
             $table->string('payment_method');
             $table->text('note')->nullable();

@@ -83,26 +83,16 @@ class SalesReturnController extends Controller
               
                 SaleReturnDetail::create([
                     'sale_return_id' => $sale_return->id,
-                    'product_id' => $cartDetail['productId'],
-                    // 'product_name' => $cartDetail['productName'],
+                    'product_id' => $cartDetail['productId'], 
                     'quantity' => $cartDetail['quantity'],
                     'price_id' => $cartDetail['price_id'],
-                    'unit_id' => $cartDetail['unit_id'],
-                    // 'sub_total' => $cartDetail['subTotal'] * 100,
-                    // 'product_discount_amount' => $cart_item->options->product_discount * 100,
-                    // 'product_discount_type' => $cart_item->options->product_discount_type,
-                    // 'product_tax_amount' => $cart_item->options->product_tax * 100,
+                    'unit_id' => $cartDetail['unit_id'], 
                     'store_id' => auth()->user()->store->id,
                 ]);
 
 
 
-                // if ($request->status == 'Completed') {
-                //     $product = Stock::findOrFail($cartDetail['stock_id']);
-                //     $product->update([
-                //         'product_quantity' => $product->product_quantity + $cartDetail['quantity']
-                //     ]);
-                // }
+               
                 if($request->return_status == 'loss'){
                     ProductLoss::create([
                         'sale_return_id' => $sale_return->id,
@@ -229,9 +219,6 @@ class SalesReturnController extends Controller
                 'date' => $request->date, 
                 'customer_id' => $request->customer_id,
                 'customer_name' => Customer::findOrFail($request->customer_id)->customer_name,
-                // 'tax_percentage' => $request->tax_percentage,
-                // 'discount_percentage' => $request->discount_percentage,
-                // 'shipping_amount' => $request->shipping_amount * 100,
                 'paid_amount' => $request->paid_amount * 100,
                 'total_amount' => $request->total_amount * 100,
                 'due_amount' => $due_amount * 100,

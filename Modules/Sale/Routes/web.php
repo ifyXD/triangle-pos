@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('sales', 'SaleController');
 
     //Payments
+    Route::get('/sale-payments/dispatch/{sale_id}', 'SalePaymentsController@dispatch')->name('sale-payments.dispatch');
     Route::get('/sale-payments/{sale_id}', 'SalePaymentsController@index')->name('sale-payments.index');
     Route::get('/sale-payments/{sale_id}/create', 'SalePaymentsController@create')->name('sale-payments.create');
     Route::post('/sale-payments/store', 'SalePaymentsController@store')->name('sale-payments.store');
