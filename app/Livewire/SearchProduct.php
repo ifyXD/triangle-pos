@@ -9,34 +9,6 @@ use Modules\Product\Entities\Product;
 
 class SearchProduct extends Component
 {
-
-
-    public $isOpen = false;
-    public $messageflash = false;
-    public $isDeleteOpen = 0;
-    public $iteration = 0;
-    public $productId;
-    public $image;
-    public $oldimage;
-
-
-
-
-
-    // public fields
-    public $product_name = '';
-    public $description = '';
-    public $product_price = '';
-    public $product_stock = 0;
-    public $product_unit = '';
-    public $product_unitspecify = '';
-
-    // by categoryId
-    public $selectCategory = '';
-    public $categoryId = '';
-    public $store_cat_id = '';
-
-
     // Query
     public $search = '';
 

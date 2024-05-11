@@ -14,11 +14,11 @@
                 @forelse($products as $product)
                     {{-- <div wire:click.prevent="selectProduct({{ $product }})" class="col-lg-4 col-md-6 col-xl-3" --}}
                     @if (!$product->min_price || $product->product_quantity === 0)
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div class="alert alert-warning mb-0">
                                 Products Not Found...
                             </div>
-                        </div>
+                        </div> --}}
                     @else
                         <div class="col-lg-4 col-md-6 col-xl-3" data-toggle="modal"
                             data-target="#viewModal{{ $product->id }}" style="cursor: pointer;">

@@ -104,14 +104,16 @@
                 <div class="col-lg-12">
                     <div class="card border-0 shadow-sm">
                         <div class="card-header">
-                            Monthly Cash Flow (Payment Sent & Received)
+                            Monthly Cash Flow ({{ date("F Y") }})
                         </div>
                         <div class="card-body">
-                            <canvas id="paymentChart"></canvas>
+                            {{-- <canvas id="paymentChart"></canvas> --}}
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
+            
         @endcan
     </div>
 @endsection
@@ -124,4 +126,55 @@
 
 @push('page_scripts')
     @vite('resources/js/chart-config.js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myChart').getContext('2d');
+    
+            var products = {!! json_encode($products) !!};
+            var totals = {!! json_encode($totals) !!};
+            var month = '{{ date("F Y") }}';
+    
+            // Combine products and totals into an array of objects
+            var data = products.map((product, index) => ({
+                product: product,
+                total: totals[index]
+            }));
+    
+            // Sort the data by total in descending order
+            data.sort((a, b) => b.total - a.total);
+    
+            // Extract sorted products and totals
+            products = data.map(item => item.product);
+            totals = data.map(item => item.total);
+    
+            var datasets = [{
+                label: month,
+                data: totals,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }];
+    
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: products,
+                    datasets: datasets
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+    
 @endpush

@@ -24,6 +24,7 @@ class ProductCart extends Component
     public $item_discount;
     public $unit_price;
     public $data;
+    public $qty = 1;
 
 
 
@@ -33,6 +34,7 @@ class ProductCart extends Component
     public function mount($cartInstance, $data = null)
     {
         $this->cart_instance = $cartInstance;
+
 
         if ($data) {
             $this->data = $data;
@@ -122,7 +124,8 @@ class ProductCart extends Component
                 // 'product_discount'      => 0.00,
                 // 'product_discount_type' => 'fixed',
                 // 'code'                  => $product['product_code'],
-                'sub_total'             => $this->calculate($product)['sub_total'],
+                'selected_quantity'             => $this->qty,
+                'sub_total'             => $price_value->product_price * 1,
                 'stock'                 => $stock['product_quantity'],
                 'product_id'                 => $product['id'],
                 'unit'                  => $unit->name,
@@ -154,32 +157,35 @@ class ProductCart extends Component
         Cart::instance($this->cart_instance)->setGlobalDiscount((int)$this->global_discount);
     }
 
-    public function updateQuantity($row_id, $product_id)
+    
+    public function updateQuantity($productId, $quantity)
     {
-        if ($this->cart_instance == 'sale' || $this->cart_instance == 'purchase_return') {
-            if ($this->check_quantity[$product_id] < $this->quantity[$product_id]) {
-                session()->flash('message', 'The requested quantity is not available in stock.');
-                return;
-            }
-        }
 
-        Cart::instance($this->cart_instance)->update($row_id, $this->quantity[$product_id]);
+        $this->qty = $quantity;
+        // dd($quantity);
+        // Find the cart item by its product ID
+        $cart_item = Cart::instance($this->cart_instance)->search(function ($cartItem, $rowId) use ($productId) {
+            return $cartItem->id === $productId;
+        })->first();
+        dd($this->qty);
+        // // Update the quantity of the item in the cart
+        // if ($cart_item) {
+        //     Cart::instance($this->cart_instance)->update($cart_item->rowId, $quantity);
+        // }
 
-        $cart_item = Cart::instance($this->cart_instance)->get($row_id);
-
-        Cart::instance($this->cart_instance)->update($row_id, [
-            'options' => [
-                'sub_total'             => $cart_item->price * $cart_item->qty,
-                'code'                  => $cart_item->options->code,
-                'stock'                 => $cart_item->options->stock,
-                'unit'                  => $cart_item->options->unit,
-                'product_tax'           => $cart_item->options->product_tax,
-                'unit_price'            => $cart_item->options->unit_price,
-                'product_discount'      => $cart_item->options->product_discount,
-                'product_discount_type' => $cart_item->options->product_discount_type,
-            ]
-        ]);
+        // $sub_total = $cart_item->options->unit_price * $quantity;
+        // // Update the cart item options
+        // if ($cart_item) {
+        //     Cart::instance($this->cart_instance)->update($cart_item->rowId, [
+        //         'options' => [
+        //             'sub_total' => $sub_total,
+        //             'stock'     => $cart_item->options->stock,
+        //             // Add other options here if needed
+        //         ]
+        //     ]);
+        // }
     }
+
 
     public function updatedDiscountType($value, $name)
     {
@@ -283,5 +289,4 @@ class ProductCart extends Component
 
         ]]);
     }
-     
 }

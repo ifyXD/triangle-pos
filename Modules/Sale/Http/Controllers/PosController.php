@@ -43,13 +43,13 @@ class PosController extends Controller
     {
         $sale_id = 0;
         // getting Anonymous Customer if customer request is null
-       
+
 
 
         DB::transaction(function () use ($request, &$sale_id) {
             $due_amount = $request->total_amount - $request->paid_amount;
             $customer = Customer::where('customer_name', 'Anonymous')->where('user_id', auth()->user()->id)->first();
-            $customer_id = $request->customer_id == null? $customer->id : $request->customer_id;
+            $customer_id = $request->customer_id == null ? $customer->id : $request->customer_id;
             $customer_name = Customer::findOrFail($customer_id)->customer_name;
             if ($due_amount == $request->total_amount) {
                 $payment_status = 'Unpaid';
@@ -63,7 +63,7 @@ class PosController extends Controller
                 'date' => now()->format('Y-m-d'),
                 // 'reference' => 'PSL',
                 'customer_id' => $customer_id,
-                'customer_name' => $customer_name, 
+                'customer_name' => $customer_name,
                 'paid_amount' => $request->paid_amount * 100,
                 'due_amount' => $due_amount * 100,
                 'total_amount' => $request->total_amount * 100,
@@ -73,18 +73,18 @@ class PosController extends Controller
                 'note' => $request->note,
                 'store_id' => auth()->user()->store->id,
             ]);
-        
+
             foreach ($request->cartDetails as $cartDetail) {
                 SaleDetails::create([
                     'sale_id' => $sale->id,
-                    'product_id' => $cartDetail['productId'], 
+                    'product_id' => $cartDetail['productId'],
                     'quantity' => $cartDetail['quantity'],
-                    'price_id' => $cartDetail['price_id'], 
-                    'unit_id' => $cartDetail['unit_id'], 
+                    'price_id' => $cartDetail['price_id'],
+                    'unit_id' => $cartDetail['unit_id'],
                     'store_id' => auth()->user()->store->id,
                     'stock_id' => $cartDetail['stock_id'],
                 ]);
-            
+
                 $product = Stock::findOrFail($cartDetail['stock_id']);
                 $product->update([
                     'product_quantity' => $product->product_quantity - $cartDetail['quantity']

@@ -11,8 +11,6 @@
             </div>
         @endif
 
-
-
         <div class="table-responsive position-relative">
             <div wire:loading.flex class="col-12 position-absolute justify-content-center align-items-center"
                 style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
@@ -27,14 +25,11 @@
                         <th class="align-middle text-center">Price / Unit</th>
                         <th class="align-middle text-center">Stock</th>
                         <th class="align-middle text-center">Quantity</th>
-                        {{-- <th class="align-middle text-center">Discount</th>
-                    <th class="align-middle text-center">Tax</th> --}}
                         <th class="align-middle text-center">Sub Total</th>
                         <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @if (count($stocks) > 0)  --}}
                     @if ($cart_items->isNotEmpty())
                         @foreach ($cart_items as $cart_item)
                             <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}"
@@ -44,7 +39,6 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     {{ $cart_item->options->price_value }} / {{ $cart_item->options->unit }}
-
                                 </td>
                                 <td class="align-middle text-center text-center">
                                     <span class="badge badge-info"
@@ -52,18 +46,19 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="input-group d-flex justify-content-center">
-                                        <input id="qtyval_{{ $cart_item->id }}"
-                                            onchange="quantity({{ $cart_item->id }}, $(this).val());"
-                                            {{-- wire:change="updateQuantity({{$cart_item->id, $cart_item->options->product_id}})" --}} style="min-width: 40px;max-width: 90px;"
-                                            type="number" class="form-control quantity" value="{{ $cart_item->qty }}"
-                                            min="1" max="{{ $cart_item->options->stock }}">
+                                        <input wire:model="qty"  
+                                        {{-- value="{{$cart_item->qty}}" --}}
+                                        wire:change="updateQuantity({{ $cart_item->id }}, {{ $qty }})"
+                                        type="number" class="form-control quantity" 
+                                        min="1" max="{{ $cart_item->options->stock }}">
+                                 
                                     </div>
                                 </td>
                                 <td class="align-middle text-center tdClass sub-total" id="td_{{ $cart_item->id }}">
-                                    {{ format_currency($cart_item->options->sub_total) }}
+                                    {{ format_currency($cart_item->subtotal) }}
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="#" onclick="removeItem($(this));">
+                                    <a href="#" wire:click.prevent="removeItem('{{ $cart_item->rowId }}')">
                                         <i class="bi bi-x-circle font-2xl text-danger"></i>
                                     </a>
                                 </td>
@@ -71,7 +66,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="8" class="text-center">
+                            <td colspan="6" class="text-center">
                                 <span class="text-danger">
                                     Please search & select products!
                                 </span>
@@ -89,7 +84,6 @@
                 <table class="table table-striped">
                     <tr>
                         <th>Grand Total</th>
-
                         <th id="grand_total">
                             (=)
                         </th>
@@ -98,12 +92,8 @@
             </div>
         </div>
     </div>
-    @foreach ($cart_items as $item)
-        {{ $item->selected_unit }}
-    @endforeach
-
-
 </div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>

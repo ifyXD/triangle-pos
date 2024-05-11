@@ -16,6 +16,7 @@ use Modules\Purchase\Entities\PurchasePayment;
 use Modules\PurchasesReturn\Entities\PurchaseReturn;
 use Modules\PurchasesReturn\Entities\PurchaseReturnPayment;
 use Modules\Sale\Entities\Sale;
+use Modules\Sale\Entities\SaleDetails;
 use Modules\Sale\Entities\SalePayment;
 use Modules\SalesReturn\Entities\SaleReturn;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
@@ -57,12 +58,30 @@ class HomeController extends Controller
         $profit = $revenue - $product_costs;
 
 
+        $firstDayOfMonth = Carbon::now()->startOfMonth();
+
+        // Get the last day of the current month
+        $lastDayOfMonth = Carbon::now()->endOfMonth();
+
+        // Fetch sales data for the current month
+        $sales = SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
+            ->join('products', 'sale_details.product_id', '=', 'products.id')
+            ->join('prices', 'sale_details.price_id', '=', 'prices.id')
+            ->whereBetween('sale_details.created_at', [$firstDayOfMonth, $lastDayOfMonth])
+            ->groupBy('products.product_name')
+            ->get();
+
+        // Extract product names and totals
+        $products = $sales->pluck('product_name')->toArray();
+        $totals = $sales->pluck('total')->toArray();
         // dd($salesQuery);
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
             // 'purchase_returns' => $purchaseReturns / 100,
             'profit' => $profit,
+            'products' => $products,
+            'totals' => $totals,
         ]);
     }
     public function storename()
