@@ -61,15 +61,13 @@ class SaleController extends Controller
                 // 'tax_percentage' => $request->tax_percentage,
                 // 'discount_percentage' => $request->discount_percentage,
                 // 'shipping_amount' => $request->shipping_amount * 100,
-                'paid_amount' => $request->paid_amount * 100,
                 'total_amount' => $request->total_amount * 100,
+                'paid_amount' => $request->paid_amount * 100,
                 'due_amount' => $due_amount * 100,
                 'status' => $request->status,
                 'payment_status' => $payment_status,
                 'payment_method' => $request->payment_method,
                 'note' => $request->note,
-                // 'tax_amount' => Cart::instance('sale')->tax() * 100,
-                // 'discount_amount' => Cart::instance('sale')->discount() * 100,
                 'store_id' => auth()->user()->store->id
             ]);
 
@@ -81,8 +79,9 @@ class SaleController extends Controller
                     'product_id' => $cartDetail['productId'],
                     'quantity' => $cartDetail['quantity'],
                     'price_id' => $cartDetail['price_id'],
+                    'store_id' => auth()->user()->store->id,
+                    'stock_id' => $cartDetail['stock_id'], 
                     'unit_id' => $cartDetail['unit_id'], 
-                    'store_id' => auth()->user()->store->id
                 ]);
 
                 $product = Stock::findOrFail($cartDetail['stock_id']);
@@ -168,8 +167,9 @@ class SaleController extends Controller
                 'options' => [
                     // 'product_discount' => $sale_detail->product_discount_amount,
                     // 'product_discount_type' => $sale_detail->product_discount_type,
+                    'selected_quantity' => 1,
                     'sub_total'   => $sale_detail->sub_total,
-                    // 'stock'       => Product::findOrFail($sale_detail->product_id)->product_quantity,
+                    'stock'       => Stock::findOrFail($sale_detail->product_id)->product_quantity,
                     // 'unit'        => $product['product_unit'],
                     'code'        => $sale_detail->product_code,
                     // 'product_tax' => $sale_detail->product_tax_amount,

@@ -54,7 +54,7 @@ class HomeController extends Controller
             }
         }
 
-        $revenue = ($sales - $saleReturns) / 100;
+        $revenue = ($sales - $saleReturns);
         $profit = $revenue - $product_costs;
 
 
@@ -64,9 +64,16 @@ class HomeController extends Controller
         $lastDayOfMonth = Carbon::now()->endOfMonth();
 
         // Fetch sales data for the current month
-        $sales = SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
+        $sales = auth()->user()->hasRole('Super Admin')? SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
+            ->join('products', 'sale_details.product_id', '=', 'products.id')
+            ->join('prices', 'sale_details.price_id', '=', 'prices.id') 
+            ->whereBetween('sale_details.created_at', [$firstDayOfMonth, $lastDayOfMonth])
+            ->groupBy('products.product_name')
+            ->get() : 
+            SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
             ->join('products', 'sale_details.product_id', '=', 'products.id')
             ->join('prices', 'sale_details.price_id', '=', 'prices.id')
+            ->where('sale_details.store_id', auth()->user()->store->id)
             ->whereBetween('sale_details.created_at', [$firstDayOfMonth, $lastDayOfMonth])
             ->groupBy('products.product_name')
             ->get();
@@ -75,6 +82,7 @@ class HomeController extends Controller
         $products = $sales->pluck('product_name')->toArray();
         $totals = $sales->pluck('total')->toArray();
         // dd($salesQuery);
+
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
@@ -83,6 +91,7 @@ class HomeController extends Controller
             'products' => $products,
             'totals' => $totals,
         ]);
+        
     }
     public function storename()
     {

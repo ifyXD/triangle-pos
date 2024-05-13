@@ -191,23 +191,21 @@ class SalePaymentsController extends Controller
         ]);
 
         foreach ($sale_details as $cartDetail) {
-
-           
-
             SaleReturnDetail::create([
                 'sale_return_id' => $sale_return->id,
                 'product_id' => $cartDetail->product_id,
                 'quantity' => $cartDetail->quantity,
                 'price_id' => $cartDetail->price_id,
                 'unit_id' => $cartDetail->unit_id,
+                'stock_id' => $cartDetail->stock_id,
                 'store_id' => auth()->user()->store->id,
             ]);
 
-            $stock = Stock::find($cartDetail->stock_id);
-            $t_qty = $cartDetail->quantity+$stock->product_quantity;
-            $stock->update([
-                'product_quantity' => $t_qty,
-            ]);
+            // $stock = Stock::find($cartDetail->stock_id);
+            // $t_qty = $cartDetail->quantity+$stock->product_quantity;
+            // $stock->update([
+            //     'product_quantity' => $t_qty,
+            // ]);
         }
 
         Cart::instance('sale_return')->destroy();

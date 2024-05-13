@@ -60,7 +60,7 @@ class ProfitLossReport extends Component
     }
 
     public function setValues() {
-        $this->total_sales = Sale::where('user_id', auth()->user()->id)->completed()
+        $this->total_sales = Sale::where('store_id', auth()->user()->store->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
@@ -69,7 +69,7 @@ class ProfitLossReport extends Component
             })
             ->count();
 
-        $this->sales_amount = Sale::where('user_id', auth()->user()->id)->completed()
+        $this->sales_amount = Sale::where('store_id', auth()->user()->store->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
@@ -96,7 +96,7 @@ class ProfitLossReport extends Component
             })
             ->sum('total_amount') / 100;
 
-        $this->total_sale_returns = SaleReturn::where('user_id', auth()->user()->id)->completed()
+        $this->total_sale_returns = SaleReturn::where('store_id', auth()->user()->store->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
@@ -105,7 +105,7 @@ class ProfitLossReport extends Component
             })
             ->count();
 
-        $this->sale_returns_amount = SaleReturn::where('user_id', auth()->user()->id)->completed()
+        $this->sale_returns_amount = SaleReturn::where('store_id', auth()->user()->store->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
@@ -152,7 +152,7 @@ class ProfitLossReport extends Component
     public function calculateProfit() {
         $product_costs = 0;
         $revenue = $this->sales_amount - $this->sale_returns_amount;
-        $sales = Sale::where('user_id', auth()->user()->id)->completed()
+        $sales = Sale::where('store_id', auth()->user()->store->id)->completed()
             ->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
@@ -173,7 +173,7 @@ class ProfitLossReport extends Component
     }
 
     public function calculatePaymentsReceived() {
-        $sale_payments = SalePayment::where('user_id', auth()->user()->id)->when($this->start_date, function ($query) {
+        $sale_payments = SalePayment::where('store_id', auth()->user()->store->id)->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
             ->when($this->end_date, function ($query) {
@@ -201,7 +201,7 @@ class ProfitLossReport extends Component
             })
             ->sum('amount') / 100;
 
-        $sale_return_payments = SaleReturnPayment::where('user_id', auth()->user()->id)->when($this->start_date, function ($query) {
+        $sale_return_payments = SaleReturnPayment::where('store_id', auth()->user()->store->id)->when($this->start_date, function ($query) {
                 return $query->whereDate('date', '>=', $this->start_date);
             })
             ->when($this->end_date, function ($query) {

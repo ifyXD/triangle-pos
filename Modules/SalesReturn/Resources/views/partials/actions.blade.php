@@ -4,6 +4,16 @@
     </button>
     <div class="dropdown-menu">
         @can('access_sale_payments')
+            <a onclick="return {{$data->return_status == 'return'? 'false' : 'true'}}" href="{{ url('stock-update-return-stock', $data->id) }}" class="dropdown-item">
+                <i class="bi bi-cash-coin mr-2 text-warning" style="line-height: 1;"></i> Return to Inventory
+            </a>
+        @endcan
+        @can('access_sale_payments')
+            <a onclick="return {{$data->return_status == 'loss'? 'false' : 'true'}}" href="{{ route('product-loss.store', $data->id) }}" class="dropdown-item">
+                <i class="bi  bi-trash mr-2 text-underline" style="line-height: 1;"></i> Saved as Product Loss
+            </a>
+        @endcan
+        @can('access_sale_payments')
             <a href="{{ route('sale-return-payments.index', $data->id) }}" class="dropdown-item">
                 <i class="bi bi-cash-coin mr-2 text-warning" style="line-height: 1;"></i> Show Payments
             </a>

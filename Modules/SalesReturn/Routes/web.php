@@ -31,6 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
     //Payments
     Route::get('/sale-return-payments/{sale_return_id}', 'SaleReturnPaymentsController@index')
         ->name('sale-return-payments.index');
+    Route::get('/product-loss-store/{sale_return_id}', 'SaleReturnPaymentsController@create_product_loss')
+        ->name('product-loss.store');
+    Route::get('/stock-update-return-stock/{sale_return_id}', 'SaleReturnPaymentsController@return_Stock')
+        ->name('stock-update.return_stock');
     Route::get('/sale-return-payments/{sale_return_id}/create', 'SaleReturnPaymentsController@create')
         ->name('sale-return-payments.create');
     Route::post('/sale-return-payments/store', 'SaleReturnPaymentsController@store')

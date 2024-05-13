@@ -12,6 +12,7 @@ class SaleDetails extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $fillable = ['stock_id','sale_id','product_id','quantity','price_id','store_id','unit_id'];
 
     protected $with = ['product'];
 

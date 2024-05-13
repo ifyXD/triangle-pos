@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductLoss extends Model
 {
+    protected $fillable = ['sale_return_id', 'product_id','stock_id','store_id'];
     use HasFactory;
 }

@@ -32,7 +32,12 @@
                 <tbody>
                     @if ($cart_items->isNotEmpty())
                         @foreach ($cart_items as $cart_item)
-                            <tr id="parent_tr_{{ $cart_item->id }}" data-product-id="{{ $cart_item->id }}"
+                            <tr id="parent_tr_{{ $cart_item->id }}" 
+                                data-price_id="{{ $cart_item->options->price_id }}"
+                                data-stock_id="{{ $cart_item->id }}"
+                                data-unit_id="{{ $cart_item->options->unit_id }}"
+                                data-product-id="{{ $cart_item->id }}"
+                                data-product_id="{{ $cart_item->options->product_id }}"
                                 data-product_price="{{ $cart_item->options->price_value }}">
                                 <td class="align-middle">
                                     {{ $cart_item->name }} <br>
@@ -46,9 +51,11 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="input-group d-flex justify-content-center">
-                                        <input wire:model="qty"  
-                                        {{-- value="{{$cart_item->qty}}" --}}
-                                        wire:change="updateQuantity({{ $cart_item->id }}, {{ $qty }})"
+                                        <input 
+                                        {{-- wire:model="qty"   --}}
+                                        value="1"
+                                        {{-- wire:change="updateQuantity({{ $cart_item->id }}, {{ $qty }})" --}}
+                                        onchange="quantity({{$cart_item->id}},{{$cart_item->options->price_value}});"
                                         type="number" class="form-control quantity" 
                                         min="1" max="{{ $cart_item->options->stock }}">
                                  
@@ -84,9 +91,7 @@
                 <table class="table table-striped">
                     <tr>
                         <th>Grand Total</th>
-                        <th id="grand_total">
-                            (=)
-                        </th>
+                        <th id="grand_total"></th>
                     </tr>
                 </table>
             </div>
@@ -94,8 +99,7 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script>
     function grandTotal() {
         var grandTotal = 0;
@@ -170,6 +174,12 @@
 
         // Event handler for clicking the "Dup" lin
         $('#submitCreateSale').click(function() {
+          
+
+            if($('#grand_total').text() == ''){
+                alert('Please adjust the quantity');
+                return false;
+            }
             let customer_id = $('#customer_id').val();
             let amount = $('#paid_amount').val();
             let paid_amount = parseFloat(amount.replace('₱', '').trim());
@@ -183,14 +193,11 @@
 
             $('tr[data-product-id]').each(function() {
                 // Extract data from the current <tr>
-                var productId = $(this).data('product-id');
+                var productId = $(this).data('product_id');
                 var productName = $(this).find('td:eq(0)').text();
-                var price_id = $(this).find('select.price-per-unit').find(':selected')
-                    .data('price_id');
-                var unit_id = $(this).find('select.price-per-unit').find(':selected')
-                    .data('unit_id');
-                var stock_id = $(this).find('select.price-per-unit').find(':selected')
-                    .data('stock_id');
+                var price_id = $(this).data('price_id');
+                var unit_id = $(this).data('unit_id');
+                var stock_id = $(this).data('stock_id');
                 var quantity = $(this).find('.quantity').val();
                 var subTotalVal = $(this).find('.sub-total').text();
                 var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
@@ -198,17 +205,17 @@
                 var cartDetail = {
                     productId: productId,
                     price_id: price_id,
-                    unit_id: unit_id,
+                    unit_id: unit_id,   
                     stock_id: stock_id,
                     productName: productName,
                     quantity: quantity,
                     subTotal: subTotal
                 };
-
+                grand_total
                 // Push the cart detail object into the array
                 cartDetails.push(cartDetail);
             });
-            console.log(cartDetails);
+            // console.log(cartDetails);
 
             $.post('{{ route('sales.store') }}', {
                     cartDetails: cartDetails,

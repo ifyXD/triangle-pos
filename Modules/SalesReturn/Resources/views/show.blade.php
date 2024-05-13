@@ -74,13 +74,13 @@
                                 @foreach($sale_return->saleReturnDetails as $item)
                                     <tr>
                                         <td class="align-middle">
-                                            {{ $item->product_name }} <br>
+                                            {{ $item->product->product_name }} <br>
                                             {{-- <span class="badge badge-success">
                                                 {{ $item->product_code }}
                                             </span> --}}
                                         </td>
 
-                                        <td class="align-middle">{{ format_currency($item->price*100) }} / {{$item->unit_price}}</td>
+                                        <td class="align-middle">{{ format_currency($item->price->product_price) }} / {{$item->unit->name}}</td>
 
                                         <td class="align-middle">
                                             {{ $item->quantity }}
@@ -95,7 +95,7 @@
                                         </td> --}}
 
                                         <td class="align-middle">
-                                            {{ format_currency($item->sub_total) }}
+                                            {{ format_currency($item->price->product_price*$item->quantity) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -120,7 +120,7 @@
                                     </tr> --}}
                                     <tr>
                                         <td class="left"><strong>Grand Total</strong></td>
-                                        <td class="right"><strong>{{ format_currency($sale_return->total_amount) }}</strong></td>
+                                        <td class="right"><strong>{{ format_currency($sale_return->total_amount*100) }}</strong></td>
                                     </tr>
                                     </tbody>
                                 </table>

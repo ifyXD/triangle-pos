@@ -95,22 +95,12 @@ class ProductCart extends Component
 
         $this->product = $product;
 
-        $prices = Price::where('product_id', $product['id'])->get();
+      
         $unit = Unit::find($stock['unit_id']);
         $price_value = Price::where('stock_id', $stock['id'])->first();
         // dd($unit);
         // Prepare price options
-        $priceOptions = [];
-        foreach ($prices as $price) {
-            // Assuming each price has fields like 'price', 'start_date', 'end_date', etc.
-            $priceOptions[] = [
-                'price'      => $price['product_price'],
-                'product_unit' => $price['product_unit'],
-                // Add any other fields you need
-            ];
-        }
-
-
+       
         // Add product to cart with prices options
         $cart->add([
             'id'      => $stock['id'],
@@ -129,10 +119,12 @@ class ProductCart extends Component
                 'stock'                 => $stock['product_quantity'],
                 'product_id'                 => $product['id'],
                 'unit'                  => $unit->name,
+                'unit_id'                  => $unit->id,
                 'price_value'           => $price_value->product_price,
+                'price_id'           => $price_value->id,
                 'product_tax'           => $this->calculate($product)['product_tax'],
                 'unit_price'            => $this->calculate($product)['unit_price'],
-                'prices'                => $priceOptions, // Add prices options here
+              
             ]
         ]);
 

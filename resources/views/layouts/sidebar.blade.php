@@ -12,9 +12,12 @@
                     : asset('images/logo.png');
             @endphp
 
-            <img class="c-sidebar-brand-full"
+            {{-- <img class="c-sidebar-brand-full"
                 src="{{ auth()->user()->hasRole('Super Admin') ? asset('images/logo.png') : $logoPath }}" alt="Site Logo"
-                width="200">
+                width="200"> --}}
+            <h4 class="c-sidebar-brand-full text-light">
+                {{ auth()->user()->hasRole('Super Admin') ? 'PUBLIC MARKET' : Str::limit(strtoupper(auth()->user()->store->store_name), 12, '') }}
+            </h4>
             <img class="c-sidebar-brand-minimized" src="{{ asset('images/logo-minimize.png') }}" alt="Site Logo"
                 width="40">
         </a>
