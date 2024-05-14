@@ -17,12 +17,12 @@
                 {{-- {!! \Milon\Barcode\Facades\DNS1DFacade::getBarCodeSVG($product->product_code, $product->product_barcode_symbology, 2, 110) !!} --}}
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-0">
+                        <div class="table-responsive text-center">
+                            <table class="table table-bordered table-striped mb-0 mx-auto">
 
                                 <thead>
                                     <tr>
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
                 <div class="card h-100">
                     <div class="card-body">
 
@@ -97,7 +97,7 @@
                         @endforelse
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

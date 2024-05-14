@@ -109,7 +109,7 @@
             </div>
         </div> --}}
         {{-- Expenses --}}
-        <div class="col-12 col-lg-4">
+        {{-- <div class="col-12 col-lg-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-3 d-flex align-items-center">
                     <div class="bg-primary p-3 mfe-3 rounded">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- Payments Received --}}
         <div class="col-12 col-lg-4">
             <div class="card border-0 shadow-sm">

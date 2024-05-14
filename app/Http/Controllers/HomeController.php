@@ -100,7 +100,7 @@ class HomeController extends Controller
 
         return view('home', [
             'revenue' => $revenue,
-            'sale_returns' => $saleReturns / 100,
+            'sale_returns' => $saleReturns,
             // 'purchase_returns' => $purchaseReturns / 100,
             'profit' => $profit,
             'products' => $products,

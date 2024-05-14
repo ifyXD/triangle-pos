@@ -7,9 +7,9 @@
                     <input type="checkbox" name="permissions[]" class="dashboardCheck" value="3,4,5,6,7"
                         {{ $userpermissions->where('permission_id', '3')->first()->status === 'true' ? 'checked' : '' }}>Dashboard
                 </label>
-                <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="expensesCheck"
+                {{-- <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="expensesCheck"
                         value="27,28,29,30,31" {{ $userpermissions->where('permission_id', '27')->first()->status === 'true' ? 'checked' : '' }}>
-                    Expenses</label>
+                    Expenses</label> --}}
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="productCheck"
                         value="8,9,10,11,12,13"
                         {{ $userpermissions->where('permission_id', '8')->first()->status === 'true' ? 'checked' : '' }}>Products</label>
@@ -29,7 +29,7 @@
                         value="67" {{ $userpermissions->where('permission_id', '67')->first()->status === 'true' ? 'checked' : '' }}>Reports</label>
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="priceCheck"
                         value="74" {{ $userpermissions->where('permission_id', '74')->first()->status === 'true' ? 'checked' : '' }}>Prices</label>
-                <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="settingCheck"
+                <label class="checkbox-button m-auto"><input type="checkbox" name="permissions[]" class="settingCheck"
                         value="41" {{ $userpermissions->where('permission_id', '41')->first()->status === 'true' ? 'checked' : '' }}>Settings</label>
             </div>
             {{--            <button class="button-next" type="button" id="permissionBtnFunc">NEXT</button> --}}

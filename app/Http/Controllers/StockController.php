@@ -52,6 +52,7 @@ class StockController extends Controller
             'product_stock_alert' => $request->product_stock_alert,
             'store_id' => auth()->user()->store->id,
         ]);
+        toast('Stock Created!', 'success');
 
         return redirect('stocks/show/' . $id);
     }
@@ -79,6 +80,7 @@ class StockController extends Controller
             'product_stock_alert' => $request->product_stock_alert,
         ]);
 
+        toast('Stock Updated!', 'success');
 
 
         return redirect('stocks/show/' . $id)->with('success', 'Price Updated!');

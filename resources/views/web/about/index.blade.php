@@ -3,7 +3,7 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <h1 class="display-1">{{ ucfirst(request()->segment(1)) }}{{ ucfirst(request()->segment(1)) }}{{ ucfirst(request()->segment(1)) }}</h1>
+                <h1 class="display-1">{{ ucfirst(request()->segment(1)) }}</h1>
                 <div class="cta-container">
                     <div class="start-now">
                         <a href="{{route('register')}}">Start now - It’s free</a>
@@ -20,7 +20,6 @@
         <div class="container">
             <div class="feature-content">
                 <div class="content">
-                    <h1 class="display-1"> {{ ucfirst(request()->segment(1)) }}</h1>
                 </div>
 
 

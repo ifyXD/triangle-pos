@@ -20,11 +20,13 @@ class UserSettingController extends Controller
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             // If "Super Admin," retrieve all units
-            $settings = Setting::where('user_id', $user->id)->first();
+            $settings = Setting::where('user_id', $user->store->id)->first();
         } else {
             // If not "Super Admin," filter units by user_id
-            $settings = Setting::where('user_id', $user->id)->first();
-            $userpermissions = UserPermission::where('user_id', $user->id)->orderBy('id', 'asc')->get();
+            $settings = Setting::where('user_id', auth()->user()->id)
+            ->where('user_id', auth()->user()->store->id)
+            ->first();
+     $userpermissions = UserPermission::where('user_id', $user->id)->orderBy('id', 'asc')->get();
 
         }
 
@@ -34,7 +36,7 @@ class UserSettingController extends Controller
     }
     public function update(Request $request)
     {
-        $setting = Setting::where('user_id', $request->user_id)->first();
+        $setting = Setting::where('user_id', $request->store->id);
 
         if ($request->hasFile('image')) {
             // If an image is uploaded, save it to the public/images/settings/user directory
@@ -46,31 +48,19 @@ class UserSettingController extends Controller
             }
         }
 
-        if ($setting == null) {
-            Setting::create([
-                'company_name' => $request->company_name,
-                'company_email' => $request->company_email,
-                'company_phone' => $request->company_phone,
-                'notification_email' => $request->notification_email,
-                'company_address' => $request->company_address,
-                'default_currency_id' => $request->default_currency_id,
-                'user_id' => auth()->user()->id,
-                'default_currency_position' => $request->default_currency_position,
-                'image' => isset($imagePath) ? $imagePath : 'avatar.png',
-            ]);
-        } else {
+    
             $setting->update([
-                'company_name' => $request->company_name,
-                'company_email' => $request->company_email,
-                'company_phone' => $request->company_phone,
-                'notification_email' => $request->notification_email,
-                'company_address' => $request->company_address,
-                'default_currency_id' => $request->default_currency_id,
+                'store_name' => $request->store_name,
+                'store_email' => $request->store_email,
+                'store_phone' => $request->store_phone,
+                // 'notification_email' => $request->notification_email,
+                'store_address' => $request->store_address,
+                // 'default_currency_id' => $request->default_currency_id,
                 'user_id' => auth()->user()->id,
-                'default_currency_position' => $request->default_currency_position,
+                // 'default_currency_position' => $request->default_currency_position,
                 'image' => isset($imagePath) ? $imagePath : $setting->image,
             ]);
-        }
+        
         toast('Settings Updated!', 'info');
 
         return redirect()->route('system-settings.index');

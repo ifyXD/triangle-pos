@@ -38,28 +38,28 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->hasAccessToPermission('access_products'))
+            {{-- @if (auth()->user()->hasAccessToPermission('access_products'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('stocks.index') ? 'c-active' : '' }}"
                         href="{{ route('stocks.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Stocks
                     </a>
                 </li>
-            @endif
-            @if (auth()->user()->hasAccessToPermission('access_prices'))
+            @endif --}}
+            {{-- @if (auth()->user()->hasAccessToPermission('access_prices'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
                         href="{{ route('prices.index') }}">
                         <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Prices
                     </a>
                 </li>
-            @endif
-            <li class="c-sidebar-nav-item">
+            @endif --}}
+            {{-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('units.index') ? 'c-active' : '' }}"
                     href="{{ route('units.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
 @endif
@@ -85,20 +85,42 @@
             <i class="c-sidebar-nav-icon bi bi-clipboard-check" style="line-height: 1;"></i> Stock Adjustments
         </a>
         <ul class="c-sidebar-nav-dropdown-items">
-            @if (auth()->user()->hasAccessToPermission('create_adjustments'))
+            @if (auth()->user()->hasAccessToPermission('access_products'))
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('stocks.index') ? 'c-active' : '' }}"
+                    href="{{ route('stocks.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Stocks
+                </a>
+            </li>
+        @endif
+        @if (auth()->user()->hasAccessToPermission('access_prices'))
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('prices.index') ? 'c-active' : '' }}"
+                        href="{{ route('prices.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Prices
+                    </a>
+                </li>
+            @endif
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->routeIs('units.index') ? 'c-active' : '' }}"
+                    href="{{ route('units.index') }}">
+                    <i class="c-sidebar-nav-icon bi bi-calculator" style="line-height: 1;"></i> Units
+                </a>
+            </li>
+            {{-- @if (auth()->user()->hasAccessToPermission('create_adjustments'))
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('adjustments.create') ? 'c-active' : '' }}"
                         href="{{ route('adjustments.create') }}">
                         <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Create Adjustment
                     </a>
                 </li>
-            @endif
-            <li class="c-sidebar-nav-item">
+            @endif --}}
+            {{-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('adjustments.index') ? 'c-active' : '' }}"
                     href="{{ route('adjustments.index') }}">
                     <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Adjustments
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
 @endif
@@ -115,7 +137,7 @@
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('sales.create') ? 'c-active' : '' }}"
                         href="{{ route('sales.create') }}">
-                        <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Create Sale
+                        <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Bulk Entries
                     </a>
                 </li>
             </ul>
@@ -133,7 +155,7 @@
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link {{ request()->routeIs('sale-returns.index') ? 'c-active' : '' }}"
                         href="{{ route('sale-returns.index') }}">
-                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> All Sale Returns
+                        <i class="c-sidebar-nav-icon bi bi-journals" style="line-height: 1;"></i> Purge Item
                     </a>
                 </li>
             </ul>
