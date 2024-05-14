@@ -40,7 +40,7 @@
                     @php
                         $low_quantity_products = \App\Models\Stock::
                             select('id', 'product_quantity', 'product_stock_alert')
-                            // ->where('store_id', auth()->user()->store->id)
+                            ->where('store_id', auth()->user()->store->id)
                             ->whereColumn('product_quantity', '<=', 'product_stock_alert')
                             ->get();
                         echo $low_quantity_products->count();

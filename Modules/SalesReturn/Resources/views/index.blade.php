@@ -19,9 +19,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{ route('sale-returns.create') }}" class="btn btn-primary">
+                        {{-- <a href="{{ route('sale-returns.create') }}" class="btn btn-primary">
                             Add Sale Return <i class="bi bi-plus"></i>
-                        </a>
+                        </a> --}}
 
                         <hr>
 

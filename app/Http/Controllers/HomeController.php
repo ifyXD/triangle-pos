@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Figures\Product;
 use App\Models\Store;
 use App\Models\ThemeSetting;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Expense\Entities\Expense;
+use Modules\Product\Entities\Category;
 use Modules\Purchase\Entities\Purchase;
 use Modules\Purchase\Entities\PurchasePayment;
 use Modules\PurchasesReturn\Entities\PurchaseReturn;
@@ -25,13 +27,16 @@ use Modules\Setting\Entities\Unit;
 
 class HomeController extends Controller
 {
+    public $search_category = '';
 
-    public function index()
+
+    public function index(Request $request)
     {
+        $categories = Category::orderBy('category_name', 'asc')->get(); 
+        $this->search_category = $request->category_id ?? 1;
         $user = auth()->user();
 
         $salesQuery = Sale::completed();
-
 
         $saleReturnsQuery = SaleReturn::completed();
         $purchaseReturnsQuery = PurchaseReturn::completed();
@@ -73,8 +78,10 @@ class HomeController extends Controller
             SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
             ->join('products', 'sale_details.product_id', '=', 'products.id')
             ->join('prices', 'sale_details.price_id', '=', 'prices.id')
+            ->join('categories', 'products.category_id', 'categories.id')
             ->where('sale_details.store_id', auth()->user()->store->id)
             ->whereBetween('sale_details.created_at', [$firstDayOfMonth, $lastDayOfMonth])
+            ->where('categories.id', 'like', '%' . $this->search_category . '%')
             ->groupBy('products.product_name')
             ->get();
 
@@ -83,6 +90,14 @@ class HomeController extends Controller
         $totals = $sales->pluck('total')->toArray();
         // dd($salesQuery);
 
+        $total_products = count(Product::all());
+        $low_quantity_products = \App\Models\Stock::where('store_id', auth()->user()->store->id)
+                            ->whereColumn('product_quantity', '<=', 'product_stock_alert')
+                            ->get();
+        $out_of_stocks = \App\Models\Stock::where('store_id', auth()->user()->store->id)
+                            ->where('product_quantity', 0)
+                            ->get();
+
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
@@ -90,6 +105,10 @@ class HomeController extends Controller
             'profit' => $profit,
             'products' => $products,
             'totals' => $totals,
+            'total_products' => $total_products,
+            'low_quantity_products' => $low_quantity_products,
+            'out_of_stocks' => $out_of_stocks,
+            'categories' => $categories,
         ]);
         
     }
