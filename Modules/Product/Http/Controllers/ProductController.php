@@ -89,15 +89,15 @@ class ProductController extends Controller
     {
         $this->checkPermission('edit_products');
 
-        $productUnits = implode(',', $request->input('product_unit', []));
+        // $productUnits = implode(',', $request->input('product_unit', []));
 
         $product->update([
             'category_id' => $request->input('category_id'),
             'product_name' => $request->input('product_name'),
-            'product_stock_alert' => $request->input('product_stock_alert'), 
-            'product_quantity' => $request->input('product_quantity'), 
-            'product_note' => $request->input('product_note'), 
-            'product_unit' => $productUnits,
+            // 'product_stock_alert' => $request->input('product_stock_alert'), 
+            // 'product_quantity' => $request->input('product_quantity'), 
+            'product_description' => $request->input('product_note'), 
+            // 'product_unit' => $productUnits,
         ]);
 
         if ($request->has('document')) {

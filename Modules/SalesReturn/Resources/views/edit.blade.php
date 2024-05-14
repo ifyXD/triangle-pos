@@ -27,12 +27,12 @@
                             @csrf
                             @method('patch')
                             <div class="form-row">
-                                <div class="col-lg-4">
+                                {{-- <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
                                         <input type="text" id="reference" class="form-control" name="reference" required value="{{ $sale_return->reference }}" readonly>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
@@ -110,21 +110,43 @@
 @push('page_scripts')
     <script src="{{ asset('js/jquery-mask-money.js') }}"></script>
     <script>
-        grandTotal();
+         function grandTotal() {
+            var grandTotal = 0;
+
+            // Iterate through each <td> element in the table body
+            $(`#cart_product tbody .tdClass`).each(function() {
+                // Get the text content of the current <td>
+                var text = $(this).text();
+
+                // Remove the currency sign (₱) and any leading/trailing whitespace
+                var value = parseFloat(text.replace('₱', '').trim());
+
+                // Add the value to the grand total
+                if (!isNaN(value)) {
+                    grandTotal += value;
+                }
+            });
+
+
+            // Set the grand total in your desired element
+            $('#grand_total').text('₱' + grandTotal.toFixed(2));
+            $('#total_amount').val(grandTotal.toFixed(2));
+
+        };
         $(document).ready(function () {
-            $('#paid_amount').maskMoney({
-                prefix:'{{ settings()->currency->symbol }}',
-                thousands:'{{ settings()->currency->thousand_separator }}',
-                decimal:'{{ settings()->currency->decimal_separator }}',
-                allowZero: true,
-            });
+            // $('#paid_amount').maskMoney({
+            //     prefix:'{{ settings()->currency->symbol }}',
+            //     thousands:'{{ settings()->currency->thousand_separator }}',
+            //     decimal:'{{ settings()->currency->decimal_separator }}',
+            //     allowZero: true,
+            // });
 
-            $('#paid_amount').maskMoney('mask');
+            // $('#paid_amount').maskMoney('mask');
 
-            $('#sale-return-form').submit(function () {
-                var paid_amount = $('#paid_amount').maskMoney('unmasked')[0];
-                $('#paid_amount').val(paid_amount);
-            });
+            // $('#sale-return-form').submit(function () {
+            //     var paid_amount = $('#paid_amount').maskMoney('unmasked')[0];
+            //     $('#paid_amount').val(paid_amount);
+            // });
 
 
             $('#editSaveBtnReturn').click(function() {
@@ -135,8 +157,7 @@
                 let payment_method = $('#payment_method').val();
                 let note = $('#note').val();
                 let status = $('#status').val();
-                let date = $('#date').val();
-                let reference = $('#reference').val();
+                let date = $('#date').val(); 
 
                 var cartDetails = [];
 
@@ -144,18 +165,19 @@
                     // Extract data from the current <tr>
                     var productId = $(this).data('product-id');
                     var productName = $(this).find('td:eq(0)').text();
-                    var pricePerProductUnit = $(this).find('.price-per-product-unit').val();
-                    var pricePerUnit = $(this).find('select.price-per-unit').find(':selected')
-                        .text();
+                    var price_id = $(this).data('price_id');
+                    var unit_id = $(this).data('unit_id');
+                    var stock_id = $(this).data('stock_id');
                     var quantity = $(this).find('.quantity').val();
                     var subTotalVal = $(this).find('.sub-total').text();
                     var subTotal = parseFloat(subTotalVal.replace('₱', '').replace(',', ''));
                     // Create an object to represent the cart detail
                     var cartDetail = {
                         productId: productId,
+                        price_id: price_id,
+                        unit_id: unit_id,
+                        stock_id: stock_id,
                         productName: productName,
-                        pricePerProductUnit: pricePerProductUnit,
-                        pricePerUnit: pricePerUnit,
                         quantity: quantity,
                         subTotal: subTotal
                     };
@@ -176,8 +198,7 @@
                         payment_method: payment_method,
                         note: note,
                         status: status,
-                        date: date,
-                        reference: reference,
+                        date: date, 
                     },
                     success: function(response) {
                         // Success callback

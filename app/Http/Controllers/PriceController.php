@@ -8,6 +8,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Modules\Product\DataTables\PriceDataTable;
 use Modules\Setting\Entities\Unit;
 
@@ -48,9 +49,22 @@ class PriceController extends Controller
     public function store(Request $request, $id)
     {
         abort_if(Gate::denies('access_prices'), 403);
+
+
+        $request->validate([
+            'product_id' => 'required',
+            'unit_id' => [
+                'required',
+                Rule::unique('prices')->where(function ($query) use ($request) {
+                    return $query->where('product_id', $request->product_id)
+                        ->where('unit_id', $request->unit_id);
+                }),
+            ],
+        ]);
+
         Price::create([
             'product_id' => $request->product_id,
-            'unit_id' => $request->product_unit,
+            'unit_id' => $request->unit_id,
             'product_cost' => $request->product_cost,
             'product_price' => $request->product_price,
             'stock_id' => $request->stock_id,

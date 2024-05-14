@@ -73,7 +73,7 @@
                 <tr>
                     <td colspan="2">
                         {{ $saleDetail->product->product_name }}
-                        ({{ $saleDetail->quantity }} x {{ $saleDetail->price }})
+                        ({{ $saleDetail->quantity }} x {{ $saleDetail->product_cost }})
                     </td>
                     <td style="text-align:right;vertical-align:bottom">{{ $saleDetail->sub_total*100 }}.00</td>
                 </tr>

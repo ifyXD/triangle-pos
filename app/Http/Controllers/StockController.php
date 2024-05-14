@@ -8,6 +8,7 @@ use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Modules\Product\DataTables\StockDataTable;
 use Modules\Setting\Entities\Unit;
 
@@ -32,6 +33,18 @@ class StockController extends Controller
     {
         abort_if(Gate::denies('access_products'), 403);
 
+
+        $request->validate([
+            'product_id' => 'required',
+            'unit_id' => [
+                'required',
+                Rule::unique('stocks')->where(function ($query) use ($request) {
+                    return $query->where('product_id', $request->product_id)
+                        ->where('unit_id', $request->unit_id);
+                }),
+            ],
+        ]);
+
         Stock::create([
             'product_id' => $request->product_id,
             'unit_id' => $request->unit_id,
@@ -51,7 +64,7 @@ class StockController extends Controller
         $data = Product::find($product_id);
         $stock_id = Stock::find($id)->unit_id;
         $stock = Stock::find($id);
-        return view('stocks.partials.edit', compact('id','stock_id', 'data', 'units','stock'));
+        return view('stocks.partials.edit', compact('id', 'stock_id', 'data', 'units', 'stock'));
 
         // return redirect('products/show/' . $id);
     }
@@ -66,7 +79,7 @@ class StockController extends Controller
             'product_stock_alert' => $request->product_stock_alert,
         ]);
 
-        
+
 
         return redirect('stocks/show/' . $id)->with('success', 'Price Updated!');
     }
@@ -76,19 +89,19 @@ class StockController extends Controller
 
         $product = Product::find($id);
         $stocks = DB::table('stocks')
-        ->select([
-            'stocks.product_quantity as product_quantity',
-            'stocks.id as stock_id',
-            'units.id as unit_id',
-            'units.name as name',
-            'units.short_name as short_name'
-        ])
-        ->join('units', 'stocks.unit_id', 'units.id')
-        ->where('stocks.product_id', $id)
-        ->get();
+            ->select([
+                'stocks.product_quantity as product_quantity',
+                'stocks.id as stock_id',
+                'units.id as unit_id',
+                'units.name as name',
+                'units.short_name as short_name'
+            ])
+            ->join('units', 'stocks.unit_id', 'units.id')
+            ->where('stocks.product_id', $id)
+            ->get();
 
-    return view('stocks.partials.show', compact('id', 'product', 'stocks'));
-}
+        return view('stocks.partials.show', compact('id', 'product', 'stocks'));
+    }
     public function destroy($id)
     {
         abort_if(Gate::denies('access_products'), 403);

@@ -53,7 +53,7 @@
                                     <div class="input-group d-flex justify-content-center">
                                         <input 
                                         {{-- wire:model="qty"   --}}
-                                        value="1"
+                                        value="{{$cart_item->qty}}"
                                         {{-- wire:change="updateQuantity({{ $cart_item->id }}, {{ $qty }})" --}}
                                         onchange="quantity({{$cart_item->id}},{{$cart_item->options->price_value}});"
                                         type="number" class="form-control quantity" 
@@ -211,7 +211,7 @@
                     quantity: quantity,
                     subTotal: subTotal
                 };
-                grand_total
+                
                 // Push the cart detail object into the array
                 cartDetails.push(cartDetail);
             });

@@ -82,7 +82,7 @@
                                 </div>
                             </div> --}}
 
-                            <div class="form-row">
+                            {{-- <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_quantity">Quantity <span class="text-danger">*</span></label>
@@ -95,7 +95,7 @@
                                         <input type="number" class="form-control" name="product_stock_alert" required value="{{ $product->product_stock_alert }}" min="0">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-row">
                                 {{-- <div class="col-md-4">
@@ -114,7 +114,7 @@
                                         </select>
                                     </div>
                                 </div> --}}
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="product_unit">Unit <i class="bi bi-question-circle-fill text-info" data-toggle="tooltip" data-placement="top" title="This short text will be placed after Product Quantity."></i> <span class="text-danger">*</span></label>
                                         <select class="form-control" multiple name="product_unit[]" id="product_unit">
@@ -135,7 +135,7 @@
                                         
                                         
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="form-group">
                                 <label for="product_note">Note</label>

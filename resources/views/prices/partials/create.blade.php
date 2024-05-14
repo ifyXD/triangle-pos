@@ -38,7 +38,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="product_name">Units <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="product_unit" id="product_unit" required>
+                                        <select class="form-control" name="unit_id" id="product_unit" required>
                                             <option value="" selected disabled>Select Unit</option>
                                             @foreach ($unitArray as $unit)
                                                     <option data-stock_id="{{$unit['stock_id']}}" value="{{ $unit['id'] }}">{{ $unit['name']. ' | '. $unit['short_name']}}</option>

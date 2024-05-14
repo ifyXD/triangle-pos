@@ -144,7 +144,13 @@ class SalesReturnController extends Controller
     public function edit(SaleReturn $sale_return) {
         // abort_if(Gate::denies('edit_sale_returns'), 403);
         $this->checkPermission('edit_sale_returns');
-        $sale_return_details = $sale_return->saleReturnDetails;
+        $sale_return_details = SaleReturnDetail::join('products', 'sale_return_details.product_id', 'products.id')
+        ->join('prices', 'sale_return_details.price_id', 'prices.id')
+        ->join('units', 'sale_return_details.unit_id', 'units.id')
+        ->join('stocks', 'sale_return_details.stock_id', 'stocks.id')
+        ->where('sale_return_details.sale_return_id', $sale_return->id)
+        ->get();
+
 
         Cart::instance('sale_return')->destroy();
 
@@ -169,18 +175,23 @@ class SalesReturnController extends Controller
 
 
             $cart->add([
-                'id'      => $sale_return_detail->product_id,
+                'id'      => $sale_return_detail->id,
                 'name'    => $sale_return_detail->product_name,
                 'qty'     => $sale_return_detail->quantity,
-                'price'   => $sale_return_detail->price *100,
+                'price'   => $sale_return_detail->product_price,
                 'weight'  => 1,
                 'options' => [
                     // 'product_discount' => $sale_return_detail->product_discount_amount,
                     // 'product_discount_type' => $sale_return_detail->product_discount_type,
-                    'sub_total'   => $sale_return_detail->sub_total,
-                    'code'        => $sale_return_detail->product_code,
-                    'stock'       => Product::findOrFail($sale_return_detail->product_id)->product_quantity,
-                    'product_tax' => $sale_return_detail->product_tax_amount,
+                    'selected_quantity' => 1,
+                    'sub_total'   => $sale_return_detail->product_price*$sale_return_detail->product_quantity, 
+                    'stock'       => $sale_return_detail->product_quantity,
+                    'product_id'    => $sale_return_detail->product_id,
+                    'unit'        => $sale_return_detail->name,
+                    'unit_id'     => $sale_return_detail->unit_id,
+                    'price_value'    => $sale_return_detail->product_price,
+                    'price_id'       => $sale_return_detail->price_id,
+                    // 'product_tax' => $sale_return_detail->product_tax_amount,
                     'unit_price'  => $sale_return_detail->unit_price,
                     'prices'                => $priceOptions, // Add prices options here
                 ]
@@ -205,15 +216,15 @@ class SalesReturnController extends Controller
                 $payment_status = 'Paid';
             }
 
-            foreach ($sale_return->saleReturnDetails as $sale_return_detail) {
-                if ($sale_return->status == 'Completed') {
-                    $product = Product::findOrFail($sale_return_detail->product_id);
-                    $product->update([
-                        'product_quantity' => $product->product_quantity - $sale_return_detail->quantity
-                    ]);
-                }
-                $sale_return_detail->delete();
-            }
+            // foreach ($sale_return->saleReturnDetails as $sale_return_detail) {
+            //     if ($sale_return->status == 'Completed') {
+            //         $product = Product::findOrFail($sale_return_detail->product_id);
+            //         $product->update([
+            //             'product_quantity' => $product->product_quantity - $sale_return_detail->quantity
+            //         ]);
+            //     }
+            //     $sale_return_detail->delete();
+            // }
 
             $sale_return->update([
                 'date' => $request->date, 
@@ -233,23 +244,18 @@ class SalesReturnController extends Controller
             foreach ($request->cartDetails as $cart_item) {
                 SaleReturnDetail::create([
                     'sale_return_id' => $sale_return->id,
-                    'product_id' => $cart_item['productId'],
-                    'product_name' => $cart_item['productName'],
-                    // 'product_code' => $cart_item->options->code,
+                    'product_id' => $cart_item['productId'],  
                     'quantity' => $cart_item['quantity'],
-                    'price' => $cart_item['pricePerProductUnit'],
-                    'unit_price' => $cart_item['pricePerUnit'],
-                    'sub_total' => $cart_item['subTotal'] * 100,
-                    // 'product_discount_amount' => $cart_item->options->product_discount * 100,
-                    // 'product_discount_type' => $cart_item->options->product_discount_type,
-                    // 'product_tax_amount' => $cart_item->options->product_tax * 100,
-                    'user_id' => auth()->user()->id,
+                    'price_id' => $cart_item['price_id'], 
+                    'unit_id' => $cart_item['unit_id'], 
+                    'store_id' => auth()->user()->store->id,
+                    'stock_id' => $cart_item['stock_id'], 
                 ]);
 
-                if ($request->status == 'Completed') {
-                    $product = Product::findOrFail($cart_item['productId']);
+                if ($request->status == 'Shipped' || $request->status == 'Completed') {
+                    $product = Stock::findOrFail($cart_item['stock_id']);
                     $product->update([
-                        'product_quantity' => $product->product_quantity + $cart_item['quantity']
+                        'product_quantity' => $product->product_quantity - $cart_item['quantity']
                     ]);
                 }
             }

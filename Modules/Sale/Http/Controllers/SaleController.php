@@ -132,6 +132,8 @@ class SaleController extends Controller
         // $sale_details = $sale->saleDetails;
         $sale_details = SaleDetails::join('products', 'sale_details.product_id', 'products.id')
             ->join('prices', 'sale_details.price_id', 'prices.id')
+            ->join('units', 'sale_details.unit_id', 'units.id')
+            ->join('stocks', 'sale_details.stock_id', 'stocks.id')
             ->where('sale_details.sale_id', $sale->id)
             ->get();
 
@@ -169,8 +171,12 @@ class SaleController extends Controller
                     // 'product_discount_type' => $sale_detail->product_discount_type,
                     'selected_quantity' => 1,
                     'sub_total'   => $sale_detail->sub_total,
-                    'stock'       => Stock::findOrFail($sale_detail->product_id)->product_quantity,
-                    // 'unit'        => $product['product_unit'],
+                    'stock'       => $sale_detail->product_quantity,
+                    'product_id'    => $sale_detail->product_id,
+                    'unit'        => $sale_detail->name,
+                    'unit_id'     => $sale_detail->unit_id,
+                    'price_value'    => $sale_detail->product_price,
+                    'price_id'       => $sale_detail->price_id,
                     'code'        => $sale_detail->product_code,
                     // 'product_tax' => $sale_detail->product_tax_amount,
                     'unit_price'  => $sale_detail->unit_price,
@@ -235,6 +241,7 @@ class SaleController extends Controller
                     'price_id' => $cart_item['price_id'],
                     'unit_id' => $cart_item['unit_id'], 
                     'store_id' => auth()->user()->store->id,
+                    'stock_id' => $cart_item['stock_id'], 
                 ]);
 
                 if ($request->status == 'Shipped' || $request->status == 'Completed') {
