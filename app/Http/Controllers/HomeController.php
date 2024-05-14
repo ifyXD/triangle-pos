@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Figures\Product;
+use App\Models\Stock;
 use App\Models\Store;
 use App\Models\ThemeSetting;
 use App\Models\User;
@@ -32,7 +33,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::orderBy('category_name', 'asc')->get(); 
+        $categories = Category::orderBy('category_name', 'asc')->get();
         $this->search_category = $request->category_id ?? 1;
         $user = auth()->user();
 
@@ -69,12 +70,12 @@ class HomeController extends Controller
         $lastDayOfMonth = Carbon::now()->endOfMonth();
 
         // Fetch sales data for the current month
-        $sales = auth()->user()->hasRole('Super Admin')? SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
+        $sales = auth()->user()->hasRole('Super Admin') ? SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
             ->join('products', 'sale_details.product_id', '=', 'products.id')
-            ->join('prices', 'sale_details.price_id', '=', 'prices.id') 
+            ->join('prices', 'sale_details.price_id', '=', 'prices.id')
             ->whereBetween('sale_details.created_at', [$firstDayOfMonth, $lastDayOfMonth])
             ->groupBy('products.product_name')
-            ->get() : 
+            ->get() :
             SaleDetails::selectRaw('products.product_name, SUM(prices.product_price * sale_details.quantity) AS total')
             ->join('products', 'sale_details.product_id', '=', 'products.id')
             ->join('prices', 'sale_details.price_id', '=', 'prices.id')
@@ -91,13 +92,17 @@ class HomeController extends Controller
         // dd($salesQuery);
 
         $total_products = count(Product::all());
-        $low_quantity_products = \App\Models\Stock::where('store_id', auth()->user()->store->id)
-                            ->whereColumn('product_quantity', '<=', 'product_stock_alert')
-                            ->get();
-        $out_of_stocks = \App\Models\Stock::where('store_id', auth()->user()->store->id)
-                            ->where('product_quantity', 0)
-                            ->get();
 
+        $low_quantity_products = auth()->user()->hasRole('Super Admin') ? Stock::whereColumn('product_quantity', '<=', 'product_stock_alert')
+            ->get() :  Stock::where('store_id', auth()->user()->store->id)
+            ->whereColumn('product_quantity', '<=', 'product_stock_alert')
+            ->get();
+        $out_of_stocks = auth()->user()->hasRole('Super Admin') ? Stock::where('product_quantity', 0)
+            ->get() : Stock::where('store_id', auth()->user()->store->id)
+            ->where('product_quantity', 0)
+            ->get();
+
+        $users = count(User::where('id', '!=',auth()->user()->id)->get());
         return view('home', [
             'revenue' => $revenue,
             'sale_returns' => $saleReturns / 100,
@@ -109,8 +114,8 @@ class HomeController extends Controller
             'low_quantity_products' => $low_quantity_products,
             'out_of_stocks' => $out_of_stocks,
             'categories' => $categories,
+            'users' => $users,
         ]);
-        
     }
     public function storename()
     {
@@ -273,7 +278,7 @@ class HomeController extends Controller
                     'store_id' => auth()->user()->store->id
                 ],
             ];
-    
+
             // Loop through the unit data and create records
             foreach ($units as $unit) {
                 Unit::create($unit);
@@ -347,7 +352,7 @@ class HomeController extends Controller
             );
         }
 
-       
+
 
 
         // You can return a response if needed

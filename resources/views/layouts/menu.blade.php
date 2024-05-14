@@ -281,7 +281,13 @@
 @endif
 
 @can('access_user_management')
-    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('roles*') ? 'c-show' : '' }}">
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link {{ request()->routeIs('users*') ? 'c-active' : '' }}"
+            href="{{ route('users.index') }}">
+            <i class="c-sidebar-nav-icon bi bi-person-lines-fill" style="line-height: 1;"></i> All Users
+        </a>
+    </li>
+    {{-- <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('roles*') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-people" style="line-height: 1;"></i> User Management
         </a>
@@ -298,31 +304,34 @@
                     <i class="c-sidebar-nav-icon bi bi-person-lines-fill" style="line-height: 1;"></i> All Users
                 </a>
             </li>
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('roles*') ? 'c-active' : '' }}"
-                    href="{{ route('roles.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-key" style="line-height: 1;"></i> Roles & Permissions
-                </a>
-            </li>
+            @if (!auth()->user()->hasRole('Super Admin'))
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('roles*') ? 'c-active' : '' }}"
+                        href="{{ route('roles.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-key" style="line-height: 1;"></i> Roles & Permissions
+                    </a>
+                </li>
+            @endif
         </ul>
-    </li>
+    </li> --}}
 @endcan
 {{-- <span class="kami-kami-span">Settings</span> --}}
-<li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
-    </a>
-    @if (auth()->user()->hasRole('Super Admin'))
-        <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('currencies*') ? 'c-active' : '' }}"
-                    href="{{ route('currencies.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i> Currencies
-                </a>
-            </li>
-        </ul>
-    @endif
-    {{-- @can('access_settings')
+@if (!auth()->user()->hasRole('Super Admin'))
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+            <i class="c-sidebar-nav-icon bi bi-gear" style="line-height: 1;"></i> Settings
+        </a>
+        @if (auth()->user()->hasRole('Super Admin'))
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('currencies*') ? 'c-active' : '' }}"
+                        href="{{ route('currencies.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i> Currencies
+                    </a>
+                </li>
+            </ul>
+        @endif
+        {{-- @can('access_settings')
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('settings*') ? 'c-active' : '' }}"
@@ -332,15 +341,16 @@
             </li>
         </ul>
     @endcan --}}
-    {{-- user settings --}}
-    @if (!auth()->user()->hasRole('Super Admin'))
-        <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->routeIs('system-settings*') ? 'c-active' : '' }}"
-                    href="{{ route('system-settings.index') }}">
-                    <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i>System Settings
-                </a>
-            </li>
-        </ul>
-    @endif
-</li>
+        {{-- user settings --}}
+        @if (!auth()->user()->hasRole('Super Admin'))
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link {{ request()->routeIs('system-settings*') ? 'c-active' : '' }}"
+                        href="{{ route('system-settings.index') }}">
+                        <i class="c-sidebar-nav-icon bi bi-cash-stack" style="line-height: 1;"></i>System Settings
+                    </a>
+                </li>
+            </ul>
+        @endif
+    </li>
+@endif
