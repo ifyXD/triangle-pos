@@ -26,12 +26,12 @@
                                 <div class="col-lg-12">
                                     <label for="image">Profile Image <span class="text-danger">*</span></label>
                                     <div class="form-group text-center">
-                                        @if (auth()->user()->setting && auth()->user()->setting->image)
+                                        @if (auth()->user()->store && auth()->user()->store->image)
                                             <img style="width: 100px; height: 100px; object-fit: cover;"
                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
-                                                src="{{ auth()->user()->setting->image == 'avatar.png'
+                                                src="{{ auth()->user()->store->image == 'avatar.png'
                                                     ? asset('images/logo.png')
-                                                    : asset('storage/' . auth()->user()->setting->image) }}"
+                                                    : asset('storage/' . auth()->user()->store->image) }}"
                                                 alt="Profile Image">
                                         @else
                                             <img style="width: 100px; height: 100px;"
@@ -45,24 +45,24 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
-                                            value="{{ auth()->user()->id }}" required>
-                                        <label for="company_name">Store Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="company_name"
-                                            value="{{ $settings->company_name ?? null }}" required>
+                                            value="{{ auth()->user()->store->user_id }}" required>
+                                        <label for="store_name">Store Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="store_name"
+                                            value="{{ auth()->user()->store->store_name ?? null }}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="company_email">Store Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="company_email"
-                                            value="{{ $settings->company_email ?? null }}">
+                                        <label for="store_email">Store Email <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="store_email"
+                                            value="{{ auth()->user()->store->store_email ?? null }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="company_phone">Phone <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="company_phone"
-                                            value="{{ $settings->company_phone ?? null }}">
+                                        <label for="store_phone">Phone <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="store_phone"
+                                            value="{{ auth()->user()->store->store_phone ?? null }}">
                                     </div>
                                 </div>
                             </div>
@@ -101,23 +101,23 @@
                                         </div>
                                     </div> --}}
 
-                                <div class="col-lg-4">
+                                {{-- <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="notification_email">Notification Email <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="notification_email"
                                             value="{{ optional($settings)->notification_email }}">
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
 
                             <div class="form-row">
                                 <div class="col-lg-5">
                                     <div class="form-group">
-                                        <label for="company_address">Address <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="company_address"
-                                            value="{{ optional($settings)->company_address }}">
+                                        <label for="store_address">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="store_address"
+                                            value="{{ auth()->user()->store->store_address }}">
                                     </div>
                                 </div>
                             </div>
