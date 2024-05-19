@@ -163,13 +163,13 @@ class SaleReturnPaymentsController extends Controller
         $qty = $stock->product_quantity + $sale_return_details->quantity;
         $stock->update([
             'product_quantity' => $qty,
-            
+
         ]);
 
         $sale_return_details->update([
             'return_status' => 'return'
         ]);
- 
+
         toast('Stock/s Return Successfully!', 'success');
 
         return redirect()->back();
@@ -178,18 +178,16 @@ class SaleReturnPaymentsController extends Controller
     {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
-        $sale_return_details = SaleReturnDetail::where('sale_return_id', $id)->get();
+        $sale_return_details = SaleReturnDetail::find($id);
 
-        foreach ($sale_return_details as $item) {
-            ProductLoss::create([
-                'sale_return_id' => $id,
-                'product_id' => $item->product_id,
-                'stock_id' => $item->stock_id,
-                'store_id' => auth()->user()->store->id,
-            ]);
-        }
+        ProductLoss::create([
+            'sale_return_id' => $id,
+            'product_id' => $sale_return_details->product_id,
+            'stock_id' => $sale_return_details->stock_id,
+            'store_id' => auth()->user()->store->id,
+        ]);
 
-        SaleReturn::findorFail($id)->update([
+        SaleReturnDetail::findorFail($id)->update([
             'return_status' => 'loss'
         ]);
         toast('Saved as Product Loss!', 'success');

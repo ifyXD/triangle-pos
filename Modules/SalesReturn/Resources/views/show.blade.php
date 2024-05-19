@@ -61,40 +61,41 @@
                         <div class="table-responsive-sm">
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th class="align-middle">Product</th>
-                                    <th class="align-middle">Net Unit Price</th>
-                                    <th class="align-middle">Quantity</th>
-                                    {{-- <th class="align-middle">Discount</th>
+                                    <tr>
+                                        <th class="align-middle">Product</th>
+                                        <th class="align-middle">Net Unit Price</th>
+                                        <th class="align-middle">Quantity</th>
+                                        {{-- <th class="align-middle">Discount</th>
                                     <th class="align-middle">Tax</th> --}}
-                                    <th class="align-middle">Sub Total</th>
-                                    <th class="align-middle">Status</th>
-                                    <th class="align-middle">Action</th>
-                                </tr>
+                                        <th class="align-middle">Sub Total</th>
+                                        <th class="align-middle">Status</th>
+                                        <th class="align-middle">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @php
-                                         $total_val = 0;
+                                        $total_val = 0;
                                     @endphp
-                                @foreach($sale_return->saleReturnDetails as $item)
-                                @php
-                                    $total_val += $item->price->product_price * $item->quantity;
-                                @endphp
-                                    <tr>
-                                        <td class="align-middle">
-                                            {{ $item->product->product_name }}<br>
-                                            {{-- <span class="badge badge-success">
+                                    @foreach ($sale_return->saleReturnDetails as $item)
+                                        @php
+                                            $total_val += $item->price->product_price * $item->quantity;
+                                        @endphp
+                                        <tr>
+                                            <td class="align-middle">
+                                                {{ $item->product->product_name }}<br>
+                                                {{-- <span class="badge badge-success">
                                                 {{ $item->product_code }}
                                             </span> --}}
-                                        </td>
+                                            </td>
 
-                                        <td class="align-middle">{{ format_currency($item->price->product_price) }} / {{$item->unit->name}}</td>
+                                            <td class="align-middle">{{ format_currency($item->price->product_price) }} /
+                                                {{ $item->unit->name }}</td>
 
-                                        <td class="align-middle">
-                                            {{ $item->quantity }}
-                                        </td>
+                                            <td class="align-middle">
+                                                {{ $item->quantity }}
+                                            </td>
 
-                                        {{-- <td class="align-middle">
+                                            {{-- <td class="align-middle">
                                             {{ format_currency($item->product_discount_amount) }}
                                         </td>
 
@@ -102,30 +103,53 @@
                                             {{ format_currency($item->product_tax_amount) }}
                                         </td> --}}
 
-                                        <td class="align-middle">
-                                            {{ format_currency($item->price->product_price*$item->quantity) }}
-                                        </td>
+                                            <td class="align-middle">
+                                                {{ format_currency($item->price->product_price * $item->quantity) }}
+                                            </td>
 
-                                        <td class="align-middle">
-                                            {{ $item->return_status }}
-                                        </td>
-                                        <td class="align-middle">
-                                            <a class="btn btn-primary" @disabled(true) onclick="return confirm('Are you sure you want to return this to stocks?')" href="{{ url('stock-update-return-stock', $item->id) }}">Return to stocks</a>
-                                            <a class="btn btn-danger" onclick="return confirm('Are you sure you want to saved this as product loss?')" href="{{ route('product-loss.store', $item->id) }}">Product Loss</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="align-middle">
+                                                {{ $item->return_status }}
+                                            </td>
+                                            <td class="align-middle">
+                                                @if ($item->return_status == null)
+                                                    <a class="btn btn-primary"
+                                                        onclick="{{ $item->return_status == 'return' ? 'return false;' : 'return confirm("Are you sure you want to return this to stocks?")' }}"
+                                                        href="{{ url('stock-update-return-stock', $item->id) }}">Return
+                                                        to
+                                                        stocks</a>
+                                                    <a class="btn btn-danger"
+                                                        onclick="return confirm('Are you sure you want to saved this as product loss?')"
+                                                        href="{{ route('product-loss.store', $item->id) }}">Product
+                                                        Loss</a>
+                                                @else
+                                                    @if ($item->return_status == 'return')
+                                                        <a class="btn btn-primary disabled"
+                                                            onclick="{{ $item->return_status == 'return' ? 'return false;' : 'return confirm("Are you sure you want to return this to stocks?")' }}"
+                                                            href="{{ url('stock-update-return-stock', $item->id) }}">Return
+                                                            to
+                                                            stocks</a>
+                                                    @else
+                                                        <a class="btn btn-danger"
+                                                            onclick="return confirm('Are you sure you want to saved this as product loss?')"
+                                                            href="{{ route('product-loss.store', $item->id) }}">Product
+                                                            Loss</a>
+                                                    @endif
+                                                @endif
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-sm-5 ml-md-auto">
                                 <table class="table">
-                                    <tbody> 
-                                    <tr>
-                                        <td class="left"><strong>Grand Total</strong></td>
-                                        <td class="right"><strong>{{ format_currency($total_val) }}</strong></td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td class="left"><strong>Grand Total</strong></td>
+                                            <td class="right"><strong>{{ format_currency($total_val) }}</strong></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -136,4 +160,3 @@
         </div>
     </div>
 @endsection
-
