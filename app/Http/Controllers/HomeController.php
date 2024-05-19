@@ -22,6 +22,7 @@ use Modules\Sale\Entities\Sale;
 use Modules\Sale\Entities\SaleDetails;
 use Modules\Sale\Entities\SalePayment;
 use Modules\SalesReturn\Entities\SaleReturn;
+use Modules\SalesReturn\Entities\SaleReturnDetail;
 use Modules\SalesReturn\Entities\SaleReturnPayment;
 use Modules\Setting\Entities\Setting;
 use Modules\Setting\Entities\Unit;
@@ -33,6 +34,27 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+
+        if (!auth()->user()->hasRole('Super Admin')) {
+            $saleReturnDetailsData = SaleReturnDetail::where('sale_return_details.store_id', auth()->user()->store->id)
+                ->join('prices', 'sale_return_details.price_id', '=', 'prices.id')
+                ->select('sale_return_details.sale_return_id', 'prices.product_price', 'sale_return_details.quantity')
+                ->get();
+
+            // Group by sale_return_id and calculate the total value
+            $totalValues = $saleReturnDetailsData->groupBy('sale_return_id')->map(function ($group) {
+                return $group->sum(function ($item) {
+                    return $item->product_price * $item->quantity;
+                });
+            });
+
+            foreach ($totalValues as $saleReturnId => $totalValue) {
+                SaleReturn::where('id', $saleReturnId)->update(['total_amount' => $totalValue]);
+            }
+        }
+
+        // Update the SaleReturn table with the calculated total values
+       
         $categories = Category::orderBy('category_name', 'asc')->get();
         $this->search_category = $request->category_id ?? 1;
         $user = auth()->user();
@@ -91,7 +113,13 @@ class HomeController extends Controller
         $totals = $sales->pluck('total')->toArray();
         // dd($salesQuery);
 
-        $total_products = count(Product::all());
+        if (Auth::user()->hasRole('Super Admin')) {
+            // If the user is a Super Admin, get all products
+            $total_products = Product::count();
+        } else {
+            // If the user is not a Super Admin, get products for the user's store
+            $total_products = Product::where('store_id', Auth::user()->store->id)->count();
+        }
 
         $low_quantity_products = auth()->user()->hasRole('Super Admin') ? Stock::whereColumn('product_quantity', '<=', 'product_stock_alert')
             ->get() :  Stock::where('store_id', auth()->user()->store->id)
@@ -105,15 +133,27 @@ class HomeController extends Controller
 
 
         $currentDate = Carbon::now('Asia/Manila')->toDateString();
-        $totalAmount = Sale::whereDate('date', $currentDate)->sum('total_amount');
-        
+        $totalAmount = auth()->user()->hasRole('Super Admin') ? Sale::whereDate('date', $currentDate)->sum('total_amount') : Sale::where('store_id', auth()->user()->store->id)->whereDate('date', $currentDate)->sum('total_amount');
+
         $users = count(User::where('id', '!=', auth()->user()->id)->get());
-       
-        
-       
+
+
+        $currentMonth = Carbon::now('Asia/Manila')->month;
+        $currentYear = Carbon::now('Asia/Manila')->year;
+
+        // Calculate the total amount for the current month
+        $monthlyTotalAmount = auth()->user()->hasRole('Super Admin') ? Sale::whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->sum('total_amount') :  Sale::where('store_id', auth()->user()->store->id)->whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+
+            ->sum('total_amount');
+
+        // echo $monthlyTotalAmount;
+
         return view('home', [
             'revenue' => $revenue,
-            'sale_returns' => $saleReturns / 100,
+            'sale_returns' => $saleReturns,
             // 'purchase_returns' => $purchaseReturns / 100,
             'profit' => $profit,
             'products' => $products,
@@ -124,6 +164,7 @@ class HomeController extends Controller
             'categories' => $categories,
             'users' => $users,
             'totalAmount' => $totalAmount,
+            'monthlyTotalAmount' => $monthlyTotalAmount / 100,
         ]);
     }
     public function storename()
