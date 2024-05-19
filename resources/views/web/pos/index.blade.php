@@ -22,7 +22,7 @@
             <div class="feature-content feature-content-destroyer">
                 <div class="content content-change">
                     <img class="image-pachuychuy"
-                         src="{{ asset('images/landingpage/tae.png') }}"
+                         src="{{ asset('images/landingpage/pos.png') }}"
                          alt="pos-image">
                 </div>
             </div>
@@ -57,4 +57,13 @@
 
         </div>
     </section>
+    <style>
+        .image-pachuychuy {
+    transition: transform 0.3s ease;
+}
+
+.image-pachuychuy:hover {
+    transform: scale(1.1);
+}
+    </style>
 @endsection

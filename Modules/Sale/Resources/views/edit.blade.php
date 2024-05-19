@@ -35,9 +35,9 @@
                                             value="{{ $sale->reference }}" readonly>
                                     </div> --}}
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="from-group">
-                                        <div class="form-group">
+                                <div class="col-md-4 ">
+                                    <div class="form-group m-auto">
+                                        <div class="form-group m-auto">
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>
                                                 @foreach (\Modules\People\Entities\Customer::when(

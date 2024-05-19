@@ -34,10 +34,10 @@
                                     <th>City</th>
                                     <td>{{ $customer->city }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th>Country</th>
                                     <td>{{ $customer->country }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>Address</th>
                                     <td>{{ $customer->address }}</td>

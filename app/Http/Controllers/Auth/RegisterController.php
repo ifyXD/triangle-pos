@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'customer_email' => 'anonymous@example.com',
             'customer_phone' => '123456789',
             'city' => 'Blank City',
-            'country' => 'Blank Country',
+            // 'country' => 'Blank Country',
             'address' => 'Blank Address',
             'user_id' => $user->id,
             'created_at' => now(),

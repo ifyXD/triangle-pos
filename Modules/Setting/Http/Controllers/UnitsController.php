@@ -45,7 +45,7 @@ class   UnitsController extends Controller
             'short_name'      => $request->short_name,
             'operator'        => $request->operator,
             'operation_value' => $request->operation_value,
-            'user_id' => auth()->user()->id,
+            'store_id' => auth()->user()->store->id,
         ]);
 
         toast('Unit Created!', 'success');
@@ -72,6 +72,8 @@ class   UnitsController extends Controller
             'short_name'      => $request->short_name,
             'operator'        => $request->operator,
             'operation_value' => $request->operation_value,
+            'store_id' => auth()->user()->store->id,
+
         ]);
 
         toast('Unit Updated!', 'info');

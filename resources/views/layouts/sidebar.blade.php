@@ -16,7 +16,7 @@
                 src="{{ auth()->user()->hasRole('Super Admin') ? asset('images/logo.png') : $logoPath }}" alt="Site Logo"
                 width="200"> --}}
             <h4 class="c-sidebar-brand-full text-light">
-                {{ auth()->user()->hasRole('Super Admin') ? 'PUBLIC MARKET' : Str::limit(strtoupper(auth()->user()->store->store_name), 12, '') }}
+                {{ auth()->user()->hasRole('Super Admin') ? 'PUBLIC MARKET' : (auth()->user()->store ? Str::limit(strtoupper(auth()->user()->store->store_name), 12, '') : 'STORE NOT FOUND') }}
             </h4>
             <img class="c-sidebar-brand-minimized" src="{{ asset('images/logo-minimize.png') }}" alt="Site Logo"
                 width="40">

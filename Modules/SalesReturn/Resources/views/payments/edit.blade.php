@@ -23,7 +23,7 @@
                         <button class="btn btn-primary">Update Payment <i class="bi bi-check"></i></button>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-row">
@@ -31,7 +31,7 @@
                                     <div class="form-group">
                                         <label for="reference">Reference <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="reference" required readonly value="{{ $saleReturnPayment->reference }}">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">

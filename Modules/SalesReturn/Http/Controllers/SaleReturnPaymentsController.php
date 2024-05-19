@@ -39,7 +39,7 @@ class SaleReturnPaymentsController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_return_id' => 'required',
@@ -49,7 +49,7 @@ class SaleReturnPaymentsController extends Controller
         DB::transaction(function () use ($request) {
             SaleReturnPayment::create([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_return_id' => $request->sale_return_id,
@@ -96,7 +96,7 @@ class SaleReturnPaymentsController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_return_id' => 'required',
@@ -124,7 +124,7 @@ class SaleReturnPaymentsController extends Controller
 
             $saleReturnPayment->update([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_return_id' => $request->sale_return_id,
@@ -150,6 +150,9 @@ class SaleReturnPaymentsController extends Controller
     public function return_Stock($id) {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
         
+        $id->merge(['store_id' => auth()->user()->store->id]);
+
+        // Retrieve sale return details using the sale_return_id
         $sale_return_details = SaleReturnDetail::where('sale_return_id', $id)->get();
 
         foreach($sale_return_details as $item){

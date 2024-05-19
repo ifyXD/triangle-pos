@@ -56,7 +56,7 @@ class SalePaymentsController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_id' => 'required',
@@ -66,7 +66,7 @@ class SalePaymentsController extends Controller
         DB::transaction(function () use ($request) {
             SalePayment::create([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_id' => $request->sale_id,
@@ -116,7 +116,7 @@ class SalePaymentsController extends Controller
         $this->checkPermission('access_sale_payments');
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_id' => 'required',
@@ -144,7 +144,7 @@ class SalePaymentsController extends Controller
 
             $salePayment->update([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_id' => $request->sale_id,

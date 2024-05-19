@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('customer_email');
             $table->string('customer_phone');
             $table->string('city');
+            $table->string('country')->nullable();
             $table->text('address');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

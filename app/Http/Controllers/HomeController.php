@@ -91,7 +91,7 @@ class HomeController extends Controller
         $totals = $sales->pluck('total')->toArray();
         // dd($salesQuery);
 
-        $total_products = count(Product::all());
+        $total_products = Product::where('store_id', auth()->user()->store)->count();
 
         $low_quantity_products = auth()->user()->hasRole('Super Admin') ? Stock::whereColumn('product_quantity', '<=', 'product_stock_alert')
             ->get() :  Stock::where('store_id', auth()->user()->store->id)
@@ -102,12 +102,12 @@ class HomeController extends Controller
             ->where('product_quantity', 0)
             ->get();
 
-        $users = count(User::where('id', '!=',auth()->user()->id)->get());
+        $users = count(User::where('id', '!=',auth()->user()->store)->get());
         return view('home', [
-            'revenue' => $revenue,
+            'revenue' => $revenue /100,
             'sale_returns' => $saleReturns,
             // 'purchase_returns' => $purchaseReturns / 100,
-            'profit' => $profit,
+            'profit' => $profit /100,
             'products' => $products,
             'totals' => $totals,
             'total_products' => $total_products,

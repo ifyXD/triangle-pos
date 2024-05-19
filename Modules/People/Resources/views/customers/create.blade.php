@@ -52,12 +52,12 @@
                                         <input type="text" class="form-control" name="city" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                {{-- <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="country">Country <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="country" required>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="form-row">

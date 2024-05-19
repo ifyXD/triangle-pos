@@ -88,22 +88,30 @@ class StockController extends Controller
     public function show($id)
     {
         abort_if(Gate::denies('access_products'), 403);
-
+    
         $product = Product::find($id);
+        if (!$product) {
+            // Handle the case where the product doesn't exist
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+    
         $stocks = DB::table('stocks')
             ->select([
                 'stocks.product_quantity as product_quantity',
                 'stocks.id as stock_id',
                 'units.id as unit_id',
                 'units.name as name',
-                'units.short_name as short_name'
+                'units.short_name as short_name',
+                'products.product_name as product_name' // Assuming the correct column name is 'product_name'
             ])
-            ->join('units', 'stocks.unit_id', 'units.id')
+            ->join('units', 'stocks.unit_id', '=', 'units.id')
+            ->join('products', 'stocks.product_id', '=', 'products.id') // Join with products table to get product name
             ->where('stocks.product_id', $id)
             ->get();
-
+    
         return view('stocks.partials.show', compact('id', 'product', 'stocks'));
     }
+    
     public function destroy($id)
     {
         abort_if(Gate::denies('access_products'), 403);
