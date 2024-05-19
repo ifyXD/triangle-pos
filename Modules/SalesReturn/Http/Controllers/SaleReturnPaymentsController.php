@@ -181,7 +181,7 @@ class SaleReturnPaymentsController extends Controller
         $sale_return_details = SaleReturnDetail::find($id);
 
         ProductLoss::create([
-            'sale_return_id' => $id,
+            'sale_return_id' => $sale_return_details->sale_return_id,
             'product_id' => $sale_return_details->product_id,
             'stock_id' => $sale_return_details->stock_id,
             'store_id' => auth()->user()->store->id,
@@ -192,6 +192,6 @@ class SaleReturnPaymentsController extends Controller
         ]);
         toast('Saved as Product Loss!', 'success');
 
-        return redirect()->route('sale-returns.index');
+        return redirect()->back();
     }
 }

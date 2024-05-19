@@ -102,8 +102,11 @@ class HomeController extends Controller
             ->where('product_quantity', 0)
             ->get();
 
+
+
         $currentDate = Carbon::now('Asia/Manila')->toDateString();
         $totalAmount = Sale::whereDate('date', $currentDate)->sum('total_amount');
+        
         $users = count(User::where('id', '!=', auth()->user()->id)->get());
        
         
