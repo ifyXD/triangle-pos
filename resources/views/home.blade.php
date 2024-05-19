@@ -1,9 +1,15 @@
 @extends('layouts.app')
+<style>
+    .col-md-6{
+        cursor: pointer;
+    }
+</style>
 @section('title', 'Home')
 @section('breadcrumb')
     <ol class="breadcrumb border-0 m-0">
         <li class="breadcrumb-item active">Home</li>
     </ol>
+
 @endsection
 
 @section('content')
@@ -11,21 +17,21 @@
         @if (!auth()->user()->hasRole('Super Admin'))
             @can('show_total_stats')
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" onclick="allsales();">
                         <div class="card border-0">
                             <div class="card-body p-0 d-flex align-items-center shadow-sm">
                                 <div class="bg-gradient-primary p-4 mfe-3 rounded-left">
                                     <i class="bi bi-bar-chart font-2xl"></i>
                                 </div>
                                 <div>
-                                    <div class="text-value text-primary">{{ format_currency($revenue) }}</div>
-                                    <div class="text-muted text-uppercase font-weight-bold small">Today's Income</div>
+                                    <div class="text-value text-primary">{{ format_currency($totalAmount/100) }}</div>
+                                    <div class="text-muted text-uppercase font-weight-bold small">Daily Sales</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" onclick="saleReturns();">
                         <div class="card border-0">
                             <div class="card-body p-0 d-flex align-items-center shadow-sm">
                                 <div class="bg-gradient-warning p-4 mfe-3 rounded-left">
@@ -45,13 +51,13 @@
                                     <i class="bi bi-trophy font-2xl"></i>
                                 </div>
                                 <div>
-                                    <div class="text-value text-info">{{ format_currency($profit) }}</div>
-                                    <div class="text-muted text-uppercase font-weight-bold small">Total Monthly</div>
+                                    <div class="text-value text-info">{{ format_currency($revenue/100) }}</div>
+                                    <div class="text-muted text-uppercase font-weight-bold small">Revenue</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" onclick="gotoProducts();">
                         <div class="card border-0">
                             <div class="card-body p-0 d-flex align-items-center shadow-sm">
                                 <div class="bg-gradient-success p-4 mfe-3 rounded-left">
@@ -64,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" onclick="stocks();">
                         <div class="card border-0">
                             <div class="card-body p-0 d-flex align-items-center shadow-sm">
                                 <div class="bg-gradient-success p-4 mfe-3 rounded-left">
@@ -77,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" onclick="stocks();">
                         <div class="card border-0">
                             <div class="card-body p-0 d-flex align-items-center shadow-sm">
                                 <div class="bg-gradient-success p-4 mfe-3 rounded-left">
@@ -188,6 +194,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+
+        function stocks(){
+            window.location = `{{ url('stocks') }}`;
+        }
+        function saleReturns(){
+            window.location = `{{ url('sale-returns') }}`;
+        }
+        function allsales(){
+            window.location = `{{ url('sales') }}`;
+        }
+        function gotoProducts(){
+            window.location = `{{ url('products') }}`;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('myChart').getContext('2d');
 

@@ -47,7 +47,7 @@
                                     @foreach ($stocks as $item)
                                         <tr>
                                             <td>{{ $item->name. ' | '. $item->short_name }}</td>
-                                            <td>{{$item->product_quantity}}</td>
+                                            <td class="{{$item->product_quantity <= $item->product_stock_alert ? 'text-danger' : ''}}">{{$item->product_quantity}}</td>
                                             <td>
                                                 @if (auth()->user()->hasAccessToPermission('access_prices'))
                                                     <a href="{{ url('stocks/edit/' . $item->stock_id) }}"

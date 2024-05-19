@@ -83,7 +83,7 @@ class StockController extends Controller
         toast('Stock Updated!', 'success');
 
 
-        return redirect('stocks/show/' . $id)->with('success', 'Price Updated!');
+        return redirect('stocks/show/' . $stock->product_id)->with('success', 'Stock Updated!');
     }
     public function show($id)
     {
@@ -98,6 +98,7 @@ class StockController extends Controller
         $stocks = DB::table('stocks')
             ->select([
                 'stocks.product_quantity as product_quantity',
+                'stocks.product_stock_alert as product_stock_alert',
                 'stocks.id as stock_id',
                 'units.id as unit_id',
                 'units.name as name',

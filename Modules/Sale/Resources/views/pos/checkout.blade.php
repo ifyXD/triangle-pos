@@ -71,7 +71,7 @@
 
 
             <div class="form-group d-flex justify-content-center flex-wrap mb-0">
-                <button type="button" class="btn btn-pill btn-danger mr-3"><i class="bi bi-x"></i> Reset</button>
+                <button type="button" class="btn btn-pill btn-danger mr-3 resetBtn"><i class="bi bi-x"></i> Reset</button>
                 <button type="button" data-toggle="modal" data-target="#cartSelect" id="proceed_cart" disabled
                     class="btn btn-pill btn-primary"><i class="bi bi-check"></i> Proceed</button>
             </div>

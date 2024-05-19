@@ -35,6 +35,7 @@ class CreateSaleReturnDetailsTable extends Migration
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('stock_id');
+            $table->string('return_status')->comment('Return to Inventory | Damage Product/s')->nullable();
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->timestamps();

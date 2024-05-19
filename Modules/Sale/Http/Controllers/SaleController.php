@@ -125,6 +125,8 @@ class SaleController extends Controller
     }
 
 
+   
+
     public function edit(Sale $sale)
     {
         // abort_if(Gate::denies('edit_sales'), 403);

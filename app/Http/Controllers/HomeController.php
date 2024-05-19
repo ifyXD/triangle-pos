@@ -102,7 +102,12 @@ class HomeController extends Controller
             ->where('product_quantity', 0)
             ->get();
 
-        $users = count(User::where('id', '!=',auth()->user()->store)->get());
+        $currentDate = Carbon::now('Asia/Manila')->toDateString();
+        $totalAmount = Sale::whereDate('date', $currentDate)->sum('total_amount');
+        $users = count(User::where('id', '!=', auth()->user()->id)->get());
+       
+        
+       
         return view('home', [
             'revenue' => $revenue /100,
             'sale_returns' => $saleReturns,
@@ -115,6 +120,7 @@ class HomeController extends Controller
             'out_of_stocks' => $out_of_stocks,
             'categories' => $categories,
             'users' => $users,
+            'totalAmount' => $totalAmount,
         ]);
     }
     public function storename()
