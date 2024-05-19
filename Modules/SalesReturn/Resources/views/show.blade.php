@@ -129,7 +129,7 @@
                                                             to
                                                             stocks</a>
                                                     @else
-                                                        <a class="btn btn-danger"
+                                                        <a class="btn btn-danger disabled"
                                                             onclick="return confirm('Are you sure you want to saved this as product loss?')"
                                                             href="{{ route('product-loss.store', $item->id) }}">Product
                                                             Loss</a>

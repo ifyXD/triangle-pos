@@ -41,14 +41,25 @@ class SearchProduct extends Component
 
         $this->unitId = 0;
         // If not "Super Admin," apply the original condition with additional user_id = 1 check
-        $this->search_results = Product::where(function ($query) use ($user) {
-            $query->where('store_id', $user->store->id)
-                ->where(function ($nestedQuery) {
-                    $nestedQuery->where('product_name', 'like', '%' . $this->query . '%');
-                });
-        })
-            ->take($this->how_many)
-            ->get();
+        if(auth()->user()->hasRole('Super Admin')){
+            $this->search_results = Product::where(function ($query) use ($user) {
+                $query->where(function ($nestedQuery) {
+                        $nestedQuery->where('product_name', 'like', '%' . $this->query . '%');
+                    });
+            })
+                ->take($this->how_many)
+                ->get();
+        }
+        else{
+            $this->search_results = Product::where(function ($query) use ($user) {
+                $query->where('store_id', $user->store->id)
+                    ->where(function ($nestedQuery) {
+                        $nestedQuery->where('product_name', 'like', '%' . $this->query . '%');
+                    });
+            })
+                ->take($this->how_many)
+                ->get();
+        }
     }
 
 
