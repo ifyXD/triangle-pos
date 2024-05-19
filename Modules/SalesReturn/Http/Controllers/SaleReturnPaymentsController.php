@@ -16,7 +16,8 @@ use Modules\SalesReturn\Entities\SaleReturnPayment;
 class SaleReturnPaymentsController extends Controller
 {
 
-    public function index($sale_return_id, SaleReturnPaymentsDataTable $dataTable) {
+    public function index($sale_return_id, SaleReturnPaymentsDataTable $dataTable)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $sale_return = SaleReturn::findOrFail($sale_return_id);
@@ -25,7 +26,8 @@ class SaleReturnPaymentsController extends Controller
     }
 
 
-    public function create($sale_return_id) {
+    public function create($sale_return_id)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $sale_return = SaleReturn::findOrFail($sale_return_id);
@@ -34,7 +36,8 @@ class SaleReturnPaymentsController extends Controller
     }
 
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $request->validate([
@@ -82,7 +85,8 @@ class SaleReturnPaymentsController extends Controller
     }
 
 
-    public function edit($sale_return_id, SaleReturnPayment $saleReturnPayment) {
+    public function edit($sale_return_id, SaleReturnPayment $saleReturnPayment)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $sale_return = SaleReturn::findOrFail($sale_return_id);
@@ -91,7 +95,8 @@ class SaleReturnPaymentsController extends Controller
     }
 
 
-    public function update(Request $request, SaleReturnPayment $saleReturnPayment) {
+    public function update(Request $request, SaleReturnPayment $saleReturnPayment)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $request->validate([
@@ -138,7 +143,8 @@ class SaleReturnPaymentsController extends Controller
     }
 
 
-    public function destroy(SaleReturnPayment $saleReturnPayment) {
+    public function destroy(SaleReturnPayment $saleReturnPayment)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $saleReturnPayment->delete();
@@ -147,33 +153,34 @@ class SaleReturnPaymentsController extends Controller
 
         return redirect()->route('sale-returns.index');
     }
-    public function return_Stock($id) {
+    public function return_Stock($id)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
-        
-        $sale_return_details = SaleReturnDetail::where('sale_return_id', $id)->get();
 
-        foreach($sale_return_details as $item){
-            $stock = Stock::find($item->stock_id);
-            $qty = $stock->product_quantity+$item->quantity;
-            $stock->update([
-                'product_quantity' => $qty, 
-            ]); 
-        }
-        ProductLoss::where('sale_return_id', $id)->delete();
-      
-        SaleReturn::findorFail($id)->update([
+        $sale_return_details = SaleReturnDetail::find($id);
+
+        $stock = Stock::find($sale_return_details->stock_id);
+        $qty = $stock->product_quantity + $sale_return_details->quantity;
+        $stock->update([
+            'product_quantity' => $qty,
+            
+        ]);
+
+        $sale_return_details->update([
             'return_status' => 'return'
         ]);
+ 
         toast('Stock/s Return Successfully!', 'success');
 
-        return redirect()->route('sale-returns.index');
+        return redirect()->back();
     }
-    public function create_product_loss($id) {
+    public function create_product_loss($id)
+    {
         abort_if(Gate::denies('access_sale_return_payments'), 403);
 
         $sale_return_details = SaleReturnDetail::where('sale_return_id', $id)->get();
 
-        foreach($sale_return_details as $item){
+        foreach ($sale_return_details as $item) {
             ProductLoss::create([
                 'sale_return_id' => $id,
                 'product_id' => $item->product_id,
@@ -181,7 +188,7 @@ class SaleReturnPaymentsController extends Controller
                 'store_id' => auth()->user()->store->id,
             ]);
         }
-      
+
         SaleReturn::findorFail($id)->update([
             'return_status' => 'loss'
         ]);

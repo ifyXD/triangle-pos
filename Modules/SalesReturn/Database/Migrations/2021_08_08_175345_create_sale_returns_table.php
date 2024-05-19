@@ -16,25 +16,20 @@ class CreateSaleReturnsTable extends Migration
         Schema::create('sale_returns', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            // $table->string('reference')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->string('customer_name');
-            // $table->integer('tax_percentage')->nullable()->default(0);
-            // $table->integer('tax_amount')->default(0);
-            // $table->integer('discount_percentage')->nullable()->default(0)->default(0);
-            // $table->integer('discount_amount')->nullable()->default(0);
-            // $table->integer('shipping_amount')->nullable()->default(0);
+            $table->string('customer_name'); 
             $table->integer('total_amount');
             $table->integer('paid_amount');
             $table->integer('due_amount');
             $table->string('status');
-            $table->string('return_status')->comment('Return to Inventory | Damage Product/s')->nullable();
+            
             $table->string('payment_status');
             $table->string('payment_method');
             $table->text('note')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
             $table->unsignedBigInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade'); 
+            $table->unsignedBigInteger('sale_id');
             $table->timestamps();
         });
     }

@@ -281,4 +281,5 @@ class SalesReturnController extends Controller
 
         return redirect()->route('sale-returns.index');
     }
+    
 }

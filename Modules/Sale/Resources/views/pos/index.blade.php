@@ -32,7 +32,8 @@
                                             <i class="bi bi-search text-primary"></i>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control searchProduct" placeholder="Type product name....">
+                                    <input type="text" class="form-control searchProduct"
+                                        placeholder="Type product name....">
                                 </div>
                             </div>
                         </div>
@@ -105,6 +106,14 @@
 
         }
 
+        function updateQty(element, sid) {
+            let priceValue = $(element).closest('tr').find('.price-per-product-unit').text();
+            let qty = $(element).val();
+
+            $(element).closest('tr').find('.sub-total').text((parseFloat(priceValue) * parseInt(qty)).toFixed(2));
+            updateGrandTotal();
+        }
+
         function proceedProduct(id) {
 
             let product_name = $(`.parentcontent${id}`).find(`#product_name${id}`).val();
@@ -152,7 +161,7 @@
                     <td>${product_name}</td>
                     <td class="price-per-unit">${priceText}</td>
                     <td class="price-per-product-unit">${priceValue}</td>
-                    <td class="quantity">${qty}</td>
+                    <td class="quantity"><input type="number" min="1" max="${product_quantity}" value="${qty}" class="form-control" onchange="updateQty($(this),${stock_id} )"></input></td>
                     <td class="sub-total">${(parseFloat(priceValue) * parseInt(qty)).toFixed(2)}</td>
                     <td class="align-middle text-center">
                         <a href="#" class="removeItem">
@@ -260,7 +269,7 @@
                     var productName = $(this).find('td:eq(0)').text();
                     var pricePerProductUnit = $(this).find('.price-per-product-unit').text();
                     var pricePerUnit = $(this).find('.price-per-unit').text();
-                    var quantity = $(this).find('.quantity').text();
+                    var quantity = $(this).find('.quantity').find('input').val();
                     var subTotal = $(this).find('.sub-total').text();
 
                     // Create an object to represent the cart detail
@@ -280,6 +289,8 @@
                     cartDetails.push(cartDetail);
                 });
 
+
+                // console.log(cartDetails);
                 // Output the cart details array to console for testing
                 // console.log(cartDetails);
                 // Make an AJAX POST request to send the cart details to the server
@@ -323,9 +334,7 @@
 
                 if (search != "") {
                     $(".col-md-6").each(function() {
-                        var cardTitle = $(this).find(".card-title").text()
-                    .toLowerCase(); //text of each card example card 1 
-
+                        var cardTitle = $(this).find(".card-title").text().toLowerCase();
                         if (cardTitle.indexOf(search) === -1) {
                             $(this).addClass("d-none");
                         }
@@ -336,6 +345,10 @@
                         // $('.nodata').removeClass('d-none');
                     }
                 }
+            });
+            $('.resetBtn').click(function() {
+                $('.tablecart tbody').empty();
+                updateGrandTotal();
             });
         });
     </script>
