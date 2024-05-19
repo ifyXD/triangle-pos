@@ -29,7 +29,7 @@
                             <div class="form-row">
                             
                                 <div class="col-lg-4 mt -ml-6">
-                                    <div class="from-group">
+                                    <div class="form-group">
                                         <div class="form-group">
                                             <label for="customer_id">Customer <span class="text-danger">*</span></label>
                                             <select class="form-control" name="customer_id" id="customer_id" required>

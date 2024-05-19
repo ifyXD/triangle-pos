@@ -8,8 +8,8 @@
                 <div class="buttons-container">
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="dashboardCheck"
                             value="3,4,5,6,7" checked>Dashboard</label>
-                    <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="expensesCheck"
-                            value="27,28,29,30,31" checked>Expenses</label>
+                    {{-- <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="expensesCheck"
+                            value="27,28,29,30,31" checked>Expenses</label> --}}
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="productCheck"
                             value="8,9,10,11,12,13" checked>Products</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="adjustmentCheck"
@@ -24,7 +24,7 @@
                             value="67" checked>Reports</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="priceCheck"
                             value="74" checked>Prices</label>
-                    <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="settingCheck"
+                    <label class="checkbox-button m-auto"><input type="checkbox" name="permissions[]" class="settingCheck"
                             value="41" checked>Settings</label>
                 </div>
                 <button class="button-next" type="button" id="permissionBtnFunc">NEXT</button>

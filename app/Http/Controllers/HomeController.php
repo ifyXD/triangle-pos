@@ -155,7 +155,7 @@ class HomeController extends Controller
             'revenue' => $revenue,
             'sale_returns' => $saleReturns,
             // 'purchase_returns' => $purchaseReturns / 100,
-            'profit' => $profit,
+            'profit' => $profit /100,
             'products' => $products,
             'totals' => $totals,
             'total_products' => $total_products,

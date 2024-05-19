@@ -33,7 +33,7 @@ class SalePaymentsDataTable extends DataTable
         }
 
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->bySale()->with('sale')->where('user_id', $user->id)->orWhere('user_id',1);
+        return $model->newQuery()->bySale()->with('sale')->where('store_id', $user->store->id);
     }
 
     public function html() {
@@ -62,8 +62,9 @@ class SalePaymentsDataTable extends DataTable
             Column::make('date')
                 ->className('align-middle text-center'),
 
-            Column::make('reference')
-                ->className('align-middle text-center'),
+            Column::make('amount')
+                ->className('align-middle text-center')
+                ->visible(false),
 
             Column::computed('amount')
                 ->className('align-middle text-center'),

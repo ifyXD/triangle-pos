@@ -42,6 +42,7 @@ class PriceController extends Controller
             }
         }
         // echo $savedUnits;
+
         
         return view('prices.partials.create', compact('id', 'data', 'unitArray', 'savedUnits'));
     }
@@ -69,6 +70,7 @@ class PriceController extends Controller
             'product_price' => $request->product_price,
             'stock_id' => $request->stock_id,
         ]);
+        toast('Price Created!', 'success');
 
         return redirect('prices/show/' . $id);
     }
@@ -94,6 +96,7 @@ class PriceController extends Controller
             'product_cost' => $request->product_cost,
             'product_price' => $request->product_price,
         ]);
+        toast('Price Updated!', 'success');
 
         return redirect('prices/show/' . $price->product_id)->with('success', 'Price Updated!');
         

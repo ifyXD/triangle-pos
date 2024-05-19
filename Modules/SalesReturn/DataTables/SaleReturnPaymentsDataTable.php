@@ -33,7 +33,7 @@ class SaleReturnPaymentsDataTable extends DataTable
         }
     
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->bySaleReturn()->with('saleReturn')->where('user_id', $user->id)->orWhere('user_id',1); 
+        return $model->newQuery()->bySaleReturn()->with('saleReturn')->where('user_id', $store->id)->orWhere('user_id',1); 
     }
 
     public function html() {

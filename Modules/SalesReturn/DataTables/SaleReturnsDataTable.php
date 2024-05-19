@@ -16,13 +16,13 @@ class SaleReturnsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('total_amount', function ($data) {
-                return format_currency($data->total_amount);
+                return format_currency($data->total_amount*100);
             })
             ->addColumn('paid_amount', function ($data) {
-                return format_currency($data->paid_amount);
+                return format_currency($data->paid_amount*100);
             })
             ->addColumn('due_amount', function ($data) {
-                return format_currency($data->due_amount);
+                return format_currency($data->due_amount*100);
             })
             ->addColumn('status', function ($data) {
                 return view('salesreturn::partials.status', compact('data'));

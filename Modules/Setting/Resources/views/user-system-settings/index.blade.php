@@ -45,24 +45,24 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" name="user_id"
-                                            value="{{ auth()->user()->store->user_id }}" required>
+                                            value="{{ auth()->user()->id }}" required>
                                         <label for="store_name">Store Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="store_name"
-                                            value="{{ auth()->user()->store->store_name ?? null }}" required>
+                                            value="{{ auth()->user()->store->store_name ?? '' }}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="store_email">Store Email <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="store_email"
-                                            value="{{ auth()->user()->store->store_email ?? null }}">
+                                        value="{{ auth()->user()->store->store_email ?? '' }}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="store_phone">Phone <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="store_phone"
-                                            value="{{ auth()->user()->store->store_phone ?? null }}">
+                                        value="{{ auth()->user()->store->store_phone ?? '' }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <label for="store_address">Address <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="store_address"
-                                            value="{{ auth()->user()->store->store_address }}">
+                                        value="{{ auth()->user()->store->store_address ?? '' }}" required>
                                     </div>
                                 </div>
                             </div>

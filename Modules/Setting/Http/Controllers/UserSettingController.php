@@ -21,11 +21,13 @@ class UserSettingController extends Controller
         // Check if the user has the role "Super Admin"
         if ($user->hasRole('Super Admin')) {
             // If "Super Admin," retrieve all units
-            $settings = Setting::where('user_id', $user->id)->first();
+            $settings = Setting::where('user_id', $user->store->id)->first();
         } else {
             // If not "Super Admin," filter units by user_id
-            $settings = Setting::where('user_id', $user->id)->first();
-            $userpermissions = UserPermission::where('user_id', $user->id)->orderBy('id', 'asc')->get();
+            $settings = Setting::where('user_id', auth()->user()->store->id)
+            ->where('user_id', auth()->user()->id)
+            ->first();
+     $userpermissions = UserPermission::where('user_id', $user->id)->orderBy('id', 'asc')->get();
 
         }
 
@@ -36,46 +38,47 @@ class UserSettingController extends Controller
     public function update(Request $request)
     {
         $setting = Store::where('user_id', $request->user_id)->first();
-
-        if ($request->hasFile('image')) {
-            // If an image is uploaded, save it to the public/images/settings/user directory
-            $imagePath = $request->file('image')->store('images/stores/user', 'public');
-
-            // Delete the previous image (if any)
-            if ($setting && $setting->image) {
-                Storage::disk('public')->delete($setting->image);
+    
+        // If no existing setting is found, return an error or create a new setting
+        if (!$setting) {
+            // Option 1: Create a new setting
+            $setting = Store::create([
+                'store_name' => $request->store_name,
+                'store_email' => $request->store_email,
+                'store_phone' => $request->store_phone,
+                'store_address' => $request->store_address,
+                'user_id' => auth()->user()->id,
+                'image' => $request->hasFile('image') ? $request->file('image')->store('images/stores/user', 'public') : 'avatar.png',
+            ]);
+        } else {
+            // Handle image upload and deletion
+            if ($request->hasFile('image')) {
+                // If an image is uploaded, save it to the public/images/settings/user directory
+                $imagePath = $request->file('image')->store('images/stores/user', 'public');
+    
+                // Delete the previous image (if any)
+                if ($setting->image) {
+                    Storage::disk('public')->delete($setting->image);
+                }
+                $setting->image = $imagePath;
             }
-        }
-
-        // if ($setting == null) {
-        //     Setting::create([
-        //         'store_name' => $request->store_name,
-        //         'store_email' => $request->store_email,
-        //         'store_phone' => $request->store_phone,
-        //         'notification_email' => $request->notification_email,
-        //         'store_address' => $request->store_address,
-        //         'default_currency_id' => $request->default_currency_id,
-        //         'user_id' => auth()->user()->id,
-        //         'default_currency_position' => $request->default_currency_position,
-        //         'image' => isset($imagePath) ? $imagePath : 'avatar.png',
-        //     ]);
-        // } else {
+    
+            // Update existing setting
             $setting->update([
                 'store_name' => $request->store_name,
                 'store_email' => $request->store_email,
                 'store_phone' => $request->store_phone,
-                // 'notification_email' => $request->notification_email,
                 'store_address' => $request->store_address,
-                // 'default_currency_id' => $request->default_currency_id,
                 'user_id' => auth()->user()->id,
-                // 'default_currency_position' => $request->default_currency_position,
                 'image' => isset($imagePath) ? $imagePath : $setting->image,
             ]);
-        // }
+        }
+    
         toast('Settings Updated!', 'info');
-
+    
         return redirect()->route('system-settings.index');
     }
+    
     public function themeupdate(Request $request)
     {
         $setting = ThemeSetting::where('user_id', $request->user_id)->first();

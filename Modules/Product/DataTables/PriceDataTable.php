@@ -33,6 +33,7 @@ class PriceDataTable extends DataTable
                 return $data->product_quantity . ' ' . $data->product_unit;
             })
             ->rawColumns(['product_image']);
+            
     }
 
     public function query(Product $model)
@@ -132,4 +133,5 @@ class PriceDataTable extends DataTable
     {
         return 'Product_' . date('YmdHis');
     }
+    
 }

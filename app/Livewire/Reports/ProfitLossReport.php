@@ -112,7 +112,7 @@ class ProfitLossReport extends Component
             ->when($this->end_date, function ($query) {
                 return $query->whereDate('date', '<=', $this->end_date);
             })
-            ->sum('total_amount') / 100;
+            ->sum('total_amount');
 
         $this->total_purchase_returns = PurchaseReturn::where('user_id', auth()->user()->id)->completed()
             ->when($this->start_date, function ($query) {

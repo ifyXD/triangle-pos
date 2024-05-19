@@ -42,7 +42,7 @@ class SaleReturnPaymentsController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_return_id' => 'required',
@@ -52,7 +52,7 @@ class SaleReturnPaymentsController extends Controller
         DB::transaction(function () use ($request) {
             SaleReturnPayment::create([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_return_id' => $request->sale_return_id,
@@ -101,7 +101,7 @@ class SaleReturnPaymentsController extends Controller
 
         $request->validate([
             'date' => 'required|date',
-            'reference' => 'required|string|max:255',
+            // 'reference' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'note' => 'nullable|string|max:1000',
             'sale_return_id' => 'required',
@@ -129,7 +129,7 @@ class SaleReturnPaymentsController extends Controller
 
             $saleReturnPayment->update([
                 'date' => $request->date,
-                'reference' => $request->reference,
+                // 'reference' => $request->reference,
                 'amount' => $request->amount,
                 'note' => $request->note,
                 'sale_return_id' => $request->sale_return_id,

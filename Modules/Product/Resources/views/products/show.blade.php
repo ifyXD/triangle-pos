@@ -47,10 +47,10 @@
                                     <th>Price</th>
                                     <td>{{ format_currency($product->product_price) }}</td>
                                 </tr> --}}
-                                <tr>
+                                {{-- <tr>
                                     <th>Quantity</th>
                                     <td>{{ $product->product_quantity . ' ' . $product->product_unit }}</td>
-                                </tr>
+                                </tr> --}}
                                 {{-- <tr>
                                     <th>Stock Worth</th>
                                     <td>
@@ -58,10 +58,10 @@
                                         PRICE:: {{ format_currency($product->product_price * $product->product_quantity) }}
                                     </td>
                                 </tr> --}}
-                                <tr>
+                                {{-- <tr>
                                     <th>Alert Quantity</th>
                                     <td>{{ $product->product_stock_alert }}</td>
-                                </tr>
+                                </tr> --}}
                                 {{-- <tr>
                                     <th>Tax (%)</th>
                                     <td>{{ $product->product_order_tax ?? 'N/A' }}</td>

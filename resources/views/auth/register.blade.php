@@ -6,6 +6,8 @@
                 <div class="form-header">
                     <h1>PUB MARKET</h1>
                     <p>Create your account</p>
+                           <p>Make sure that your email is a Gmail account !! </p>
+
                 </div>
                 <form class="login-form" action="{{ url('/register') }}" method="post">
                     @csrf
@@ -44,6 +46,7 @@
                         <div class="login-link register-link">
                             <span class="have-account">
                                 <a href="{{ route('login') }}">I already have an account</a>
+
                             </span>
                         </div>
                     </div>

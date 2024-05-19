@@ -60,8 +60,8 @@
             <h2 style="margin-bottom: 5px">{{ strtoupper(auth()->user()->store->store_name) }}</h2>
 
             <p style="font-size: 11px;line-height: 15px;margin-top: 0">
-                {{ settings()->company_email }}, {{ settings()->company_phone }}
-                <br>{{ settings()->company_address }}
+                {{ auth()->user()->store->store_email ?? '' }}, {{ auth()->user()->store->store_phone ?? '' }}
+                <br>{{ auth()->user()->store->store_address ?? '' }}
             </p>
         </div>
         <p>

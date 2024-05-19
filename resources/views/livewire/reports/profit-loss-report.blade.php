@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <div class="text-value text-primary">{{ format_currency($sales_amount) }}</div>
-                        <div class="text-uppercase font-weight-bold small ">{{ $total_sales }} Sales</div>
+                        <div class="text-uppercase font-weight-bold small ">{{ $total_sales }} Total's Income</div>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div>
                         <div class="text-value text-primary">{{ format_currency($sale_returns_amount) }}</div>
-                        <div class="text-uppercase font-weight-bold small">{{ $total_sale_returns }} Sale Returns</div>
+                        <div class="text-uppercase font-weight-bold small">{{ $total_sale_returns }} Purge Items</div>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div>
                         <div class="text-value text-primary">{{ format_currency($profit_amount) }}</div>
-                        <div class="text-uppercase font-weight-bold small">Profit</div>
+                        <div class="text-uppercase font-weight-bold small">Total Monthly</div>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
             </div>
         </div> --}}
         {{-- Expenses --}}
-        <div class="col-12 col-lg-4">
+        {{-- <div class="col-12 col-lg-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-3 d-flex align-items-center">
                     <div class="bg-primary p-3 mfe-3 rounded">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- Payments Received --}}
         <div class="col-12 col-lg-4">
             <div class="card border-0 shadow-sm">
