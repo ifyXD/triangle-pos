@@ -34,7 +34,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-
         if (!auth()->user()->hasRole('Super Admin')) {
             $saleReturnDetailsData = SaleReturnDetail::where('sale_return_details.store_id', auth()->user()->store->id)
                 ->join('prices', 'sale_return_details.price_id', '=', 'prices.id')
@@ -52,8 +51,6 @@ class HomeController extends Controller
                 SaleReturn::where('id', $saleReturnId)->update(['total_amount' => $totalValue]);
             }
         }
-
-        // Update the SaleReturn table with the calculated total values
        
         $categories = Category::orderBy('category_name', 'asc')->get();
         $this->search_category = $request->category_id ?? 1;
@@ -61,8 +58,8 @@ class HomeController extends Controller
 
         $salesQuery = Sale::completed();
 
-        $saleReturnsQuery = SaleReturn::completed();
-        $purchaseReturnsQuery = PurchaseReturn::completed();
+        $saleReturnsQuery = auth()->user()->hasRole('Super Admin') ? SaleReturn::completed() : SaleReturn::where('store_id', auth()->user()->store->id)->completed();
+        // $purchaseReturnsQuery = PurchaseReturn::completed();
 
         // If the user is not a "Super Admin," filter the queries by user
 

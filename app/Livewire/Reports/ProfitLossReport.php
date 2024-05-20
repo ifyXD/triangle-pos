@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Reports;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use Modules\Expense\Entities\Expense;
 use Modules\Purchase\Entities\Purchase;
@@ -140,7 +141,7 @@ class ProfitLossReport extends Component
             })
             ->sum('amount') / 100;
 
-        $this->profit_amount = $this->calculateProfit();
+        $this->profit_amount = $this->calculateProfit()/100;
 
         $this->payments_received_amount = $this->calculatePaymentsReceived();
 
@@ -150,26 +151,17 @@ class ProfitLossReport extends Component
     }
 
     public function calculateProfit() {
-        $product_costs = 0;
-        $revenue = $this->sales_amount - $this->sale_returns_amount;
-        $sales = Sale::where('store_id', auth()->user()->store->id)->completed()
-            ->when($this->start_date, function ($query) {
-                return $query->whereDate('date', '>=', $this->start_date);
-            })
-            ->when($this->end_date, function ($query) {
-                return $query->whereDate('date', '<=', $this->end_date);
-            })
-            ->with('saleDetails')->get();
+        $currentMonth = Carbon::now('Asia/Manila')->month;
+        $currentYear = Carbon::now('Asia/Manila')->year;
 
-        foreach ($sales as $sale) {
-            foreach ($sale->saleDetails as $saleDetail) {
-                $product_costs += $saleDetail->product->product_cost;
-            }
-        }
+        // Calculate the total amount for the current month
+        $monthlyTotalAmount = auth()->user()->hasRole('Super Admin') ? Sale::whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->sum('total_amount') :  Sale::where('store_id', auth()->user()->store->id)->whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->sum('total_amount');
 
-        $profit = $revenue - $product_costs;
-
-        return $profit;
+        return $monthlyTotalAmount;
     }
 
     public function calculatePaymentsReceived() {
