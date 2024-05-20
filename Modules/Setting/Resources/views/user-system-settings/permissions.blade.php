@@ -23,8 +23,7 @@
                         value="42,43,44,45,46,47,48"
                         {{ $userpermissions->where('permission_id', '42')->first()->status === 'true' ? 'checked' : '' }}>Sales</label>
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="salereturnCheck"
-                        value="49,50,51,52,53,54" {{ $userpermissions->where('permission_id', '49')->first()->status === 'true' ? 'checked' : '' }}>Sale
-                    Returns</label>
+                        value="49,50,51,52,53,54" {{ $userpermissions->where('permission_id', '49')->first()->status === 'true' ? 'checked' : '' }}>Total Purge Cost</label>
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="reportCheck"
                         value="67" {{ $userpermissions->where('permission_id', '67')->first()->status === 'true' ? 'checked' : '' }}>Reports</label>
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="priceCheck"

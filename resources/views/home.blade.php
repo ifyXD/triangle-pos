@@ -39,7 +39,7 @@
                             </div>
                             <div>
                                 <div class="text-value text-warning">{{ format_currency($sale_returns) }}</div>
-                                <div class="text-muted text-uppercase font-weight-bold small">Sales Return</div>
+                                <div class="text-muted text-uppercase font-weight-bold small">Total Purge Cost</div>
                             </div>
                         </div>
                     </div>

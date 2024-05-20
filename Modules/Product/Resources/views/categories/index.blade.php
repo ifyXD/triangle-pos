@@ -22,10 +22,12 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- Button trigger modal -->
+                        @if (!auth()->user()->hasRole('Super Admin'))
                         <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#categoryCreateModal">
                             Add Category <i class="bi bi-plus"></i>
-                        </button> 
+                        </button>
+                    @endif
                         <hr> 
                         <div class="table-responsive">
                             {!! $dataTable->table() !!}

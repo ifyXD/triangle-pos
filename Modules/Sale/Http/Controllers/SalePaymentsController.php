@@ -248,7 +248,7 @@ class SalePaymentsController extends Controller
     public function dispatch_store($id)
     {
         $this->checkPermission('create_sale_returns');
-        // now()->format('Y-m-d')
+        // now()->format('Y-m-d')   
 
         $sale_detail = SaleDetails::where('sale_details.id', $id)->join('prices', 'sale_details.price_id', 'prices.id')->first();
         $sale = Sale::find($sale_detail->sale_id);

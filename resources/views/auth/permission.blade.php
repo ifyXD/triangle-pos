@@ -19,7 +19,7 @@
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="saleCheck"
                             value="42,43,44,45,46,47,48" checked>Sales</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="salereturnCheck"
-                            value="49,50,51,52,53,54" checked>Sale Returns</label>
+                            value="49,50,51,52,53,54" checked>Purge Item</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="reportCheck"
                             value="67" checked>Reports</label>
                     <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="priceCheck"

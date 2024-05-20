@@ -22,8 +22,8 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->hasAccessToPermission('create_products'))
-                <li class="c-sidebar-nav-item">
+@if (!auth()->user()->hasRole('Super Admin'))
+                <li class="c-sidebar-nav-item"> 
                     <a class="c-sidebar-nav-link {{ request()->routeIs('products.create') ? 'c-active' : '' }}"
                         href="{{ route('products.create') }}">
                         <i class="c-sidebar-nav-icon bi bi-journal-plus" style="line-height: 1;"></i> Create Product
@@ -132,6 +132,7 @@
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-receipt" style="line-height: 1;"></i> Sales
         </a>
+        @if (!auth()->user()->hasRole('Super Admin'))
         @if (auth()->user()->hasAccessToPermission('create_sales'))
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
@@ -142,6 +143,8 @@
                 </li>
             </ul>
         @endif
+    @endif
+    
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->routeIs('sales.index') ? 'c-active' : '' }}"
@@ -254,7 +257,7 @@
     </li>
 @endif
 
-@if (auth()->user()->hasAccessToPermission('access_reports'))
+@if (auth()->user()->hasAccessToPermission('access_reports') && !auth()->user()->hasRole('Super Admin'))
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ request()->routeIs('*-report.index') ? 'c-show' : '' }}">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon bi bi-graph-up" style="line-height: 1;"></i> Reports
@@ -301,6 +304,7 @@
         </ul>
     </li>
 @endif
+
 
 @can('access_user_management')
     <li class="c-sidebar-nav-item">
