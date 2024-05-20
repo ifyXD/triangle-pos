@@ -271,6 +271,8 @@ class SalePaymentsController extends Controller
                 'sale_id' => $sale->id,
             ]
         );
+
+
         $sale_return_details = SaleReturnDetail::updateOrCreate(
             [
                 'sale_return_id' => $sale_return->id,
