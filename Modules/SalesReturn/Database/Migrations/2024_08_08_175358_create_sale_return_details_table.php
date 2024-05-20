@@ -39,6 +39,7 @@ class CreateSaleReturnDetailsTable extends Migration
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->timestamps();
+            
         });
     }
 
