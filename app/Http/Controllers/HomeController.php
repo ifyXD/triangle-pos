@@ -143,7 +143,6 @@ class HomeController extends Controller
             ->whereYear('date', $currentYear)
             ->sum('total_amount') :  Sale::where('store_id', auth()->user()->store->id)->whereMonth('date', $currentMonth)
             ->whereYear('date', $currentYear)
-
             ->sum('total_amount');
 
         // echo $monthlyTotalAmount;

@@ -11,7 +11,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
-
     public function dataTable($query) {
         return datatables()
             ->eloquent($query)
@@ -25,29 +24,34 @@ class UsersDataTable extends DataTable
             })
             ->addColumn('status', function ($data) {
                 if ($data->is_active == 1) {
-                    $html = '<span class="badge badge-success">Active</span>';
+                    return '<span class="badge badge-success">Active</span>';
                 } else {
-                    $html = '<span class="badge badge-warning">Deactivated</span>';
+                    return '<span class="badge badge-warning">Deactivated</span>';
                 }
-
-                return $html;
             })
             ->addColumn('image', function ($data) {
-                // $url = $data->getFirstMediaUrl('avatars');
-                $url = $data->image == 'avatar.png'? $data->getFirstMediaUrl('avatars') : asset($data->image);
-
+                $url = $data->image == 'avatar.png' ? $data->getFirstMediaUrl('avatars') : asset($data->image);
                 return '<img src="' . $url . '" style="width:50px;height:50px;" class="img-thumbnail rounded-circle"/>';
-                // return $data->image;
             })
             ->rawColumns(['image', 'status']);
     }
 
     public function query(User $model) {
         return $model->newQuery()
+            ->select([
+                'users.id',
+                'users.first_name',
+                'users.email',
+                'stores.store_name',
+                'users.is_active',
+                'users.image',
+                'users.created_at'
+            ])
+            ->leftJoin('stores', 'stores.user_id', '=', 'users.id')
             ->with(['roles' => function ($query) {
-                $query->select('name')->get();
+                $query->select('name');
             }])
-            ->where('id', '!=', auth()->id());
+            ->where('users.id', '!=', auth()->id());
     }
 
     public function html() {
@@ -77,6 +81,9 @@ class UsersDataTable extends DataTable
                 ->className('text-center align-middle'),
 
             Column::make('first_name')
+                ->className('text-center align-middle'),
+
+            Column::make('store_name')
                 ->className('text-center align-middle'),
 
             Column::make('email')
