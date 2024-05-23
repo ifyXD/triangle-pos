@@ -38,21 +38,20 @@ class UsersDataTable extends DataTable
 
     public function query(User $model) {
         return $model->newQuery()
-            ->select([
-                'users.id',
-                'users.first_name',
-                'users.email',
-                'stores.store_name',
-                'stores.image as simage',
-                'users.is_active',
-                'users.image',
-                'users.created_at'
-            ])
-            ->leftJoin('stores', 'stores.user_id', '=', 'users.id')
-            ->with(['roles' => function ($query) {
-                $query->select('name');
-            }])
-            ->where('users.id', '!=', auth()->id());
+        ->select([
+            'users.id',
+            'users.first_name',
+            'users.email',
+            'stores.store_name',
+            'stores.image as simage',
+            'users.is_active',
+            'users.image',
+            'users.created_at'
+        ])
+        ->leftJoin('stores', 'stores.user_id', '=', 'users.id')
+        ->with(['roles:id,name']) // Eager load roles with only id and name
+        ->where('users.id', '!=', auth()->id());
+    
     }
 
     public function html() {
@@ -65,12 +64,12 @@ class UsersDataTable extends DataTable
                                 <'row'<'col-md-5'i><'col-md-7 mt-2'p>>")
             ->orderBy(6)
             ->buttons(
-                Button::make('excel')
-                    ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
+                // Button::make('excel')
+                //     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
-                Button::make('reset')
-                    ->text('<i class="bi bi-x-circle"></i> Reset'),
+                // Button::make('reset')
+                //     ->text('<i class="bi bi-x-circle"></i> Reset'),
                 Button::make('reload')
                     ->text('<i class="bi bi-arrow-repeat"></i> Reload')
             );

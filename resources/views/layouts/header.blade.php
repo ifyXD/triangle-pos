@@ -91,7 +91,8 @@
                     <img class="c-avatar rounded-circle" src="{{ auth()->user()->getFirstMediaUrl('avatars') }}"
                         alt="Profile Image">
                 @else
-                    <img class="c-avatar rounded-circle"
+                    <img style="width: 35px; height: 35px; object-fit: cover;"
+                    class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
                         src="{{ auth()->user()->store->image == 'avatar.png'
                             ? auth()->user()->getFirstMediaUrl('avatars')
                             : asset('storage/' . auth()->user()->store->image) }}"

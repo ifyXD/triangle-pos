@@ -47,8 +47,8 @@ class CustomersDataTable extends DataTable
                     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),*/
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
-                Button::make('reset')
-                    ->text('<i class="bi bi-x-circle"></i> Reset'),
+                // Button::make('reset')
+                //     ->text('<i class="bi bi-x-circle"></i> Reset'),
                 Button::make('reload')
                     ->text('<i class="bi bi-arrow-repeat"></i> Reload')
             );

@@ -2,6 +2,7 @@
 
 namespace Modules\User\Http\Controllers;
 
+use App\Models\Store;
 use Modules\User\DataTables\UsersDataTable;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -81,24 +82,34 @@ class UsersController extends Controller
         $user->syncRoles($request->role);
 
         if ($request->hasFile('image')) {
-            // Delete the old image if it exists
-            if ($user->image) {
-                $oldImagePath = public_path($user->image);
-                if (File::exists($oldImagePath)) {
-                    // File::delete($oldImagePath);
-                }
+            $setting = Store::where('user_id',$user->id)->first();
+
+
+            $imagePath = $request->file('image')->store('images/stores/user', 'public');
+    
+            // Delete the previous image (if any)
+            if ($setting->image) {
+                Storage::disk('public')->delete($setting->image);
             }
+            $setting->image = $imagePath;
+            // Delete the old image if it exists
+            // if ($user->image) {
+            //     $oldImagePath = public_path($user->image);
+            //     if (File::exists($oldImagePath)) {
+            //         // File::delete($oldImagePath);
+            //     }
+            // }
 
-            $image = $request->file('image');
+            // $image = $request->file('image');
 
-            // Generate a unique filename
-            $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+            // // Generate a unique filename
+            // $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
 
-            // Resize the image if needed
-            // $resizedImage = Image::make($image)->resize(300, 200)->encode();
+            // // Resize the image if needed
+            // // $resizedImage = Image::make($image)->resize(300, 200)->encode();
 
-            // Store the image to the public directory with a unique filename
-            $image->move(public_path('images/users'), $imageName);
+            // // Store the image to the public directory with a unique filename
+            // $image->move(public_path('images/stores/user'), $imageName);
 
             // Save the image path to the database or associate it with the user
             $user->update([
@@ -107,7 +118,9 @@ class UsersController extends Controller
                 'last_name'  => $request->last_name, 
                 'email' => $request->email,
                 'is_active' => $request->is_active,
-                'image' => 'images/users/' . $imageName,
+            ]);
+            $setting->update([ 
+                'image' => isset($imagePath) ? $imagePath : $setting->image,
             ]);
         } else {
             // No image uploaded
