@@ -34,8 +34,20 @@
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="name">Name <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name" required value="{{ $user->name }}">
+                                        <label for="name">First Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="first_name" required value="{{ $user->first_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Middle Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="middle_name" value="{{ $user->middle_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Last Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="last_name" required value="{{ $user->last_name }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -70,9 +82,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="image">Profile Image <span class="text-danger">*</span></label>
-                                <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ $user->image == 'avatar.png' ? 
+                                <img style="width: 100px;height: 100px;" class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2" src="{{ $user->store->image == 'avatar.png' ? 
                                 auth()->user()->getFirstMediaUrl('avatars') : 
-                                asset($user->image) }}" alt="Profile Image">
+                                asset('storage/' .$user->store->image) }}" alt="Profile Image">
                                 <input id="image" type="file" name="image" data-max-file-size="500KB">
                             </div>
                         </div>

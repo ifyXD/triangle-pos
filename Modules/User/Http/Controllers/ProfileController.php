@@ -32,7 +32,8 @@ class ProfileController extends Controller
             //     'max:2048',
             //     Rule::dimensions()->maxWidth(300)->maxHeight(200), // Add dimension constraints if needed
             // ],
-            'name'  => 'required|string|max:255',
+            'first_name'  => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . auth()->id(),
         ]);
 
@@ -60,14 +61,18 @@ class ProfileController extends Controller
 
             // Save the image path to the database or associate it with the user
             $user->update([
-                'name'  => $request->name,
+                'first_name'  => $request->first_name,
+                'middle_name'  => $request->middle_name,
+                'last_name'  => $request->last_name,
                 'email' => $request->email,
                 'image' => 'images/users/' . $imageName,
             ]);
         } else {
             // No image uploaded
             $user->update([
-                'name'  => $request->name,
+                'first_name'  => $request->first_name,
+                'middle_name'  => $request->middle_name,
+                'last_name'  => $request->last_name,
                 'email' => $request->email,
             ]);
         }

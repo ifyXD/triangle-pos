@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12">
                 @include('utils.alerts')
-                <h3>Hello, <span class="text-primary">{{ auth()->user()->name }}</span></h3>
+                <h3>Hello, <span class="text-primary">{{ auth()->user()->first_name }}</span></h3>
                 <p class="font-italic">Change your profile information & password from here...</p>
             </div>
             <div class="col-lg-6">
@@ -48,13 +48,30 @@
 
 
                             <div class="form-group">
-                                <label for="name">Name <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="name" required
-                                    value="{{ auth()->user()->name }}">
+                                <label for="name">First Name <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="first_name" required
+                                    value="{{ auth()->user()->first_name }}">
                                 @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="name">Middle Name <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="middle_name" 
+                                    value="{{ auth()->user()->middle_name }}">
+                                @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Last Name <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="last_name" required
+                                    value="{{ auth()->user()->last_name }}">
+                                @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                           
                             <div class="form-group">
                                 <label for="email">Email <span class="text-danger">*</span></label>
                                 <input class="form-control" type="email" name="email" required

@@ -73,7 +73,8 @@ class UsersController extends Controller
         abort_if(Gate::denies('access_user_management'), 403);
 
         $request->validate([
-            'name'     => 'required|string|max:255',
+            'first_name'     => 'required|string|max:255',
+            'last_name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email,'.$user->id,
         ]); 
 
@@ -101,7 +102,9 @@ class UsersController extends Controller
 
             // Save the image path to the database or associate it with the user
             $user->update([
-                'name'  => $request->name,
+                'first_name'  => $request->first_name,
+                'middle_name'  => $request->middle_name,
+                'last_name'  => $request->last_name, 
                 'email' => $request->email,
                 'is_active' => $request->is_active,
                 'image' => 'images/users/' . $imageName,
@@ -109,7 +112,9 @@ class UsersController extends Controller
         } else {
             // No image uploaded
             $user->update([
-                'name'  => $request->name,
+                'first_name'  => $request->first_name,
+                'middle_name'  => $request->middle_name,
+                'last_name'  => $request->last_name, 
                 'email' => $request->email,
                 'is_active' => $request->is_active
             ]);
