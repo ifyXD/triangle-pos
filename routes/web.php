@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Requirement 1
     Route::middleware('verified','isCheckRequirement')->group(function () {
         Route::get('/registration-requirements-storename', [HomeController::class, 'storename'])->name('registration.requirements-storename');
-        Route::get('/registration-requirements-permission', [HomeController::class, 'permission'])->name('registration.requirements-permission');
+        // Route::get('/registration-requirements-permission', [HomeController::class, 'permission'])->name('registration.requirements-permission');
         Route::get('/registration-requirements-colorpallete', [HomeController::class, 'colorpallete'])->name('registration.requirements-colorpallete');
     });
 

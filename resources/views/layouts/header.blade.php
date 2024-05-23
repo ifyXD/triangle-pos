@@ -40,14 +40,22 @@
                     <span class="badge badge-pill badge-danger">
                         @php
                             $low_quantity_products = auth()->user()->hasRole('Super Admin')
-                                ? \App\Models\Stock::select('stocks.id', 'stocks.product_quantity', 'stocks.product_stock_alert')
-                                    ->join('products','stocks.product_id','products.id')
+                                ? \App\Models\Stock::select(
+                                    'stocks.id',
+                                    'stocks.product_quantity',
+                                    'stocks.product_stock_alert',
+                                )
+                                    ->join('products', 'stocks.product_id', 'products.id')
                                     ->whereColumn('stocks.product_quantity', '<=', 'stocks.product_stock_alert')
                                     ->select('products.product_name as product_name', 'products.id as id')
                                     ->get()
-                                : \App\Models\Stock::select('stocks.id', 'stocks.product_quantity', 'stocks.product_stock_alert')
+                                : \App\Models\Stock::select(
+                                    'stocks.id',
+                                    'stocks.product_quantity',
+                                    'stocks.product_stock_alert',
+                                )
                                     ->where('stocks.store_id', auth()->user()->store->id)
-                                    ->join('products','stocks.product_id','products.id')
+                                    ->join('products', 'stocks.product_id', 'products.id')
                                     ->select('products.product_name as product_name', 'products.id as id')
                                     ->whereColumn('stocks.product_quantity', '<=', 'stocks.product_stock_alert')
                                     ->get();
@@ -60,7 +68,7 @@
                         <strong>{{ $low_quantity_products->count() }} Notifications</strong>
                     </div>
                     @forelse($low_quantity_products as $product)
-                        <a class="dropdown-item" href="{{ url('stocks/show/'. $product->id) }}">
+                        <a class="dropdown-item" href="{{ url('stocks/show/' . $product->id) }}">
                             <i class="bi bi-hash mr-1 text-primary"></i> Product: "{{ $product->product_name }}" is
                             low in
                             stock!
@@ -80,9 +88,9 @@
             aria-expanded="false">
             <div class="c-avatar mr-2">
                 <img class="c-avatar rounded-circle"
-                    src="{{ auth()->user()->image == 'avatar.png'
-                        ? auth()->user()->getFirstMediaUrl('avatars')
-                        : asset(auth()->user()->image) }}"
+                    src="{{ auth()->user()->store->image == 'avatar.png'
+                    ? auth()->user()->getFirstMediaUrl('avatars')
+                    : asset('storage/' . auth()->user()->store->image) }}"
                     alt="Profile Image">
 
             </div>

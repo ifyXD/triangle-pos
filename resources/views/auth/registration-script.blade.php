@@ -34,7 +34,7 @@
         });
 
         $('#btn_backpallete').click(function() {
-            window.location.href = "{{ route('registration.requirements-permission') }}";
+            window.location.href = "{{ route('registration.requirements-storename') }}";
         });
         $('#backBtnpermission').click(function() {
             window.location.href = "{{ route('registration.requirements-storename') }}";

@@ -30,13 +30,13 @@
                                             <img style="width: 100px; height: 100px; object-fit: cover;"
                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
                                                 src="{{ auth()->user()->store->image == 'avatar.png'
-                                                    ? asset('images/logo.png')
+                                                    ? auth()->user()->getFirstMediaUrl('avatars')
                                                     : asset('storage/' . auth()->user()->store->image) }}"
                                                 alt="Profile Image">
                                         @else
                                             <img style="width: 100px; height: 100px;"
                                                 class="d-block mx-auto img-thumbnail img-fluid rounded-circle mb-2"
-                                                src="{{ asset('images/logo.png') }}" alt="Default Image">
+                                                src="{{ auth()->user()->getFirstMediaUrl('avatars') }}" alt="Default Image">
                                         @endif
                                         <input id="image" type="file" name="image" data-max-file-size="500KB">
                                     </div>
@@ -131,7 +131,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">Permissions</h5>
                     </div>
@@ -140,7 +140,7 @@
 
                     </div>
                 </div>
-
+ --}}
 
                 <div class="card">
                     <div class="card-header bg-primary text-white">
@@ -192,7 +192,7 @@
             });
 
             $('#btn_backpallete').click(function() {
-                window.location.href = "{{ route('registration.requirements-permission') }}";
+              
             });
             $('#backBtnpermission').click(function() {
                 window.location.href = "{{ route('registration.requirements-storename') }}";

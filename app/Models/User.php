@@ -99,16 +99,18 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         // Implement your logic to check if the user has access to the given permission
         // For example, checking if status is true
-        if (auth()->user()->hasRole('Super Admin')) {
+        if (auth()->user()->hasRole('Super Admin') && auth()->user()->hasRole('Admin')) {
             return true;
         }
+        return true;
+        // return $this->userpermissions()
+        // ->join('permissions', 'user_permissions.permission_id', '=', 'permissions.id')
+        // ->where('permissions.name', $permissionName)
+        // ->where('user_permissions.status', 'true')
+        // ->where('user_permissions.user_id', $this->id)
+        // ->exists();
     
         // Existing permission check for other users
-        return $this->userpermissions()
-            ->join('permissions', 'user_permissions.permission_id', '=', 'permissions.id')
-            ->where('permissions.name', $permissionName)
-            ->where('user_permissions.status', 'true')
-            ->where('user_permissions.user_id', $this->id)
-            ->exists();
+      
     }
 }

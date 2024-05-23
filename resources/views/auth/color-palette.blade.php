@@ -89,7 +89,7 @@
             <button class="button-next" id="paletteBtnSubmit" type="submit">FINISH</button>
 
         </div>
-        <a class="button-back" href="{{ url('registration-requirements-permission') }}">
+        <a class="button-back" href="{{ route('registration.requirements-storename') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <mask id="mask0_262_436" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
                       height="24">

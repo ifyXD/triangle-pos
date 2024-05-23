@@ -167,10 +167,10 @@ class HomeController extends Controller
     {
         return view('auth.storename');
     }
-    public function permission()
-    {
-        return view('auth.permission');
-    }
+    // public function permission()
+    // {
+    //     return view('auth.permission');
+    // }
     public function colorpallete()
     {
         return view('auth.color-palette');
@@ -330,7 +330,7 @@ class HomeController extends Controller
                 Unit::create($unit);
             }
 
-            $redirect = redirect()->route('registration.requirements-permission');
+            $redirect = redirect()->route('registration.requirements-colorpallete');
         }
         return $redirect;
     }

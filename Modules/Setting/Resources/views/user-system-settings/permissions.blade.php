@@ -1,5 +1,4 @@
-<div class="permission-wrapper">
-    {{--    <h1 class="headline">Select <span>feature</span> that apply.</h1> --}}
+{{-- <div class="permission-wrapper"> 
     <form id="permissions-form">
         <div class="permission-container">
             <div class="buttons-container">
@@ -7,9 +6,7 @@
                     <input type="checkbox" name="permissions[]" class="dashboardCheck" value="3,4,5,6,7"
                         {{ $userpermissions->where('permission_id', '3')->first()->status === 'true' ? 'checked' : '' }}>Dashboard
                 </label>
-                {{-- <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="expensesCheck"
-                        value="27,28,29,30,31" {{ $userpermissions->where('permission_id', '27')->first()->status === 'true' ? 'checked' : '' }}>
-                    Expenses</label> --}}
+           
                 <label class="checkbox-button"><input type="checkbox" name="permissions[]" class="productCheck"
                         value="8,9,10,11,12,13"
                         {{ $userpermissions->where('permission_id', '8')->first()->status === 'true' ? 'checked' : '' }}>Products</label>
@@ -31,7 +28,7 @@
                 <label class="checkbox-button m-auto"><input type="checkbox" name="permissions[]" class="settingCheck"
                         value="41" {{ $userpermissions->where('permission_id', '41')->first()->status === 'true' ? 'checked' : '' }}>Settings</label>
             </div>
-            {{--            <button class="button-next" type="button" id="permissionBtnFunc">NEXT</button> --}}
+           
             <div id="permissionBtnFunc" disabled class="form-group mb-0">
                 <button type="button" id="submitNiBay" class="btn btn-primary"><i class="bi bi-check"></i>
                     Save Changes
@@ -40,6 +37,4 @@
         </div>
     </form>
 
-</div>
-{{-- @dd($userpermissions[0]->status) --}}
-{{-- {{ $userpermissions[55]->status === 'true' ? 'checked' : '' }} --}}
+</div> --}}
