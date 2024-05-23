@@ -86,12 +86,18 @@
     <li class="c-header-nav-item dropdown">
         <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">
-            <div class="c-avatar mr-2">
-                <img class="c-avatar rounded-circle"
-                    src="{{ auth()->user()->store->image == 'avatar.png'
-                    ? auth()->user()->getFirstMediaUrl('avatars')
-                    : asset('storage/' . auth()->user()->store->image) }}"
-                    alt="Profile Image">
+            <div class="c-avatar mr-2" title="{{ auth()->user()->first_name }}">
+                @if (auth()->user()->hasRole('Super Admin'))
+                    <img class="c-avatar rounded-circle" src="{{ auth()->user()->getFirstMediaUrl('avatars') }}"
+                        alt="Profile Image">
+                @else
+                    <img class="c-avatar rounded-circle"
+                        src="{{ auth()->user()->store->image == 'avatar.png'
+                            ? auth()->user()->getFirstMediaUrl('avatars')
+                            : asset('storage/' . auth()->user()->store->image) }}"
+                        alt="Profile Image">
+                @endif
+
 
             </div>
 

@@ -94,23 +94,34 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasMany(Product::class);
     }
-    
+
     public function hasAccessToPermission($permissionName)
     {
-        // Implement your logic to check if the user has access to the given permission
-        // For example, checking if status is true
-        if (auth()->user()->hasRole('Super Admin') && auth()->user()->hasRole('Admin')) {
+        // // Implement your logic to check if the user has access to the given permission
+        // // For example, checking if status is true
+        // if (auth()->user()->hasRole('Super Admin')) {
+        //     return true;
+        // }
+        // // return $this->userpermissions()
+        // // ->join('permissions', 'user_permissions.permission_id', '=', 'permissions.id')
+        // // ->where('permissions.name', $permissionName)
+        // // ->where('user_permissions.status', 'true')
+        // // ->where('user_permissions.user_id', $this->id)
+        // // ->exists();
+
+        // // I want to change that want to auth()->user()->hasRole('Admin')
+
+        if (auth()->user()->hasRole('Super Admin')) {
             return true;
         }
-        return true;
-        // return $this->userpermissions()
-        // ->join('permissions', 'user_permissions.permission_id', '=', 'permissions.id')
-        // ->where('permissions.name', $permissionName)
-        // ->where('user_permissions.status', 'true')
-        // ->where('user_permissions.user_id', $this->id)
-        // ->exists();
     
-        // Existing permission check for other users
-      
+        // Check if the user has the 'Admin' role and the specific permission
+        if (auth()->user()->hasRole('Admin') && auth()->user()->can($permissionName)) {
+            return true;
+        }
+    
+        return false;
+    
+
     }
 }

@@ -30,7 +30,7 @@ class UsersDataTable extends DataTable
                 }
             })
             ->addColumn('image', function ($data) {
-                $url = $data->image == 'avatar.png' ? $data->getFirstMediaUrl('avatars') : asset($data->image);
+                $url = $data->simage == 'avatar.png' ? $data->getFirstMediaUrl('avatars') : asset('storage/' . $data->simage);
                 return '<img src="' . $url . '" style="width:50px;height:50px;" class="img-thumbnail rounded-circle"/>';
             })
             ->rawColumns(['image', 'status']);
@@ -43,6 +43,7 @@ class UsersDataTable extends DataTable
                 'users.first_name',
                 'users.email',
                 'stores.store_name',
+                'stores.image as simage',
                 'users.is_active',
                 'users.image',
                 'users.created_at'
