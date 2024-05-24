@@ -12,16 +12,8 @@ class SaleReturnDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'return_status',
-        'sale_return_id',
-        'product_id',
-        'quantity',
-        'price_id',
-        'store_id',
-        'unit_id',
-        'stock_id',
-    ];
+    protected $fillable = ['return_status','sale_return_id', 'product_id', 'quantity', 'price_id', 'store_id', 'unit_id', 'stock_id'];
+
     protected $guarded = [];
 
     protected $with = ['product', 'unit', 'price'];

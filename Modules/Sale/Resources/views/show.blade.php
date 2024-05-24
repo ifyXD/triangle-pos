@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header d-flex flex-wrap align-items-center">
                         <div>
-                            Reference: <strong>{{ $sale->reference }}</strong>
+                            {{-- Reference: <strong>{{ $sale->reference }}</strong> --}}
                         </div>
                         <a target="_blank" class="btn btn-sm btn-secondary mfs-auto mfe-1 d-print-none"
                             href="{{ route('sales.pdf', $sale->id) }}">
@@ -31,11 +31,11 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-sm-4 mb-3 mb-md-0">
-                                <h5 class="mb-2 border-bottom pb-2">Company Info:</h5>
-                                <div><strong>{{ settings()->company_name }}</strong></div>
-                                <div>{{ settings()->company_address }}</div>
-                                <div>Email: {{ settings()->company_email }}</div>
-                                <div>Phone: {{ settings()->company_phone }}</div>
+                                <h5 class="mb-2 border-bottom pb-2">Store Info:</h5>
+                                <div>Name: <strong>{{ auth()->user()->store->store_name }}</strong></div>
+                                <div>Adress: {{ auth()->user()->store->store_address }}</div>
+                                <div>Email: {{ auth()->user()->store->store_email }}</div>
+                                <div>Phone: {{ auth()->user()->store->store_phone }}</div>
                             </div>
 
                             <div class="col-sm-4 mb-3 mb-md-0">

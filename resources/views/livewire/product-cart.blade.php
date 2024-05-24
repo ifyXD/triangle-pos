@@ -34,6 +34,7 @@
                         @foreach ($cart_items as $cart_item)
                             <tr id="parent_tr_{{ $cart_item->id }}" 
                                 data-price_id="{{ $cart_item->options->price_id }}"
+                                data-sale_id="{{ $cart_item->options->sale_id }}"
                                 data-stock_id="{{ $cart_item->id }}"
                                 data-unit_id="{{ $cart_item->options->unit_id }}"
                                 data-product-id="{{ $cart_item->id }}"

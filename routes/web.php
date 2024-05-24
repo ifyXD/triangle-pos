@@ -63,14 +63,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('prices', 'PriceController');
     Route::resource('stocks', 'StockController');
 
-    Route::get('prices/create/{id}', 'PriceController@create');
+    Route::get('prices/create/{id}', 'PriceController@create')->name('prices.create');
     Route::patch('prices/store/{id}', 'PriceController@store')->name('prices.store');
     Route::patch('prices/update/{id}', 'PriceController@update')->name('prices.update');
     Route::get('prices/show/{id}', 'PriceController@show')->name('prices.show');
     Route::get('prices/edit/{id}', 'PriceController@edit');
     Route::delete('prices/delete/{id}', 'PriceController@destroy')->name('prices.destroy');
     
-    Route::get('stocks/create/{id}', 'StockController@create');
+    Route::get('stocks/create/{id}', 'StockController@create')->name('stocks.create');
     Route::patch('stocks/store/{id}', 'StockController@store')->name('stocks.store');
     Route::patch('stocks/update/{id}', 'StockController@update')->name('stocks.update');
     Route::get('stocks/show/{id}', 'StockController@show')->name('stocks.show');

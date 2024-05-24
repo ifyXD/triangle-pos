@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
             ->join('products', 'sale_details.product_id', 'products.id')
             ->join('units', 'sale_details.unit_id', 'units.id')
             ->join('prices', 'sale_details.price_id', 'prices.id')
-            ->select('products.product_name as product_name', 'units.name as unit_name', 'prices.product_price as product_price', 'sale_details.quantity as quantity', 'sale_details.id as id')
+            ->select('prices.product_price as asd', 'products.product_name as product_name', 'units.name as unit_name', 'sale_details.quantity as quantity', 'sale_details.id as id')
             ->get();
 
         $pdf = FacadePdf::loadView('sale::print-pos', [

@@ -21,8 +21,8 @@ class SaleReturnsDataTable extends DataTable
             ->addColumn('paid_amount', function ($data) {
                 return format_currency($data->paid_amount*100);
             })
-            ->addColumn('due_amount', function ($data) {
-                return format_currency($data->due_amount*100);
+            ->addColumn('changed', function ($data) {
+                return format_currency($data->changed);
             })
             ->addColumn('status', function ($data) {
                 return view('salesreturn::partials.status', compact('data'));
@@ -44,7 +44,7 @@ class SaleReturnsDataTable extends DataTable
         }
     
         // If not "Super Admin," apply the original condition
-        return $model->newQuery()->where('store_id', $user->store->id); 
+        return $model->newQuery()->where('store_id', $user->store->id)->select('sale_returns.*','sale_returns.due_amount as changed'); 
     }
 
     public function html() {
@@ -61,8 +61,8 @@ class SaleReturnsDataTable extends DataTable
                 //     ->text('<i class="bi bi-file-earmark-excel-fill"></i> Excel'),
                 Button::make('print')
                     ->text('<i class="bi bi-printer-fill"></i> Print'),
-                Button::make('reset')
-                    ->text('<i class="bi bi-x-circle"></i> Reset'),
+                // Button::make('reset')
+                //     ->text('<i class="bi bi-x-circle"></i> Reset'),
                 Button::make('reload')
                     ->text('<i class="bi bi-arrow-repeat"></i> Reload')
             );
@@ -86,7 +86,7 @@ class SaleReturnsDataTable extends DataTable
             Column::computed('paid_amount')
                 ->className('text-center align-middle'),
 
-            Column::computed('due_amount')
+            Column::computed('changed')
                 ->className('text-center align-middle'),
 
             Column::computed('payment_status')

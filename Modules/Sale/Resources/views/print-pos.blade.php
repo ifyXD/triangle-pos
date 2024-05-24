@@ -73,9 +73,9 @@
                 <tr>
                     <td colspan="2">
                         {{ $saleDetail->product->product_name }}
-                        ({{ $saleDetail->quantity }} x {{ $saleDetail->product_cost }})
+                        ({{ $saleDetail->quantity }} x {{ $saleDetail->price->product_price }})
                     </td>
-                    <td style="text-align:right;vertical-align:bottom">{{ $saleDetail->sub_total*100 }}.00</td>
+                    <td style="text-align:right;vertical-align:bottom">{{ $saleDetail->quantity*$saleDetail->price->product_price }}.00</td>
                 </tr>
             @endforeach
 
@@ -112,14 +112,7 @@
                     <td class="centered" style="padding: 5px;">
                         Amount: {{ $sale->paid_amount}}.00
                     </td>
-                </tr>
-                {{-- <tr style="border-bottom: 0;">
-                    <td class="centered" colspan="3">
-                        <div style="margin-top: 10px;">
-                            {!! \Milon\Barcode\Facades\DNS1DFacade::getBarcodeSVG($sale->reference, 'C128', 1, 25, 'black', false) !!}
-                        </div>
-                    </td>
-                </tr> --}}
+                </tr> 
             </tbody>
         </table>
     </div>

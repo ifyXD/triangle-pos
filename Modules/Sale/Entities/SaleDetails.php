@@ -14,23 +14,23 @@ class SaleDetails extends Model
     protected $guarded = [];
     protected $fillable = ['stock_id','sale_id','product_id','quantity','price_id','store_id','unit_id'];
 
-    protected $with = ['product'];
+    protected $with = ['product', 'price'];
 
 
     public function product() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
     public function price() {
-        return $this->hasOne(Price::class, 'price_id', 'id');
+        return $this->hasOne(Price::class, 'id', 'price_id');
     }
 
     public function sale() {
         return $this->belongsTo(Sale::class, 'sale_id', 'id');
     }
 
-    public function getPriceAttribute($value) {
-        return $value;
-    }
+    // public function getPriceAttribute($value) {
+    //     return $value;
+    // }
 
     // public function getUnitPriceAttribute($value) {
     //     return $value;

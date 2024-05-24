@@ -65,26 +65,27 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="status">Status <span class="text-danger">*</span></label>
-                                        <select class="form-control" name="status" id="status" required>
+                                        {{-- <label for="status">Status <span class="text-danger">*</span></label> --}}
+                                        <input type="hidden" name="status" id="status" value="Completed">
+                                        {{-- <select class="form-control" name="status" id="status" required>
                                             <option {{ $sale_return->status == 'Pending' ? 'selected' : '' }} value="Pending">Pending</option>
-                                            {{-- <option {{ $sale_return->status == 'Shipped' ? 'selected' : '' }} value="Shipped">Shipped</option> --}}
+                                            <option {{ $sale_return->status == 'Shipped' ? 'selected' : '' }} value="Shipped">Shipped</option>
                                             <option {{ $sale_return->status == 'Completed' ? 'selected' : '' }} value="Completed">Completed</option>
-                                        </select>
+                                        </select> --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="from-group">
                                         <div class="form-group">
-                                            <label for="payment_method">Payment Method <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="payment_method" id="payment_method" required value="{{ $sale_return->payment_method }}" readonly>
+                                            {{-- <label for="payment_method">Payment Method <span class="text-danger">*</span></label> --}}
+                                            <input type="hidden" class="form-control" name="payment_method" id="payment_method" required value="{{ $sale_return->payment_method }}" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="paid_amount">Amount Paid <span class="text-danger">*</span></label>
-                                        <input id="paid_amount" type="text" class="form-control" name="paid_amount" required value="{{ $sale_return->paid_amount }}">
+                                        <input id="paid_amount" type="text" class="form-control" name="paid_amount" required value="{{ $sale_return->paid_amount*100 }}">
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +167,7 @@
                     var productId = $(this).data('product-id');
                     var productName = $(this).find('td:eq(0)').text();
                     var price_id = $(this).data('price_id');
+                    var sale_id = $(this).data('sale_id');
                     var unit_id = $(this).data('unit_id');
                     var stock_id = $(this).data('stock_id');
                     var quantity = $(this).find('.quantity').val();
@@ -174,6 +176,7 @@
                     // Create an object to represent the cart detail
                     var cartDetail = {
                         productId: productId,
+                        sale_id: sale_id,
                         price_id: price_id,
                         unit_id: unit_id,
                         stock_id: stock_id,
@@ -185,7 +188,7 @@
                     // Push the cart detail object into the array
                     cartDetails.push(cartDetail);
                 });
-                // console.log(total_amount);
+                // console.log(cartDetails);
 
                 $.ajax({
                     url: '{{ route('sale-returns.update', $sale_return) }}',

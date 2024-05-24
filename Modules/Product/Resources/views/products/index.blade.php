@@ -20,10 +20,10 @@
                 <div class="card">
                     <div class="card-body">
                         @if (!auth()->user()->hasRole('Super Admin'))
-                        <a href="{{ route('products.create') }}" class="btn btn-primary">
-                            Add Product <i class="bi bi-plus"></i>
-                        </a>
-                    @endif
+                            <a href="{{ route('products.create') }}" class="btn btn-primary">
+                                Add Product <i class="bi bi-plus"></i>
+                            </a>
+                        @endif
 
                         <hr>
 
