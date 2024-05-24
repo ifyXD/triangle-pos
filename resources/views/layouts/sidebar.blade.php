@@ -15,9 +15,9 @@
             {{-- <img class="c-sidebar-brand-full"
                 src="{{ auth()->user()->hasRole('Super Admin') ? asset('images/logo.png') : $logoPath }}" alt="Site Logo"
                 width="200"> --}}
-            <h4 class="c-sidebar-brand-full text-light">
-                {{ auth()->user()->hasRole('Super Admin') ? 'PUBLIC MARKET' : (auth()->user()->store ? Str::limit(strtoupper(auth()->user()->store->store_name), 12, '') : 'STORE NOT FOUND') }}
-            </h4>
+            <small class="c-sidebar-brand-full text-light">
+                {{ auth()->user()->hasRole('Super Admin') ? 'PUBLIC MARKET' : (auth()->user()->store ? Str::limit(strtoupper(auth()->user()->store->store_name), 20, '') : 'STORE NOT FOUND') }}
+            </small>
             <img class="c-sidebar-brand-minimized" src="{{ asset('images/logo-minimize.png') }}" alt="Site Logo"
                 width="40">
         </a>
